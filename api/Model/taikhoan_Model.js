@@ -1,52 +1,58 @@
 const Sequelize = require('sequelize');
 const db = require('./../Config/db');
 
-const taikhoan_Model = sequelize.define('xedap', {
+const taikhoan_Model = db.define('taikhoan', {
     // attributes
-    XE_ID: {
+    TK_ID: {
       type: Sequelize.STRING,
       allowNull: false
     },
-    XE_TRANGTHAI: {
+    TK_PASSWORD: {
       type: Sequelize.STRING
       // allowNull defaults to true
     },
-    XE_VITRI: {
+    TK_HOTEN: {
         type: Sequelize.STRING,
       }, 
-    XE_NAMSANXUAT: {
-        type: Sequelize.STRING,
-      },
-      XE_GHICHU: {
+    TK_QUYEN: {
         type: Sequelize.STRING,
       }
   }
   );
-//   // Find all users
-// db.findAll().then(users => {
-//     console.log("All users:", JSON.stringify(users, null, 4));
-//   });
+
+  db.sync();
+  // find all users
   
-//   // Create a new user
-//   db.create({ firstName: "Jane", lastName: "Doe" }).then(jane => {
-//     console.log("Jane's auto-generated ID:", jane.id);
-//   });
+  // Find all users
+  // taikhoan_Model.findAll().then(taikhoan => {
+  //   console.log("All users:", JSON.stringify(taikhoan, null, 4));
+  // });
   
-//   // Delete everyone named "Jane"
-//   db.destroy({
-//     where: {
-//       firstName: "Jane"
-//     }
-//   }).then(() => {
-//     console.log("Done");
-//   });
+  // Create a new user
+  // taikhoan_Model.create({ 
+  //   TK_ID: "B1606777", 
+  //   TK_PASSWORD: "12345",
+  //   TK_HOTEN:"Nguyen Anh Bang",
+  //   TK_QUYEN:"1"
+  // }).then(jane => {
+  //   console.log("Jane's auto-generated ID:", jane.id);
+  // });
   
-//   // Change everyone without a last name to "Doe"
-//   db.update({ lastName: "Doe" }, {
-//     where: {
-//       lastName: null
-//     }
-//   }).then(() => {
-//     console.log("Done");
-//   });
-exports.taikhoan_Model;
+  // // Delete everyone named "Jane"
+  // taikhoan_Model.destroy({
+  //   where: {
+  //     firstName: "Jane"
+  //   }
+  // }).then(() => {
+  //   console.log("Done");
+  // });
+  
+  // // Change everyone without a last name to "Doe"
+  // taikhoan_Model.update({ lastName: "Doe" }, {
+  //   where: {
+  //     lastName: null
+  //   }
+  // }).then(() => {
+  //   console.log("Done");
+  // });
+module.exports=taikhoan_Model;

@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('./../Config/db');
 
-const xedap = sequelize.define('user', {
+const xe = sequelize.define('xe', {
     // attributes
     XE_ID: {
       type: Sequelize.STRING,
@@ -22,6 +22,7 @@ const xedap = sequelize.define('user', {
       }
   }
   );
+  exports.xe;
 //   // Find all users
 // db.findAll().then(users => {
 //     console.log("All users:", JSON.stringify(users, null, 4));
