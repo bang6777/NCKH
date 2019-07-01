@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 
 // Option 1: Passing parameters separately
-module.exports = new Sequelize('nckh_xedap', 'root', '', {
+module.exports = new Sequelize('xedap', 'root', '', {
   host: 'localhost',
   dialect: 'mysql',
   pool: {

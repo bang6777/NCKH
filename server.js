@@ -7,10 +7,12 @@ const port = process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(express.static(__dirname + '/public'));
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-var routes = require('./api/routes/TK_routes'); //importing route
+var routes = require('./api/routes/bikeRoute'); //importing route
 // routes(app);
 app.use('/',routes);
 app.use(function(req, res) {

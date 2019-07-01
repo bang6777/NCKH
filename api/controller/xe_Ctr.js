@@ -1,48 +1,32 @@
-// 'use strict'
+'use strict'
+const xe_M = require('../Model/xe_Model');
 
-// // const util = require('util')
-// // const mysql = require('mysql')
-// // const db = require('./../Config/db')
+exports.allXe = (cb) => {
+    // var statement = "select * from taikhoan";
+    xe_M.findAll().then(xe => {
+        cb(null, xe);
+        console.log("All xe:", JSON.stringify(xe, null, 4));
+    });
+};
 
-// const xe_Model = require('./../Model/xe');
+exports.addXe = (XE_ID, XE_NAMSANXUAT, XE_GHICHU, cb) =>{
+    xe_M.create({
+        XE_ID: XE_ID,
+        XE_NAMSANXUAT: XE_NAMSANXUAT,
+        XE_GHICHU: XE_GHICHU
+    }).then(xe => {
+        console.log("Xe ID: " +xe.XE_ID);
+        cb(null, xe);
+    });
+};
 
-// module.exports = {
-//     get: (req, res) => {
-//         let sql = 'SELECT * FROM taikhoan'
-//         xe_Model.query(sql, (err, response) => {
-//             if (err) throw err
-//             res.json(response)
-//         })
-//     },
-//     detail: (req, res) => {
-//         let sql = 'SELECT * FROM taikhoan WHERE TK_ID = ?'
-//         xe_Model.query(sql, [req.params.TK_ID], (err, response) => {
-//             if (err) throw err
-//             res.json(response[0])
-//         })
-//     },
-//     update: (req, res) => {
-//         let data = req.body;
-//         let TK_ID = req.params.TK_ID;
-//         let sql = 'UPDATE products SET ? WHERE id = ?'
-//         xe_Model.query(sql, [data, TK_ID], (err, response) => {
-//             if (err) throw err
-//             res.json({message: 'Update success!'})
-//         })
-//     },
-//     store: (req, res) => {
-//         let data = req.body;
-//         let sql = 'INSERT INTO taikhoan (TK_ID,TK_PASSWORD,TK_HOTEN,TK_QUYEN) VALUES (4,1234,"Tam Bui",1)'
-//         xe_Model.query(sql, [data], (err, response) => {
-//             if (err) throw err
-//             res.json({message: 'Insert success!'})
-//         })
-//     },
-//     delete: (req, res) => {
-//         let sql = 'DELETE FROM taikhoan WHERE TK_ID = 4'
-//         xe_Model.query(sql, [req.params.TK_ID], (err, response) => {
-//             if (err) throw err
-//             res.json({message: 'Delete success!'})
-//         })
-//     }
-// }
+exports.deleteXe = (XE_ID, cb) => {
+    xe_M.destroy({
+        where: {
+            XE_ID: XE_ID
+        }
+    }).then((xe) => {
+        console.log("Đã xóa xe: ", xe.XE_ID);
+        cb(null, xe);
+    });
+};

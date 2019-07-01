@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Đăng nhập</title>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/usm/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="./css/login.css" />
+
+    <script>
+        function toIndex() {
+            location.href = "/"
+        }
+    </script>
+
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="col-lg-6 offset-lg-3 frmLogin">
+            <div class="row mt-5">
+                <div class="col-lg-6 left-side d-flex align-items-center">
+                    <span class="title">
+                        HỆ THỐNG QUẢN LÝ XE ĐẠP
+                    </span>
+                </div>
+                <div class="col-lg-6 right-side d-flex align-items-center">
+                    <form>
+                        <div class="content">
+                            <img src="img/logo.png" width="30%" class="mb-5" />
+                            <div class="form-group ">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend col-lg-2">
+                                        <i class="fa fa-user fa-lg align-self-center"></i>
+                                    </div>
+                                    <input class="form-control rounded mr-3" id="username" type="text"
+                                        placeholder="Username" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend col-lg-2">
+                                        <i class="fa fa-lock fa-lg align-self-center"></i>
+                                    </div>
+                                    <input class="form-control rounded mr-3" id="username" type="password"
+                                        placeholder="Password" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Đăng nhập" width="300px" id="btnLogin"
+                                    class="justify-content-center p-2 ml-5 btn btn-primary" onclick="toIndex()">
+                            </div>
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>
