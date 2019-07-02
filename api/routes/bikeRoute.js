@@ -7,6 +7,7 @@ var loi = require('../controller/loi_Ctr');
 var huhong = require('../controller/huhong_Ctr');
 var muontra = require('../controller/muontra_Ctr');
 var vipham = require('../controller/vipham_Ctr');
+var muontraRoute = require("./muontra_Route");
 
 //Login
 router.get('/login', function (req, res) {
@@ -105,17 +106,17 @@ router.post('/xe', function (req, res) {
         res.status(404).json({ message: "XE_ID null" });
     }
 
-    xe.addXe(XE_ID, XE_NAMSANXUAT, XE_GHICHU, function (err, data){
+    xe.addXe(XE_ID, XE_NAMSANXUAT, XE_GHICHU, function (err, data) {
         if (err) {
             res.status(404).json({ message: "XE_ID null" });
-        } 
-        else{
-            res.status(200).json({message: "Đã thêm thành công!"})
+        }
+        else {
+            res.status(200).json({ message: "Đã thêm thành công!" })
         }
     });
 });
 
-router.post('/xe/delete/:TK_ID', function (req, res){
+router.post('/xe/delete/:TK_ID', function (req, res) {
     var XE_ID = req.body.XE_ID;
     xe.deleteXe(XE_ID, function (err, data) {
         if (err) {
@@ -137,9 +138,7 @@ router.get('/khuonvien', function (req, res) {
 
 //----Quản lý
 //-----------Mượn trả
-router.get('/muontra', function (req, res) {
-    res.render('./../api/views/muontra')
-})
+router.get('/muontra/:TK_ID', muontraRoute.viewMuonTra);
 //-----------Vi phạm
 router.get('/vipham', function (req, res) {
     res.render('./../api/views/vipham')
@@ -148,6 +147,8 @@ router.get('/vipham', function (req, res) {
 router.get('/huhong', function (req, res) {
     res.render('./../api/views/huhong')
 })
+
+
 
 module.exports = router;
 

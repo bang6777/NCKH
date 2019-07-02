@@ -10,7 +10,7 @@ module.exports = new Sequelize('xedap', 'root', '', {
     acquire: 30000,
     idle: 10000
   },
-  define:{
-    freezeTableName:true
+  define: {
+    freezeTableName: true
   }
 });
