@@ -2,56 +2,57 @@ const Sequelize = require('sequelize');
 const db = require('./../Config/db');
 
 const taikhoan_Model = db.define('taikhoan', {
-  // attributes
-  TK_ID: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  TK_PASSWORD: {
-    type: Sequelize.STRING
-    // allowNull defaults to true
-  },
-  TK_HOTEN: {
-    type: Sequelize.STRING,
-  },
-  TK_QUYEN: {
-    type: Sequelize.STRING,
-  },
-  TK_DONVI: {
-    type: Sequelize.STRING
-  },
-  TK_LOAI: {
-    type: Sequelize.STRING
-  },
-  TK_HIEULUC: {
-    type: Sequelize.STRING
-  }
+	// attributes
+	TK_ID: {
+		type: Sequelize.STRING,
+		allowNull: false,
+		primaryKey: true
+	},
+	TK_PASSWORD: {
+		type: Sequelize.STRING,
+		allowNull: false
+	},
+	TK_HOTEN: {
+		type: Sequelize.STRING
+	},
+	TK_QUYEN: {
+		type: Sequelize.STRING
+	},
+	TK_DONVI: {
+		type: Sequelize.STRING
+	},
+	TK_LOAI: {
+		type: Sequelize.STRING
+	},
+	TK_HIEULUC: {
+		type: Sequelize.STRING
+	}
 });
-const muontra_Model = db.define('muontra', {
-  MUONTRA_ID: {
-      type: Sequelize.STRING,
-      allowNull: false
-  },
-  TK_ID: {
-      type: Sequelize.STRING
-  },
-  XE_ID: {
-      type: Sequelize.STRING
-  },
-  MUON_THOIGIAN: {
-      type: Sequelize.STRING
-  },
-  TRA_THOIGIAN: {
-      type: Sequelize.STRING
-  },
-  MUON_VITRI: {
-      type: Sequelize.STRING
-  },
-  TRA_VITRI: {
-      type: Sequelize.STRING
-  }
-});
-taikhoan_Model.belongsTo(muontra_Model, {foreignKey: 'TK_ID'});
+// const muontra_Model = db.define('muontra', {
+//   MUONTRA_ID: {
+//       type: Sequelize.STRING,
+//       allowNull: false
+//   },
+//   TK_ID: {
+//       type: Sequelize.STRING
+//   },
+//   XE_ID: {
+//       type: Sequelize.STRING
+//   },
+//   MUON_THOIGIAN: {
+//       type: Sequelize.STRING
+//   },
+//   TRA_THOIGIAN: {
+//       type: Sequelize.STRING
+//   },
+//   MUON_VITRI: {
+//       type: Sequelize.STRING
+//   },
+//   TRA_VITRI: {
+//       type: Sequelize.STRING
+//   }
+// });
+// taikhoan_Model.belongsTo(muontra_Model, {foreignKey: 'TK_ID'});
 
 db.sync();
 module.exports = taikhoan_Model;
