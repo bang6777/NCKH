@@ -136,7 +136,11 @@ router.post("/xe", function (req, res) {
 });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 router.post("/xe/delete/:XE_ID", function(req, res) {
+=======
+router.post("/xe/delete/:TK_ID", function (req, res) {
+>>>>>>> 1989359c58011a47c5d07e8f218ad897f3e95eaa
 =======
 router.post("/xe/delete/:TK_ID", function (req, res) {
 >>>>>>> 1989359c58011a47c5d07e8f218ad897f3e95eaa
@@ -222,11 +226,14 @@ router.get("/vipham", function (req, res) {
 });
 //-----------Hư hỏng
 <<<<<<< HEAD
+<<<<<<< HEAD
 router.get("/huhong", function(req, res) {
   huhong.allHuHong(function(err, data) {
     res.render("./../api/views/huhong", { huhong: data });
   });
 =======
+=======
+>>>>>>> 1989359c58011a47c5d07e8f218ad897f3e95eaa
 router.get("/huhong", function (req, res) {
   res.render("./../api/views/huhong");
 >>>>>>> 1989359c58011a47c5d07e8f218ad897f3e95eaa

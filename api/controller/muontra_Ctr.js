@@ -35,4 +35,7 @@ exports.muontra_nguoidung = function (TK_ID, cb) {
 
 }
 
+<<<<<<< HEAD
+>>>>>>> 1989359c58011a47c5d07e8f218ad897f3e95eaa
+=======
 >>>>>>> 1989359c58011a47c5d07e8f218ad897f3e95eaa
