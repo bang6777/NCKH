@@ -28,6 +28,9 @@ const huhong_Model = db.define("huhong", {
   },
   HH_TRANGTHAI: {
     type: Sequelize.STRING
+  },
+  HH_THOIGIAN: {
+    type: Sequelize.STRING
   }
 });
 
