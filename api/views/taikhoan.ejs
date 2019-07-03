@@ -107,10 +107,12 @@
                                 <i class="fa fa-edit fa-lg" data-toggle="modal" data-target="#EditTK" title="Cập nhật">
                                 </i>
                                 <!-- <a href="#"><i class="fa fa-trash fa-lg"></i> -->
-                                <form action="/taikhoan/delete/<%= tk.TK_ID %>" method="POST" enctype="application/x-www-form-urlencoded" style="margin-left: 5%">
-                                    <label for="btnDelete[<%= tk.TK_ID %>]"><i class="fa fa-trash fa-lg" title="Xóa"></i></label>
-                                    <input type="hidden" name="TK_ID" value="<%= tk.TK_ID %>">
-                                    <input type="submit" value="Delete" id="btnDelete[<%= tk.TK_ID %>]" class="btn-hidden">
+                                <form action="/taikhoan/delete/<%= tk.TK_ID %>" method="POST"
+                                enctype="application/x-www-form-urlencoded" style="margin-left: 5%">
+                                <label for="btnDelete[<%= tk.TK_ID %>]"><i class="fa fa-trash fa-lg"
+                                        title="Xóa"></i></label>
+                                <input type="hidden" name="TK_ID" value="<%= tk.TK_ID %>">
+                                <input type="submit" value="Delete" id="btnDelete[<%= tk.TK_ID %>]" class="btn-hidden">
                                 </form>
 
                             </td>
@@ -191,8 +193,9 @@
                         <h4 class="modal-title text-uppercase">Cập nhật thông tin người dùng</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
-                    
-                    <form action="/taikhoan/update/" method="POST" enctype="application/x-www-form-urlencoded">
+                    <% taikhoan.forEach(function(tk){  %>
+                    <form action="/taikhoan/update/<%= tk.TK_ID %>" method="POST"
+                        enctype="application/x-www-form-urlencoded">
                         <div class="modal-body">
                             <div class="modal-body">
                                 <div class="form-group ">
@@ -228,6 +231,7 @@
                                 data-dismiss="modal" />
                         </div>
                     </form>
+                    <%});%>
                 </div>
             </div>
         </div>
@@ -342,7 +346,7 @@
             </div>
         </div>
     </div>
-    
+
 </body>
 
 </html>

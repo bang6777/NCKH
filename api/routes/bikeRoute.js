@@ -138,6 +138,10 @@ router.get('/khuonvien', function (req, res) {
 
 //----Quản lý
 //-----------Mượn trả
+router.get('/muontra', function (req, res) {
+    res.render('./../api/views/muontra')
+})
+// Muon tra theo ID
 router.get('/muontra/:TK_ID', muontraRoute.viewMuonTra);
 //-----------Vi phạm
 router.get('/vipham', function (req, res) {
