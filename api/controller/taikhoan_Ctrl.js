@@ -55,13 +55,31 @@ exports.updateUser = (TK_ID, TK_HOTEN, TK_DONVI, TK_LOAI, TK_QUYEN, cb) => {
         TK_DONVI: TK_DONVI,
         TK_LOAI: TK_LOAI,
         TK_QUYEN: TK_QUYEN,
-    }, 
-    {
-        where: {
-            TK_ID: TK_ID
-        }
-    }).then((tk_bang) => {
-        console.log("Đã cập nhật tài khoản: ", tk_bang.TK_ID);
-        cb(null, tk_bang);
-    });
+    },
+        {
+            where: {
+                TK_ID: TK_ID
+            }
+        }).then((tk_bang) => {
+            console.log("Đã cập nhật tài khoản: ", tk_bang.TK_ID);
+            cb(null, tk_bang);
+        });
+};
+
+exports.getOneTK = (TK_ID, TK_HOTEN, TK_DONVI, TK_LOAI, TK_QUYEN, cb) => {
+    taikhoan_M.update({
+        TK_ID: TK_ID,
+        TK_HOTEN: TK_HOTEN,
+        TK_DONVI: TK_DONVI,
+        TK_LOAI: TK_LOAI,
+        TK_QUYEN: TK_QUYEN,
+    },
+        {
+            where: {
+                TK_ID: TK_ID
+            }
+        }).then((tk_bang) => {
+            console.log("Đã cập nhật tài khoản: ", tk_bang.TK_ID);
+            cb(null, tk_bang);
+        });
 };
