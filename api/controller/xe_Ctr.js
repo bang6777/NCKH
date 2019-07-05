@@ -2,10 +2,9 @@
 const xe_M = require("../Model/xe_Model");
 
 exports.allXe = cb => {
-  // var statement = "select * from taikhoan";
   xe_M.findAll().then(xe => {
     cb(null, xe);
-    console.log("All xe:", JSON.stringify(xe, null, 4));
+    console.log("Tất cả xe: ", JSON.stringify(xe, null, 4));
   });
 };
 
@@ -17,7 +16,7 @@ exports.addXe = (XE_ID, XE_NAMSANXUAT, XE_GHICHU, cb) => {
       XE_GHICHU: XE_GHICHU
     })
     .then(xe => {
-      console.log("Xe ID: " + xe.XE_ID);
+      console.log("ID của xe: " + xe.XE_ID);
       cb(null, xe);
     });
 };

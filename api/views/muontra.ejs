@@ -78,7 +78,7 @@
           >
             <thead class="bg-info text-white font-weight-semi-bold text-center">
               <tr>
-                <!-- <td>STT</td> -->
+                <td>STT</td>
                 <td>ID người dùng</td>
                 <td>ID xe</td>
                 <td>Thời gian mượn</td>
@@ -90,11 +90,11 @@
             <tbody class="text-center">
               <% muontra.forEach(function(mt){ %>
               <tr>
+                <td></td>
                 <td><%= mt.TK_ID %></td>
                 <td><%= mt.XE_ID %></td>
                 <td><%= mt.MUON_THOIGIAN %></td>
                 <td><%= mt.TRA_THOIGIAN %></td>
-
                 <td>
                   <a href="#"
                     ><i
@@ -105,124 +105,126 @@
                   ></a>
                 </td>
               </tr>
+
               <% }); %>
             </tbody>
           </table>
         </div>
-      </div>
-      <!-- Modal Chi tiet muon tra -->
-      <div id="ChiTietMuonTra" class="modal fade" role="dialog">
-        <div class="modal-dialog modal-lg">
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title text-uppercase">Chi tiết mượn trả xe</h4>
-              <button type="button" class="close" data-dismiss="modal">
-                &times;
-              </button>
-            </div>
 
-            <div class="modal-body">
-              <table class="table table-sm table-borderless col-lg-8 mx-auto">
-                <tr>
-                  <td>ID mượn trả</td>
-                  <td>1</td>
-                </tr>
-                <tr>
-                  <td>ID người dùng</td>
-                  <td>B1606935</td>
-                </tr>
-                <tr>
-                  <td>ID xe</td>
-                  <td>X001</td>
-                </tr>
-                <tr>
-                  <td>Thời gian mượn</td>
-                  <td>15:00:00 06/05/2019</td>
-                </tr>
-                <tr>
-                  <td>Thời gian trả</td>
-                  <td>15:15:00 06/05/2019</td>
-                </tr>
-                <tr>
-                  <td>Vị trí mượn</td>
-                  <td>
-                    <img src="img/marker-green.png" height="20px" />
-                    10.02998, 105.769601
-                  </td>
-                </tr>
-                <tr>
-                  <td>Vị trí trả</td>
-                  <td>
-                    <img src="img/marker-red.png" height="20px" />
-                    10.03054, 105.768646
-                  </td>
-                </tr>
-              </table>
-            </div>
+        <!-- Modal Chi tiet muon tra -->
+        <div id="ChiTietMuonTra" class="modal fade" role="dialog">
+          <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title text-uppercase">Chi tiết mượn trả xe</h4>
+                <button type="button" class="close" data-dismiss="modal">
+                  &times;
+                </button>
+              </div>
 
-            <!-- Map -->
-            <div id="googleMap" style="width: 100%; height :200px"></div>
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDr5qwgemJp4LtodR8lvXg382V-cDFK3bY&callback=MapPosition"></script>
+              <div class="modal-body">
+                <table class="table table-sm table-borderless col-lg-8 mx-auto">
+                  <tr>
+                    <td>ID mượn trả</td>
+                    <td>1</td>
+                  </tr>
+                  <tr>
+                    <td>ID người dùng</td>
+                    <td>B1606935</td>
+                  </tr>
+                  <tr>
+                    <td>ID xe</td>
+                    <td>X001</td>
+                  </tr>
+                  <tr>
+                    <td>Thời gian mượn</td>
+                    <td>15:00:00 06/05/2019</td>
+                  </tr>
+                  <tr>
+                    <td>Thời gian trả</td>
+                    <td>15:15:00 06/05/2019</td>
+                  </tr>
+                  <tr>
+                    <td>Vị trí mượn</td>
+                    <td>
+                      <img src="img/marker-green.png" height="20px" />
+                      10.02998, 105.769601
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Vị trí trả</td>
+                    <td>
+                      <img src="img/marker-red.png" height="20px" />
+                      10.03054, 105.768646
+                    </td>
+                  </tr>
+                </table>
+              </div>
 
-            <div class=" modal-footer">
-              <input
-                type="button"
-                value="Đóng"
-                id="btnCancel"
-                class="btn btn-danger px-3"
-                data-dismiss="modal"
-              />
+              <!-- Map -->
+              <div id="googleMap" style="width: 100%; height :200px"></div>
+              <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDr5qwgemJp4LtodR8lvXg382V-cDFK3bY&callback=MapPosition"></script>
+
+              <div class=" modal-footer">
+                <input
+                  type="button"
+                  value="Đóng"
+                  id="btnCancel"
+                  class="btn btn-danger px-3"
+                  data-dismiss="modal"
+                />
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- Modal Chi tiet TK -->
-      <div id="ChiTietTK" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title text-uppercase">Chi tiết tài khoản</h4>
-              <button type="button" class="close" data-dismiss="modal">
-                &times;
-              </button>
-            </div>
+        <!-- Modal Chi tiet TK -->
+        <div id="ChiTietTK" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title text-uppercase">Chi tiết tài khoản</h4>
+                <button type="button" class="close" data-dismiss="modal">
+                  &times;
+                </button>
+              </div>
 
-            <div class="modal-body">
-              <table class="table table-sm table-borderless col-lg-8 mx-auto">
-                <tr>
-                  <td>ID</td>
-                  <td>B1606935</td>
-                </tr>
-                <tr>
-                  <td>Họ tên</td>
-                  <td>Bành Ngọc Thụy Thảo</td>
-                </tr>
-                <tr>
-                  <td>Đơn vị</td>
-                  <td>Khoa CNTT & TT</td>
-                </tr>
-                <tr>
-                  <td>Loại tài khoản</td>
-                  <td>Sinh viên</td>
-                </tr>
-                <tr>
-                  <td>Hiệu lực</td>
-                  <td>Còn hiệu lực</td>
-                </tr>
-              </table>
-            </div>
+              <div class="modal-body">
+                <table class="table table-sm table-borderless col-lg-8 mx-auto">
+                  <tr>
+                    <td>ID</td>
+                    <td>B1606935</td>
+                  </tr>
+                  <tr>
+                    <td>Họ tên</td>
+                    <td>Bành Ngọc Thụy Thảo</td>
+                  </tr>
+                  <tr>
+                    <td>Đơn vị</td>
+                    <td>Khoa CNTT & TT</td>
+                  </tr>
+                  <tr>
+                    <td>Loại tài khoản</td>
+                    <td>Sinh viên</td>
+                  </tr>
+                  <tr>
+                    <td>Hiệu lực</td>
+                    <td>Còn hiệu lực</td>
+                  </tr>
+                </table>
+              </div>
 
-            <div class=" modal-footer">
-              <input
-                type="button"
-                value="Đóng"
-                id="btnCancel"
-                class="btn btn-danger px-3"
-                data-dismiss="modal"
-              />
+              <div class=" modal-footer">
+                <input
+                  type="button"
+                  value="Đóng"
+                  id="btnCancel"
+                  class="btn btn-danger px-3"
+                  data-dismiss="modal"
+                />
+              </div>
             </div>
           </div>
         </div>
