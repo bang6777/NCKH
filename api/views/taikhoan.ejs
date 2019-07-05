@@ -196,6 +196,7 @@
                     <% taikhoan.forEach(function(tk){  %>
                     <form action="/taikhoan/update/<%= tk.TK_ID %>" method="POST"
                         enctype="application/x-www-form-urlencoded">
+                        <%});%>
                         <div class="modal-body">
                             <div class="modal-body">
                                 <div class="form-group ">
@@ -231,7 +232,7 @@
                                 data-dismiss="modal" />
                         </div>
                     </form>
-                    <%});%>
+
                 </div>
             </div>
         </div>
