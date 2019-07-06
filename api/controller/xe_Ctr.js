@@ -33,3 +33,30 @@ exports.deleteXe = (XE_ID, cb) => {
       cb(null, xe);
     });
 };
+
+exports.updateXe = (
+  XE_ID,
+
+  XE_NAMSANXUAT,
+  XE_GHICHU,
+  cb
+) => {
+  xe_M
+    .update(
+      {
+        XE_ID: XE_ID,
+
+        XE_NAMSANXUAT: XE_NAMSANXUAT,
+        XE_GHICHU: XE_GHICHU
+      },
+      {
+        where: {
+          XE_ID: XE_ID
+        }
+      }
+    )
+    .then(xe => {
+      console.log("Đã cập nhật xe: ", xe.XE_ID);
+      cb(null, xe);
+    });
+};

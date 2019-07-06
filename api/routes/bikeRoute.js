@@ -135,6 +135,17 @@ router.post("/xe/delete/:XE_ID", function(req, res) {
   });
 });
 
+router.post("/xe/update/:XE_ID", function(req, res) {
+  var XE_ID = req.body.XE_ID;
+  var XE_NAMSANXUAT = req.body.XE_NAMSANXUAT;
+  var XE_GHICHU = req.body.XE_GHICHU;
+  xe.updateXe(XE_ID, XE_NAMSANXUAT, XE_GHICHU, function(err, data) {
+    if (err) {
+      res.status(404).json({ message: "ERR" });
+    } else res.status(200).json({ message: "đã cập nhật thành công xe ID: " + XE_ID });
+  });
+});
+
 //-------------Lỗi
 router.get("/loi", function(req, res) {
   loi.allLoi(function(err, data) {
@@ -177,7 +188,7 @@ router.post("/loi/update/:LOI_ID", function(req, res) {
   var LOI_ID = req.body.LOI_ID;
   var LOI_TEN = req.body.LOI_TEN;
   var LOI_MOTA = req.body.LOI_MOTA;
-  LOI_ID.updateLoi(LOI_ID, LOI_TEN, LOI_MOTA, function(err, data) {
+  loi.updateLoi(LOI_ID, LOI_TEN, LOI_MOTA, function(err, data) {
     if (err) {
       res.status(404).json({ message: "ERR" });
     } else res.status(200).json({ message: "đã cập nhật thành công lỗi ID: " + LOI_ID });

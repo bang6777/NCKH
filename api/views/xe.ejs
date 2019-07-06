@@ -100,7 +100,7 @@
                   <i
                     class="fa fa-edit fa-lg"
                     data-toggle="modal"
-                    data-target="#EditTK"
+                    data-target="#EditXe"
                     title="Cập nhật"
                   >
                   </i>
@@ -232,37 +232,49 @@
                 &times;
               </button>
             </div>
-            <form>
+            <% xe.forEach(function(xe){ %>
+            <form
+              action="/xe/update/<%= xe.XE_ID %>"
+              method="POST"
+              enctype="application/x-www-form-urlencoded"
+            >
+              <%});%>
               <div class="modal-body">
-                <div class="form-group ">
-                  <input
-                    type="text"
-                    name=""
-                    id="txtXe_ID"
-                    class="form-control"
-                    required
-                    placeholder="ID xe"
-                  />
-                </div>
+                <div class="modal-body">
+                  <div class="form-group ">
+                    <input
+                      type="text"
+                      name="XE_ID"
+                      id="txtXe_ID"
+                      class="form-control"
+                      required
+                      placeholder="ID xe"
+                      required
+                    />
+                  </div>
 
-                <div class="form-group">
-                  <input
-                    type="password"
-                    name=""
-                    id="txtXe_NamSanXuat"
-                    class="form-control"
-                    placeholder="Năm sản xuất"
-                  />
-                </div>
-                <div class="form-group ">
-                  <textarea
-                    class="form-control"
-                    id="txtXe_GhiChu"
-                    placeholder="Nhập ghi chú...."
-                  ></textarea>
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      name="XE_NAMSANXUAT"
+                      id="txtXe_NamSanXuat"
+                      class="form-control"
+                      placeholder="Năm sản xuất"
+                      required
+                    />
+                  </div>
+
+                  <div class="form-group ">
+                    <textarea
+                      class="form-control"
+                      name="XE_GHICHU"
+                      id="txtXe_GhiChu"
+                      placeholder="Nhập ghi chú...."
+                      required
+                    ></textarea>
+                  </div>
                 </div>
               </div>
-
               <div class=" modal-footer">
                 <input
                   type="submit"
