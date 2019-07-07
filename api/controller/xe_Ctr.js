@@ -33,3 +33,17 @@ exports.deleteXe = (XE_ID, cb) => {
       cb(null, xe);
     });
 };
+exports.updateXe = (XE_ID, XE_VITRI, cb) => {
+  xe_M.update({
+    XE_ID: XE_ID,
+    XE_VITRI: XE_VITRI
+  },
+    {
+      where: {
+        XE_ID: XE_ID
+      }
+    }).then((xe) => {
+      console.log("Đã cập nhật tài khoản: ", xe.XE_ID);
+      cb(null, xe);
+    });
+};
