@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 
 // Option 1: Passing parameters separately
 module.exports = new Sequelize('xedap', 'root', '', {
-  host: 'localhost',
+  host: 'https://xedap-nckh.heroku.com/',
   dialect: 'mysql',
   pool: {
     max: 5,
