@@ -16,7 +16,8 @@
     <!-- My css -->
     <link rel="stylesheet" href="css/login.css" />
     <!-- My js -->
-    <script src="js/function.js" type="text/javascript"></script>
+    <script src="./js/function.js" type="text/javascript"></script>
+    <script src="./js/taikhoan-ajax.js"></script>
 
     <!-- Data table -->
     <link rel="stylesheet" type="text/css"
@@ -35,7 +36,6 @@
     <script>
         $(document).ready(function () {
             $('#tableTK').DataTable();
-            loadHeadFoot();
         });
 
     </script>
@@ -71,22 +71,18 @@
                         </tr>
                     </thead>
 
-                    <tbody class="text-center">
+                    <tbody class="text-center" id="tb">
                         <!-- <%= JSON.stringify(taikhoan) %> -->
                         <% taikhoan.forEach(function(tk){  %>
                         <tr>
                             <td> <%= tk.TK_ID %> </td>
                             <td> <%= tk.TK_HOTEN %> </td>
-
                             <td> <%= tk.TK_DONVI %> </td>
                             <td> <%= tk.TK_LOAI %></td>
                             <td>
-                                <!-- <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="ckHieuLuc[1]">
-                                    <label class="custom-control-label" for="ckHieuLuc[1]"></label>
-                                </div> -->
+
                                 <% if(tk.TK_HIEULUC == 1) {%>
-                                <!-- <h2><%= tk.TK_HIEULUC %>  hello</h2> -->
+
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input" checked=true
                                         id="ckHieuLuc[<%= tk.TK_ID %>]">
@@ -106,7 +102,7 @@
                             <td class="thaotac">
                                 <i class="fa fa-edit fa-lg" data-toggle="modal" data-target="#EditTK" title="Cập nhật">
                                 </i>
-                                <!-- <a href="#"><i class="fa fa-trash fa-lg"></i> -->
+                                
                                 <form action="/taikhoan/delete/<%= tk.TK_ID %>" method="POST"
                                 enctype="application/x-www-form-urlencoded" style="margin-left: 5%">
                                 <label for="btnDelete[<%= tk.TK_ID %>]"><i class="fa fa-trash fa-lg"
