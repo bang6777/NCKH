@@ -6,8 +6,7 @@ const loi = require("./loi_Model");
 const vipham_Model = db.define("vipham", {
   VP_ID: {
     type: Sequelize.STRING,
-    allowNull: false,
-    primaryKey: true
+    allowNull: false
   },
   MUONTRA_ID: {
     type: Sequelize.STRING,
