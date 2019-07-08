@@ -192,7 +192,7 @@
         </div>
       </div>
 
-      <!-- Modal Edit Xe -->
+      <!-- Modal Edit Lỗi -->
       <div id="EditLoi" class="modal fade" role="dialog">
         <div class="modal-dialog">
           <!-- Modal content-->
@@ -203,7 +203,9 @@
                 &times;
               </button>
             </div>
-            <form action="/loi/update/" method="POST" enctype="application/x-www-form-urlencoded">
+            <% loi.forEach(function(loo){ %>
+            <form action="/loi/update/<%= loo.LOI_ID %>" method="POST" enctype="application/x-www-form-urlencoded">
+              <%});%>
                 <div class="modal-body">
                     <div class="modal-body">
                         <div class="form-group ">
