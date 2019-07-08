@@ -6,8 +6,7 @@ const db = require("../Config/db");
 const muontra_Model = db.define("muontra", {
   MUONTRA_ID: {
     type: Sequelize.STRING,
-    allowNull: false,
-    primaryKey: true
+    allowNull: false
   },
   TK_ID: {
     type: Sequelize.STRING,
