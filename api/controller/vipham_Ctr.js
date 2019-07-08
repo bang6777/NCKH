@@ -3,7 +3,8 @@ const vipham_M = require('../Model/vipham_Model');
 const muontra_M = require("../Model/muontra_Model");
 const loi_M = require("../Model/loi_Model");
 const taikhoan_M = require('../Model/taikhoan_Model');
-exports.vipham_nguoidung = function (MUONTRA_ID, TK_ID, LOI_ID, cb) {
+const xe_M = require("../Model/xe_Model");
+exports.vipham_nguoidung = function (MUONTRA_ID, TK_ID, LOI_ID, XE_ID, cb) {
     vipham_M.findAll({
         include: [
             {
@@ -16,6 +17,12 @@ exports.vipham_nguoidung = function (MUONTRA_ID, TK_ID, LOI_ID, cb) {
                 model: taikhoan_M,
                 where: {
                     TK_ID: TK_ID
+                }
+            },
+            {
+                model: xe_M,
+                where: {
+                    XE_ID: XE_ID
                 }
             },
             {
