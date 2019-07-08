@@ -216,9 +216,9 @@ router.get("/muontra", function (req, res) {
 router.get("/muontra/:TK_ID", muontraRoute.viewMuonTra);
 //-----------Vi phạm
 
-router.get("/vipham", function (req, res) {
-  res.render("./../api/views/vipham");
-});
+// router.get("/vipham", function (req, res) {
+//   res.render("./../api/views/vipham");
+// });
 
 router.get("/vipham", function (req, res) {
   vipham.allViPham(function (err, data) {
