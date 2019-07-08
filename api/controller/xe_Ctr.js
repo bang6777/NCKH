@@ -42,8 +42,8 @@ exports.updateXe = (XE_ID, XE_VITRI, cb) => {
       where: {
         XE_ID: XE_ID
       }
-    }).then((xe) => {
-      console.log("Đã cập nhật tài khoản: ", xe.XE_ID);
+    }).then(xe => {
+      console.log("Đã cập nhật xe: ", xe.XE_ID);
       cb(null, xe);
     });
 };
