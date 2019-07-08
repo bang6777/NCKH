@@ -215,6 +215,11 @@ router.get("/muontra", function (req, res) {
 // Muon tra theo ID
 router.get("/muontra/:TK_ID", muontraRoute.viewMuonTra);
 //-----------Vi phạm
+
+router.get("/vipham", function (req, res) {
+  res.render("./../api/views/vipham");
+});
+
 router.get("/vipham", function (req, res) {
   vipham.allViPham(function (err, data) {
     res.render("./../api/views/vipham", { vipham: data });
