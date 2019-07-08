@@ -2,6 +2,7 @@ const Sequelize = require("sequelize");
 const db = require("../Config/db");
 const muontra = require("./muontra_Model");
 const loi = require("./loi_Model");
+const taikhoan = require("./taikhoan_Model");
 
 const vipham_Model = db.define("vipham", {
   VP_ID: {
