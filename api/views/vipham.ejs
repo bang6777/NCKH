@@ -98,28 +98,28 @@
                         <h4 class="modal-title text-uppercase">Chi tiết vi phạm</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
-
+                    <% vipham.forEach(function(vp){ %>
                     <div class="modal-body">
                         <table class="table table-borderless">
                             <tr>
                                 <td width="40%">ID vi phạm</td>
-                                <td>1</td>
+                                <td><%= vp.VP_ID %></td>
                             </tr>
                             <tr>
                                 <td>ID mượn trả</td>
-                                <td>2</td>
+                                <td><%= vp.MUONTRA_ID %></td>
                             </tr>
                             <tr>
                                 <td>ID người dùng</td>
-                                <td>B1606777</td>
+                                <td><%= vp.TK_ID %></td>
                             </tr>
                             <tr>
                                 <td>Xe vi phạm</td>
-                                <td>X02</td>
+                                <td><%= vp.XE_ID %></td>
                             </tr>
                             <tr>
                                 <td>ID lỗi</td>
-                                <td>1</td>
+                                <td><%= vp.LOI_ID %></td>
                             </tr>
                             <tr>
                                 <td>Tên lỗi</td>
@@ -131,7 +131,7 @@
                             </tr>
                         </table>
                     </div>
-
+                    <% }); %>
                     <div class=" modal-footer">
                         <input type="button" value="Đóng" id="btnCancel" class="btn btn-danger px-3"
                             data-dismiss="modal" />
