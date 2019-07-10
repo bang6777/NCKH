@@ -19,8 +19,16 @@
     <script src="./js/taikhoan-ajax.js"></script>
 
     <!-- Data table -->
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css"
+    />
 
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
@@ -33,7 +41,7 @@
         $("#tableTK").DataTable();
       });
     </script>
-    
+
     <div id="header">
       <%- include('header'); -%>
     </div>
@@ -43,14 +51,34 @@
         QUẢN LÝ THÔNG TIN NGƯỜI DÙNG
       </h2>
       <div class="container-fluid">
-        <input type="button" value="Thêm người dùng" class="btn btn-info mb-3" id="btnAdd" data-toggle="modal" data-target="#AddTK" />
+        <input
+          type="button"
+          value="Thêm người dùng"
+          class="btn btn-info mb-3"
+          id="btnAdd"
+          data-toggle="modal"
+          data-target="#AddTK"
+        />
         <input type="button" value="Xem tất cả" class="btn btn-outline-info mb-3" id="btnAll" />
-        <input type="text" name="TK_ID" id="TK_IDabc" />
-        <input type="button" value="Test" class="btn btn-outline-info mb-3" name="btnTest" data-toggle="modal" data-target="#EditTK" />
+        <!-- <input type="text" name="TK_ID" id="TK_IDabc" />
+        <input
+          type="button"
+          value="Test"
+          class="btn btn-outline-info mb-3"
+          name="btnTest"
+          data-toggle="modal"
+          data-target="#EditTK"
+        /> -->
 
         <!-- Table TK -->
         <div class="table-responsive">
-          <table id="tableTK" class="table table-striped table-bordered" style="width:100%" cellspacing="0" cellpadding="0">
+          <table
+            id="tableTK"
+            class="table table-striped table-bordered"
+            style="width:100%"
+            cellspacing="0"
+            cellpadding="0"
+          >
             <thead class="bg-info text-white font-weight-semi-bold text-center">
               <tr>
                 <td width="10%">ID</td>
@@ -73,14 +101,15 @@
                 <td><%= tk.TK_DONVI %></td>
                 <td><%= tk.TK_LOAI %></td>
                 <td>
-                  <!-- <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="ckHieuLuc[1]">
-                                    <label class="custom-control-label" for="ckHieuLuc[1]"></label>
-                                </div> -->
                   <% if(tk.TK_HIEULUC == 1) {%>
                   <!-- <h2><%= tk.TK_HIEULUC %>  hello</h2> -->
                   <div class="custom-control custom-switch">
-                    <input type="checkbox" class="custom-control-input" checked="true" id="ckHieuLuc[<%= tk.TK_ID %>]" />
+                    <input
+                      type="checkbox"
+                      class="custom-control-input"
+                      checked="true"
+                      id="ckHieuLuc[<%= tk.TK_ID %>]"
+                    />
                     <label class="custom-control-label" for="ckHieuLuc[<%= tk.TK_ID %>]"></label>
                   </div>
                   <%} else {%>
@@ -92,12 +121,24 @@
                 </td>
 
                 <td class="thaotac">
-                  <input type="button" class="btn btn-outline-info mb-3" data-toggle="modal" data-target="#EditTK" value="<%= tk.TK_ID %>" onclick="UpdateModal('<%= tk.TK_ID %>')"/>
-
-                  <i class="fa fa-edit fa-lg" data-toggle="modal" data-target="#EditTK" title="Cập nhật"> </i>
-
-                  <!-- <a href="#"><i class="fa fa-trash fa-lg"></i> -->
-                  <form action="/taikhoan/delete/<%= tk.TK_ID %>" method="POST" enctype="application/x-www-form-urlencoded" style="margin-left: 5%">
+                  <label for="btnUpdate[<%= tk.TK_ID %>]">
+                    <i class="fa fa-edit fa-lg" data-toggle="modal" data-target="#EditTK" title="Cập nhật"> </i>
+                  </label>
+                  <input
+                    type="button"
+                    class="btn-hidden"
+                    data-toggle="modal"
+                    data-target="#EditTK"
+                    value="<%= tk.TK_ID %>"
+                    onclick="UpdateModal('<%= tk.TK_ID %>')"
+                    id="btnUpdate[<%= tk.TK_ID %>]"
+                  />
+                  <form
+                    action="/taikhoan/delete/<%= tk.TK_ID %>"
+                    method="POST"
+                    enctype="application/x-www-form-urlencoded"
+                    style="margin-left: 5%"
+                  >
                     <label for="btnDelete[<%= tk.TK_ID %>]"><i class="fa fa-trash fa-lg" title="Xóa"></i></label>
                     <input type="hidden" name="TK_ID" value="<%= tk.TK_ID %>" />
                     <input type="submit" value="Delete" id="btnDelete[<%= tk.TK_ID %>]" class="btn-hidden" />
@@ -134,16 +175,44 @@
             <form action="/taikhoan" method="POST" enctype="application/x-www-form-urlencoded" id="frmTK">
               <div class="modal-body">
                 <div class="form-group ">
-                  <input type="text" name="TK_ID" id="txtTK_ID" class="form-control" required placeholder="ID người dùng" />
+                  <input
+                    type="text"
+                    name="TK_ID"
+                    id="txtTK_ID"
+                    class="form-control"
+                    required
+                    placeholder="ID người dùng"
+                  />
                 </div>
                 <div class="form-group ">
-                  <input type="text" name="TK_HOTEN" id="txtTK_HoTen" class="form-control" required placeholder="Họ tên người dùng" />
+                  <input
+                    type="text"
+                    name="TK_HOTEN"
+                    id="txtTK_HoTen"
+                    class="form-control"
+                    required
+                    placeholder="Họ tên người dùng"
+                  />
                 </div>
                 <div class="form-group ">
-                  <input type="text" name="TK_DONVI" id="txtTK_DonVi" class="form-control" required placeholder="Đơn vị" />
+                  <input
+                    type="text"
+                    name="TK_DONVI"
+                    id="txtTK_DonVi"
+                    class="form-control"
+                    required
+                    placeholder="Đơn vị"
+                  />
                 </div>
                 <div class="form-group">
-                  <input type="password" name="TK_PASSWORD" id="txtTK_Password" class="form-control" required placeholder="Password" />
+                  <input
+                    type="password"
+                    name="TK_PASSWORD"
+                    id="txtTK_Password"
+                    class="form-control"
+                    required
+                    placeholder="Password"
+                  />
                 </div>
                 <div class="form-group ">
                   <select name="TK_QUYEN" id="slTK_Quyen" class="form-control">
@@ -207,7 +276,7 @@
                     </select>
                   </div>
                   <div class="form-group ">
-                    <select id="slTK_Loai" class="form-control" name="TK_LOAI" >
+                    <select id="slTK_Loai" class="form-control" name="TK_LOAI">
                       <option value="-1">Chọn loại tài khoản</option>
                       <option value="Sinh viên">Sinh viên</option>
                       <option value="Giảng viên">Giảng viên</option>
