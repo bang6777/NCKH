@@ -63,28 +63,28 @@
                             <td>Xem chi tiết</td>
                         </tr>
                     </thead>
-
+                    <% vipham.forEach(function(vp){ %>
                     <tbody class="text-center">
                         <tr>
-                            <td>1</td>
+                            <td><%= vp.VP_ID %></td>
                             <td class="chitiet">
                                 <a data-toggle="modal" data-target="#ChiTietMuonTra">
-                                    2
+                                    <%= vp.MUONTRA_ID %>
                                 </a>
                             </td>
                             <td>1</td>
                             <td class="chitiet">
                                 <a data-toggle="modal" data-target="#ChiTietTK">
-                                    B1606777
+                                    <%= vp.TK_ID %>
                                 </a>
                             </td>
                             <td>X02</td>
-                            <td>17:00:00 06/05/2019</td>
+                            <td><%= vp.createAt %></td>
                             <td><a href="#"><i class="fa fa-info-circle fa-lg" data-toggle="modal"
                                         data-target="#ChiTietViPham"></i></a>
                         </tr>
-
                     </tbody>
+                    <% });%>
                 </table>
             </div>
         </div>
