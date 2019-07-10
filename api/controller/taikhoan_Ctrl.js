@@ -17,16 +17,7 @@ exports.allUser = cb => {
   });
 };
 
-exports.addUser = (
-  TK_ID,
-  TK_PASSWORD,
-  TK_HOTEN,
-  TK_QUYEN,
-  TK_DONVI,
-  TK_LOAI,
-  TK_HIEULUC,
-  cb
-) => {
+exports.addUser = (TK_ID, TK_PASSWORD, TK_HOTEN, TK_QUYEN, TK_DONVI, TK_LOAI, TK_HIEULUC, cb) => {
   taikhoan_M
     .create({
       TK_ID: TK_ID,
@@ -99,3 +90,29 @@ exports.getOneTK = (TK_ID, TK_HOTEN, TK_DONVI, TK_LOAI, TK_QUYEN, cb) => {
       cb(null, tk_bang);
     });
 };
+
+exports.findTKByPK = (TK_ID, cb) => {
+  taikhoan_M
+    .findAll({
+      where: {
+        TK_ID: TK_ID
+      }
+    })
+    .then(tk_bang => {
+      console.log("tài khoản: ", tk_bang.TK_ID);
+      cb(null, tk_bang);
+    });
+};
+
+// exports.deleteUser = (TK_ID, cb) => {
+//   taikhoan_M
+//     .destroy({
+//       where: {
+//         TK_ID: TK_ID
+//       }
+//     })
+//     .then(tk_bang => {
+//       console.log("Đã xóa tài khoản: ", tk_bang.TK_ID);
+//       cb(null, tk_bang);
+//     });
+// };
