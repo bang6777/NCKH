@@ -75,3 +75,12 @@ function ajaxGet() {
     }
   });
 }
+
+function Reset() {
+  $("input[name=TK_ID]").val("");
+  $("input[name=TK_HOTEN]").val("");
+  $("input[name=TK_DONVI]").val("");
+  $("input[name=TK_ID]").val("");
+  $("select[name=TK_QUYEN]").val("-1");
+  $("select[name=TK_LOAI]").val("-1");
+}

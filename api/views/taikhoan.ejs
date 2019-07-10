@@ -40,6 +40,7 @@
     <%- include('header'); -%>
   </div>
 
+<<<<<<< HEAD
   <div class="container-fluid bg-white ">
     <h2 class="text-center font-weight-semi-bold text-dark mt-3">
       QUẢN LÝ THÔNG TIN NGƯỜI DÙNG
@@ -49,6 +50,28 @@
         data-target="#AddTK" />
       <input type="button" value="Xem tất cả" class="btn btn-outline-info mb-3" id="btnAll" />
       <!-- <input type="text" name="TK_ID" id="TK_IDabc" />
+=======
+    <div id="header">
+      <%- include('header'); -%>
+    </div>
+
+    <div class="container-fluid bg-white ">
+      <h2 class="text-center font-weight-semi-bold text-dark mt-3">
+        QUẢN LÝ THÔNG TIN NGƯỜI DÙNG
+      </h2>
+      <div class="container-fluid">
+        <input
+          type="button"
+          value="Thêm người dùng"
+          class="btn btn-info mb-3"
+          id="btnAdd"
+          data-toggle="modal"
+          data-target="#AddTK"
+          onclick="Reset()"
+        />
+        <input type="button" value="Xem tất cả" class="btn btn-outline-info mb-3" id="btnAll" />
+        <!-- <input type="text" name="TK_ID" id="TK_IDabc" />
+>>>>>>> 3fbf4c4c869f28285af149c21b77888e4bbaf0b1
         <input
           type="button"
           value="Test"
@@ -204,10 +227,21 @@
               <input type="submit" value="Lưu" id="btnSave" class="btn btn-primary px-3" />
               <input type="button" value="Hủy" id="btnCancel" class="btn btn-danger px-3" data-dismiss="modal" />
             </div>
+<<<<<<< HEAD
           </form>
       </div>
     </div>
   </div>
+=======
+            <!-- <% taikhoan.forEach(function(tk){ %>
+            <form action="/taikhoan/update/<%= tk.TK_ID %>" method="POST" enctype="application/x-www-form-urlencoded">
+              <%});%> -->
+              <div class="modal-body">
+                <div class="modal-body">
+                  <div class="form-group ">
+                    <input type="text" name="TK_ID" id="txtTK_ID_update" class="form-control" required readonly />
+                  </div>
+>>>>>>> 3fbf4c4c869f28285af149c21b77888e4bbaf0b1
 
   <!-- Modal Edit TK -->
   <div id="EditTK" class="modal fade" role="dialog">
@@ -231,6 +265,7 @@
                 <input type="text" name="TK_ID" id="txtTK_ID_update" class="form-control" required readonly />
               </div>
 
+<<<<<<< HEAD
               <div class="form-group ">
                 <input type="text" name="TK_HOTEN" id="txtTK_HoTen" class="form-control" required />
               </div>
@@ -253,6 +288,13 @@
                 </select>
               </div>
             </div>
+=======
+              <div class=" modal-footer">
+                <input type="submit" value="Cập nhật" id="btnUpdate" class="btn btn-primary px-3" />
+                <input type="button" value="Hủy" id="btnCancel" class="btn btn-danger px-3" data-dismiss="modal" />
+              </div>
+            <!-- </form> -->
+>>>>>>> 3fbf4c4c869f28285af149c21b77888e4bbaf0b1
           </div>
 
           <div class=" modal-footer">
