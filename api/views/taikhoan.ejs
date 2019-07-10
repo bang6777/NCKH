@@ -58,6 +58,7 @@
           id="btnAdd"
           data-toggle="modal"
           data-target="#AddTK"
+          onclick="Reset()"
         />
         <input type="button" value="Xem tất cả" class="btn btn-outline-info mb-3" id="btnAll" />
         <!-- <input type="text" name="TK_ID" id="TK_IDabc" />
@@ -253,9 +254,9 @@
                 &times;
               </button>
             </div>
-            <% taikhoan.forEach(function(tk){ %>
+            <!-- <% taikhoan.forEach(function(tk){ %>
             <form action="/taikhoan/update/<%= tk.TK_ID %>" method="POST" enctype="application/x-www-form-urlencoded">
-              <%});%>
+              <%});%> -->
               <div class="modal-body">
                 <div class="modal-body">
                   <div class="form-group ">
@@ -287,10 +288,10 @@
               </div>
 
               <div class=" modal-footer">
-                <input type="submit" value="Lưu" id="btnSave" class="btn btn-primary px-3" />
+                <input type="submit" value="Cập nhật" id="btnUpdate" class="btn btn-primary px-3" />
                 <input type="button" value="Hủy" id="btnCancel" class="btn btn-danger px-3" data-dismiss="modal" />
               </div>
-            </form>
+            <!-- </form> -->
           </div>
         </div>
       </div>

@@ -85,7 +85,10 @@ router.post("/taikhoan/update/:TK_ID", function(req, res) {
   taikhoan.updateUser(TK_ID, TK_HOTEN, TK_DONVI, TK_LOAI, TK_QUYEN, function(err, data) {
     if (err) {
       res.status(404).json({ message: "ERR" });
-    } else res.status(200).json({ message: "đã cập nhật thành công tài khoản ID: " + TK_ID });
+    } else {
+      // res.status(200).json({ message: "đã cập nhật thành công tài khoản ID: " + TK_ID });
+      return res.redirect("/taikhoan");
+    }
   });
 });
 // ---------------------------------------------Test
