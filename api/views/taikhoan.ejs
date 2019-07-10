@@ -40,38 +40,19 @@
     <%- include('header'); -%>
   </div>
 
-<<<<<<< HEAD
+  <div id="header">
+    <%- include('header'); -%>
+  </div>
+
   <div class="container-fluid bg-white ">
     <h2 class="text-center font-weight-semi-bold text-dark mt-3">
       QUẢN LÝ THÔNG TIN NGƯỜI DÙNG
     </h2>
     <div class="container-fluid">
       <input type="button" value="Thêm người dùng" class="btn btn-info mb-3" id="btnAdd" data-toggle="modal"
-        data-target="#AddTK" />
+        data-target="#AddTK" onclick="Reset()" />
       <input type="button" value="Xem tất cả" class="btn btn-outline-info mb-3" id="btnAll" />
       <!-- <input type="text" name="TK_ID" id="TK_IDabc" />
-=======
-    <div id="header">
-      <%- include('header'); -%>
-    </div>
-
-    <div class="container-fluid bg-white ">
-      <h2 class="text-center font-weight-semi-bold text-dark mt-3">
-        QUẢN LÝ THÔNG TIN NGƯỜI DÙNG
-      </h2>
-      <div class="container-fluid">
-        <input
-          type="button"
-          value="Thêm người dùng"
-          class="btn btn-info mb-3"
-          id="btnAdd"
-          data-toggle="modal"
-          data-target="#AddTK"
-          onclick="Reset()"
-        />
-        <input type="button" value="Xem tất cả" class="btn btn-outline-info mb-3" id="btnAll" />
-        <!-- <input type="text" name="TK_ID" id="TK_IDabc" />
->>>>>>> 3fbf4c4c869f28285af149c21b77888e4bbaf0b1
         <input
           type="button"
           value="Test"
@@ -227,199 +208,172 @@
               <input type="submit" value="Lưu" id="btnSave" class="btn btn-primary px-3" />
               <input type="button" value="Hủy" id="btnCancel" class="btn btn-danger px-3" data-dismiss="modal" />
             </div>
-<<<<<<< HEAD
-          </form>
-      </div>
-    </div>
-  </div>
-=======
             <!-- <% taikhoan.forEach(function(tk){ %>
             <form action="/taikhoan/update/<%= tk.TK_ID %>" method="POST" enctype="application/x-www-form-urlencoded">
               <%});%> -->
-              <div class="modal-body">
-                <div class="modal-body">
-                  <div class="form-group ">
-                    <input type="text" name="TK_ID" id="txtTK_ID_update" class="form-control" required readonly />
-                  </div>
->>>>>>> 3fbf4c4c869f28285af149c21b77888e4bbaf0b1
-
-  <!-- Modal Edit TK -->
-  <div id="EditTK" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title text-uppercase">
-            Cập nhật thông tin người dùng
-          </h4>
-          <button type="button" class="close" data-dismiss="modal">
-            &times;
-          </button>
-        </div>
-        <% taikhoan.forEach(function(tk){ %>
-        <form action="/taikhoan/update/<%= tk.TK_ID %>" method="POST" enctype="application/x-www-form-urlencoded">
-          <%});%>
-          <div class="modal-body">
             <div class="modal-body">
-              <div class="form-group ">
-                <input type="text" name="TK_ID" id="txtTK_ID_update" class="form-control" required readonly />
+              <div class="modal-body">
+                <div class="form-group ">
+                  <input type="text" name="TK_ID" id="txtTK_ID_update" class="form-control" required readonly />
+                </div>
+
+                <!-- Modal Edit TK -->
+                <div id="EditTK" class="modal fade" role="dialog">
+                  <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title text-uppercase">
+                          Cập nhật thông tin người dùng
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal">
+                          &times;
+                        </button>
+                      </div>
+                      <% taikhoan.forEach(function(tk){ %>
+                      <form action="/taikhoan/update/<%= tk.TK_ID %>" method="POST"
+                        enctype="application/x-www-form-urlencoded">
+                        <%});%>
+                        <div class="modal-body">
+                          <div class="modal-body">
+                            <div class="form-group ">
+                              <input type="text" name="TK_ID" id="txtTK_ID_update" class="form-control" required
+                                readonly />
+                            </div>
+
+                            <div class=" modal-footer">
+                              <input type="submit" value="Cập nhật" id="btnUpdate" class="btn btn-primary px-3" />
+                              <input type="button" value="Hủy" id="btnCancel" class="btn btn-danger px-3"
+                                data-dismiss="modal" />
+                            </div>
+                            <!-- </form> -->
+                          </div>
+
+                          <div class=" modal-footer">
+                            <input type="submit" value="Lưu" id="btnSave" class="btn btn-primary px-3" />
+                            <input type="button" value="Hủy" id="btnCancel" class="btn btn-danger px-3"
+                              data-dismiss="modal" />
+                          </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-<<<<<<< HEAD
-              <div class="form-group ">
-                <input type="text" name="TK_HOTEN" id="txtTK_HoTen" class="form-control" required />
-              </div>
-              <div class="form-group ">
-                <input type="text" name="TK_DONVI" id="txtTK_DonVi" class="form-control" required />
-              </div>
-              <div class="form-group ">
-                <select id="slTK_Quyen" class="form-control" name="TK_QUYEN">
-                  <option value="-1">Chọn quyền sử dụng</option>
-                  <option value="Quản trị">Quản trị</option>
-                  <option value="Người dùng">Người dùng</option>
-                </select>
-              </div>
-              <div class="form-group ">
-                <select id="slTK_Loai" class="form-control" name="TK_LOAI">
-                  <option value="-1">Chọn loại tài khoản</option>
-                  <option value="Sinh viên">Sinh viên</option>
-                  <option value="Giảng viên">Giảng viên</option>
-                  <option value="Khách vãng lai">Khách vãng lai</option>
-                </select>
+              <!-- Modal ThongKe TK Muon Tra -->
+              <div id="ThongKeTK-MuonTra" class="modal fade" role="dialog">
+                <div class="modal-dialog modal-lg">
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title text-uppercase">
+                        Thống kê lượt mượn trả xe
+                      </h4>
+                      <button type="button" class="close" data-dismiss="modal">
+                        &times;
+                      </button>
+                    </div>
+
+                    <div class="modal-body">
+                      <table class="table table-sm mx-auto table-striped text-center">
+                        <thead>
+                          <td>ID mượn trả</td>
+                          <td>ID xe</td>
+                          <td>Thời gian mượn</td>
+                          <td>Thời gian trả</td>
+                        </thead>
+                        <tbody>
+                          <td>1</td>
+                          <td>X01</td>
+                          <td>15:00:00 06/05/2019</td>
+                          <td>15:15:00 06/05/2019</td>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class=" modal-footer">
+                      <input type="button" value="Đóng" id="btnCancel" class="btn btn-danger px-3"
+                        data-dismiss="modal" />
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-=======
-              <div class=" modal-footer">
-                <input type="submit" value="Cập nhật" id="btnUpdate" class="btn btn-primary px-3" />
-                <input type="button" value="Hủy" id="btnCancel" class="btn btn-danger px-3" data-dismiss="modal" />
+
+            <!-- Modal ThongKe TK Vi Pham -->
+            <div id="ThongKeTK-ViPham" class="modal fade" role="dialog">
+              <div class="modal-dialog modal-lg">
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title text-uppercase">Thống kê lượt vi phạm</h4>
+                    <button type="button" class="close" data-dismiss="modal">
+                      &times;
+                    </button>
+                  </div>
+
+                  <div class="modal-body">
+                    <table class="table table-sm mx-auto table-striped text-center">
+                      <thead>
+                        <td>ID vi phạm</td>
+                        <td>ID mượn trả</td>
+                        <td>Tên lỗi</td>
+                        <td>Xe vi phạm</td>
+                        <td>Thời gian vi phạm</td>
+                      </thead>
+                      <tbody>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>Ngoài khuôn viên trường</td>
+                        <td>X02</td>
+                        <td>17:00:00 06/05/2019</td>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class=" modal-footer">
+                    <input type="button" value="Đóng" id="btnCancel" class="btn btn-danger px-3" data-dismiss="modal" />
+                  </div>
+                </div>
               </div>
-            <!-- </form> -->
->>>>>>> 3fbf4c4c869f28285af149c21b77888e4bbaf0b1
+            </div>
+      </div>
+
+      <!-- Modal ThongKe TK Hu Hong -->
+      <div id="ThongKeTK-HuHong" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title text-uppercase">
+                Thống kê lượt báo hư hỏng
+              </h4>
+              <button type="button" class="close" data-dismiss="modal">
+                &times;
+              </button>
+            </div>
+
+            <div class="modal-body">
+              <table class="table table-sm mx-auto table-striped text-center">
+                <thead>
+                  <td>ID hư hỏng</td>
+                  <td>ID xe</td>
+                  <td>Mô tả hư hỏng</td>
+                  <td>Thời gian</td>
+                </thead>
+                <tbody>
+                  <td>1</td>
+                  <td>X002</td>
+                  <td>Xe xẹp bánh</td>
+                  <td>17:00:00 06/05/2019</td>
+                </tbody>
+              </table>
+            </div>
+            <div class=" modal-footer">
+              <input type="button" value="Đóng" id="btnCancel" class="btn btn-danger px-3" data-dismiss="modal" />
+            </div>
           </div>
-
-          <div class=" modal-footer">
-            <input type="submit" value="Lưu" id="btnSave" class="btn btn-primary px-3" />
-            <input type="button" value="Hủy" id="btnCancel" class="btn btn-danger px-3" data-dismiss="modal" />
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-  </div>
-
-  <!-- Modal ThongKe TK Muon Tra -->
-  <div id="ThongKeTK-MuonTra" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-lg">
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title text-uppercase">
-            Thống kê lượt mượn trả xe
-          </h4>
-          <button type="button" class="close" data-dismiss="modal">
-            &times;
-          </button>
-        </div>
-
-        <div class="modal-body">
-          <table class="table table-sm mx-auto table-striped text-center">
-            <thead>
-              <td>ID mượn trả</td>
-              <td>ID xe</td>
-              <td>Thời gian mượn</td>
-              <td>Thời gian trả</td>
-            </thead>
-            <tbody>
-              <td>1</td>
-              <td>X01</td>
-              <td>15:00:00 06/05/2019</td>
-              <td>15:15:00 06/05/2019</td>
-            </tbody>
-          </table>
-        </div>
-        <div class=" modal-footer">
-          <input type="button" value="Đóng" id="btnCancel" class="btn btn-danger px-3" data-dismiss="modal" />
         </div>
       </div>
     </div>
-  </div>
-  </div>
-
-  <!-- Modal ThongKe TK Vi Pham -->
-  <div id="ThongKeTK-ViPham" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-lg">
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title text-uppercase">Thống kê lượt vi phạm</h4>
-          <button type="button" class="close" data-dismiss="modal">
-            &times;
-          </button>
-        </div>
-
-        <div class="modal-body">
-          <table class="table table-sm mx-auto table-striped text-center">
-            <thead>
-              <td>ID vi phạm</td>
-              <td>ID mượn trả</td>
-              <td>Tên lỗi</td>
-              <td>Xe vi phạm</td>
-              <td>Thời gian vi phạm</td>
-            </thead>
-            <tbody>
-              <td>1</td>
-              <td>2</td>
-              <td>Ngoài khuôn viên trường</td>
-              <td>X02</td>
-              <td>17:00:00 06/05/2019</td>
-            </tbody>
-          </table>
-        </div>
-        <div class=" modal-footer">
-          <input type="button" value="Đóng" id="btnCancel" class="btn btn-danger px-3" data-dismiss="modal" />
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
-
-  <!-- Modal ThongKe TK Hu Hong -->
-  <div id="ThongKeTK-HuHong" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-lg">
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title text-uppercase">
-            Thống kê lượt báo hư hỏng
-          </h4>
-          <button type="button" class="close" data-dismiss="modal">
-            &times;
-          </button>
-        </div>
-
-        <div class="modal-body">
-          <table class="table table-sm mx-auto table-striped text-center">
-            <thead>
-              <td>ID hư hỏng</td>
-              <td>ID xe</td>
-              <td>Mô tả hư hỏng</td>
-              <td>Thời gian</td>
-            </thead>
-            <tbody>
-              <td>1</td>
-              <td>X002</td>
-              <td>Xe xẹp bánh</td>
-              <td>17:00:00 06/05/2019</td>
-            </tbody>
-          </table>
-        </div>
-        <div class=" modal-footer">
-          <input type="button" value="Đóng" id="btnCancel" class="btn btn-danger px-3" data-dismiss="modal" />
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
   </div>
 </body>
 
