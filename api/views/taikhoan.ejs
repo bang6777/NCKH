@@ -28,12 +28,14 @@
 <body onload="GetTKConHieuLuc()">
   <script>
     $(document).ready(function () {
-      // LoadDataTable();
-      // $("#tableTK").DataTable();
+      LoadDataTable();
+      $("#tableTK").DataTable();
     });
   </script>
 
-
+  <div id="header">
+    <%-include('header'); -%>
+  </div>
 
   <div class="container-fluid bg-white ">
     <h2 class="text-center font-weight-semi-bold text-dark mt-3">
