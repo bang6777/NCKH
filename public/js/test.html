@@ -13,14 +13,90 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
   </head>
   <body>
-    <input id="a" />
-    <input type="button" value="" onclick="Test()" />
+    <select class="form-control form-control-md" id="slTK_View">
+      <option value="1">Còn hiệu lực</option>
+      <option value="0">Vô hiệu</option>
+      <option value="2">Xem tất cả</option>
+
+      <!-- <%= JSON.stringify(taikhoan) %> -->
+      <% taikhoan.forEach(function(tk){ %>
+      <tr>
+        <td><%= tk.TK_ID %></td>
+        <td><%= tk.TK_HOTEN %></td>
+
+        <td><%= tk.TK_DONVI %></td>
+        <td><%= tk.TK_LOAI %></td>
+        <td>
+          <% if(tk.TK_HIEULUC == 1) {%>
+          <!-- <h2><%= tk.TK_HIEULUC %>  hello</h2> -->
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              checked="true"
+              id="ckHieuLuc[<%= tk.TK_ID %>]"
+              onclick="UpdateHieuLuc('<%= tk.TK_ID %>')"
+              name="TK_HIEULUC"
+            />
+            <label class="custom-control-label" for="ckHieuLuc[<%= tk.TK_ID %>]"></label>
+          </div>
+          <%} else {%>
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="ckHieuLuc[<%= tk.TK_ID %>]"
+              onclick="UpdateHieuLuc('<%= tk.TK_ID %>')"
+              name="TK_HIEULUC"
+            />
+            <label class="custom-control-label" for="ckHieuLuc[<%= tk.TK_ID %>]"></label>
+          </div>
+          <%}%>
+        </td>
+
+        <td class="thaotac">
+          <label for="btnUpdate[<%= tk.TK_ID %>]">
+            <i class="fa fa-edit fa-lg" data-toggle="modal" data-target="#EditTK" title="Cập nhật"> </i>
+          </label>
+          <input
+            type="button"
+            class="btn-hidden"
+            data-toggle="modal"
+            data-target="#EditTK"
+            value="<%= tk.TK_ID %>"
+            onclick="UpdateModal('<%= tk.TK_ID %>')"
+            id="btnUpdate[<%= tk.TK_ID %>]"
+          />
+          <!-- <form
+              method="DELETE"
+              enctype="application/x-www-form-urlencoded"
+              style="margin-left: 5%"
+              
+            > -->
+          <label for="btnDelete[<%= tk.TK_ID %>]"><i class="fa fa-trash fa-lg" title="Xóa"></i></label>
+          <input type="hidden" name="TK_ID" value="<%= tk.TK_ID %>" />
+          <input type="button" value="Delete" id="btnDelete[<%= tk.TK_ID %>]" class="btn-hidden" onclick="Delete('<%= tk.TK_ID %>')" />
+          <!-- </form> -->
+        </td>
+        <td>
+          <button data-toggle="modal" data-target="#ThongKeTK-MuonTra" class="btn btn-outline-dark btn-sm">
+            Mượn-trả
+          </button>
+          <button data-toggle="modal" data-target="#ThongKeTK-ViPham" class="btn btn-outline-dark btn-sm">
+            Vi phạm
+          </button>
+          <button data-toggle="modal" data-target="#ThongKeTK-HuHong" class="btn btn-outline-dark btn-sm">
+            Hư hỏng
+          </button>
+        </td>
+      </tr>
+      <% }); %>
+    </select>
+
     <script>
-      function Test() {
-        // document.getElementById("a").value = "ádasdsad";
-        // alert(document.getElementById("a").value);
-        $("#a").val("đasa");
-        alert($("#a").val());
+      function a() {
+        var view = document.getElementById("slTK_View").value;
+        if(view == 1)
       }
     </script>
   </body>

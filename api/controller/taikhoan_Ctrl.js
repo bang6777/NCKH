@@ -54,7 +54,7 @@ exports.updateUser = (TK_ID, TK_HOTEN, TK_DONVI, TK_LOAI, TK_QUYEN, cb) => {
   taikhoan_M
     .update(
       {
-        TK_ID: TK_ID,
+        // TK_ID: TK_ID,
         TK_HOTEN: TK_HOTEN,
         TK_DONVI: TK_DONVI,
         TK_LOAI: TK_LOAI,
@@ -107,15 +107,46 @@ exports.findTKByPK = (TK_ID, cb) => {
     });
 };
 
-// exports.deleteUser = (TK_ID, cb) => {
-//   taikhoan_M
-//     .destroy({
-//       where: {
-//         TK_ID: TK_ID
-//       }
-//     })
-//     .then(tk_bang => {
-//       console.log("Đã xóa tài khoản: ", tk_bang.TK_ID);
-//       cb(null, tk_bang);
-//     });
-// };
+exports.updateHieuLuc = (TK_ID, TK_HIEULUC, cb) => {
+  taikhoan_M
+    .update(
+      {
+        TK_HIEULUC: TK_HIEULUC
+      },
+      {
+        where: {
+          TK_ID: TK_ID
+        }
+      }
+    )
+    .then(tk_bang => {
+      console.log("Đã cập nhật hiệu lực tài khoản: ", tk_bang.TK_ID);
+      cb(null, tk_bang);
+    });
+};
+
+exports.getTKConHieuLuc = cb => {
+  taikhoan_M
+    .findAll({
+      where: {
+        TK_HIEULUC: "1"
+      }
+    })
+    .then(tk_bang => {
+      console.log("tài khoản: ", tk_bang.TK_ID);
+      cb(null, tk_bang);
+    });
+};
+
+exports.getTKVoHieuLuc = cb => {
+  taikhoan_M
+    .findAll({
+      where: {
+        TK_HIEULUC: "0"
+      }
+    })
+    .then(tk_bang => {
+      console.log("tài khoản: ", tk_bang.TK_ID);
+      cb(null, tk_bang);
+    });
+};
