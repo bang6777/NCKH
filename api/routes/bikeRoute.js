@@ -59,38 +59,38 @@ router.post("/taikhoan", function(req, res) {
     if (err) {
       res.status(404).json({ message: "ERR!" });
     } else {
-      // res.status(200).json({ message: "đã thêm thành công!" });
-      res.redirect("/taikhoan");
+      res.status(200).json({ message: "đã thêm thành công!" });
+      // res.redirect("/taikhoan");
     }
   });
 });
 
-router.post("/taikhoan/delete/:TK_ID", function(req, res) {
-  var TK_ID = req.body.TK_ID;
-  taikhoan.deleteUser(TK_ID, function(err, data) {
-    if (err) {
-      res.status(404).json({ message: "ERR" });
-    } else {
-      // res.status(200).json({ message: "đã xóa thành công tài khoản ID: " + TK_ID });
-      return res.redirect("/taikhoan");
-    }
-  });
-});
-router.post("/taikhoan/update/:TK_ID", function(req, res) {
-  var TK_ID = req.body.TK_ID;
-  var TK_HOTEN = req.body.TK_HOTEN;
-  var TK_DONVI = req.body.TK_DONVI;
-  var TK_LOAI = req.body.TK_LOAI;
-  var TK_QUYEN = req.body.TK_QUYEN;
-  taikhoan.updateUser(TK_ID, TK_HOTEN, TK_DONVI, TK_LOAI, TK_QUYEN, function(err, data) {
-    if (err) {
-      res.status(404).json({ message: "ERR" });
-    } else {
-      // res.status(200).json({ message: "đã cập nhật thành công tài khoản ID: " + TK_ID });
-      return res.redirect("/taikhoan");
-    }
-  });
-});
+// router.post("/taikhoan/delete/:TK_ID", function(req, res) {
+//   var TK_ID = req.body.TK_ID;
+//   taikhoan.deleteUser(TK_ID, function(err, data) {
+//     if (err) {
+//       res.status(404).json({ message: "ERR" });
+//     } else {
+//       // res.status(200).json({ message: "đã xóa thành công tài khoản ID: " + TK_ID });
+//       return res.redirect("/taikhoan");
+//     }
+//   });
+// });
+// router.post("/taikhoan/update/:TK_ID", function(req, res) {
+//   var TK_ID = req.body.TK_ID;
+//   var TK_HOTEN = req.body.TK_HOTEN;
+//   var TK_DONVI = req.body.TK_DONVI;
+//   var TK_LOAI = req.body.TK_LOAI;
+//   var TK_QUYEN = req.body.TK_QUYEN;
+//   taikhoan.updateUser(TK_ID, TK_HOTEN, TK_DONVI, TK_LOAI, TK_QUYEN, function(err, data) {
+//     if (err) {
+//       res.status(404).json({ message: "ERR" });
+//     } else {
+//       res.status(200).json({ message: "đã cập nhật thành công tài khoản ID: " + TK_ID });
+//       // return res.redirect("/taikhoan");
+//     }
+//   });
+// });
 // ---------------------------------------------Test
 //get all TK
 router.get("/taikhoan/all", function(req, res) {
@@ -104,6 +104,81 @@ router.post("/taikhoan/find", function(req, res) {
   var TK_ID = req.body.TK_ID;
   taikhoan.findTKByPK(TK_ID, function(err, data) {
     res.status(200).json(data);
+  });
+});
+
+//cap nhat hieu luc
+router.post("/taikhoan/update-hieuluc/:TK_ID", function(req, res) {
+  var TK_ID = req.body.TK_ID;
+  var TK_HIEULUC = req.body.TK_HIEULUC;
+  taikhoan.updateHieuLuc(TK_ID, TK_HIEULUC, function(err, data) {
+    if (err) {
+      res.status(404).json({ message: "ERR" });
+    } else {
+      res.status(200).json({ message: "đã cập nhật hiệu lực tài khoản ID: " + TK_ID });
+    }
+  });
+});
+
+//cap nhat thong tin
+router.post("/taikhoan/update/:TK_ID", function(req, res) {
+  var TK_ID = req.body.TK_ID;
+  var TK_HOTEN = req.body.TK_HOTEN;
+  var TK_DONVI = req.body.TK_DONVI;
+  var TK_LOAI = req.body.TK_LOAI;
+  var TK_QUYEN = req.body.TK_QUYEN;
+  taikhoan.updateUser(TK_ID, TK_HOTEN, TK_DONVI, TK_LOAI, TK_QUYEN, function(err, data) {
+    if (err) {
+      res.status(404).json({ message: "ERR" });
+    } else {
+      res.status(200).json({ message: "đã cập nhật thông tin tài khoản ID: " + TK_ID });
+    }
+  });
+});
+
+//xoa taikhoan
+router.post("/taikhoan/delete/:TK_ID", function(req, res) {
+  var TK_ID = req.body.TK_ID;
+  taikhoan.deleteUser(TK_ID, function(err, data) {
+    if (err.name == "SequelizeForeignKeyConstraintError") {
+      // res.status(202).json(err.name);
+      res.status(202).json("fk");
+    } else {
+      // res.status(200).json({ message: "đã xóa thành công tài khoản ID: " + TK_ID });
+      res.status(200).json("ok");
+    }
+  });
+});
+
+//tai khoan con hieu luc
+router.get("/taikhoan/conhieuluc", function(req, res) {
+  taikhoan.getTKConHieuLuc(function(err, data) {
+    res.status(200).json(data);
+  });
+});
+
+//tai khoan vo hieu luc
+router.get("/taikhoan/vohieuluc", function(req, res) {
+  taikhoan.getTKVoHieuLuc(function(err, data) {
+    res.status(200).json(data);
+  });
+});
+//------------
+//Cap nhat
+router.post("/taikhoan/update", function(req, res) {
+  var TK_ID = req.body.TK_ID;
+  var TK_HOTEN = req.body.TK_HOTEN;
+  var TK_DONVI = req.body.TK_DONVI;
+  var TK_LOAI = req.body.TK_LOAI;
+  var TK_QUYEN = req.body.TK_QUYEN;
+
+  taikhoan.updateUser(TK_ID, TK_HOTEN, TK_DONVI, TK_LOAI, TK_QUYEN, function(err, data) {
+    if (err) {
+      res.status(404).json({ message: "ERR" });
+    } else {
+      // res.status(200).json({ message: "đã cập nhật thành công tài khoản ID: " + TK_ID });
+      return res.redirect("/taikhoan");
+    }
   });
 });
 

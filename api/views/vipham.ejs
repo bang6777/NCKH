@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta id="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Quản lý vi phạm </title>
 
@@ -16,7 +16,8 @@
     <!-- My css -->
     <link rel="stylesheet" href="css/login.css" />
     <!-- My js -->
-    <script src="js/function.js" type="text/javascript"></script>
+    <script src="./js/function.js" type="text/javascript"></script>
+    <script src="./js/vipham-ajax.js"></script>
 
     <!-- Data table -->
     <link rel="stylesheet" type="text/css"
@@ -74,7 +75,7 @@
                             </td>
                             <td>1</td>
                             <td class="chitiet">
-                                <a data-toggle="modal" data-target="#ChiTietTK">
+                                <a onclick="LoadTK('<%= vp.TK_ID %>')" data-toggle="modal" data-target="#ChiTietTK">
                                     <%= vp.TK_ID %>
                                 </a>
                             </td>
@@ -155,23 +156,23 @@
                         <table class="table table-sm table-borderless col-lg-8 mx-auto">
                             <tr>
                                 <td>ID</td>
-                                <td>B1606777</td>
+                                <td id="TK_ID"></td>
                             </tr>
                             <tr>
                                 <td>Họ tên</td>
-                                <td>Nguyễn Anh Bằng</td>
+                                <td id="TK_HOTEN"></td>
                             </tr>
                             <tr>
                                 <td>Đơn vị</td>
-                                <td>Khoa CNTT & TT</td>
+                                <td id="TK_DONVI"></td>
                             </tr>
                             <tr>
                                 <td>Loại tài khoản</td>
-                                <td>Sinh viên</td>
+                                <td id= "TK_LOAI"></td>
                             </tr>
                             <tr>
                                 <td>Hiệu lực</td>
-                                <td>Còn hiệu lực</td>
+                                <td id="TK_HIEULUC"></td>
                             </tr>
                         </table>
                     </div>
