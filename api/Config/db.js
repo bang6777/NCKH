@@ -5,7 +5,7 @@ module.exports = new Sequelize("sql12297830", "sql12297830", "UI2y5fJwMQ", {
   host: "sql12.freemysqlhosting.net",
   dialect: "mysql",
   pool: {
-    max: 5,
+    max: 6,
     min: 0,
     acquire: 30000,
     idle: 10000

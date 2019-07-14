@@ -30,8 +30,8 @@ const taikhoan_Model = db.define('taikhoan', {
   }
 });
 
-// muontra_Model.belongsTo(taikhoan_Model, {foreignKey: 'TK_ID'});
-taikhoan_Model.hasMany(muontra_Model, { foreignKey: 'TK_ID' });
-muontra_Model.belongsTo(taikhoan_Model, { foreignKey: 'TK_ID' });
+// // muontra_Model.belongsTo(taikhoan_Model, {foreignKey: 'TK_ID'});
+// taikhoan_Model.hasMany(muontra_Model, { foreignKey: 'TK_ID' });
+// muontra_Model.belongsTo(taikhoan_Model, { foreignKey: 'TK_ID' });
 db.sync();
 module.exports = taikhoan_Model;

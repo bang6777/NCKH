@@ -44,6 +44,9 @@ exports.deleteUser = (TK_ID, cb) => {
     .then(tk_bang => {
       console.log("Đã xóa tài khoản: ", tk_bang.TK_ID);
       cb(null, tk_bang);
+    })
+    .catch(err => {
+      cb(err, null);
     });
 };
 
