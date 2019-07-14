@@ -1,5 +1,5 @@
-$(document).ready(function() {
-  $("#btnAdd").on("click", function() {
+$(document).ready(function () {
+  $("#btnAdd").on("click", function () {
     ResetModal();
   });
   // $("#tableTK").on("draw.dt", function() {
@@ -36,7 +36,7 @@ function AddTK() {
       url: "/taikhoan/find",
       data: JSON.stringify({ TK_ID: tk_id }),
       contentType: "application/json",
-      success: function(response) {
+      success: function (response) {
         var length = Object.keys(response).length;
         console.log(length);
         if (length > 0) {
@@ -56,19 +56,19 @@ function AddTK() {
               TK_LOAI: tk_loai
             }),
             contentType: "application/json",
-            success: function() {
+            success: function () {
               LoadView();
               $("#btnCancelSave").click();
               alert("Đã thêm thành công tài khoản: " + tk_id);
             },
-            error: function(e) {
+            error: function (e) {
               alert("Đã có lỗi xảy ra!");
               console.log(e);
             }
           });
         }
       },
-      error: function(e) {
+      error: function (e) {
         console.log(e);
       }
     });
@@ -84,8 +84,8 @@ function UpdateModal(a) {
     url: "/taikhoan/find",
     data: JSON.stringify({ TK_ID: tk }),
     contentType: "application/json",
-    success: function(response) {
-      $.each(response, function(i, taikhoan) {
+    success: function (response) {
+      $.each(response, function (i, taikhoan) {
         console.log(taikhoan);
         $("input[name=TK_ID]").val(taikhoan.TK_ID);
         $("input[name=TK_HOTEN]").val(taikhoan.TK_HOTEN);
@@ -94,7 +94,7 @@ function UpdateModal(a) {
         $("select[name=TK_LOAI]").val(taikhoan.TK_LOAI);
       });
     },
-    error: function(e) {
+    error: function (e) {
       console.log(e);
     }
   });
@@ -118,11 +118,11 @@ function UpdateHieuLuc(a) {
     method: "POST",
     data: JSON.stringify({ TK_ID: tk_id, TK_HIEULUC: tk_hieuluc }),
     contentType: "application/json",
-    success: function() {
+    success: function () {
       alert("Đã cập nhật thành công hiệu lực tài khoản: " + tk_id);
       LoadView();
     },
-    error: function(e) {
+    error: function (e) {
       alert("Đã có lỗi xảy ra!");
       console.log(e);
     }
@@ -140,7 +140,7 @@ function Delete(a) {
       method: "POST",
       data: JSON.stringify({ TK_ID: tk_id }),
       contentType: "application/json",
-      success: function(res) {
+      success: function (res) {
         // alert(res == "f");
         if (res == "fk") {
           alert("Không thể xóa tài khoản vì có vi phạm, mượn trả hoặc báo hư hỏng!");
@@ -149,7 +149,7 @@ function Delete(a) {
         }
         LoadView();
       },
-      error: function(res) {
+      error: function (res) {
         alert("Đã có lỗi xảy ra!");
         // console.log(res);
         // var r = JSON.stringify(res);
@@ -177,13 +177,13 @@ function UpdateInfo() {
       TK_LOAI: tk_loai
     }),
     contentType: "application/json",
-    success: function() {
+    success: function () {
       alert("Đã cập nhật thành công thông tin tài khoản: " + tk_id);
       LoadView();
       $("#btnCancelUpdate").click();
       // window.location.reload();
     },
-    error: function(e) {
+    error: function (e) {
       alert("Đã có lỗi xảy ra!");
       console.log(e);
     }
@@ -196,12 +196,12 @@ function GetAllTK() {
     method: "GET",
     url: "/taikhoan/all",
     contenType: "application/json",
-    success: function(response) {
+    success: function (response) {
       console.log(response);
       var tb = $("#tb");
       tb.html("");
       tk_data = "";
-      $.each(response, function(i, tk) {
+      $.each(response, function (i, tk) {
         tk_data += `<tr>
                       <td> ${tk.TK_ID}</td>
                       <td> ${tk.TK_HOTEN}</td>
@@ -258,7 +258,7 @@ function GetAllTK() {
       });
       tb.append(tk_data);
     },
-    error: function(e) {
+    error: function (e) {
       alert("Đã có lỗi xảy ra!");
       console.log(e);
     }
@@ -271,12 +271,12 @@ function GetTKConHieuLuc() {
     method: "GET",
     url: "/taikhoan/conhieuluc",
     contenType: "application/json",
-    success: function(response) {
+    success: function (response) {
       console.log(response);
       var tb = $("#tb");
       tb.html("");
       tk_data = "";
-      $.each(response, function(i, tk) {
+      $.each(response, function (i, tk) {
         tk_data += `<tr>
                       <td> ${tk.TK_ID}</td>
                       <td> ${tk.TK_HOTEN}</td>
@@ -335,11 +335,11 @@ function GetTKConHieuLuc() {
       tb.append(tk_data);
       // LoadDataTable();
 
-      $("#tableTK")
-        .DataTable()
-        .reload();
+      // $("#tableTK")
+      //   .DataTable()
+      //   .reload();
     },
-    error: function(e) {
+    error: function (e) {
       alert("Đã có lỗi xảy ra!");
       console.log(e);
     }
@@ -352,13 +352,13 @@ function GetTKVoHieuLuc() {
     method: "GET",
     url: "/taikhoan/vohieuluc",
     contenType: "application/json",
-    success: function(response) {
+    success: function (response) {
       console.log(response);
       var tb = $("#tb");
       tb.html("");
       tk_data = "";
 
-      $.each(response, function(i, tk) {
+      $.each(response, function (i, tk) {
         // alert(typeof response);
         tk_data += `<tr>
                       <td> ${tk.TK_ID}</td>
@@ -416,7 +416,7 @@ function GetTKVoHieuLuc() {
       });
       tb.append(tk_data);
     },
-    error: function(e) {
+    error: function (e) {
       alert("Đã có lỗi xảy ra!");
       console.log(e);
     }
