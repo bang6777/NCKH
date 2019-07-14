@@ -161,11 +161,11 @@ function Delete(a) {
 
 // Update thong tin
 function UpdateInfo() {
-  var tk_id = $("#txtTK_ID_add").val();
-  var tk_hoten = $("#txtTK_HoTen_add").val();
-  var tk_donvi = $("#txtTK_DonVi_add").val();
-  var tk_quyen = $("#slTK_Quyen_add").val();
-  var tk_loai = $("#slTK_Loai__add").val();
+  var tk_id = $("#txtTK_ID_update").val();
+  var tk_hoten = $("#txtTK_HoTen_update").val();
+  var tk_donvi = $("#txtTK_DonVi_update").val();
+  var tk_quyen = $("#slTK_Quyen_update").val();
+  var tk_loai = $("#slTK_Loai_update").val();
   $.ajax({
     url: "/taikhoan/update/" + tk_id,
     method: "POST",
