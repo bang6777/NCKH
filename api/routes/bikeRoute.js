@@ -8,6 +8,7 @@ var huhong = require("../controller/huhong_Ctr");
 var muontra = require("../controller/muontra_Ctr");
 var vipham = require("../controller/vipham_Ctr");
 var muontraRoute = require("./muontra_Route");
+var huhongRoute = require("./huhong_Route");
 
 //Login
 router.get("/login", function(req, res) {
@@ -324,6 +325,9 @@ router.get("/huhong", function(req, res) {
     res.render("./../api/views/huhong", { huhong: data });
   });
 });
+
+// Hu hong theo ID
+router.get("/huhong/:TK_ID", huhongRoute.viewHuHong);
 
 module.exports = router;
 
