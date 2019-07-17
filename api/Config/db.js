@@ -15,7 +15,11 @@ const Sequelize = require("sequelize");
 //   }
 // });
 
-var sequelize = new Sequelize(process.env.DATABASE_URL);
+var sequelize = new Sequelize(process.env.DATABASE_URL, {
+  define: {
+    freezeTableName: true
+  }
+});
 
 
 // // Option 2: Passing parameters separately : CSDL OFFLINE
