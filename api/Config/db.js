@@ -1,19 +1,22 @@
 const Sequelize = require("sequelize");
 
 // Option 1: Passing parameters separately : CSDL ONLINE
-module.exports = new Sequelize("sql12297830", "sql12297830", "UI2y5fJwMQ", {
-  host: "sql12.freemysqlhosting.net",
-  dialect: "mysql",
-  pool: {
-    max: 6,
-    min: 0,
-    acquire: 30000,
-    idle: 10000
-  },
-  define: {
-    freezeTableName: true
-  }
-});
+// module.exports = new Sequelize("dahi1kdj129vh", "yolxgxchuspctq", "981c3ed1bdbabe61e304541b7218f3df8762bf958b36b8298355f99a71cbff78", {
+//   host: "ec2-107-22-211-248.compute-1.amazonaws.com",
+//   dialect: "mysql",
+//   pool: {
+//     max: 6,
+//     min: 0,
+//     acquire: 30000,
+//     idle: 10000
+//   },
+//   define: {
+//     freezeTableName: true
+//   }
+// });
+
+var sequelize = new Sequelize(process.env.DATABASE_URL);
+
 
 // // Option 2: Passing parameters separately : CSDL OFFLINE
 // module.exports = new Sequelize("xedap", "root", "", {
