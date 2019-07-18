@@ -6,8 +6,8 @@ function LoadTK(a) {
     url: "/taikhoan/find",
     data: JSON.stringify({ TK_ID: tk }),
     contentType: "application/json",
-    success: function(response) {
-      $.each(response, function(i, taikhoan) {
+    success: function (response) {
+      $.each(response, function (i, taikhoan) {
         console.log(taikhoan);
 
         $("#TK_ID").html(taikhoan.TK_ID);
@@ -21,7 +21,7 @@ function LoadTK(a) {
         $("#TK_DONVI").html(taikhoan.TK_DONVI);
       });
     },
-    error: function(e) {
+    error: function (e) {
       console.log(e);
     }
   });

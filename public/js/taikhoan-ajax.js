@@ -30,7 +30,6 @@ function AddTK() {
   if (tk_id == "" || tk_hoten == "" || tk_password == "" || tk_donvi == "" || tk_quyen == "" || tk_loai == "") {
     alert("Vui lòng điền đầy đủ các trường!");
   } else {
-    // alert(tk);
     $.ajax({
       type: "POST",
       url: "/taikhoan/find",
@@ -40,10 +39,8 @@ function AddTK() {
         var length = Object.keys(response).length;
         console.log(length);
         if (length > 0) {
-          // alert(tk_id + " đã có! ----" + found);
           $("#TK_alert").html("ID đã tồn tại. Vui lòng chọn ID khác!");
         } else {
-          // alert(tk_id + " ok! ----" + found);
           $.ajax({
             url: "/taikhoan",
             method: "POST",
@@ -78,7 +75,7 @@ function AddTK() {
 //Load data vao modal updat
 function UpdateModal(a) {
   var tk = a;
-  // alert(tk);
+
   $.ajax({
     type: "POST",
     url: "/taikhoan/find",
@@ -112,7 +109,7 @@ function UpdateHieuLuc(a) {
   } else {
     tk_hieuluc = 0;
   }
-  // alert(tk_id + "----" + tk_hieuluc);
+
   $.ajax({
     url: "/taikhoan/update-hieuluc/" + tk_id,
     method: "POST",
@@ -141,7 +138,6 @@ function Delete(a) {
       data: JSON.stringify({ TK_ID: tk_id }),
       contentType: "application/json",
       success: function (res) {
-        // alert(res == "f");
         if (res == "fk") {
           alert("Không thể xóa tài khoản vì có vi phạm, mượn trả hoặc báo hư hỏng!");
         } else if (res == "ok") {
@@ -151,9 +147,6 @@ function Delete(a) {
       },
       error: function (res) {
         alert("Đã có lỗi xảy ra!");
-        // console.log(res);
-        // var r = JSON.stringify(res);
-        // alert(r);
       }
     });
   }
@@ -181,7 +174,6 @@ function UpdateInfo() {
       alert("Đã cập nhật thành công thông tin tài khoản: " + tk_id);
       LoadView();
       $("#btnCancelUpdate").click();
-      // window.location.reload();
     },
     error: function (e) {
       alert("Đã có lỗi xảy ra!");
@@ -242,13 +234,17 @@ function GetAllTK() {
                       `;
         tk_data += `
                       <td>
-                      <button data-toggle="modal" data-target="#ThongKeTK-MuonTra" class="btn btn-outline-dark btn-sm">
+                      <button data-toggle="modal" data-target="#ThongKeTK-MuonTra" class="btn btn-outline-dark btn-sm" onclick="TK_MuonTra('${
+          tk.TK_ID
+          }')">
                         Mượn-trả
                       </button>
                       <button data-toggle="modal" data-target="#ThongKeTK-ViPham" class="btn btn-outline-dark btn-sm">
                         Vi phạm
                       </button>
-                      <button data-toggle="modal" data-target="#ThongKeTK-HuHong" class="btn btn-outline-dark btn-sm">
+                      <button data-toggle="modal" data-target="#ThongKeTK-HuHong" class="btn btn-outline-dark btn-sm"  onclick="TK_HuHong('${
+          tk.TK_ID
+          }')">
                         Hư hỏng
                       </button>
                       </td>
@@ -317,20 +313,23 @@ function GetTKConHieuLuc() {
                       `;
         tk_data += `
                       <td>
-                      <button data-toggle="modal" data-target="#ThongKeTK-MuonTra" class="btn btn-outline-dark btn-sm">
+                      <button data-toggle="modal" data-target="#ThongKeTK-MuonTra" class="btn btn-outline-dark btn-sm" onclick="TK_MuonTra('${
+          tk.TK_ID
+          }')">
                         Mượn-trả
                       </button>
                       <button data-toggle="modal" data-target="#ThongKeTK-ViPham" class="btn btn-outline-dark btn-sm">
                         Vi phạm
                       </button>
-                      <button data-toggle="modal" data-target="#ThongKeTK-HuHong" class="btn btn-outline-dark btn-sm">
+                      <button data-toggle="modal" data-target="#ThongKeTK-HuHong" class="btn btn-outline-dark btn-sm"  onclick="TK_HuHong('${
+          tk.TK_ID
+          }')">
                         Hư hỏng
                       </button>
                       </td>
                       
                     </tr>
                   `;
-        // JSON.stringify(response);
       });
       tb.append(tk_data);
       // LoadDataTable();
@@ -359,7 +358,6 @@ function GetTKVoHieuLuc() {
       tk_data = "";
 
       $.each(response, function (i, tk) {
-        // alert(typeof response);
         tk_data += `<tr>
                       <td> ${tk.TK_ID}</td>
                       <td> ${tk.TK_HOTEN}</td>
@@ -400,13 +398,17 @@ function GetTKVoHieuLuc() {
                       `;
         tk_data += `
                       <td>
-                      <button data-toggle="modal" data-target="#ThongKeTK-MuonTra" class="btn btn-outline-dark btn-sm">
+                      <button data-toggle="modal" data-target="#ThongKeTK-MuonTra" class="btn btn-outline-dark btn-sm" onclick="TK_MuonTra('${
+          tk.TK_ID
+          }')">
                         Mượn-trả
                       </button>
                       <button data-toggle="modal" data-target="#ThongKeTK-ViPham" class="btn btn-outline-dark btn-sm">
                         Vi phạm
                       </button>
-                      <button data-toggle="modal" data-target="#ThongKeTK-HuHong" class="btn btn-outline-dark btn-sm">
+                      <button data-toggle="modal" data-target="#ThongKeTK-HuHong" class="btn btn-outline-dark btn-sm"  onclick="TK_HuHong('${
+          tk.TK_ID
+          }')">
                         Hư hỏng
                       </button>
                       </td>
@@ -418,6 +420,66 @@ function GetTKVoHieuLuc() {
     },
     error: function (e) {
       alert("Đã có lỗi xảy ra!");
+      console.log(e);
+    }
+  });
+}
+
+//Thong ke TK - MuonTra
+function TK_MuonTra(a) {
+  var tk_id = a;
+
+  $.ajax({
+    type: "GET",
+    url: "/muontra/" + tk_id,
+    data: JSON.stringify({ TK_ID: tk_id }),
+    contentType: "application/json",
+    success: function (response) {
+      console.log(response);
+      var tb = $("#TK_MuonTra");
+      tb.html("");
+      tk_data = "";
+      $.each(response, function (i, tk) {
+        tk_data += `<tr>
+          <td>${tk.MUONTRA_ID}</td>
+          <td>${tk.XE_ID}</td>
+          <td>${tk.MUON_THOIGIAN}</td>
+          <td>${tk.TRA_THOIGIAN}</td>
+        </tr>`;
+      });
+      tb.append(tk_data);
+    },
+    error: function (e) {
+      console.log(e);
+    }
+  });
+}
+
+//Thong ke TK - HuHong
+function TK_HuHong(a) {
+  var tk_id = a;
+
+  $.ajax({
+    type: "GET",
+    url: "/huhong/" + tk_id,
+    data: JSON.stringify({ TK_ID: tk_id }),
+    contentType: "application/json",
+    success: function (response) {
+      console.log(response);
+      var tb = $("#TK_HuHong");
+      tb.html("");
+      tk_data = "";
+      $.each(response, function (i, tk) {
+        tk_data += `<tr>
+          <td>${tk.HH_ID}</td>
+          <td>${tk.XE_ID}</td>
+          <td>${tk.HH_MOTA}</td>
+          <td>${tk.HH_THOIGIAN}</td>
+        </tr>`;
+      });
+      tb.append(tk_data);
+    },
+    error: function (e) {
       console.log(e);
     }
   });
@@ -464,31 +526,6 @@ function LoadDataTable() {
   //   pageLength: -1,
   //   lengthMenu: [[5, 10, 15, 20, 25, -1], [5, 10, 15, 20, 25, "Tất cả"]]
   // });
-
-  var table = $("#tableTK").DataTable({
-    destroy: true,
-    columnDefs: [{ targets: [1, 2, 3, 4, 5, 6], searchable: false }],
-    ordering: false,
-    language: {
-      lengthMenu: "Hiển thị _MENU_ dòng dữ liệu trên một trang:",
-      info: "Hiển thị _START_ trong tổng số _TOTAL_ dòng dữ liệu:",
-      infoEmpty: "Dữ liệu rỗng",
-      emptyTable: "Chưa có dữ liệu nào ",
-      processing: "Đang xử lý ",
-      search: "Tìm kiếm theo mã học viên: ",
-      loadingRecords: "Đang load dữ liệu",
-      zeroRecords: "Không tìm thấy dữ liệu",
-      infoFiltered: "(Được từ tổng số _MAX_ dòng dữ liệu",
-      paginate: {
-        first: "|<",
-        last: ">|",
-        next: ">>",
-        previous: "<<"
-      }
-    },
-    pageLength: -1,
-    lengthMenu: [[5, 10, 15, 20, 25, -1], [5, 10, 15, 20, 25, "Tất cả"]]
-  });
 }
 
 //nothing
