@@ -50,12 +50,19 @@ function getToaDo() {
   // coordinates[2] = { lat: 10.030332111075557, lng: 105.77185979381204 };
   // coordinates[3] = { lat: 10.033522681017374, lng: 105.76826205701684 };
 
-  coordinates = [
-    { lat: 10.028958677252596, lng: 105.76534381491831 },
-    { lat: 10.026063882281509, lng: 105.76837649880792 },
-    { lat: 10.030332111075557, lng: 105.77185979381204 },
-    { lat: 10.033522681017374, lng: 105.76826205701684 }
-  ];
+  var l1 = 10.028958677252596;
+  var l2 = 105.76534381491831;
+  var l3 = 10.026063882281509;
+  var l4 = 105.76837649880792;
+  // coordinates = [
+  //   { lat: 10.028958677252596, lng: 105.76534381491831 },
+  //   { lat: 10.026063882281509, lng: 105.76837649880792 },
+  //   { lat: 10.030332111075557, lng: 105.77185979381204 },
+  //   { lat: 10.033522681017374, lng: 105.76826205701684 }
+  // ];
+  coordinates.push({ lat: l1, lng: l2 });
+  coordinates.push({ lat: l3, lng: l4 });
+  alert(typeof l1);
 }
 //2.Load khuon vien
 function loadKhuonVien() {
@@ -76,6 +83,7 @@ function drawKhuonVien(coordinates) {
     //editable : true
   });
   polygon.setMap(map);
+  // alert("done");
 }
 
 //3. Cap nhat khuon vien
@@ -149,7 +157,8 @@ function Done() {
   for (var i = 0; i < markers.length; i++) {
     markers[i].setDraggable(false);
     if (markers[i].label != "null") {
-      document.getElementById("ToaDo").innerHTML += markers[i].id + "-" + "Lat: " + markers[i].position.lat() + " - Lng: " + markers[i].position.lng() + "<br>";
+      document.getElementById("ToaDo").innerHTML +=
+        markers[i].id + "-" + "Lat: " + markers[i].position + " - Lng: " + markers[i].position.lng() + "<br>";
       coordinates[j] = {
         lat: markers[i].position.lat(),
         lng: markers[i].position.lng()

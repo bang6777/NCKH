@@ -1,6 +1,8 @@
-const Sequelize = require('sequelize');
-const db = require('./../Config/db');
-const muontra_Model = require('../Model/muontra_Model');
+const Sequelize = require("sequelize");
+const db = require("./../Config/db");
+const muontra_Model = require("../Model/muontra_Model");
+const huhong_Model = require("../Model/huhong_Model");
+const vipham_Model = require("../Model/vipham_Model");
 
 const taikhoan_Model = db.define('taikhoan', {
   // attributes
@@ -30,8 +32,17 @@ const taikhoan_Model = db.define('taikhoan', {
   }
 });
 
-// // muontra_Model.belongsTo(taikhoan_Model, {foreignKey: 'TK_ID'});
-// taikhoan_Model.hasMany(muontra_Model, { foreignKey: 'TK_ID' });
-// muontra_Model.belongsTo(taikhoan_Model, { foreignKey: 'TK_ID' });
+// muontra_Model.belongsTo(taikhoan_Model, {foreignKey: 'TK_ID'});
+taikhoan_Model.hasMany(muontra_Model, { foreignKey: "TK_ID" });
+muontra_Model.belongsTo(taikhoan_Model, { foreignKey: "TK_ID" });
+
+//tai khoan - hu hong
+taikhoan_Model.hasMany(huhong_Model, { foreignKey: "TK_ID" });
+huhong_Model.belongsTo(taikhoan_Model, { foreignKey: "TK_ID" });
+
+//tai khoan - vi pham
+taikhoan_Model.hasMany(vipham_Model, { foreignKey: "TK_ID" });
+vipham_Model.belongsTo(taikhoan_Model, { foreignKey: "TK_ID" });
+
 db.sync();
 module.exports = taikhoan_Model;

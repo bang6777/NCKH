@@ -1,5 +1,5 @@
 "use strict";
-// const Sequelize = require('sequelize');
+const Sequelize = require("sequelize");
 const muontra_M = require("../Model/muontra_Model");
 const taikhoan_M = require("../Model/taikhoan_Model");
 
@@ -26,9 +26,45 @@ exports.muontra_nguoidung = function(TK_ID, cb) {
     });
 };
 
+//get All muon tra
 exports.allMuonTra = cb => {
   muontra_M.findAll().then(muontra => {
     cb(null, muontra);
     console.log("All mượn trả:", JSON.stringify(muontra, null, 4));
   });
+};
+
+//get chua tra xe
+exports.getChuaTra = cb => {
+  const Op = Sequelize.Op;
+  muontra_M
+    .findAll({
+      where: {
+        [Op.or]: [
+          {
+            TRA_THOIGIAN: null
+          },
+          {
+            TRA_VITRI: null
+          }
+        ]
+      }
+    })
+    .then(mt => {
+      console.log("muon tra: ", mt.MUONTRA_ID);
+      cb(null, mt);
+    });
+};
+
+exports.findMuonTraByID = (MUONTRA_ID, cb) => {
+  muontra_M
+    .findAll({
+      where: {
+        MUONTRA_ID: MUONTRA_ID
+      }
+    })
+    .then(mt => {
+      console.log("muon tra: ", mt.MUONTRA_ID);
+      cb(null, mt);
+    });
 };
