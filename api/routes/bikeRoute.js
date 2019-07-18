@@ -9,6 +9,7 @@ var muontra = require("../controller/muontra_Ctr");
 var vipham = require("../controller/vipham_Ctr");
 var muontraRoute = require("./muontra_Route");
 var huhongRoute = require("./huhong_Route");
+var khuonvien = require("../controller/khuonvien_Ctr");
 
 //Login
 router.get("/login", function(req, res) {
@@ -300,13 +301,36 @@ router.get("/khuonvien", function(req, res) {
 });
 
 //----Quản lý
-//-----------Mượn trả
+//-----------Render Mượn trả
 router.get("/muontra", function(req, res) {
   muontra.allMuonTra(function(err, data) {
     res.render("./../api/views/muontra", { muontra: data });
   });
 });
-// Muon tra theo ID
+
+//Get all muon tra
+router.get("/muontra/all", function(req, res) {
+  muontra.allMuonTra(function(err, data) {
+    res.status(200).json(data);
+  });
+});
+
+//get chua tra
+router.get("/muontra/chuatra", function(req, res) {
+  muontra.getChuaTra(function(err, data) {
+    res.status(200).json(data);
+  });
+});
+
+//get muon tra theo MT_ID
+router.post("/muontra/find", function(req, res) {
+  var MUONTRA_ID = req.body.MUONTRA_ID;
+  muontra.findMuonTraByID(MUONTRA_ID, function(err, data) {
+    res.status(200).json(data);
+  });
+});
+
+// Muon tra theo TK_ID
 router.get("/muontra/:TK_ID", muontraRoute.viewMuonTra);
 //-----------Vi phạm
 
@@ -329,6 +353,45 @@ router.get("/huhong", function(req, res) {
 // Hu hong theo ID
 router.get("/huhong/:TK_ID", huhongRoute.viewHuHong);
 
+//----------Khuon vien
+//get toa do
+router.get("/khuonvien/getToaDo", function(req, res) {
+  khuonvien.allToaDo(function(err, data) {
+    res.status(202).json(data);
+  });
+});
+
+router.get("/khuonvien-off", function(req, res) {
+  res.render("./../api/views/khuonvien-off");
+});
+
+//add toa do
+router.post("/khuonvien/", function(req, res) {
+  // var TK_ID = req.body.TK_ID;
+  var KV_LAT = req.body.KV_LAT;
+  var KV_LNG = req.body.KV_LNG;
+
+  khuonvien.addKV(KV_LAT, KV_LNG, 1, function(err, data) {
+    if (err) {
+      res.status(404).json({ message: "ERR!" });
+    } else {
+      res.status(200).json({ message: "đã thêm tọa độ thành công!" });
+      // res.redirect("/taikhoan");
+    }
+  });
+});
+
+//cap nhat trang thai 0
+router.post("/khuonvien/update", function(req, res) {
+  var KV_TRANGTHAI = req.body.KV_TRANGTHAI;
+  khuonvien.updateKV_TrangThai(KV_TRANGTHAI, function(err, data) {
+    if (err) {
+      res.status(404).json({ message: "ERR" });
+    } else {
+      res.status(200).json({ message: "đã cập nhật thành công trang thai toa do! " });
+    }
+  });
+});
 module.exports = router;
 
 // module.exports = function(app) {
