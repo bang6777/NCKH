@@ -31,11 +31,7 @@ const Sequelize = require("sequelize");
 //     freezeTableName: true
 // }
 // });
-var sequelize = new Sequelize(process.env.DATABASE_URL, {
-    define: {
-        freezeTableName: true
-    }
-});
+var sequelize = new Sequelize(process.env.DATABASE_URL);
 sequelize.authenticate()
     .then(() => {
         console.log('Connection has been established successfully.');
