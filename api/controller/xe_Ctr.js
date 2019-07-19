@@ -31,18 +31,25 @@ exports.deleteXe = (XE_ID, cb) => {
     .then(xe => {
       console.log("Đã xóa xe: ", xe.XE_ID);
       cb(null, xe);
+    })
+    .catch(err => {
+      cb(err, null);
     });
 };
 exports.updateXe = (XE_ID, XE_VITRI, cb) => {
-  xe_M.update({
-    XE_ID: XE_ID,
-    XE_VITRI: XE_VITRI
-  },
-    {
-      where: {
-        XE_ID: XE_ID
+  xe_M
+    .update(
+      {
+        XE_ID: XE_ID,
+        XE_VITRI: XE_VITRI
+      },
+      {
+        where: {
+          XE_ID: XE_ID
+        }
       }
-    }).then(xe => {
+    )
+    .then(xe => {
       console.log("Đã cập nhật xe: ", xe.XE_ID);
       cb(null, xe);
     });
@@ -75,4 +82,16 @@ exports.updateXeAllInf = (
     });
 };
 
-
+//tim xe theo id
+exports.findXeByID = (XE_ID, cb) => {
+  xe_M
+    .findAll({
+      where: {
+        XE_ID: XE_ID
+      }
+    })
+    .then(xe => {
+      console.log("tài khoản: ", xe.XE_ID);
+      cb(null, xe);
+    });
+};
