@@ -12,7 +12,7 @@ function ResetModal() {
   document.getElementById("txtTK_ID_add").value = "";
   document.getElementById("txtTK_Password_add").value = "";
   document.getElementById("txtTK_HoTen_add").value = "";
-  document.getElementById("txtTK_DonVi_add").value = "";
+  document.getElementById("slTK_DonVi_add").value = "-1";
   document.getElementById("slTK_Quyen_add").value = "-1";
   document.getElementById("slTK_Loai_add").value = "-1";
   $("#TK_alert").html("");
@@ -23,7 +23,7 @@ function AddTK() {
   var tk_id = $("#txtTK_ID_add").val();
   var tk_hoten = $("#txtTK_HoTen_add").val();
   var tk_password = $("#txtTK_Password_add").val();
-  var tk_donvi = $("#txtTK_DonVi_add").val();
+  var tk_donvi = $("#slTK_DonVi_add").val();
   var tk_quyen = $("#slTK_Quyen_add").val();
   var tk_loai = $("#slTK_Loai_add").val();
 
@@ -86,7 +86,7 @@ function UpdateModal(a) {
         console.log(taikhoan);
         $("input[name=TK_ID]").val(taikhoan.TK_ID);
         $("input[name=TK_HOTEN]").val(taikhoan.TK_HOTEN);
-        $("input[name=TK_DONVI]").val(taikhoan.TK_DONVI);
+        $("select[name=TK_DONVI]").val(taikhoan.TK_DONVI);
         $("select[name=TK_QUYEN]").val(taikhoan.TK_QUYEN);
         $("select[name=TK_LOAI]").val(taikhoan.TK_LOAI);
       });
@@ -156,7 +156,7 @@ function Delete(a) {
 function UpdateInfo() {
   var tk_id = $("#txtTK_ID_update").val();
   var tk_hoten = $("#txtTK_HoTen_update").val();
-  var tk_donvi = $("#txtTK_DonVi_update").val();
+  var tk_donvi = $("#slTK_DonVi_update").val();
   var tk_quyen = $("#slTK_Quyen_update").val();
   var tk_loai = $("#slTK_Loai_update").val();
   $.ajax({
