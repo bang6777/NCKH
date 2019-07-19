@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="css/login.css" />
     <!-- My js -->
     <script src="js/function.js" type="text/javascript"></script>
-
+    <script src="./js/huhong-ajax.js"> type="text/javascript"></script>
     <!-- Data table -->
     <link
       rel="stylesheet"
@@ -43,7 +43,7 @@
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
   </head>
 
-  <body>
+  <body onload="GetHHDangCho()">
     <script>
       $(document).ready(function() {
         $("#tbHuHong").DataTable();
@@ -56,12 +56,12 @@
     </div>
 
     <div class="container-fluid bg-white ">
-      <h2 class="text-center font-weight-semi-bold text-dark mt-3">
+      <h2 class="text-center font-weight-semi-bold text-dark mt-3" >
         QUẢN LÝ HƯ HỎNG XE
       </h2>
       <div class="form-group form-inline col-lg-2">
         <label class="mr-3">Lọc</label>
-        <select class="form-control form-control-sm" id="slHH_View">
+        <select class="form-control form-control-sm" id="slHH_View" onchange="LoadView()">
           <option value="0">Đang chờ</option>
           <option value="1">Đang sửa</option>
           <option value="2">Đã sửa</option>
@@ -70,7 +70,7 @@
         </select>
       </div>
 
-      <div class="container-fluid">
+      
         <!-- Table hu hong -->
         <div class="table-responsive">
           <table
@@ -91,8 +91,8 @@
               </tr>
             </thead>
 
-            <tbody class="text-center">
-              <% huhong.forEach(function(hh){ %>
+            <tbody class="text-center" id="tb">
+              <!-- <% huhong.forEach(function(hh){ %>
               <tr>
                 <td><%= hh.HH_ID %></td>
                 <td><%= hh.TK_ID %></td>
@@ -111,7 +111,7 @@
                   </select>
                 </td>
               </tr>
-              <% }); %>
+              <% }); %> -->
             </tbody>
           </table>
         </div>

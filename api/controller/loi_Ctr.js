@@ -31,6 +31,9 @@ exports.deleteLoi = (LOI_ID, cb) => {
     .then(loi_bang => {
       console.log("Đã xóa lỗi: ", loi_bang.LOI_ID);
       cb(null, loi_bang);
+    })
+    .catch(err => {
+      cb(err, null);
     });
 };
 
@@ -51,5 +54,18 @@ exports.updateLoi = (LOI_ID, LOI_TEN, LOI_MOTA, cb) => {
     .then(loi_bang => {
       console.log("Cập nhật thành công: ", loi_bang.LOI_ID);
       cb(null, loi_bang);
+    });
+};
+
+exports.findLoiByID = (LOI_ID, cb) => {
+  loi_M
+    .findAll({
+      where: {
+        LOI_ID: LOI_ID
+      }
+    })
+    .then(loi => {
+      console.log("Lỗi: ", loi.LOI_ID);
+      cb(null, loi);
     });
 };

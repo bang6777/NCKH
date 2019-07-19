@@ -44,7 +44,7 @@
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
   </head>
 
-  <body>
+  <body onload="GetAllXE()">
     <script>
       $(document).ready(function() {
         $("#tbXe").DataTable();
@@ -89,9 +89,9 @@
               </tr>
             </thead>
 
-            <tbody class="text-center">
+            <tbody class="text-center" id="tb">
               <!-- <%= JSON.stringify(xe) %> -->
-              <% xe.forEach(function(xe){ %>
+              <!-- <% xe.forEach(function(xe){ %>
               <tr>
                 <td><%= xe.XE_ID %></td>
                 <td><%= xe.XE_NAMSANXUAT %></td>
@@ -148,7 +148,7 @@
                   </button>
                 </td>
               </tr>
-              <%});%>
+              <%});%> -->
             </tbody>
           </table>
         </div>
@@ -164,17 +164,14 @@
                 &times;
               </button>
             </div>
-            <form
-              action="/xe"
-              method="POST"
-              enctype="application/x-www-form-urlencoded"
-            >
+            <form>
               <div class="modal-body">
                 <div class="form-group ">
+                  <span id="XE_alert" class="text-danger font-size-1"></span>
                   <input
                     type="text"
                     name="XE_ID"
-                    id="txtXe_ID"
+                    id="txtXe_ID_add"
                     class="form-control"
                     required
                     placeholder="ID xe"
@@ -185,7 +182,7 @@
                   <input
                     type="text"
                     name="XE_NAMSANXUAT"
-                    id="txtXe_NamSanXuat"
+                    id="txtXe_NamSanXuat_add"
                     class="form-control"
                     placeholder="Năm sản xuất"
                   />
@@ -193,7 +190,7 @@
                 <div class="form-group ">
                   <textarea
                     class="form-control"
-                    id="txtXe_GhiChu"
+                    id="txtXe_GhiChu_add"
                     name="XE_GHICHU"
                     placeholder="Nhập ghi chú...."
                   ></textarea>
@@ -202,15 +199,16 @@
 
               <div class=" modal-footer">
                 <input
-                  type="submit"
+                  type="button"
                   value="Lưu"
                   id="btnSave"
                   class="btn btn-primary px-3"
+                  onclick="AddXE()"
                 />
                 <input
                   type="button"
                   value="Hủy"
-                  id="btnCancel"
+                  id="btnCancelSave"
                   class="btn btn-danger px-3"
                   data-dismiss="modal"
                 />
@@ -233,24 +231,18 @@
                 &times;
               </button>
             </div>
-            <% xe.forEach(function(xe){ %>
-            <form
-              action="/xe/update/<%= xe.XE_ID %>"
-              method="POST"
-              enctype="application/x-www-form-urlencoded"
-            >
-              <%});%>
+
+            <form method="POST" enctype="application/x-www-form-urlencoded">
               <div class="modal-body">
                 <div class="modal-body">
                   <div class="form-group ">
                     <input
                       type="text"
                       name="XE_ID"
-                      id="txtXe_ID"
+                      id="txtXe_ID_update"
                       class="form-control"
                       required
-                      placeholder="ID xe"
-                      required
+                      readonly
                     />
                   </div>
 
@@ -258,9 +250,8 @@
                     <input
                       type="text"
                       name="XE_NAMSANXUAT"
-                      id="txtXe_NamSanXuat"
+                      id="txtXe_NamSanXuat_update"
                       class="form-control"
-                      placeholder="Năm sản xuất"
                       required
                     />
                   </div>
@@ -269,8 +260,7 @@
                     <textarea
                       class="form-control"
                       name="XE_GHICHU"
-                      id="txtXe_GhiChu"
-                      placeholder="Nhập ghi chú...."
+                      id="txtXe_GhiChu_update"
                       required
                     ></textarea>
                   </div>
@@ -280,13 +270,14 @@
                 <input
                   type="submit"
                   value="Lưu"
-                  id="btnSave"
+                  id="btnUpdate"
                   class="btn btn-primary px-3"
+                  onclick="UpdateInfo()"
                 />
                 <input
                   type="button"
                   value="Hủy"
-                  id="btnCancel"
+                  id="btnCancelUpdate"
                   class="btn btn-danger px-3"
                   data-dismiss="modal"
                 />

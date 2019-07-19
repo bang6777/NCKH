@@ -29,3 +29,68 @@ exports.huhong_taikhoan = function(TK_ID, cb) {
       console.log("All hu hong theo id:", JSON.stringify(dsHuHong, null, 4));
     });
 };
+
+exports.findHuHongByID = (HH_ID, cb) => {
+  huhong_M
+    .findAll({
+      where: {
+        HH_ID: HH_ID
+      }
+    })
+    .then(hh => {
+      console.log("Hư hỏng: ", hh.HH_ID);
+      cb(null, hh);
+    });
+};
+
+exports.getHuHongDangCho = cb => {
+  huhong_M
+    .findAll({
+      where: {
+        HH_TRANGTHAI: "0"
+      }
+    })
+    .then(hh => {
+      console.log("Hư hỏng đang chờ: ", hh.HH_ID);
+      cb(null, hh);
+    });
+};
+
+exports.getHuHongDangSua = cb => {
+  huhong_M
+    .findAll({
+      where: {
+        HH_TRANGTHAI: "1"
+      }
+    })
+    .then(hh => {
+      console.log("Hư hỏng đang sua: ", hh.HH_ID);
+      cb(null, hh);
+    });
+};
+
+exports.getHuHongDaSua = cb => {
+  huhong_M
+    .findAll({
+      where: {
+        HH_TRANGTHAI: "2"
+      }
+    })
+    .then(hh => {
+      console.log("Hư hỏng đã sửa: ", hh.HH_ID);
+      cb(null, hh);
+    });
+};
+
+exports.getHuHongBaoSai = cb => {
+  huhong_M
+    .findAll({
+      where: {
+        HH_TRANGTHAI: "3"
+      }
+    })
+    .then(hh => {
+      console.log("Hư hỏng báo sai: ", hh.HH_ID);
+      cb(null, hh);
+    });
+};
