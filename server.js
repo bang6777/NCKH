@@ -3,6 +3,22 @@ const app = express();
 var path = require('path');
 const bodyParser = require('body-parser');
 // require('dotenv').load();
+// parse application/json
+app.use(bodyParser.json());
+//parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// import passport and passport-jwt modules
+const passport = require('passport');
+const passportJWT = require('passport-jwt');
+// ExtractJwt to help extract the token
+let ExtractJwt = passportJWT.ExtractJwt;
+// JwtStrategy which is the strategy for the authentication
+let JwtStrategy = passportJWT.Strategy;
+let jwtOptions = {};
+jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+jwtOptions.secretOrKey = 'tbtlh';
+
 const port = process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({ extended: true }));

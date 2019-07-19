@@ -16,6 +16,7 @@ router.get("/login", function (req, res) {
   res.render("./../api/views/login");
 });
 
+
 // Trang chủ
 router.get("/", function (req, res) {
   res.render("./../api/views/index");
@@ -30,7 +31,7 @@ router.get("/taikhoan", function (req, res) {
 });
 
 //-----------add tài khoản
-router.post("/taikhoan", function (req, res) {
+router.post("/taikhoan", function (req, res, next) {
   var TK_ID = req.body.TK_ID;
   var TK_PASSWORD = req.body.TK_PASSWORD;
   var TK_HOTEN = req.body.TK_HOTEN;

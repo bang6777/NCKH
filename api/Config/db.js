@@ -1,3 +1,7 @@
+// parse application/json
+app.use(bodyParser.json());
+//parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }));
 const Sequelize = require("sequelize");
 // module.exports = new Sequelize(process.env.DATABASE_URL);
 
