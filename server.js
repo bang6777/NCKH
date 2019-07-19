@@ -3,10 +3,6 @@ const app = express();
 var path = require('path');
 const bodyParser = require('body-parser');
 // require('dotenv').load();
-// parse application/json
-app.use(bodyParser.json());
-//parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }));
 
 // import passport and passport-jwt modules
 const passport = require('passport');

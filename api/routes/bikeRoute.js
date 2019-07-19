@@ -16,6 +16,29 @@ router.get("/login", function (req, res) {
   res.render("./../api/views/login");
 });
 
+router.post("/login", function (req, res) {
+  var TK_ID = req.body.TK_ID;
+  var TK_PASSWORD = req.body.TK_PASSWORD;
+  // var TK_QUYEN = req.body.TK_QUYEN;
+  if (TK_ID == null) {
+    res.status(404).json({ message: "TK_ID null" });
+  }
+  if (TK_PASSWORD == null) {
+    res.status(404).json({ message: "TK_Pwd null" });
+  }
+  // if (TK_QUYEN == null) {
+  //   res.status(404).json({ message: "TK_QUYEN null" });
+  // }
+  taikhoan.checkLoginServer(TK_ID, TK_PASSWORD, function (err, data) {
+    if (err) {
+      res.status(404).json({ message: "ERR!" });
+    } else {
+      res.status(200).json({ message: "đã đăng nhập thành công!" });
+      // res.redirect("/taikhoan");
+    }
+
+  })
+});
 
 // Trang chủ
 router.get("/", function (req, res) {
@@ -190,21 +213,16 @@ router.post("/taikhoan/update", function (req, res) {
 // ---------------------------------------------Test
 
 //-------------Xe
-<<<<<<< HEAD
+//render trang xe
 router.get("/xe", function (req, res) {
   xe.allXe(function (err, data) {
-=======
-//render trang xe
-router.get("/xe", function(req, res) {
-  xe.allXe(function(err, data) {
->>>>>>> 2694d31f68501499c7691f0ca9a7f5353163ecc6
     res.render("./../api/views/xe", { xe: data });
   });
 });
 
 //get all xe
-router.get("/xe/all", function(req, res) {
-  xe.allXe(function(err, data) {
+router.get("/xe/all", function (req, res) {
+  xe.allXe(function (err, data) {
     res.status(200).json(data);
   });
 });
@@ -215,20 +233,16 @@ router.get("/xe/vitri", function (req, res) {
   });
 });
 
-<<<<<<< HEAD
-router.post("/xe", function (req, res) {
-=======
 //tim xe theo id
-router.post("/xe/find", function(req, res) {
+router.post("/xe/find", function (req, res) {
   var XE_ID = req.body.XE_ID;
-  xe.findXeByID(XE_ID, function(err, data) {
+  xe.findXeByID(XE_ID, function (err, data) {
     res.status(200).json(data);
   });
 });
 
 //them xe
-router.post("/xe", function(req, res) {
->>>>>>> 2694d31f68501499c7691f0ca9a7f5353163ecc6
+router.post("/xe", function (req, res) {
   var XE_ID = req.body.XE_ID;
   var XE_NAMSANXUAT = req.body.XE_NAMSANXUAT;
   var XE_GHICHU = req.body.XE_GHICHU;
@@ -254,16 +268,10 @@ router.post("/xe", function(req, res) {
 
 router.post("/xe/delete/:XE_ID", function (req, res) {
   var XE_ID = req.body.XE_ID;
-<<<<<<< HEAD
   xe.deleteXe(XE_ID, function (err, data) {
-    if (err) {
-      res.status(404).json({ message: "ERR" });
-=======
-  xe.deleteXe(XE_ID, function(err, data) {
     if (err.name == "SequelizeForeignKeyConstraintError") {
       // res.status(202).json(err.name);
       res.status(202).json("fk");
->>>>>>> 2694d31f68501499c7691f0ca9a7f5353163ecc6
     } else {
       // res.status(200).json({ message: "đã xóa thành công tài khoản ID: " + TK_ID });
       res.status(200).json("ok");
@@ -286,11 +294,11 @@ router.post("/xe/update/:XE_ID", function (req, res) {
   });
 });
 // update xe
-router.post("/xe/updateInfo/:XE_ID", function(req, res) {
+router.post("/xe/updateInfo/:XE_ID", function (req, res) {
   var XE_ID = req.body.XE_ID;
   var XE_NAMSANXUAT = req.body.XE_NAMSANXUAT;
   var XE_GHICHU = req.body.XE_GHICHU;
-  xe.updateXeAllInf(XE_ID, XE_NAMSANXUAT, XE_GHICHU, function(err, data) {
+  xe.updateXeAllInf(XE_ID, XE_NAMSANXUAT, XE_GHICHU, function (err, data) {
     if (err) {
       res.status(404).json({ message: "ERR" });
     } else {
@@ -306,26 +314,22 @@ router.get("/loi", function (req, res) {
   });
 });
 // get all loi
-router.get("/loi/all", function(req, res) {
-  loi.allLoi(function(err, data) {
+router.get("/loi/all", function (req, res) {
+  loi.allLoi(function (err, data) {
     res.status(200).json(data);
   });
 });
 
 // tìm lỗi theo id
-router.post("/loi/find", function(req, res) {
+router.post("/loi/find", function (req, res) {
   var LOI_ID = req.body.LOI_ID;
-  loi.findLoiByID(LOI_ID, function(err, data) {
+  loi.findLoiByID(LOI_ID, function (err, data) {
     res.status(200).json(data);
   });
 });
 
-<<<<<<< HEAD
-router.post("/loi", function (req, res) {
-=======
 //them loi
-router.post("/loi", function(req, res) {
->>>>>>> 2694d31f68501499c7691f0ca9a7f5353163ecc6
+router.post("/loi", function (req, res) {
   var LOI_ID = req.body.LOI_ID;
   var LOI_TEN = req.body.LOI_TEN;
   var LOI_MOTA = req.body.LOI_MOTA;
@@ -349,13 +353,7 @@ router.post("/loi", function(req, res) {
 
 router.post("/loi/delete/:LOI_ID", function (req, res) {
   var LOI_ID = req.body.LOI_ID;
-<<<<<<< HEAD
   loi.deleteLoi(LOI_ID, function (err, data) {
-    if (err) {
-      res.status(404).json({ message: "ERR" });
-    } else res.status(200).json({ message: "đã xóa thành công lỗi ID: " + LOI_ID });
-=======
-  loi.deleteLoi(LOI_ID, function(err, data) {
     if (err.name == "SequelizeForeignKeyConstraintError") {
       // res.status(202).json(err.name);
       res.status(202).json("fk");
@@ -363,7 +361,6 @@ router.post("/loi/delete/:LOI_ID", function (req, res) {
       // res.status(200).json({ message: "đã xóa thành công tài khoản ID: " + TK_ID });
       res.status(200).json("ok");
     }
->>>>>>> 2694d31f68501499c7691f0ca9a7f5353163ecc6
   });
 });
 
@@ -378,11 +375,11 @@ router.post("/loi/update/:LOI_ID", function (req, res) {
   });
 });
 
-router.post("/loi/update", function(req, res) {
+router.post("/loi/update", function (req, res) {
   var LOI_ID = req.body.LOI_ID;
   var LOI_TEN = req.body.LOI_TEN;
   var LOI_MOTA = req.body.LOI_MOTA;
-  loi.updateLoi(LOI_ID, LOI_TEN, LOI_MOTA, function(err, data) {
+  loi.updateLoi(LOI_ID, LOI_TEN, LOI_MOTA, function (err, data) {
     if (err) {
       res.status(404).json({ message: "ERR" });
     } else {
@@ -442,8 +439,8 @@ router.get("/vipham", function (req, res) {
   });
 });
 
-router.get("/vipham/all", function(req, res) {
-  vipham.allViPham(function(err, data) {
+router.get("/vipham/all", function (req, res) {
+  vipham.allViPham(function (err, data) {
     res.status(200).json(data);
   });
 });
@@ -455,16 +452,16 @@ router.get("/huhong", function (req, res) {
 });
 
 //get all huhong
-router.get("/huhong/all", function(req, res) {
-  huhong.allHuHong(function(err, data) {
+router.get("/huhong/all", function (req, res) {
+  huhong.allHuHong(function (err, data) {
     res.status(200).json(data);
   });
 });
 
 //find theo id
-router.post("/huhong/find", function(req, res) {
+router.post("/huhong/find", function (req, res) {
   var HH_ID = req.body.HH_ID;
-  huhong.findHuHongByID(HH_ID, function(err, data) {
+  huhong.findHuHongByID(HH_ID, function (err, data) {
     res.status(200).json(data);
   });
 });
@@ -476,29 +473,29 @@ router.post("/huhong/find", function(req, res) {
 // });
 
 //hh dang cho
-router.get("/huhong/huhongdangcho", function(req, res) {
-  huhong.getHuHongDangCho(function(err, data) {
+router.get("/huhong/huhongdangcho", function (req, res) {
+  huhong.getHuHongDangCho(function (err, data) {
     res.status(200).json(data);
   });
 });
 
 //hh đang sửa
-router.get("/huhong/huhongdangsua", function(req, res) {
-  huhong.getHuHongDangSua(function(err, data) {
+router.get("/huhong/huhongdangsua", function (req, res) {
+  huhong.getHuHongDangSua(function (err, data) {
     res.status(200).json(data);
   });
 });
 
 //hh đã sửa
-router.get("/huhong/huhongdasua", function(req, res) {
-  huhong.getHuHongDaSua(function(err, data) {
+router.get("/huhong/huhongdasua", function (req, res) {
+  huhong.getHuHongDaSua(function (err, data) {
     res.status(200).json(data);
   });
 });
 
 //hh báo sai
-router.get("/huhong/huhongbaosai", function(req, res) {
-  huhong.getHuHongBaoSai(function(err, data) {
+router.get("/huhong/huhongbaosai", function (req, res) {
+  huhong.getHuHongBaoSai(function (err, data) {
     res.status(200).json(data);
   });
 });

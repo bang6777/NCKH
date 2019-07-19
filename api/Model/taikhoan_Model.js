@@ -1,3 +1,4 @@
+const bcrypt = require("bcrypt");
 const Sequelize = require("sequelize");
 const db = require("./../Config/db");
 const muontra_Model = require("../Model/muontra_Model");
