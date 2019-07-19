@@ -6,21 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Quản lý người dùng</title>
 
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/usm/popper.min.js"></script> -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans"
-      rel="stylesheet"
-    />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
     <!-- My css -->
     <link rel="stylesheet" href="css/login.css" />
     <!-- My js -->
@@ -74,11 +65,7 @@
 
           <div class="form-group form-inline col-lg-2">
             <label class="mr-3">Lọc</label>
-            <select
-              class="form-control form-control-md"
-              id="slTK_View"
-              onchange="LoadView()"
-            >
+            <select class="form-control form-control-md" id="slTK_View" onchange="LoadView()">
               <option value="1">Còn hiệu lực</option>
               <option value="0">Vô hiệu</option>
               <option value="2">Xem tất cả</option>
@@ -146,15 +133,16 @@
                     placeholder="Họ tên người dùng"
                   />
                 </div>
+                <!-- <div class="form-group ">
+                  <input type="text" name="TK_DONVI" id="txtTK_DonVi_add" class="form-control" required placeholder="Đơn vị" />
+                </div> -->
                 <div class="form-group ">
-                  <input
-                    type="text"
-                    name="TK_DONVI"
-                    id="txtTK_DonVi_add"
-                    class="form-control"
-                    required
-                    placeholder="Đơn vị"
-                  />
+                  <select name="TK_DONVI" id="slTK_DonVi_add" class="form-control">
+                    <option value="-1">Chọn đơn vị</option>
+                    <option value="Công nghệ">Công nghệ</option>
+                    <option value="CNTT & TT">CNTT & TT</option>
+                    <option value="Ngoại ngữ">Ngoại ngữ</option>
+                  </select>
                 </div>
                 <div class="form-group">
                   <input
@@ -167,22 +155,14 @@
                   />
                 </div>
                 <div class="form-group ">
-                  <select
-                    name="TK_QUYEN"
-                    id="slTK_Quyen_add"
-                    class="form-control"
-                  >
+                  <select name="TK_QUYEN" id="slTK_Quyen_add" class="form-control">
                     <option value="-1">Chọn quyền sử dụng</option>
                     <option value="Quản trị">Quản trị</option>
                     <option value="Người dùng">Người dùng</option>
                   </select>
                 </div>
                 <div class="form-group ">
-                  <select
-                    name="TK_LOAI"
-                    id="slTK_Loai_add"
-                    class="form-control"
-                  >
+                  <select name="TK_LOAI" id="slTK_Loai_add" class="form-control">
                     <option value="-1">Chọn loại tài khoản</option>
                     <option value="Sinh viên">Sinh viên</option>
                     <option value="Giảng viên">Giảng viên</option>
@@ -194,20 +174,8 @@
               <div class=" modal-footer">
                 <!-- <input type="submit" value="Lưu" id="btnSave" class="btn btn-primary px-3" onclick="AddTK()" /> -->
 
-                <input
-                  type="button"
-                  value="Lưu"
-                  id="btnSave"
-                  class="btn btn-primary px-3"
-                  onclick="AddTK()"
-                />
-                <input
-                  type="button"
-                  value="Hủy"
-                  id="btnCancelSave"
-                  class="btn btn-danger px-3"
-                  data-dismiss="modal"
-                />
+                <input type="button" value="Lưu" id="btnSave" class="btn btn-primary px-3" onclick="AddTK()" />
+                <input type="button" value="Hủy" id="btnCancelSave" class="btn btn-danger px-3" data-dismiss="modal" />
               </div>
             </form>
           </div>
@@ -234,51 +202,32 @@
               <div class="modal-body">
                 <div class="modal-body">
                   <div class="form-group ">
-                    <input
-                      type="text"
-                      name="TK_ID"
-                      id="txtTK_ID_update"
-                      class="form-control"
-                      required
-                      readonly
-                    />
+                    <input type="text" name="TK_ID" id="txtTK_ID_update" class="form-control" required readonly />
                   </div>
 
                   <div class="form-group ">
-                    <input
-                      type="text"
-                      name="TK_HOTEN"
-                      id="txtTK_HoTen_update"
-                      class="form-control"
-                      required
-                    />
+                    <input type="text" name="TK_HOTEN" id="txtTK_HoTen_update" class="form-control" required />
+                  </div>
+                  <!-- <div class="form-group ">
+                    <input type="text" name="TK_DONVI" id="txtTK_DonVi_update" class="form-control" required />
+                  </div> -->
+                  <div class="form-group ">
+                    <select name="TK_DONVI" id="slTK_DonVi_add" class="form-control">
+                      <option value="-1">Chọn đơn vị</option>
+                      <option value="Công nghệ">Công nghệ</option>
+                      <option value="CNTT & TT">CNTT & TT</option>
+                      <option value="Ngoại ngữ">Ngoại ngữ</option>
+                    </select>
                   </div>
                   <div class="form-group ">
-                    <input
-                      type="text"
-                      name="TK_DONVI"
-                      id="txtTK_DonVi_update"
-                      class="form-control"
-                      required
-                    />
-                  </div>
-                  <div class="form-group ">
-                    <select
-                      id="slTK_Quyen_update"
-                      class="form-control"
-                      name="TK_QUYEN"
-                    >
+                    <select id="slTK_Quyen_update" class="form-control" name="TK_QUYEN">
                       <option value="-1">Chọn quyền sử dụng</option>
                       <option value="Quản trị">Quản trị</option>
                       <option value="Người dùng">Người dùng</option>
                     </select>
                   </div>
                   <div class="form-group ">
-                    <select
-                      id="slTK_Loai_update"
-                      class="form-control"
-                      name="TK_LOAI"
-                    >
+                    <select id="slTK_Loai_update" class="form-control" name="TK_LOAI">
                       <option value="-1">Chọn loại tài khoản</option>
                       <option value="Sinh viên">Sinh viên</option>
                       <option value="Giảng viên">Giảng viên</option>
@@ -340,13 +289,7 @@
               </table>
             </div>
             <div class=" modal-footer">
-              <input
-                type="button"
-                value="Đóng"
-                id="btnCancel"
-                class="btn btn-danger px-3"
-                data-dismiss="modal"
-              />
+              <input type="button" value="Đóng" id="btnCancel" class="btn btn-danger px-3" data-dismiss="modal" />
             </div>
           </div>
         </div>
@@ -383,13 +326,7 @@
               </table>
             </div>
             <div class=" modal-footer">
-              <input
-                type="button"
-                value="Đóng"
-                id="btnCancel"
-                class="btn btn-danger px-3"
-                data-dismiss="modal"
-              />
+              <input type="button" value="Đóng" id="btnCancel" class="btn btn-danger px-3" data-dismiss="modal" />
             </div>
           </div>
         </div>
@@ -426,13 +363,7 @@
               </table>
             </div>
             <div class=" modal-footer">
-              <input
-                type="button"
-                value="Đóng"
-                id="btnCancel"
-                class="btn btn-danger px-3"
-                data-dismiss="modal"
-              />
+              <input type="button" value="Đóng" id="btnCancel" class="btn btn-danger px-3" data-dismiss="modal" />
             </div>
           </div>
         </div>

@@ -15,7 +15,7 @@
     <!-- My css -->
     <link rel="stylesheet" href="css/login.css" />
     <!-- My js -->
-    <script src="./js/function.js" type="text/javascript"></script>
+    <!-- <script src="./js/function.js" type="text/javascript"></script> -->
     <script src="./js/muontra-ajax.js"></script>
 
     <!-- Data table -->
@@ -27,7 +27,7 @@
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
   </head>
 
-  <body>
+  <body onload="getAllMuonTra()">
     <script>
       $(document).ready(function() {
         $("#tbMuonTra").DataTable();
@@ -45,7 +45,7 @@
       </h2>
       <div class="form-group form-inline col-lg-2">
         <label class="mr-3">Lọc</label>
-        <select class="form-control form-control-sm" id="slMuonTra_View">
+        <select class="form-control form-control-sm" id="slMuonTra_View" onchange="LoadView()">
           <option value="1">Xem tất cả</option>
           <option value="0">Chưa trả xe</option>
         </select>
@@ -65,8 +65,8 @@
               </tr>
             </thead>
 
-            <tbody class="text-center">
-              <% muontra.forEach(function(mt){ %>
+            <tbody class="text-center" id="tb">
+              <!-- <% muontra.forEach(function(mt){ %>
               <tr>
                 <td></td>
                 <td class="chitiet">
@@ -82,7 +82,7 @@
                 </td>
               </tr>
 
-              <% }); %>
+              <% }); %> -->
             </tbody>
           </table>
         </div>
@@ -100,8 +100,8 @@
               </div>
 
               <div class="modal-body">
-                <table class="table table-sm table-borderless col-lg-8 mx-auto">
-                  <tr>
+                <table class="table table-sm table-borderless col-lg-8 mx-auto" id="tbCTMT">
+                  <!-- <tr>
                     <td>ID mượn trả</td>
                     <td>1</td>
                   </tr>
@@ -134,7 +134,7 @@
                       <img src="img/marker-red.png" height="20px" />
                       10.03054, 105.768646
                     </td>
-                  </tr>
+                  </tr> -->
                 </table>
               </div>
 
