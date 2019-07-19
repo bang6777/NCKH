@@ -104,7 +104,7 @@ function ChiTietMuonTra(a) {
   var mt_id = a;
   var vtMuon = "";
   var vtTra = "";
-  loadKhuonVien();
+  // loadKhuonVien();
 
   $.ajax({
     type: "POST",

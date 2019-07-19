@@ -62,7 +62,7 @@ function getToaDo() {
   // ];
   coordinates.push({ lat: l1, lng: l2 });
   coordinates.push({ lat: l3, lng: l4 });
-  alert(typeof l1);
+  // alert(typeof l1);
 }
 //2.Load khuon vien
 function loadKhuonVien() {
