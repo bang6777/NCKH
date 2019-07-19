@@ -14,20 +14,20 @@ app.set('view engine', 'ejs');
 
 var routes = require('./api/routes/bikeRoute'); //importing route
 // routes(app);
-app.use('/',routes);
-app.use(function(req, res) {
-    res.status(404).send({url: req.originalUrl + ' not found'});
+app.use('/', routes);
+app.use(function (req, res) {
+  res.status(404).send({ url: req.originalUrl + ' not found' });
 });
 
 
-const db = require('./api/Config/db');
-db.authenticate()
-.then(() => {
-  console.log('Connection has been established successfully.');
-})
-.catch(err => {
-  console.error('Unable to connect to the database:', err);
-});
+// const db = require('./api/Config/db');
+// db.authenticate()
+// .then(() => {
+//   console.log('Connection has been established successfully.');
+// })
+// .catch(err => {
+//   console.error('Unable to connect to the database:', err);
+// });
 
 app.listen(port);
 console.log('RESTful API server started on: ' + port);
