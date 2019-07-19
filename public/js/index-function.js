@@ -50,8 +50,6 @@ function GetViTri() {
   });
 }
 
-//---------------Load map
-
 //----------------Ham
 //Chia toa do
 function createLatLng(coordString) {
