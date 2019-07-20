@@ -5,4 +5,10 @@ exports.viewMuonTra = function (req, res) {
     muontraCtr.muontra_nguoidung(TK_ID, function (err, data) {
         res.json(data);
     });
-}
+};
+exports.viewMuonTraXe = function (req, res) {
+    var XE_ID = req.params.XE_ID;
+    muontraCtr.muontra_Xe(XE_ID, function (err, data) {
+        res.json(data);
+    });
+};

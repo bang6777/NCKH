@@ -27,9 +27,9 @@ const Sequelize = require("sequelize");
 //         acquire: 30000,
 //         idle: 10000
 //     },
-// define: {
-//     freezeTableName: true
-// }
+//     define: {
+//         freezeTableName: true
+//     }
 // });
 var sequelize = new Sequelize(process.env.DATABASE_URL);
 sequelize.authenticate()

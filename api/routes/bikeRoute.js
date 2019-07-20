@@ -425,6 +425,10 @@ router.post("/muontra/find", function (req, res) {
 
 // Muon tra theo TK_ID
 router.get("/muontra/:TK_ID", muontraRoute.viewMuonTra);
+
+// Muon trA THEO XE_ID
+router.get("/muontra/xe/:XE_ID", muontraRoute.viewMuonTraXe);
+
 //-----------Vi phạm
 
 // router.get("/vipham/:VP_ID", function (req, res) {
