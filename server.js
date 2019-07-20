@@ -34,7 +34,7 @@ io.on('connection', function (socket) {
   });
   socket.on('Client-send-unlock', function (data) {
     console.log('Client send unlock: ' + data);
-    socket.broadcast.emit("Server-send-unlock", data);
+    socket.broadcast.emit("Server-send-unlock", data.unlock);
   });
 
 });

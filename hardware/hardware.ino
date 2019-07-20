@@ -8,8 +8,8 @@ Servo servo;
 
 //SocketIOClient client;
 SocketIoClient socket;
-const char* ssid = "Aurora419_5G";          //Tên mạng Wifi mà Socket server của bạn đang kết nối
-const char* password = "aurora419";  //Pass mạng wifi ahihi, anh em rãnh thì share pass cho mình với.
+const char* ssid = "My ASUS";          //Tên mạng Wifi mà Socket server của bạn đang kết nối
+const char* password = "15999999";  //Pass mạng wifi ahihi, anh em rãnh thì share pass cho mình với.
 
 char host[] = "https://nckh-xedap.herokuapp.com";  //Địa chỉ IP dịch vụ, hãy thay đổi nó theo địa chỉ IP Socket server của bạn.
 int port = 80;                  //Cổng dịch vụ socket server do chúng ta tạo!
@@ -26,14 +26,25 @@ bool isSend = false;
 
 //------------------------------------ funtion-------------------
 void lock(){
-    servo.write(50);
+    servo.write(90);
     Serial.println(0);
     delay(100);  
 }
-void unlock(){
-    servo.write(0);
-    Serial.println(1);
-    delay(100);  
+void unlock(const char* payload, size_t length){
+    String data = payload;
+    if(data == "unlock"){
+      servo.write(0);
+      Serial.println(1);
+    }
+    
+  }
+ void emitToado(const char* payload, size_t length){
+    String data = payload;
+    if(data == "unlock"){
+      servo.write(0);
+      Serial.println(1);
+    }
+    
   }
 
 // Module SIM
@@ -110,19 +121,20 @@ void laytoado(){  //Lấy tọa độ
   Serial.print(c); Serial.println("s");
 }
 //=============================================
+
 String toado(){   //Trả về tọa độ
-  String td;
+  String td1;
   do{
     do{
       do{
-        td=AT("AT+LOCATION=2");
-      }while ((td.indexOf(',')==-1)||(td.indexOf("AT+LOCATION=2")==-1)||(td.indexOf("OK")==-1));
-    }while(td.indexOf("AT+LOCATION=2")>td.lastIndexOf("OK"));
-    td=tachtoado(td);
-    td.trim();
-  }while((td.indexOf("AT")!=-1)||(td.length()<17));
+        td1=AT("AT+LOCATION=2");
+      }while ((td1.indexOf(',')==-1)||(td1.indexOf("AT+LOCATION=2")==-1)||(td1.indexOf("OK")==-1));
+    }while(td1.indexOf("AT+LOCATION=2")>td1.lastIndexOf("OK"));
+    td1=tachtoado(td1);
+    td1.trim();
+  }while((td1.indexOf("AT")!=-1)||(td1.length()<17));
   yield();
-  return(td);
+  return td1;
 }
 
 // ==================================
@@ -175,7 +187,8 @@ void setup() {
     //  motor_1_Tien(255);
     
     socket.begin(host, port);
-    socket.emit("hardware-send-location",toado);
+    String strToaDo = toado();
+    socket.emit("hardware-send-location",strToaDo.c_str());
     socket.on("Server-send-unlock",unlock);
   }
 
@@ -183,7 +196,7 @@ void setup() {
     //  client.monitor();
     socket.loop();
     if(digitalRead(D3)==1){
-      unlock();
+      servo.write(0);
     } else{
       lock();
     }
