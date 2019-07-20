@@ -4,7 +4,7 @@
   "engines": {
     "node": "8.11.1"
   },
-  "description": "",
+  "description": "NCKH",
   "main": "index.js",
   "scripts": {
     "start": "node server.js"
@@ -28,5 +28,13 @@
     "sequelize": "*",
     "sequence": "*",
     "socket.io": "*"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bang6777/NCKH.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bang6777/NCKH/issues"
+  },
+  "homepage": "https://github.com/bang6777/NCKH#readme"
 }
