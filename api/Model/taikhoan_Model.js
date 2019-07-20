@@ -1,10 +1,11 @@
+const bcrypt = require("bcrypt");
 const Sequelize = require("sequelize");
 const db = require("./../Config/db");
 const muontra_Model = require("../Model/muontra_Model");
 const huhong_Model = require("../Model/huhong_Model");
 const vipham_Model = require("../Model/vipham_Model");
 
-const taikhoan_Model = db.define("taikhoan", {
+const taikhoan_Model = db.define('taikhoan', {
   // attributes
   TK_ID: {
     type: Sequelize.STRING,
@@ -16,10 +17,10 @@ const taikhoan_Model = db.define("taikhoan", {
     // allowNull defaults to true
   },
   TK_HOTEN: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   TK_QUYEN: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   TK_DONVI: {
     type: Sequelize.STRING
