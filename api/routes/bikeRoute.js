@@ -7,9 +7,12 @@ var loi = require("../controller/loi_Ctr");
 var huhong = require("../controller/huhong_Ctr");
 var muontra = require("../controller/muontra_Ctr");
 var vipham = require("../controller/vipham_Ctr");
+var khuonvien = require("../controller/khuonvien_Ctr");
+
 var muontraRoute = require("./muontra_Route");
 var huhongRoute = require("./huhong_Route");
-var khuonvien = require("../controller/khuonvien_Ctr");
+var viphamRoute = require("./vipham_Route");
+//--------------------------------------------------------
 
 //Login
 router.get("/login", function(req, res) {
@@ -430,12 +433,6 @@ router.get("/muontra/:TK_ID", muontraRoute.viewMuonTra);
 
 //-----------Vi phạm
 
-// router.get("/vipham/:VP_ID", function (req, res) {
-//   vipham.allViPham(function (err, data) {
-//     res.render("./../api/views/vipham", { vipham: data });
-//   });
-// });
-
 router.get("/vipham", function(req, res) {
   vipham.allViPham(function(err, data) {
     res.render("./../api/views/vipham", { vipham: data });
@@ -447,6 +444,10 @@ router.get("/vipham/all", function(req, res) {
     res.status(200).json(data);
   });
 });
+
+//vi pham - tai khoan
+// router.get("/vipham/taikhoan/:TK_ID", viphamRoute.viewTaiKhoan);
+
 //-----------Hư hỏng
 router.get("/huhong", function(req, res) {
   huhong.allHuHong(function(err, data) {
@@ -474,13 +475,13 @@ router.post("/huhong/find", function(req, res) {
 //     res.status(200).json(data);
 //   });
 // });
-// router.get("/huhong/:TK_ID", huhongRoute.viewHuHong);
+router.get("/huhong/taikhoan/:TK_ID", huhongRoute.viewHuHong);
 // Hu hong theo ID
-router.post("/huhong/:TK_ID", function(req, res) {
-  huhong.huhong_taikhoan(function(err, data) {
-    res.status(200).json(data);
-  });
-});
+// router.get("/huhong/taikhoan/:TK_ID", function(req, res) {
+//   huhong.huhong_taikhoan(function(err, data) {
+//     res.status(200).json(data);
+//   });
+// });
 
 //hh dang cho
 router.get("/huhong/huhongdangcho", function(req, res) {

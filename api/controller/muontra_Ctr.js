@@ -8,7 +8,7 @@ const xe_M = require("../Model/xe_Model");
 // muontra_M.belongsTo(taikhoan_M, { foreignKey: 'TK_ID' });
 
 //muon tra - tai khoan
-exports.muontra_nguoidung = function(TK_ID, cb) {
+exports.muontra_nguoidung = function (TK_ID, cb) {
   muontra_M
     .findAll({
       include: [
@@ -27,9 +27,7 @@ exports.muontra_nguoidung = function(TK_ID, cb) {
       console.log("All muon tra theo id:", JSON.stringify(dsMuonTra, null, 4));
     });
 };
-
-//muon tra - xe
-exports.muontra_xe = function(XE_ID, cb) {
+exports.muontra_Xe = function (XE_ID, cb) {
   muontra_M
     .findAll({
       include: [
