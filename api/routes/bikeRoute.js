@@ -36,8 +36,7 @@ router.post("/login", function (req, res) {
       res.status(200).json({ message: "đã đăng nhập thành công!" });
       // res.redirect("/taikhoan");
     }
-
-  })
+  });
 });
 
 // Trang chủ
@@ -423,11 +422,11 @@ router.post("/muontra/find", function (req, res) {
   });
 });
 
+// Muon tra theo XE_ID
+router.get("/muontra/xe/:XE_ID", muontraRoute.viewMuonTraXe);
+
 // Muon tra theo TK_ID
 router.get("/muontra/:TK_ID", muontraRoute.viewMuonTra);
-
-// Muon trA THEO XE_ID
-router.get("/muontra/xe/:XE_ID", muontraRoute.viewMuonTraXe);
 
 //-----------Vi phạm
 
@@ -475,6 +474,13 @@ router.post("/huhong/find", function (req, res) {
 //     res.status(200).json(data);
 //   });
 // });
+// router.get("/huhong/:TK_ID", huhongRoute.viewHuHong);
+// Hu hong theo ID
+router.post("/huhong/:TK_ID", function (req, res) {
+  huhong.huhong_taikhoan(function (err, data) {
+    res.status(200).json(data);
+  });
+});
 
 //hh dang cho
 router.get("/huhong/huhongdangcho", function (req, res) {

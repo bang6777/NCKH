@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 const db = require('../Config/db');
 const muontra = require('./muontra_Model');
 
-const xe_Model = db.define('xe', {
+const xe_Model = db.define("xe", {
 	// attributes
 	XE_ID: {
 		type: Sequelize.STRING,
@@ -23,8 +23,6 @@ const xe_Model = db.define('xe', {
 		type: Sequelize.STRING
 	}
 });
-
-
 
 db.sync();
 module.exports = xe_Model;

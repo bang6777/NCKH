@@ -111,7 +111,6 @@ exports.findTKByPK = (TK_ID, cb) => {
 };
 
 exports.checkLoginServer = (TK_ID, TK_PASSWORD, cb) => {
-
   taikhoan_M
     .findOne({
       where: {
@@ -129,7 +128,6 @@ exports.checkLoginServer = (TK_ID, TK_PASSWORD, cb) => {
         console.log("Sai tài khoản hoặc password, ", tk_bang.TK_ID);
         cb(err, null);
       }
-
     });
 };
 

@@ -3,9 +3,11 @@ const Sequelize = require("sequelize");
 const muontra_M = require("../Model/muontra_Model");
 const taikhoan_M = require("../Model/taikhoan_Model");
 const xe_M = require("../Model/xe_Model");
+
 // taikhoan_M.hasMany(muontra_M, { foreignKey: 'TK_ID' });
 // muontra_M.belongsTo(taikhoan_M, { foreignKey: 'TK_ID' });
 
+//muon tra - tai khoan
 exports.muontra_nguoidung = function (TK_ID, cb) {
   muontra_M
     .findAll({
@@ -41,9 +43,10 @@ exports.muontra_Xe = function (XE_ID, cb) {
       if (dsMuonTra) {
         cb(null, dsMuonTra);
       } else cb("Không có dữ liệu", null);
-      console.log("All muon tra theo id:", JSON.stringify(dsMuonTra, null, 4));
+      console.log("All muon tra xe theo id:", JSON.stringify(dsMuonTra, null, 4));
     });
 };
+
 //get All muon tra
 exports.allMuonTra = cb => {
   muontra_M.findAll().then(muontra => {

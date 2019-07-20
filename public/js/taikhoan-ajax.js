@@ -27,14 +27,7 @@ function AddTK() {
   var tk_quyen = $("#slTK_Quyen_add").val();
   var tk_loai = $("#slTK_Loai_add").val();
 
-  if (
-    tk_id == "" ||
-    tk_hoten == "" ||
-    tk_password == "" ||
-    tk_donvi == "" ||
-    tk_quyen == "" ||
-    tk_loai == ""
-  ) {
+  if (tk_id == "" || tk_hoten == "" || tk_password == "" || tk_donvi == "" || tk_quyen == "" || tk_loai == "") {
     alert("Vui lòng điền đầy đủ các trường!");
   } else {
     $.ajax({
@@ -146,9 +139,7 @@ function Delete(a) {
       contentType: "application/json",
       success: function (res) {
         if (res == "fk") {
-          alert(
-            "Không thể xóa tài khoản vì có vi phạm, mượn trả hoặc báo hư hỏng!"
-          );
+          alert("Không thể xóa tài khoản vì có vi phạm, mượn trả hoặc báo hư hỏng!");
         } else if (res == "ok") {
           alert("Đã xóa tài khoản: " + tk_id);
         }
@@ -230,19 +221,13 @@ function GetAllTK() {
                         name= "TK_HIEULUC"
                       />`;
         }
-        tk_data += `<label class="custom-control-label" for="ckHieuLuc[${
-          tk.TK_ID
-        }]"></label>
+        tk_data += `<label class="custom-control-label" for="ckHieuLuc[${tk.TK_ID}]"></label>
                         </div>
                       </td>
                       <td class="">
-                      <i class="fa fa-edit fa-lg" data-toggle="modal" data-target="#EditTK" title="Cập nhật" onclick="UpdateModal('${
-                        tk.TK_ID
-                      }')" >
+                      <i class="fa fa-edit fa-lg" data-toggle="modal" data-target="#EditTK" title="Cập nhật" onclick="UpdateModal('${tk.TK_ID}')" >
                       </i>
-                      <i class="fa fa-trash fa-lg" title="Xóa" onclick="Delete('${
-                        tk.TK_ID
-                      }')" >
+                      <i class="fa fa-trash fa-lg" title="Xóa" onclick="Delete('${tk.TK_ID}')" >
                       </i>
                     </td>
                       
@@ -315,19 +300,13 @@ function GetTKConHieuLuc() {
                         name= "TK_HIEULUC"
                       />`;
         }
-        tk_data += `<label class="custom-control-label" for="ckHieuLuc[${
-          tk.TK_ID
-        }]"></label>
+        tk_data += `<label class="custom-control-label" for="ckHieuLuc[${tk.TK_ID}]"></label>
                         </div>
                       </td>
                       <td class="">
-                      <i class="fa fa-edit fa-lg" data-toggle="modal" data-target="#EditTK" title="Cập nhật" onclick="UpdateModal('${
-                        tk.TK_ID
-                      }')" >
+                      <i class="fa fa-edit fa-lg" data-toggle="modal" data-target="#EditTK" title="Cập nhật" onclick="UpdateModal('${tk.TK_ID}')" >
                       </i>
-                      <i class="fa fa-trash fa-lg" title="Xóa" onclick="Delete('${
-                        tk.TK_ID
-                      }')" >
+                      <i class="fa fa-trash fa-lg" title="Xóa" onclick="Delete('${tk.TK_ID}')" >
                       </i>
                     </td>
                       
@@ -406,19 +385,13 @@ function GetTKVoHieuLuc() {
                         name= "TK_HIEULUC"
                       />`;
         }
-        tk_data += `<label class="custom-control-label" for="ckHieuLuc[${
-          tk.TK_ID
-        }]"></label>
+        tk_data += `<label class="custom-control-label" for="ckHieuLuc[${tk.TK_ID}]"></label>
                         </div>
                       </td>
                       <td class="">
-                      <i class="fa fa-edit fa-lg" data-toggle="modal" data-target="#EditTK" title="Cập nhật" onclick="UpdateModal('${
-                        tk.TK_ID
-                      }')" >
+                      <i class="fa fa-edit fa-lg" data-toggle="modal" data-target="#EditTK" title="Cập nhật" onclick="UpdateModal('${tk.TK_ID}')" >
                       </i>
-                      <i class="fa fa-trash fa-lg" title="Xóa" onclick="Delete('${
-                        tk.TK_ID
-                      }')" >
+                      <i class="fa fa-trash fa-lg" title="Xóa" onclick="Delete('${tk.TK_ID}')" >
                       </i>
                     </td>
                       
@@ -487,7 +460,7 @@ function TK_HuHong(a) {
   var tk_id = a;
 
   $.ajax({
-    type: "GET",
+    type: "POST",
     url: "/huhong/" + tk_id,
     data: JSON.stringify({ TK_ID: tk_id }),
     contentType: "application/json",

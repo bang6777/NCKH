@@ -9,20 +9,20 @@ const huhong_Model = db.define("huhong", {
     primaryKey: true,
     allowNull: false
   },
-  TK_ID: {
-    type: Sequelize.STRING,
-    references: {
-      model: taikhoan,
-      key: "TK_ID"
-    }
-  },
-  XE_ID: {
-    type: Sequelize.STRING,
-    references: {
-      model: xedap,
-      key: "XE_ID"
-    }
-  },
+  // TK_ID: {
+  //   type: Sequelize.STRING,
+  //   references: {
+  //     model: taikhoan,
+  //     key: "TK_ID"
+  //   }
+  // },
+  // XE_ID: {
+  //   type: Sequelize.STRING,
+  //   references: {
+  //     model: xedap,
+  //     key: "XE_ID"
+  //   }
+  // },
   HH_MOTA: {
     type: Sequelize.STRING
   },
