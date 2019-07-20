@@ -6,6 +6,7 @@ const taikhoan_M = require("../Model/taikhoan_Model");
 // taikhoan_M.hasMany(muontra_M, { foreignKey: 'TK_ID' });
 // muontra_M.belongsTo(taikhoan_M, { foreignKey: 'TK_ID' });
 
+//muon tra - tai khoan
 exports.muontra_nguoidung = function(TK_ID, cb) {
   muontra_M
     .findAll({
@@ -23,6 +24,27 @@ exports.muontra_nguoidung = function(TK_ID, cb) {
         cb(null, dsMuonTra);
       } else cb("Không có dữ liệu", null);
       console.log("All muon tra theo id:", JSON.stringify(dsMuonTra, null, 4));
+    });
+};
+
+//muon tra - xe
+exports.muontra_xe = function(XE_ID, cb) {
+  muontra_M
+    .findAll({
+      include: [
+        {
+          model: taikhoan_M,
+          where: {
+            XE_ID: XE_ID
+          }
+        }
+      ]
+    })
+    .then(dsMuonTra => {
+      if (dsMuonTra) {
+        cb(null, dsMuonTra);
+      } else cb("Không có dữ liệu", null);
+      console.log("All muon tra xe theo id:", JSON.stringify(dsMuonTra, null, 4));
     });
 };
 

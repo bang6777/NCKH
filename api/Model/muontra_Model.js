@@ -10,18 +10,18 @@ const muontra_Model = db.define("muontra", {
     primaryKey: true
   },
   TK_ID: {
-    type: Sequelize.STRING,
-    references: {
-      model: taikhoan,
-      key: "TK_ID"
-    }
+    type: Sequelize.STRING
+    // references: {
+    //   model: taikhoan,
+    //   key: "TK_ID"
+    // }
   },
   XE_ID: {
-    type: Sequelize.STRING,
-    references: {
-      model: xedap,
-      key: "XE_ID"
-    }
+    type: Sequelize.STRING
+    // references: {
+    //   model: xedap,
+    //   key: "XE_ID"
+    // }
   },
   MUON_THOIGIAN: {
     type: Sequelize.STRING

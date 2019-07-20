@@ -32,9 +32,7 @@ function GetAllLoi() {
                         <td>${loi.LOI_TEN}</td>
                         <td>${loi.LOI_MOTA}</td>
                         <td class="">
-                      <i class="fa fa-edit fa-lg" data-toggle="modal" data-target="#EditLoi" title="Cập nhật" onclick="UpdateModal('${
-                        loi.LOI_ID
-                      }')" >
+                      <i class="fa fa-edit fa-lg" data-toggle="modal" data-target="#EditLoi" title="Cập nhật" onclick="UpdateModal('${loi.LOI_ID}')" >
                       </i>
                       <i class="fa fa-trash fa-lg" title="Xóa" onclick="Delete('${loi.LOI_ID}')" >
                       </i>
@@ -157,7 +155,6 @@ function Delete(a) {
       data: JSON.stringify({ LOI_ID: loi_id }),
       contentType: "application/json",
       success: function(res) {
-        alert(res);
         if (res == "fk") {
           alert("Không thể xóa tài khoản vì có vi phạm, mượn trả hoặc báo hư hỏng!");
         } else if (res == "ok") {
