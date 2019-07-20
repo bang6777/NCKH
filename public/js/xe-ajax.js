@@ -74,6 +74,7 @@ function GetAllXE() {
                       data-toggle="modal"
                       data-target="#ThongKeXe-MuonTra"
                       class="btn btn-outline-dark btn-sm"
+                      onclick="XE_MuonTra('${xe.XE_ID}')"
                     >
                       Mượn-trả
                     </button>
@@ -175,4 +176,34 @@ function Delete(a) {
       }
     });
   }
+}
+
+//Thong ke TK - MuonTra
+function XE_MuonTra(a) {
+  var xe_id = a;
+
+  $.ajax({
+    type: "GET",
+    url: "/muontra/xe/" + xe_id,
+    data: JSON.stringify({ XE_ID: xe_id }),
+    contentType: "application/json",
+    success: function(response) {
+      console.log(response);
+      var tb = $("#XE_MuonTra");
+      tb.html("");
+      xe_data = "";
+      $.each(response, function(i, xe) {
+        xe_data += `<tr>
+          <td>${xe.MUONTRA_ID}</td>
+          <td>${xe.TK_ID}</td>
+          <td>${xe.MUON_THOIGIAN}</td>
+          <td>${xe.TRA_THOIGIAN}</td>
+        </tr>`;
+      });
+      tb.append(xe_data);
+    },
+    error: function(e) {
+      console.log(e);
+    }
+  });
 }

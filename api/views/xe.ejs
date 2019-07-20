@@ -6,21 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Quản lý xe đạp</title>
 
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/usm/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans"
-      rel="stylesheet"
-    />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
     <!-- My css -->
     <link rel="stylesheet" href="css/login.css" />
     <!-- My js -->
@@ -169,14 +160,7 @@
               <div class="modal-body">
                 <div class="form-group ">
                   <span id="XE_alert" class="text-danger font-size-1"></span>
-                  <input
-                    type="text"
-                    name="XE_ID"
-                    id="txtXe_ID_add"
-                    class="form-control"
-                    required
-                    placeholder="ID xe"
-                  />
+                  <input type="text" name="XE_ID" id="txtXe_ID_add" class="form-control" required placeholder="ID xe" />
                 </div>
 
                 <div class="form-group">
@@ -199,20 +183,8 @@
               </div>
 
               <div class=" modal-footer">
-                <input
-                  type="button"
-                  value="Lưu"
-                  id="btnSave"
-                  class="btn btn-primary px-3"
-                  onclick="AddXE()"
-                />
-                <input
-                  type="button"
-                  value="Hủy"
-                  id="btnCancelSave"
-                  class="btn btn-danger px-3"
-                  data-dismiss="modal"
-                />
+                <input type="button" value="Lưu" id="btnSave" class="btn btn-primary px-3" onclick="AddXE()" />
+                <input type="button" value="Hủy" id="btnCancelSave" class="btn btn-danger px-3" data-dismiss="modal" />
               </div>
             </form>
           </div>
@@ -237,14 +209,7 @@
               <div class="modal-body">
                 <div class="modal-body">
                   <div class="form-group ">
-                    <input
-                      type="text"
-                      name="XE_ID"
-                      id="txtXe_ID_update"
-                      class="form-control"
-                      required
-                      readonly
-                    />
+                    <input type="text" name="XE_ID" id="txtXe_ID_update" class="form-control" required readonly />
                   </div>
 
                   <div class="form-group">
@@ -258,23 +223,12 @@
                   </div>
 
                   <div class="form-group ">
-                    <textarea
-                      class="form-control"
-                      name="XE_GHICHU"
-                      id="txtXe_GhiChu_update"
-                      required
-                    ></textarea>
+                    <textarea class="form-control" name="XE_GHICHU" id="txtXe_GhiChu_update" required></textarea>
                   </div>
                 </div>
               </div>
               <div class=" modal-footer">
-                <input
-                  type="submit"
-                  value="Lưu"
-                  id="btnUpdate"
-                  class="btn btn-primary px-3"
-                  onclick="UpdateInfo()"
-                />
+                <input type="submit" value="Lưu" id="btnUpdate" class="btn btn-primary px-3" onclick="UpdateInfo()" />
                 <input
                   type="button"
                   value="Hủy"
@@ -310,22 +264,16 @@
                   <td>Thời gian mượn</td>
                   <td>Thời gian trả</td>
                 </thead>
-                <tbody>
-                  <td>1</td>
+                <tbody id="XE_MuonTra">
+                  <!-- <td>1</td>
                   <td>B1606777</td>
                   <td>15:00:00 06/05/2019</td>
-                  <td>15:15:00 06/05/2019</td>
+                  <td>15:15:00 06/05/2019</td> -->
                 </tbody>
               </table>
             </div>
             <div class=" modal-footer">
-              <input
-                type="button"
-                value="Đóng"
-                id="btnCancel"
-                class="btn btn-danger px-3"
-                data-dismiss="modal"
-              />
+              <input type="button" value="Đóng" id="btnCancel" class="btn btn-danger px-3" data-dismiss="modal" />
             </div>
           </div>
         </div>
@@ -362,13 +310,7 @@
               </table>
             </div>
             <div class=" modal-footer">
-              <input
-                type="button"
-                value="Đóng"
-                id="btnCancel"
-                class="btn btn-danger px-3"
-                data-dismiss="modal"
-              />
+              <input type="button" value="Đóng" id="btnCancel" class="btn btn-danger px-3" data-dismiss="modal" />
             </div>
           </div>
         </div>
@@ -403,13 +345,7 @@
               </table>
             </div>
             <div class=" modal-footer">
-              <input
-                type="button"
-                value="Đóng"
-                id="btnCancel"
-                class="btn btn-danger px-3"
-                data-dismiss="modal"
-              />
+              <input type="button" value="Đóng" id="btnCancel" class="btn btn-danger px-3" data-dismiss="modal" />
             </div>
           </div>
         </div>

@@ -10,8 +10,12 @@ function GetAllHuHong() {
       huhong_data = "";
       $.each(response, function(i, huhong) {
         huhong_data += `<tr>
-                            <td>${huhong.HH_ID}</td>
-                            <td>${huhong.TK_ID}</td>
+        <td>${huhong.HH_ID}</td>
+                            <td class="chitiet">
+                            <a onclick="LoadTK('${huhong.TK_ID}')" data-toggle="modal" data-target="#ChiTietTK">
+                            ${huhong.TK_ID} </a>
+                            </td>
+                            
                             <td>${huhong.XE_ID}</td>
                             <td>${huhong.HH_MOTA}</td>
                             <td>${huhong.HH_THOIGIAN}</td>
@@ -22,6 +26,7 @@ function GetAllHuHong() {
                     <select
                     id="slHH_TrangThai['${huhong.HH_ID}']"
                     class="form-control form-control-sm"
+                    onchange="UpdateTrangThaiHuHong('${huhong.HH_ID}')"
                     >
                         <option value="0" selected=true>Đang chờ</option>
                         <option value="1" >Đang sửa</option>
@@ -36,6 +41,7 @@ function GetAllHuHong() {
                 <select
                 id="slHH_TrangThai['${huhong.HH_ID}']"
                 class="form-control form-control-sm"
+                onchange="UpdateTrangThaiHuHong('${huhong.HH_ID}')"
                 >
                     <option value="0" >Đang chờ</option>
                     <option value="1" selected=true>Đang sửa</option>
@@ -50,6 +56,7 @@ function GetAllHuHong() {
                 <select
                 id="slHH_TrangThai['${huhong.HH_ID}']"
                 class="form-control form-control-sm"
+                onchange="UpdateTrangThaiHuHong('${huhong.HH_ID}')"
                 >
                     <option value="0" >Đang chờ</option>
                     <option value="1" >Đang sửa</option>
@@ -64,6 +71,7 @@ function GetAllHuHong() {
                 <select
                 id="slHH_TrangThai['${huhong.HH_ID}']"
                 class="form-control form-control-sm"
+                onchange="UpdateTrangThaiHuHong('${huhong.HH_ID}')"
                 >
                     <option value="0" >Đang chờ</option>
                     <option value="1" >Đang sửa</option>
@@ -124,6 +132,7 @@ function GetHHDangCho() {
                         <select
                         id="slHH_TrangThai['${huhong.HH_ID}']"
                         class="form-control form-control-sm"
+                        onchange="UpdateTrangThaiHuHong('${huhong.HH_ID}')"
                         >
                             <option value="0" selected=true>Đang chờ</option>
                             <option value="1" >Đang sửa</option>
@@ -138,6 +147,7 @@ function GetHHDangCho() {
                     <select
                     id="slHH_TrangThai['${huhong.HH_ID}']"
                     class="form-control form-control-sm"
+                    onchange="UpdateTrangThaiHuHong('${huhong.HH_ID}')"
                     >
                         <option value="0" >Đang chờ</option>
                         <option value="1" selected=true>Đang sửa</option>
@@ -152,6 +162,7 @@ function GetHHDangCho() {
                     <select
                     id="slHH_TrangThai['${huhong.HH_ID}']"
                     class="form-control form-control-sm"
+                    onchange="UpdateTrangThaiHuHong('${huhong.HH_ID}')"
                     >
                         <option value="0" >Đang chờ</option>
                         <option value="1" >Đang sửa</option>
@@ -166,6 +177,7 @@ function GetHHDangCho() {
                     <select
                     id="slHH_TrangThai['${huhong.HH_ID}']"
                     class="form-control form-control-sm"
+                    onchange="UpdateTrangThaiHuHong('${huhong.HH_ID}')"
                     >
                         <option value="0" >Đang chờ</option>
                         <option value="1" >Đang sửa</option>
@@ -226,6 +238,7 @@ function GetHHDangSua() {
                         <select
                         id="slHH_TrangThai['${huhong.HH_ID}']"
                         class="form-control form-control-sm"
+                        onchange="UpdateTrangThaiHuHong('${huhong.HH_ID}')"
                         >
                             <option value="0" selected=true>Đang chờ</option>
                             <option value="1" >Đang sửa</option>
@@ -240,6 +253,7 @@ function GetHHDangSua() {
                     <select
                     id="slHH_TrangThai['${huhong.HH_ID}']"
                     class="form-control form-control-sm"
+                    onchange="UpdateTrangThaiHuHong('${huhong.HH_ID}')"
                     >
                         <option value="0" >Đang chờ</option>
                         <option value="1" selected=true>Đang sửa</option>
@@ -254,6 +268,7 @@ function GetHHDangSua() {
                     <select
                     id="slHH_TrangThai['${huhong.HH_ID}']"
                     class="form-control form-control-sm"
+                    onchange="UpdateTrangThaiHuHong('${huhong.HH_ID}')"
                     >
                         <option value="0" >Đang chờ</option>
                         <option value="1" >Đang sửa</option>
@@ -268,6 +283,7 @@ function GetHHDangSua() {
                     <select
                     id="slHH_TrangThai['${huhong.HH_ID}']"
                     class="form-control form-control-sm"
+                    onchange="UpdateTrangThaiHuHong('${huhong.HH_ID}')"
                     >
                         <option value="0" >Đang chờ</option>
                         <option value="1" >Đang sửa</option>
@@ -327,6 +343,7 @@ function GetHHDaSua() {
                         <select
                         id="slHH_TrangThai['${huhong.HH_ID}']"
                         class="form-control form-control-sm"
+                        onchange="UpdateTrangThaiHuHong('${huhong.HH_ID}')"
                         >
                             <option value="0" selected=true>Đang chờ</option>
                             <option value="1" >Đang sửa</option>
@@ -341,6 +358,7 @@ function GetHHDaSua() {
                     <select
                     id="slHH_TrangThai['${huhong.HH_ID}']"
                     class="form-control form-control-sm"
+                    onchange="UpdateTrangThaiHuHong('${huhong.HH_ID}')"
                     >
                         <option value="0" >Đang chờ</option>
                         <option value="1" selected=true>Đang sửa</option>
@@ -355,6 +373,7 @@ function GetHHDaSua() {
                     <select
                     id="slHH_TrangThai['${huhong.HH_ID}']"
                     class="form-control form-control-sm"
+                    onchange="UpdateTrangThaiHuHong('${huhong.HH_ID}')"
                     >
                         <option value="0" >Đang chờ</option>
                         <option value="1" >Đang sửa</option>
@@ -369,6 +388,7 @@ function GetHHDaSua() {
                     <select
                     id="slHH_TrangThai['${huhong.HH_ID}']"
                     class="form-control form-control-sm"
+                    onchange="UpdateTrangThaiHuHong('${huhong.HH_ID}')"
                     >
                         <option value="0" >Đang chờ</option>
                         <option value="1" >Đang sửa</option>
@@ -428,6 +448,7 @@ function GetHHBaoSai() {
                         <select
                         id="slHH_TrangThai['${huhong.HH_ID}']"
                         class="form-control form-control-sm"
+                        onchange="UpdateTrangThaiHuHong('${huhong.HH_ID}')"
                         >
                             <option value="0" selected=true>Đang chờ</option>
                             <option value="1" >Đang sửa</option>
@@ -442,6 +463,7 @@ function GetHHBaoSai() {
                     <select
                     id="slHH_TrangThai['${huhong.HH_ID}']"
                     class="form-control form-control-sm"
+                    onchange="UpdateTrangThaiHuHong('${huhong.HH_ID}')"
                     >
                         <option value="0" >Đang chờ</option>
                         <option value="1" selected=true>Đang sửa</option>
@@ -456,6 +478,7 @@ function GetHHBaoSai() {
                     <select
                     id="slHH_TrangThai['${huhong.HH_ID}']"
                     class="form-control form-control-sm"
+                    onchange="UpdateTrangThaiHuHong('${huhong.HH_ID}')"
                     >
                         <option value="0" >Đang chờ</option>
                         <option value="1" >Đang sửa</option>
@@ -470,6 +493,7 @@ function GetHHBaoSai() {
                     <select
                     id="slHH_TrangThai['${huhong.HH_ID}']"
                     class="form-control form-control-sm"
+                    onchange="UpdateTrangThaiHuHong('${huhong.HH_ID}')"
                     >
                         <option value="0" >Đang chờ</option>
                         <option value="1" >Đang sửa</option>
@@ -511,4 +535,63 @@ function LoadView() {
   //     GetTKVoHieuLuc();
   //     // LoadDataTable();
   //   }
+}
+
+function LoadTK(a) {
+  var tk = a;
+  // alert(tk);
+  $.ajax({
+    type: "POST",
+    url: "/taikhoan/find",
+    data: JSON.stringify({ TK_ID: tk }),
+    contentType: "application/json",
+    success: function(response) {
+      $.each(response, function(i, taikhoan) {
+        console.log(taikhoan);
+
+        $("#TK_ID").html(taikhoan.TK_ID);
+        $("#TK_HOTEN").html(taikhoan.TK_HOTEN);
+        if (taikhoan.TK_HIEULUC == 1) {
+          $("#TK_HIEULUC").html("Còn hiệu lực");
+        } else if (taikhoan.TK_HIEULUC == 0) {
+          $("#TK_HIEULUC").html("Đã vô hiệu");
+        }
+        $("#TK_LOAI").html(taikhoan.TK_LOAI);
+        $("#TK_DONVI").html(taikhoan.TK_DONVI);
+      });
+    },
+    error: function(e) {
+      console.log(e);
+    }
+  });
+}
+
+//Update trạng thái xe
+function UpdateTrangThaiHuHong(a) {
+  var hh_id = a;
+  var hh_trangthai;
+  var hhTrangThai = "slHH_TrangThai['" + hh_id + "']";
+
+  // var c = document.getElementById(ckHieuLuc);
+
+  // if (c.checked == true) {
+  //   tk_hieuluc = 1;
+  // } else {
+  //   tk_hieuluc = 0;
+  // }
+  hh_trangthai = document.getElementById(hhTrangThai).value;
+  $.ajax({
+    url: "/huhong/update-trangthai/" + hh_id,
+    method: "POST",
+    data: JSON.stringify({ HH_ID: hh_id, HH_TRANGTHAI: hh_trangthai }),
+    contentType: "application/json",
+    success: function() {
+      alert("Đã cập nhật thành công trạng thái của hư hỏng: " + hh_id);
+      LoadView();
+    },
+    error: function(e) {
+      alert("Đã có lỗi xảy ra!");
+      console.log(e);
+    }
+  });
 }

@@ -94,3 +94,21 @@ exports.getHuHongBaoSai = cb => {
       cb(null, hh);
     });
 };
+
+exports.updateTrangThaiHuHong = (HH_ID, HH_TRANGTHAI, cb) => {
+  huhong_M
+    .update(
+      {
+        HH_TRANGTHAI: HH_TRANGTHAI
+      },
+      {
+        where: {
+          HH_ID: HH_ID
+        }
+      }
+    )
+    .then(hh => {
+      console.log("Đã cập nhật trạng thái hư hỏng: " + hh.HH_ID);
+      cb(null, hh);
+    });
+};

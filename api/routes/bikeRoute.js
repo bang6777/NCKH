@@ -510,6 +510,20 @@ router.get("/huhong/huhongbaosai", function(req, res) {
   });
 });
 
+//update trạng thái hư hỏng
+router.post("/huhong/update-trangthai/:HH_ID", function(req, res) {
+  var HH_ID = req.body.HH_ID;
+  var HH_TRANGTHAI = req.body.HH_TRANGTHAI;
+  huhong.updateTrangThaiHuHong(HH_ID, HH_TRANGTHAI, function(err, data) {
+    if (err) {
+      // res.status(404).json({ message: "ERR" });
+      res.status(404).json(err.name);
+      // return res.redirect("/taikhoan");
+    } else {
+      res.status(200).json({ message: "đã cập nhật trạng thái hư hỏng ID: " + HH_ID });
+    }
+  });
+});
 //----------Khuon vien
 //get toa do
 router.get("/khuonvien/getToaDo", function(req, res) {
