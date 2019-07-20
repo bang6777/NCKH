@@ -2,6 +2,7 @@
 const Sequelize = require("sequelize");
 const muontra_M = require("../Model/muontra_Model");
 const taikhoan_M = require("../Model/taikhoan_Model");
+const xe_M = require("../Model/xe_Model");
 
 // taikhoan_M.hasMany(muontra_M, { foreignKey: 'TK_ID' });
 // muontra_M.belongsTo(taikhoan_M, { foreignKey: 'TK_ID' });
@@ -33,7 +34,7 @@ exports.muontra_xe = function(XE_ID, cb) {
     .findAll({
       include: [
         {
-          model: taikhoan_M,
+          model: xe_M,
           where: {
             XE_ID: XE_ID
           }

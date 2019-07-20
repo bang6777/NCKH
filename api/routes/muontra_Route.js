@@ -11,5 +11,6 @@ exports.viewMuonTraXe = function(req, res) {
   var XE_ID = req.params.XE_ID;
   muontraCtr.muontra_xe(XE_ID, function(err, data) {
     res.json(data);
+    console.log(data);
   });
 };

@@ -1,5 +1,4 @@
 const Sequelize = require("sequelize");
-const muontra_Model = require("../Model/muontra_Model");
 const db = require("../Config/db");
 
 const xe_Model = db.define("xe", {
@@ -23,10 +22,6 @@ const xe_Model = db.define("xe", {
     type: Sequelize.STRING
   }
 });
-
-//xe - muon tra
-// xe_M.hasMany(muontra_M, { foreignKey: "XE_ID" });
-muontra_Model.belongsTo(xe_Model, { foreignKey: "XE_ID" });
 
 db.sync();
 module.exports = xe_Model;
