@@ -256,7 +256,7 @@ router.post("/xe", function (req, res) {
     res.status(404).json({ message: "XE_GHICHU null" });
   }
 
-  xe.addXe(XE_ID, XE_NAMSANXUAT, XE_GHICHU, function (err, data) {
+  xe.addXe(XE_ID, XE_NAMSANXUAT, XE_GHICHU, 0, function (err, data) {
     if (err) {
       res.status(404).json({ message: "XE_ID null" });
     } else {

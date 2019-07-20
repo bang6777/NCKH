@@ -8,12 +8,13 @@ exports.allXe = cb => {
   });
 };
 
-exports.addXe = (XE_ID, XE_NAMSANXUAT, XE_GHICHU, cb) => {
+exports.addXe = (XE_ID, XE_NAMSANXUAT, XE_GHICHU, XE_TRANGTHAI, cb) => {
   xe_M
     .create({
       XE_ID: XE_ID,
       XE_NAMSANXUAT: XE_NAMSANXUAT,
-      XE_GHICHU: XE_GHICHU
+      XE_GHICHU: XE_GHICHU,
+      XE_TRANGTHAI: XE_TRANGTHAI
     })
     .then(xe => {
       console.log("ID của xe: " + xe.XE_ID);
