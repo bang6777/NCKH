@@ -67,7 +67,6 @@ exports.updateXeAllInf = (
     .update(
       {
         XE_ID: XE_ID,
-
         XE_NAMSANXUAT: XE_NAMSANXUAT,
         XE_GHICHU: XE_GHICHU
       },
