@@ -1,5 +1,5 @@
 "use strict";
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const sequelize = require("./../Config/db");
 const taikhoan_M = require("../Model/taikhoan_Model");
 
