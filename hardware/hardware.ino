@@ -8,10 +8,10 @@ Servo servo;
 
 //SocketIOClient client;
 SocketIoClient socket;
-const char* ssid = "My ASUS";          //Tên mạng Wifi mà Socket server của bạn đang kết nối
-const char* password = "15999999";  //Pass mạng wifi ahihi, anh em rãnh thì share pass cho mình với.
+const char* ssid = "SVTest";          //Tên mạng Wifi mà Socket server của bạn đang kết nối
+const char* password = "9876543210";  //Pass mạng wifi ahihi, anh em rãnh thì share pass cho mình với.
 
-char host[] = "https://nckh-xedap.herokuapp.com";  //Địa chỉ IP dịch vụ, hãy thay đổi nó theo địa chỉ IP Socket server của bạn.
+char host[] = "http://nckh-xedap.herokuapp.com";  //Địa chỉ IP dịch vụ, hãy thay đổi nó theo địa chỉ IP Socket server của bạn.
 int port = 80;                  //Cổng dịch vụ socket server do chúng ta tạo!
 
 
@@ -29,12 +29,16 @@ void lock(){
     servo.write(90);
     Serial.println(0);
     delay(100);  
+    Serial.println("Locked....");
 }
 void unlock(const char* payload, size_t length){
     String data = payload;
+    Serial.println("recive");
+    Serial.println(payload);
     if(data == "unlock"){
       servo.write(0);
-      Serial.println(1);
+      
+      Serial.println("Unlocked....");
     }
     
   }
