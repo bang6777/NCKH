@@ -1,3 +1,20 @@
+$(document).ready(function() {
+  $("#btnAdd").on("click", function() {
+    ResetModal();
+  });
+  // $("#tableTK").on("draw.dt", function() {
+  //   LoadView();
+  // });
+});
+
+//Reset modal
+function ResetModal() {
+  document.getElementById("txtXe_ID_add").value = "";
+  document.getElementById("txtXe_NamSanXuat_add").value = "";
+  document.getElementById("txtXe_GhiChu_add").value = "";
+  $("#XE_alert").html("");
+}
+
 //Add
 function AddXE() {
   var xe_id = $("#txtXe_ID_add").val();
@@ -89,6 +106,7 @@ function GetAllXE() {
                       data-toggle="modal"
                       data-target="#ThongKeXe-HuHong"
                       class="btn btn-outline-dark btn-sm"
+                      onclick="XE_HuHong('${xe.XE_ID}')"
                     >
                       Hư hỏng
                     </button>
@@ -198,6 +216,35 @@ function XE_MuonTra(a) {
           <td>${xe.TK_ID}</td>
           <td>${xe.MUON_THOIGIAN}</td>
           <td>${xe.TRA_THOIGIAN}</td>
+        </tr>`;
+      });
+      tb.append(xe_data);
+    },
+    error: function(e) {
+      console.log(e);
+    }
+  });
+}
+//Thong ke xe - HuHong
+function XE_HuHong(a) {
+  var xe_id = a;
+
+  $.ajax({
+    type: "GET",
+    url: "/huhong/xe/" + xe_id,
+    data: JSON.stringify({ XE_ID: xe_id }),
+    contentType: "application/json",
+    success: function(response) {
+      console.log(response);
+      var tb = $("#XE_HuHong");
+      tb.html("");
+      xe_data = "";
+      $.each(response, function(i, xe) {
+        xe_data += `<tr>
+          <td>${xe.HH_ID}</td>
+          <td>${xe.TK_ID}</td>
+          <td>${xe.HH_MOTA}</td>
+          <td>${xe.HH_THOIGIAN}</td>
         </tr>`;
       });
       tb.append(xe_data);

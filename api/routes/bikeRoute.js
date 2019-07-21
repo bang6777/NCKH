@@ -476,6 +476,7 @@ router.post("/huhong/find", function(req, res) {
 //   });
 // });
 router.get("/huhong/taikhoan/:TK_ID", huhongRoute.viewHuHong);
+router.get("/huhong/xe/:XE_ID", huhongRoute.viewHuHongXe);
 // Hu hong theo ID
 // router.get("/huhong/taikhoan/:TK_ID", function(req, res) {
 //   huhong.huhong_taikhoan(function(err, data) {

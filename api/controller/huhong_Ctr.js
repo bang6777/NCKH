@@ -1,6 +1,7 @@
 "use strict";
 const huhong_M = require("../Model/huhong_Model");
 const taikhoan_M = require("../Model/taikhoan_Model");
+const xe_M = require("../Model/xe_Model");
 
 exports.allHuHong = cb => {
   huhong_M.findAll().then(huhong => {
@@ -26,7 +27,28 @@ exports.huhong_taikhoan = function(TK_ID, cb) {
       if (dsHuHong) {
         cb(null, dsHuHong);
       } else cb("Không có dữ liệu", null);
-      console.log("All hu hong theo id:", JSON.stringify(dsHuHong, null, 4));
+      console.log("All hu hong theo tài khoản:", JSON.stringify(dsHuHong, null, 4));
+    });
+};
+
+//hu hong theo xe
+exports.huhong_xe = function(XE_ID, cb) {
+  huhong_M
+    .findAll({
+      include: [
+        {
+          model: xe_M,
+          where: {
+            XE_ID: XE_ID
+          }
+        }
+      ]
+    })
+    .then(dsHuHong => {
+      if (dsHuHong) {
+        cb(null, dsHuHong);
+      } else cb("Không có dữ liệu", null);
+      console.log("All hu hong theo xe id:", JSON.stringify(dsHuHong, null, 4));
     });
 };
 
