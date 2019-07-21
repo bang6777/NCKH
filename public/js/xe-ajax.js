@@ -1,3 +1,17 @@
+$(document).ready(function() {
+  $("#btnAdd").on("click", function() {
+    ResetModal();
+  });
+});
+
+//Reset modal
+function ResetModal() {
+  document.getElementById("txtXe_ID_add").value = "";
+  document.getElementById("txtXe_NamSanXuat_add").value = "";
+  document.getElementById("txtXe_GhiChu_add").value = "";
+  $("#XE_alert").html("");
+}
+
 //Add
 function AddXE() {
   var xe_id = $("#txtXe_ID_add").val();
@@ -188,7 +202,6 @@ function Delete(a) {
 //Thong ke TK - ViPham
 async function Xe_ViPham(a) {
   var xe_id = a;
-
   await $.ajax({
     type: "GET",
     url: "/vipham/xe/" + xe_id,
@@ -224,6 +237,65 @@ async function Xe_ViPham(a) {
             console.log(e);
           }
         });
+      });
+      tb.append(xe_data);
+    },
+    error: function(e) {
+      console.log(e);
+    }
+  });
+}
+//Thong ke TK - MuonTra
+function XE_MuonTra(a) {
+  var xe_id = a;
+
+  $.ajax({
+    type: "GET",
+    url: "/muontra/xe/" + xe_id,
+    data: JSON.stringify({ XE_ID: xe_id }),
+    contentType: "application/json",
+    success: function(response) {
+      console.log(response);
+      var tb = $("#XE_MuonTra");
+      tb.html("");
+      xe_data = "";
+      $.each(response, function(i, xe) {
+        xe_data += `<tr>
+          <td>${xe.MUONTRA_ID}</td>
+          <td>${xe.TK_ID}</td>
+          <td>${xe.MUON_THOIGIAN}</td>
+          <td>${xe.TRA_THOIGIAN}</td>
+        </tr>`;
+      });
+      tb.append(xe_data);
+    },
+    error: function(e) {
+      console.log(e);
+    }
+  });
+}
+
+//Thong ke xe - HuHong
+function XE_HuHong(a) {
+  var xe_id = a;
+
+  $.ajax({
+    type: "GET",
+    url: "/huhong/xe/" + xe_id,
+    data: JSON.stringify({ XE_ID: xe_id }),
+    contentType: "application/json",
+    success: function(response) {
+      console.log(response);
+      var tb = $("#XE_HuHong");
+      tb.html("");
+      xe_data = "";
+      $.each(response, function(i, xe) {
+        xe_data += `<tr>
+          <td>${xe.HH_ID}</td>
+          <td>${xe.TK_ID}</td>
+          <td>${xe.HH_MOTA}</td>
+          <td>${xe.HH_THOIGIAN}</td>
+        </tr>`;
       });
       tb.append(xe_data);
     },

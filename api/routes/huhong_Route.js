@@ -6,3 +6,10 @@ exports.viewHuHong = function(req, res) {
     res.json(data);
   });
 };
+
+exports.viewHuHongXe = function(req, res) {
+  var XE_ID = req.params.XE_ID;
+  huhongCtr.huhong_xe(XE_ID, function(err, data) {
+    res.json(data);
+  });
+};

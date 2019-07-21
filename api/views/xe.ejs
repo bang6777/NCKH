@@ -134,10 +134,21 @@
                 </div>
 
                 <div class="form-group">
-                  <input type="text" name="XE_NAMSANXUAT" id="txtXe_NamSanXuat_add" class="form-control" placeholder="Năm sản xuất" />
+                  <input
+                    type="text"
+                    name="XE_NAMSANXUAT"
+                    id="txtXe_NamSanXuat_add"
+                    class="form-control"
+                    placeholder="Năm sản xuất"
+                  />
                 </div>
                 <div class="form-group ">
-                  <textarea class="form-control" id="txtXe_GhiChu_add" name="XE_GHICHU" placeholder="Nhập ghi chú...."></textarea>
+                  <textarea
+                    class="form-control"
+                    id="txtXe_GhiChu_add"
+                    name="XE_GHICHU"
+                    placeholder="Nhập ghi chú...."
+                  ></textarea>
                 </div>
               </div>
 
@@ -182,7 +193,13 @@
               </div>
               <div class=" modal-footer">
                 <input type="submit" value="Lưu" id="btnUpdate" class="btn btn-primary px-3" onclick="UpdateInfo()" />
-                <input type="button" value="Hủy" id="btnCancelUpdate" class="btn btn-danger px-3" data-dismiss="modal" />
+                <input
+                  type="button"
+                  value="Hủy"
+                  id="btnCancelUpdate"
+                  class="btn btn-danger px-3"
+                  data-dismiss="modal"
+                />
               </div>
             </form>
           </div>
@@ -211,11 +228,11 @@
                   <td>Thời gian mượn</td>
                   <td>Thời gian trả</td>
                 </thead>
-                <tbody>
-                  <td>1</td>
+                <tbody id="XE_MuonTra">
+                  <!-- <td>1</td>
                   <td>B1606777</td>
                   <td>15:00:00 06/05/2019</td>
-                  <td>15:15:00 06/05/2019</td>
+                  <td>15:15:00 06/05/2019</td> -->
                 </tbody>
               </table>
             </div>
@@ -275,25 +292,24 @@
               </button>
             </div>
 
-            <div class="modal-body">
-              <table class="table table-sm mx-auto table-striped text-center">
-                <thead>
-                  <td>ID hư hỏng</td>
-                  <td>ID người báo</td>
-                  <td>Mô tả hư hỏng</td>
-                  <td>Thời gian</td>
-                </thead>
-                <tbody>
-                  <td>1</td>
-                  <td>B1606777</td>
-                  <td>Xe xẹp bánh</td>
-                  <td>17:00:00 06/05/2019</td>
-                </tbody>
-              </table>
-            </div>
-            <div class=" modal-footer">
-              <input type="button" value="Đóng" id="btnCancel" class="btn btn-danger px-3" data-dismiss="modal" />
-            </div>
+          <div class="modal-body">
+            <table class="table table-sm mx-auto table-striped text-center">
+              <thead>
+                <td>ID hư hỏng</td>
+                <td>ID người báo</td>
+                <td>Mô tả hư hỏng</td>
+                <td>Thời gian</td>
+              </thead>
+              <tbody id="XE_HuHong">
+                <!-- <td>1</td>
+                <td>B1606777</td>
+                <td>Xe xẹp bánh</td>
+                <td>17:00:00 06/05/2019</td> -->
+              </tbody>
+            </table>
+          </div>
+          <div class=" modal-footer">
+            <input type="button" value="Đóng" id="btnCancel" class="btn btn-danger px-3" data-dismiss="modal" />
           </div>
         </div>
       </div>
