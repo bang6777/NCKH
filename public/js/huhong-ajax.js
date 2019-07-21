@@ -8,6 +8,14 @@ function GetAllHuHong() {
       var tb = $("#tb");
       tb.html("");
       huhong_data = "";
+
+      if ($.fn.DataTable.isDataTable("#tbHuHong")) {
+        $("#tbHuHong")
+          .DataTable()
+          .destroy();
+      }
+      $("#tbHuHong tbody").empty();
+
       $.each(response, function(i, huhong) {
         huhong_data += `<tr>
                             <td>${huhong.HH_ID}</td>
@@ -77,6 +85,7 @@ function GetAllHuHong() {
         huhong_data += `</tr>`;
       });
       tb.append(huhong_data);
+      LoadDataTable();
     },
     error: function(e) {
       alert("Đã có lỗi xảy ra!");
@@ -95,6 +104,14 @@ function GetHHDangCho() {
       var tb = $("#tb");
       tb.html("");
       huhong_data = "";
+
+      if ($.fn.DataTable.isDataTable("#tbHuHong")) {
+        $("#tbHuHong")
+          .DataTable()
+          .destroy();
+      }
+      $("#tbHuHong tbody").empty();
+
       if (response.length > 0) {
         $.each(response, function(i, huhong) {
           huhong_data += `<tr>
@@ -104,19 +121,6 @@ function GetHHDangCho() {
                                 <td>${huhong.HH_MOTA}</td>
                                 <td>${huhong.HH_THOIGIAN}</td>
                           `;
-          // if (huhong.HH_TRANGTHAI == 0) {
-          //   huhong_data += `<td>
-          //               <select
-          //               id="slHH_TrangThai['${huhong.HH_ID}']"
-          //               class="form-control form-control-sm"
-          //               >
-          //                   <option value="0" selected=true>Đang chờ</option>
-          //                   <option value="1" >Đang sửa</option>
-          //                   <option value="2">Đã sửa</option>
-          //                   <option value="3">Báo sai</option>
-          //           </select>
-          //         </td>`;
-          // }
 
           switch (huhong.HH_TRANGTHAI) {
             case "0": {
@@ -179,6 +183,7 @@ function GetHHDangCho() {
           huhong_data += `</tr>`;
         });
         tb.append(huhong_data);
+        LoadDataTable();
       }
     },
     error: function(e) {
@@ -198,6 +203,14 @@ function GetHHDangSua() {
       var tb = $("#tb");
       tb.html("");
       huhong_data = "";
+
+      if ($.fn.DataTable.isDataTable("#tbHuHong")) {
+        $("#tbHuHong")
+          .DataTable()
+          .destroy();
+      }
+      $("#tbHuHong tbody").empty();
+
       $.each(response, function(i, huhong) {
         huhong_data += `<tr>
                                 <td>${huhong.HH_ID}</td>
@@ -206,20 +219,6 @@ function GetHHDangSua() {
                                 <td>${huhong.HH_MOTA}</td>
                                 <td>${huhong.HH_THOIGIAN}</td>
                           `;
-        // if (huhong.HH_TRANGTHAI == 0) {
-        //   huhong_data += `<td>
-        //               <select
-        //               id="slHH_TrangThai['${huhong.HH_ID}']"
-        //               class="form-control form-control-sm"
-        //               >
-        //                   <option value="0" selected=true>Đang chờ</option>
-        //                   <option value="1" >Đang sửa</option>
-        //                   <option value="2">Đã sửa</option>
-        //                   <option value="3">Báo sai</option>
-        //           </select>
-        //         </td>`;
-        // }
-
         switch (huhong.HH_TRANGTHAI) {
           case "0": {
             huhong_data += `<td>
@@ -281,6 +280,7 @@ function GetHHDangSua() {
         huhong_data += `</tr>`;
       });
       tb.append(huhong_data);
+      LoadDataTable();
     },
     error: function(e) {
       alert("Đã có lỗi xảy ra!");
@@ -307,20 +307,6 @@ function GetHHDaSua() {
                                 <td>${huhong.HH_MOTA}</td>
                                 <td>${huhong.HH_THOIGIAN}</td>
                           `;
-        // if (huhong.HH_TRANGTHAI == 0) {
-        //   huhong_data += `<td>
-        //               <select
-        //               id="slHH_TrangThai['${huhong.HH_ID}']"
-        //               class="form-control form-control-sm"
-        //               >
-        //                   <option value="0" selected=true>Đang chờ</option>
-        //                   <option value="1" >Đang sửa</option>
-        //                   <option value="2">Đã sửa</option>
-        //                   <option value="3">Báo sai</option>
-        //           </select>
-        //         </td>`;
-        // }
-
         switch (huhong.HH_TRANGTHAI) {
           case "0": {
             huhong_data += `<td>
@@ -382,6 +368,7 @@ function GetHHDaSua() {
         huhong_data += `</tr>`;
       });
       tb.append(huhong_data);
+      LoadDataTable();
     },
     error: function(e) {
       alert("Đã có lỗi xảy ra!");
@@ -408,20 +395,6 @@ function GetHHBaoSai() {
                                 <td>${huhong.HH_MOTA}</td>
                                 <td>${huhong.HH_THOIGIAN}</td>
                           `;
-        // if (huhong.HH_TRANGTHAI == 0) {
-        //   huhong_data += `<td>
-        //               <select
-        //               id="slHH_TrangThai['${huhong.HH_ID}']"
-        //               class="form-control form-control-sm"
-        //               >
-        //                   <option value="0" selected=true>Đang chờ</option>
-        //                   <option value="1" >Đang sửa</option>
-        //                   <option value="2">Đã sửa</option>
-        //                   <option value="3">Báo sai</option>
-        //           </select>
-        //         </td>`;
-        // }
-
         switch (huhong.HH_TRANGTHAI) {
           case "0": {
             huhong_data += `<td>
@@ -483,6 +456,7 @@ function GetHHBaoSai() {
         huhong_data += `</tr>`;
       });
       tb.append(huhong_data);
+      LoadDataTable();
     },
     error: function(e) {
       alert("Đã có lỗi xảy ra!");
@@ -503,12 +477,32 @@ function LoadView() {
   } else if (view == 4) {
     GetAllHuHong();
   }
-  // LoadDataTable();
-  //   } else if (view == 2) {
-  //     GetAllTK();
-  //     // LoadDataTable();
-  //   } else if (view == 0) {
-  //     GetTKVoHieuLuc();
-  //     // LoadDataTable();
-  //   }
+}
+
+//Load table
+function LoadDataTable() {
+  table = $("#tbHuHong").DataTable({
+    stateSave: true,
+    columnDefs: [{ targets: [1, 2, 3, 4, 5], searchable: false }],
+    ordering: false,
+    language: {
+      lengthMenu: "Hiển thị _MENU_ dòng dữ liệu trên một trang:",
+      info: "Hiển thị _START_ trong tổng số _TOTAL_ dòng dữ liệu:",
+      infoEmpty: "Dữ liệu rỗng",
+      emptyTable: "Chưa có dữ liệu nào ",
+      processing: "Đang xử lý ",
+      search: "Tìm kiếm theo ID: ",
+      loadingRecords: "Đang load dữ liệu",
+      zeroRecords: "Không tìm thấy dữ liệu",
+      infoFiltered: "(Được từ tổng số _MAX_ dòng dữ liệu",
+      paginate: {
+        first: "|<",
+        last: ">|",
+        next: "Sau",
+        previous: "Trước"
+      }
+    },
+    pageLength: -1,
+    lengthMenu: [[5, 10, 15, 20, 25, -1], [5, 10, 15, 20, 25, "Tất cả"]]
+  });
 }

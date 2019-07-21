@@ -1,4 +1,3 @@
-const bcrypt = require("bcrypt");
 const Sequelize = require("sequelize");
 const db = require("./../Config/db");
 const muontra_Model = require("../Model/muontra_Model");
@@ -39,9 +38,9 @@ const taikhoan_Model = db.define("taikhoan", {
 muontra_Model.belongsTo(taikhoan_Model, { foreignKey: "TK_ID" });
 muontra_Model.belongsTo(xe_Model, { foreignKey: "XE_ID" });
 
-xe_Model.hasMany(muontra_Model, { as: 'muontra', foreignKey: 'XE_ID' });
+xe_Model.hasMany(muontra_Model, { as: "muontra", foreignKey: "XE_ID" });
 
-muontra_Model.belongsTo(xe_Model, { foreignKey: 'XE_ID' });
+muontra_Model.belongsTo(xe_Model, { foreignKey: "XE_ID" });
 
 //tai khoan - hu hong
 taikhoan_Model.hasMany(huhong_Model, { foreignKey: "TK_ID" });

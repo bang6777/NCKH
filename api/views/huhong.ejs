@@ -44,13 +44,9 @@
   </head>
 
   <body onload="GetHHDangCho()">
-    <script>
-      $(document).ready(function() {
-        $("#tbHuHong").DataTable();
-      });
-    </script>
+    
 
-    <script></script>
+   
     <div id="header">
       <%- include('header'); -%>
     </div>
@@ -59,7 +55,7 @@
       <h2 class="text-center font-weight-semi-bold text-dark mt-3" >
         QUẢN LÝ HƯ HỎNG XE
       </h2>
-      <div class="form-group form-inline col-lg-2">
+      <div class="form-group form-inline">
         <label class="mr-3">Lọc</label>
         <select class="form-control form-control-sm" id="slHH_View" onchange="LoadView()">
           <option value="0">Đang chờ</option>

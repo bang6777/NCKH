@@ -29,15 +29,14 @@ router.post("/login", function(req, res) {
   if (TK_PASSWORD == null) {
     res.status(404).json({ message: "TK_Pwd null" });
   }
-  // if (TK_QUYEN == null) {
-  //   res.status(404).json({ message: "TK_QUYEN null" });
-  // }
+
   taikhoan.checkLoginServer(TK_ID, TK_PASSWORD, function(err, data) {
     if (err) {
-      res.status(404).json({ message: "ERR!" });
+      // res.status(404).json({ message: "ERR!" });
+      res.status(200).json("err");
     } else {
-      res.status(200).json({ message: "đã đăng nhập thành công!" });
-      // res.redirect("/taikhoan");
+      // res.status(200).json({ message: "đã đăng nhập thành công!" });
+      res.status(200).json("ok");
     }
   });
 });
@@ -193,6 +192,16 @@ router.get("/taikhoan/vohieuluc", function(req, res) {
     res.status(200).json(data);
   });
 });
+
+//search TK_ID
+router.get("/taikhoan/search/:id&:hieuluc1&:hieuluc2", function(req, res) {
+  var id = req.params.id;
+  var hieuluc1 = req.params.hieuluc1;
+  var hieuluc2 = req.params.hieuluc2;
+  taikhoan.searchTK_ID(id, hieuluc1, hieuluc2, function(err, data) {
+    res.status(200).json(data);
+  });
+});
 //------------
 //Cap nhat
 router.post("/taikhoan/update", function(req, res) {
@@ -330,6 +339,14 @@ router.post("/loi/find", function(req, res) {
   });
 });
 
+// tìm lỗi theo id
+router.get("/loi/:LOI_ID", function(req, res) {
+  var LOI_ID = req.params.LOI_ID;
+  loi.findLoiByID(LOI_ID, function(err, data) {
+    res.status(200).json(data);
+  });
+});
+
 //them loi
 router.post("/loi", function(req, res) {
   var LOI_ID = req.body.LOI_ID;
@@ -446,7 +463,10 @@ router.get("/vipham/all", function(req, res) {
 });
 
 //vi pham - tai khoan
-// router.get("/vipham/taikhoan/:TK_ID", viphamRoute.viewTaiKhoan);
+router.get("/vipham/taikhoan/:TK_ID", viphamRoute.viewTaiKhoan);
+
+//vi pham - xe
+router.get("/vipham/xe/:XE_ID", viphamRoute.viewXe);
 
 //-----------Hư hỏng
 router.get("/huhong", function(req, res) {

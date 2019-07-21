@@ -2,8 +2,14 @@ $(document).ready(function() {
   $("#btnAdd").on("click", function() {
     ResetModal();
   });
-  // $("#tableTK").on("draw.dt", function() {
-  //   LoadView();
+
+  // $("#search").on("keyup", function() {
+  //   var key = document.getElementById("search").value;
+  //   if (key == "") {
+  //     LoadView();
+  //   } else {
+  //     search_id(key);
+  //   }
   // });
 });
 
@@ -193,6 +199,14 @@ function GetAllTK() {
       var tb = $("#tb");
       tb.html("");
       tk_data = "";
+
+      if ($.fn.DataTable.isDataTable("#tableTK")) {
+        $("#tableTK")
+          .DataTable()
+          .destroy();
+      }
+      $("#tableTK tbody").empty();
+
       $.each(response, function(i, tk) {
         tk_data += `<tr>
                       <td> ${tk.TK_ID}</td>
@@ -239,7 +253,9 @@ function GetAllTK() {
                       }')">
                         Mượn-trả
                       </button>
-                      <button data-toggle="modal" data-target="#ThongKeTK-ViPham" class="btn btn-outline-dark btn-sm">
+                      <button data-toggle="modal" data-target="#ThongKeTK-ViPham" class="btn btn-outline-dark btn-sm" onclick="TK_ViPham('${
+                        tk.TK_ID
+                      }')">
                         Vi phạm
                       </button>
                       <button data-toggle="modal" data-target="#ThongKeTK-HuHong" class="btn btn-outline-dark btn-sm"  onclick="TK_HuHong('${
@@ -253,6 +269,7 @@ function GetAllTK() {
                   `;
       });
       tb.append(tk_data);
+      LoadDataTable();
     },
     error: function(e) {
       alert("Đã có lỗi xảy ra!");
@@ -269,9 +286,18 @@ function GetTKConHieuLuc() {
     contenType: "application/json",
     success: function(response) {
       console.log(response);
+      JSON.stringify(response);
       var tb = $("#tb");
       tb.html("");
       tk_data = "";
+
+      if ($.fn.DataTable.isDataTable("#tableTK")) {
+        $("#tableTK")
+          .DataTable()
+          .destroy();
+      }
+      $("#tableTK tbody").empty();
+
       $.each(response, function(i, tk) {
         tk_data += `<tr>
                       <td> ${tk.TK_ID}</td>
@@ -318,7 +344,9 @@ function GetTKConHieuLuc() {
                       }')">
                         Mượn-trả
                       </button>
-                      <button data-toggle="modal" data-target="#ThongKeTK-ViPham" class="btn btn-outline-dark btn-sm">
+                      <button data-toggle="modal" data-target="#ThongKeTK-ViPham" class="btn btn-outline-dark btn-sm" onclick="TK_ViPham('${
+                        tk.TK_ID
+                      }')">
                         Vi phạm
                       </button>
                       <button data-toggle="modal" data-target="#ThongKeTK-HuHong" class="btn btn-outline-dark btn-sm"  onclick="TK_HuHong('${
@@ -331,12 +359,9 @@ function GetTKConHieuLuc() {
                     </tr>
                   `;
       });
-      tb.append(tk_data);
-      // LoadDataTable();
 
-      // $("#tableTK")
-      //   .DataTable()
-      //   .reload();
+      tb.append(tk_data);
+      LoadDataTable();
     },
     error: function(e) {
       alert("Đã có lỗi xảy ra!");
@@ -357,6 +382,13 @@ function GetTKVoHieuLuc() {
       tb.html("");
       tk_data = "";
 
+      if ($.fn.DataTable.isDataTable("#tableTK")) {
+        $("#tableTK")
+          .DataTable()
+          .destroy();
+      }
+      $("#tableTK tbody").empty();
+
       $.each(response, function(i, tk) {
         tk_data += `<tr>
                       <td> ${tk.TK_ID}</td>
@@ -403,7 +435,9 @@ function GetTKVoHieuLuc() {
                       }')">
                         Mượn-trả
                       </button>
-                      <button data-toggle="modal" data-target="#ThongKeTK-ViPham" class="btn btn-outline-dark btn-sm">
+                      <button data-toggle="modal" data-target="#ThongKeTK-ViPham" class="btn btn-outline-dark btn-sm" onclick="TK_ViPham('${
+                        tk.TK_ID
+                      }')">
                         Vi phạm
                       </button>
                       <button data-toggle="modal" data-target="#ThongKeTK-HuHong" class="btn btn-outline-dark btn-sm"  onclick="TK_HuHong('${
@@ -417,6 +451,7 @@ function GetTKVoHieuLuc() {
                   `;
       });
       tb.append(tk_data);
+      LoadDataTable();
     },
     error: function(e) {
       alert("Đã có lỗi xảy ra!");
@@ -471,11 +506,28 @@ function TK_ViPham(a) {
       tk_data = "";
       $.each(response, function(i, tk) {
         tk_data += `<tr>
-          <td>${tk.HH_ID}</td>
+          <td>${tk.VP_ID}</td>
+          <td>${tk.MUONTRA_ID}</td>
+          <td id="id_loi[${tk.LOI_ID}]"></td>
           <td>${tk.XE_ID}</td>
-          <td>${tk.HH_MOTA}</td>
-          <td>${tk.HH_THOIGIAN}</td>
-        </tr>`;
+          <td>${tk.VP_THOIGIAN}</td>
+        <\tr>`;
+        $.ajax({
+          url: "/loi/" + tk.LOI_ID,
+          data: JSON.stringify({ LOI_ID: tk.LOI_ID }),
+          method: "GET",
+          contentType: "application/json",
+          success: function(response) {
+            console.log(response.LOI_TEN);
+            tenloi = response.LOI_TEN;
+            var loi_id = "id_loi[" + response.LOI_ID + "]";
+            document.getElementById(loi_id).innerHTML = response.LOI_TEN;
+          },
+          error: function(e) {
+            alert("Đã có lỗi xảy ra!");
+            console.log(e);
+          }
+        });
       });
       tb.append(tk_data);
     },
@@ -520,80 +572,134 @@ function LoadView() {
   var view = document.getElementById("slTK_View").value;
   if (view == 1) {
     GetTKConHieuLuc();
-    // LoadDataTable();
   } else if (view == 2) {
     GetAllTK();
-    // LoadDataTable();
   } else if (view == 0) {
     GetTKVoHieuLuc();
-    // LoadDataTable();
   }
 }
 
 //Load table
 function LoadDataTable() {
-  // var table = $("#tableTK").DataTable({
-  //   // stateSave: true,
-  //   destroy: true,
-  //   info: false,
-  //   columnDefs: [{ targets: [1, 2, 3, 4, 5, 6], searchable: false }],
-  //   // ordering: false,
-  //   language: {
-  //     lengthMenu: "Hiển thị _MENU_ dòng dữ liệu trên một trang:",
-  //     // info: "Hiển thị _START_ trong tổng số _TOTAL_ dòng dữ liệu:",
-  //     // infoEmpty: "Dữ liệu rỗng",
-  //     emptyTable: "Chưa có dữ liệu nào ",
-  //     processing: "Đang xử lý ",
-  //     search: "Tìm kiếm theo ID: ",
-  //     loadingRecords: "Đang load dữ liệu",
-  //     zeroRecords: "Không tìm thấy dữ liệu",
-  //     infoFiltered: "Được từ tổng số _MAX_ dòng dữ liệu",
-  //     paginate: {
-  //       next: "Sau",
-  //       previous: "Trước"
-  //     }
-  //   },
-  //   pageLength: -1,
-  //   lengthMenu: [[5, 10, 15, 20, 25, -1], [5, 10, 15, 20, 25, "Tất cả"]]
-  // });
+  table = $("#tableTK").DataTable({
+    stateSave: true,
+    columnDefs: [{ targets: [1, 2, 3, 4, 5, 6], searchable: false }],
+    ordering: false,
+    language: {
+      lengthMenu: "Hiển thị _MENU_ dòng dữ liệu trên một trang:",
+      info: "Hiển thị _START_ trong tổng số _TOTAL_ dòng dữ liệu:",
+      infoEmpty: "Dữ liệu rỗng",
+      emptyTable: "Chưa có dữ liệu nào ",
+      processing: "Đang xử lý ",
+      search: "Tìm kiếm theo ID: ",
+      loadingRecords: "Đang load dữ liệu",
+      zeroRecords: "Không tìm thấy dữ liệu",
+      infoFiltered: "(Được từ tổng số _MAX_ dòng dữ liệu",
+      paginate: {
+        first: "|<",
+        last: ">|",
+        next: "Sau",
+        previous: "Trước"
+      }
+    },
+    pageLength: -1,
+    lengthMenu: [[5, 10, 15, 20, 25, -1], [5, 10, 15, 20, 25, "Tất cả"]]
+  });
 }
 
-//nothing
-function a() {
-  // tk_data = "";
-  // tk_data += "<tr>";
-  // tk_data += "<td>" + tk.TK_ID + "</td>";
-  // tk_data += "<td>" + tk.TK_HOTEN + "</td>";
-  // tk_data += "<td>" + tk.TK_DONVI + "</td>";
-  // tk_data += "<td>" + tk.TK_LOAI + "</td>";
-  // tk_data += "<td>";
-  // tk_data += '<div class="custom-control custom-switch">';
-  // tk_data += "<input type='checkbox' class='custom-control-input' onclick='UpdateHieuLuc(" + tk.TK_ID + ")' name='TK_HIEULUC' ";
-  // if (tk.TK_HIEULUC == 1) {
-  //   tk_data += "checked='true' id='ckHieuLuc[" + tk.TK_ID + "]'/>";
-  // } else {
-  //   tk_data += id = "id='ckHieuLuc[" + tk.TK_ID + "]'/>";
-  // }
-  // tk_data += '<label class="custom-control-label" for="ckHieuLuc[' + tk.TK_ID + ']"></label></div>';
-  // tk_data += "</td>";
-  // tk_data += '<td class="">';
-  // tk_data += '<label for="btnUpdate[' + tk.TK_ID + ']">';
-  // tk_data += '<i class="fa fa-edit fa-lg" data-toggle="modal" data-target="#EditTK" title="Cập nhật"> </i>';
-  // tk_data += "</label>";
-  // tk_data +=
-  //   '<input type="button" class="btn-hidden" data-toggle="modal" data-target="#EditTK" onclick="UpdateModal(' +
-  //   tk.TK_ID +
-  //   ')" id="btnUpdate[' +
-  //   tk.TK_ID +
-  //   ']"/>';
-  // tk_data += '<label for="btnDelete[' + tk.TK_ID + ']"><i class="fa fa-trash fa-lg" title="Xóa"></i></label>';
-  // tk_data += '<input type="hidden" name="TK_ID" value="' + tk.TK_ID + '" />';
-  // tk_data += '<input type="button" value="Delete" id="btnDelete[' + tk.TK_ID + ']" class="btn-hidden" onclick="Delete(' + tk.TK_ID + ')" />';
-  // tk_data += "</td>";
-  // tk_data += "<td>";
-  // tk_data += '<button data-toggle="modal" data-target="#ThongKeTK-MuonTra" class="btn btn-outline-dark btn-sm">Mượn-trả</button>';
-  // tk_data += '<button data-toggle="modal" data-target="#ThongKeTK-ViPham" class="btn btn-outline-dark btn-sm">Vi phạm</button>';
-  // tk_data += '<button data-toggle="modal" data-target="#ThongKeTK-HuHong" class="btn btn-outline-dark btn-sm">Hư hỏng</button>';
-  // tk_data += "</td>";
-  // tb.append(tk_data);
-}
+// function search_id(search) {
+//   var hieuluc1, hieuluc2;
+//   var view = document.getElementById("slTK_View").value;
+//   switch (view) {
+//     case "0":
+//       hieuluc1 = 0;
+//       hieuluc2 = 0;
+//       break;
+//     case "1":
+//       hieuluc1 = 1;
+//       hieuluc2 = 1;
+//       break;
+//     case "2":
+//       hieuluc1 = 1;
+//       hieuluc2 = 0;
+//       break;
+//   }
+//   $.ajax({
+//     type: "GET",
+//     url: "/taikhoan/search/" + search + "&" + hieuluc1 + "&" + hieuluc2,
+//     data: JSON.stringify({ search: search }),
+//     contentType: "application/json",
+//     success: function(response) {
+//       console.log(response);
+//       var tb = $("#tb");
+//       tb.html("");
+//       tk_data = "";
+//       $.each(response, function(i, tk) {
+//         tk_data += `<tr>
+//                       <td> ${tk.TK_ID}</td>
+//                       <td> ${tk.TK_HOTEN}</td>
+//                       <td> ${tk.TK_DONVI}</td>
+//                       <td> ${tk.TK_LOAI}</td>
+//                       <td>
+//                         <div class="custom-control custom-switch">
+//                   `;
+
+//         if (tk.TK_HIEULUC == 1) {
+//           tk_data += `<input
+//                         type="checkbox"
+//                         class="custom-control-input"
+//                         checked="true"
+//                         id="ckHieuLuc[${tk.TK_ID}]"
+//                         onclick="UpdateHieuLuc('${tk.TK_ID}')"
+//                         name= "TK_HIEULUC"
+//                       />`;
+//         } else {
+//           tk_data += `<input
+//                         type="checkbox"
+//                         class="custom-control-input"
+//                         id="ckHieuLuc[${tk.TK_ID}]"
+//                         onclick="UpdateHieuLuc('${tk.TK_ID}')"
+//                         name= "TK_HIEULUC"
+//                       />`;
+//         }
+//         tk_data += `<label class="custom-control-label" for="ckHieuLuc[${tk.TK_ID}]"></label>
+//                         </div>
+//                       </td>
+//                       <td class="">
+//                       <i class="fa fa-edit fa-lg" data-toggle="modal" data-target="#EditTK" title="Cập nhật" onclick="UpdateModal('${tk.TK_ID}')" >
+//                       </i>
+//                       <i class="fa fa-trash fa-lg" title="Xóa" onclick="Delete('${tk.TK_ID}')" >
+//                       </i>
+//                     </td>
+
+//                       `;
+//         tk_data += `
+//                       <td>
+//                       <button data-toggle="modal" data-target="#ThongKeTK-MuonTra" class="btn btn-outline-dark btn-sm" onclick="TK_MuonTra('${
+//                         tk.TK_ID
+//                       }')">
+//                         Mượn-trả
+//                       </button>
+//                       <button data-toggle="modal" data-target="#ThongKeTK-ViPham" class="btn btn-outline-dark btn-sm" onclick="TK_ViPham('${
+//                         tk.TK_ID
+//                       }')">
+//                         Vi phạm
+//                       </button>
+//                       <button data-toggle="modal" data-target="#ThongKeTK-HuHong" class="btn btn-outline-dark btn-sm"  onclick="TK_HuHong('${
+//                         tk.TK_ID
+//                       }')">
+//                         Hư hỏng
+//                       </button>
+//                       </td>
+
+//                     </tr>
+//                   `;
+//       });
+//       tb.append(tk_data);
+//     },
+//     error: function(e) {
+//       alert("Đã có lỗi xảy ra!");
+//       console.log(e);
+//     }
+//   });
+// }
