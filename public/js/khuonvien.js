@@ -37,10 +37,10 @@ function GetAndDraw() {
     method: "GET",
     url: "/khuonvien/getToaDo",
     contentType: "application/json",
-    success: function(response) {
+    success: function (response) {
       // console.log(response);
       if (response.length > 0) {
-        $.each(response, function(i, td) {
+        $.each(response, function (i, td) {
           coordinates.push({ lat: td.KV_LAT, lng: td.KV_LNG });
         });
 
@@ -49,7 +49,7 @@ function GetAndDraw() {
         alert("Hiện chưa khoanh vùng khuôn viên!");
       }
     },
-    error: function(e) {
+    error: function (e) {
       alert("Đã có lỗi xảy ra!");
       console.log(e);
     }
@@ -80,17 +80,17 @@ function GetToaDo() {
     method: "GET",
     url: "/khuonvien/getToaDo",
     contentType: "application/json",
-    success: function(response) {
+    success: function (response) {
       // console.log(response);
       if (response.length > 0) {
-        $.each(response, function(i, td) {
+        $.each(response, function (i, td) {
           coordinates.push({ lat: td.KV_LAT, lng: td.KV_LNG });
         });
       } else {
         alert("Hiện chưa khoanh vùng khuôn viên!");
       }
     },
-    error: function(e) {
+    error: function (e) {
       alert("Đã có lỗi xảy ra!");
       console.log(e);
     }
@@ -114,10 +114,10 @@ async function updateKhuonVien() {
     method: "GET",
     url: "/khuonvien/getToaDo",
     contentType: "application/json",
-    success: function(response) {
+    success: function (response) {
       // console.log(response);
       if (response.length > 0) {
-        $.each(response, function(i, td) {
+        $.each(response, function (i, td) {
           coordinates.push({ lat: td.KV_LAT, lng: td.KV_LNG });
         });
 
@@ -132,12 +132,12 @@ async function updateKhuonVien() {
         alert("Hiện chưa khoanh vùng khuôn viên!");
       }
     },
-    error: function(e) {
+    error: function (e) {
       alert("Đã có lỗi xảy ra!");
       console.log(e);
     }
   });
-  map.addListener("click", function(e) {
+  map.addListener("click", function (e) {
     placeMarker(e.latLng, map);
   });
 }
@@ -157,10 +157,10 @@ async function Save() {
     method: "POST",
     contentType: "application/json",
     data: JSON.stringify({ KV_TRANGTHAI: "0" }),
-    success: function() {
+    success: function () {
       // alert("Đã cập nhật thành công trạng thái tọa độ!");
     },
-    error: function(e) {
+    error: function (e) {
       alert("Đã có lỗi xảy ra!");
       console.log(e);
     }
@@ -184,10 +184,10 @@ async function Save() {
           KV_LNG: kv_lng
         }),
         contentType: "application/json",
-        success: function() {
+        success: function () {
           // alert("Đã thêm thành công tọa độ! " + kv_lat + "---" + kv_lng);
         },
-        error: function(e) {
+        error: function (e) {
           alert("Đã có lỗi xảy ra!");
           console.log(e);
         }
@@ -214,8 +214,8 @@ async function GetViTri() {
     type: "GET",
     url: "/xe/vitri",
     contentType: "application/json",
-    success: function(response) {
-      $.each(response, function(i, xe) {
+    success: function (response) {
+      $.each(response, function (i, xe) {
         console.log(xe.XE_ID, xe.XE_VITRI);
         var vt = createLatLng(xe.XE_VITRI);
         if (xe.XE_TRANGTHAI == "0") {
@@ -239,12 +239,12 @@ async function GetViTri() {
         }
       });
     },
-    error: function(e) {
+    error: function (e) {
       console.log(e);
     }
   });
 
-  await setTimeout(function() {
+  await setTimeout(function () {
     for (i = 0; i < arrxe.length; i++) {
       var isInside = google.maps.geometry.poly.containsLocation(arrxe[i].getPosition(), polygon);
       var isOnEdge = google.maps.geometry.poly.isLocationOnEdge(arrxe[i].getPosition(), polygon, 0.00001);
@@ -290,12 +290,12 @@ function placeMarker(position) {
     placeMarker(position);
   }
 
-  google.maps.event.addListener(marker, "rightclick", function(point) {
+  google.maps.event.addListener(marker, "rightclick", function (point) {
     id = this.id;
     delMarker(id);
   });
 
-  var delMarker = function(id) {
+  var delMarker = function (id) {
     marker = markers[id];
     markers[id].setMap(null);
     markers[id].label = "null";
@@ -310,7 +310,38 @@ function createLatLng(coordString) {
 
 //Load lai tao marker
 async function Reload() {
-  await setInterval(function() {
+  await setInterval(function () {
     GetViTri();
   }, 4000);
+}
+
+// Update vị trí
+function UpdateViTri() {
+  var str = $("#location").val();
+  if (str != "") {
+
+
+    var a = str.split(":");
+
+    var xe_vitri = a[0];
+    var xe_id = a[1];
+
+
+    $.ajax({
+      url: "/xe/update/" + xe_id,
+      method: "POST",
+      data: JSON.stringify({
+        XE_ID: xe_id,
+        XE_VITRI: xe_vitri
+      }),
+      contentType: "application/json",
+      success: function () {
+        alert("Đã cập nhật thành công vị trí xe: " + xe_id);
+      },
+      error: function (e) {
+        alert("Đã có lỗi xảy ra!");
+        console.log(e);
+      }
+    });
+  }
 }

@@ -45,7 +45,7 @@ router.post("/login", function (req, res) {
 });
 
 router.post("/api/login", (req, res) => {
-  jwt.sign({ taikhoan: taikhoan }, 'secretkey', (err, token) => {
+  jwt.sign({ taikhoan: taikhoan.TK_ID }, 'secretkey', (err, token) => {
     res.json({
       token: token
     })

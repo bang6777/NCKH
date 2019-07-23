@@ -204,12 +204,15 @@ void setup() {
   servo.attach(D2);
 
   Serial.println(("Ket noi socket.............."));
-  socket.begin(host, port);
-  String strToaDo = toado();
-  socket.emit("hardware-send-location", strToaDo.c_str());
+//  socket.begin(host, port);
+  while(socket.begin(host, port)){
+    String strToaDo = toado();
+  strToaDo = "\""+strToaDo +"\"";
+  socket.emit("hardware-send-location", strToaDo);
+  }
 
   socket.on("Server-send-unlock", unlock);
-  Serial.println(strToaDo);
+//  Serial.println(strToaDo);
   Serial.println("Hoan thanh");
 
 
@@ -225,5 +228,7 @@ void loop() {
   else {
     lock();
   }
-
+//  String strToaDo = toado();
+//  strToaDo = "\""+strToaDo +"\"";
+//  socket.emit("hardware-send-location", strToaDo);
 }
