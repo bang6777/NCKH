@@ -58,6 +58,10 @@ io.on('connection', function (socket) {
     console.log('hardware send location: ' + data);
     socket.broadcast.emit("Server-send-location", data);
   });
+  socket.on('hardware-send-location1', function (data) {
+    console.log('hardware send location: ' + data);
+    socket.broadcast.emit("Server-send-location1", data);
+  });
   socket.on('Client-send-unlock', function (data) {
     console.log('Client send unlock: ' + JSON.stringify(data));
     socket.broadcast.emit("Server-send-unlock", "unlock");
