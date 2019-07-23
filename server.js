@@ -1,20 +1,26 @@
 // const http = require('http');
 const express = require('express');
 const app = express();
+const jwt = require('jsonwebtoken');
+// var session = require('express-session');
+// const passport = require('passport');
 var path = require('path');
 const bodyParser = require('body-parser');
-// require('dotenv').load();
+// app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true })); // session secret
+// app.use(passport.initialize());
+// app.use(passport.session());
+// // require('dotenv').load();
 
-// import passport and passport-jwt modules
-const passport = require('passport');
-const passportJWT = require('passport-jwt');
-// ExtractJwt to help extract the token
-let ExtractJwt = passportJWT.ExtractJwt;
-// JwtStrategy which is the strategy for the authentication
-let JwtStrategy = passportJWT.Strategy;
-let jwtOptions = {};
-jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-jwtOptions.secretOrKey = 'tbtlh';
+// // import passport and passport-jwt modules
+
+// const passportJWT = require('passport-jwt');
+// // ExtractJwt to help extract the token
+// let ExtractJwt = passportJWT.ExtractJwt;
+// // JwtStrategy which is the strategy for the authentication
+// let JwtStrategy = passportJWT.Strategy;
+// let jwtOptions = {};
+// jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+// jwtOptions.secretOrKey = 'tbtlh';
 
 
 
@@ -33,16 +39,6 @@ app.use('/', routes);
 app.use(function (req, res) {
   res.status(404).send({ url: req.originalUrl + ' not found' });
 });
-
-
-// const db = require('./api/Config/db');
-// db.authenticate()
-// .then(() => {
-//   console.log('Connection has been established successfully.');
-// })
-// .catch(err => {
-//   console.error('Unable to connect to the database:', err);
-// });
 
 // socket io
 var http = require('http').createServer(app);

@@ -2,6 +2,7 @@
 const bcrypt = require("bcryptjs");
 const sequelize = require("./../Config/db");
 const taikhoan_M = require("../Model/taikhoan_Model");
+const jwt = require('jsonwebtoken');
 
 // exports.allUser = (query,cb) =>{
 //     var statement = "select * from taikhoan";

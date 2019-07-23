@@ -10,7 +10,7 @@ var vipham = require("../controller/vipham_Ctr");
 var muontraRoute = require("./muontra_Route");
 var huhongRoute = require("./huhong_Route");
 var khuonvien = require("../controller/khuonvien_Ctr");
-
+const jwt = require('jsonwebtoken');
 //Login
 router.get("/login", function (req, res) {
   res.render("./../api/views/login");
@@ -37,6 +37,19 @@ router.post("/login", function (req, res) {
       // res.redirect("/taikhoan");
     }
   });
+  // jwt.sign({taikhoan:taikhoan}, 'secretkey', (err,token)=>{
+  //   res.json({
+  //     token:token
+  //   })
+  // })
+});
+
+router.post("/api/login", (req, res) => {
+  jwt.sign({ taikhoan: taikhoan }, 'secretkey', (err, token) => {
+    res.json({
+      token: token
+    })
+  })
 });
 
 // Trang chủ
