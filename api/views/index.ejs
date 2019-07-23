@@ -27,13 +27,10 @@
   <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
   <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+  <script src="jquery.js"></script>
+
   <script src="/socket.io/socket.io.js"></script>
-  <script>
-    var socket = io.connect("https://nckh-xedap.herokuapp.com");
-    socket.on("Server-send-location", function (data) {
-      $("#location").val(data);
-    });
-  </script>
+
 </head>
 
 <body>
@@ -56,5 +53,11 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDr5qwgemJp4LtodR8lvXg382V-cDFK3bY&callback=myMap"></script>
   </div>
 </body>
+<script>
+  var socket = io.connect("https://nckh-xedap.herokuapp.com");
+  socket.on("Server-send-location", function (data) {
+    $("#location").val(data);
+  });
+</script>
 
 </html>
