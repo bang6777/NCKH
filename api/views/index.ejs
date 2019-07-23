@@ -30,13 +30,6 @@
   <script src="/socket.io/socket.io.js"></script>
   <script>
     var socket = io.connect("https://nckh-xedap.herokuapp.com");
-    // var socket = io();
-    // io.on('connection', function (socket) {
-    //   console.log('a user connected');
-    //   socket.on('disconnect', function () {
-    //     console.log('user disconnected');
-    //   });
-    // });
     socket.on("Server-send-location", function (data) {
       $("#location").val(" " + data + ", ");
     });

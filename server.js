@@ -54,9 +54,9 @@ io.on('connection', function (socket) {
   socket.on('Client-send-connect', function (data) {
     console.log('Node MCU send: ' + data);
   });
-  socket.on('hardware-send-location', function (location) {
-    console.log('hardware send location: ' + location);
-    socket.broadcast.emit("Server-send-location", location);
+  socket.on('hardware-send-location', function (data) {
+    console.log('hardware send location: ' + data);
+    socket.broadcast.emit("Server-send-location", data);
   });
   socket.on('Client-send-unlock', function (data) {
     console.log('Client send unlock: ' + JSON.stringify(data));
