@@ -140,13 +140,13 @@ function UpdateModal(a) {
     url: "/loi/find",
     data: JSON.stringify({ LOI_ID: tk }),
     contentType: "application/json",
-    success: function(response) {
-      $.each(response, function(i, loi) {
-        console.log(loi);
-        $("#txtLoi_ID_update").val(loi.LOI_ID);
-        $("#txtLoi_TenLoi_update").val(loi.LOI_TEN);
-        $("#txtLoi_MoTa_update").val(loi.LOI_MOTA);
-      });
+    success: function(loi) {
+      // $.each(response, function(i, loi) {
+      console.log(loi);
+      $("#txtLoi_ID_update").val(loi.LOI_ID);
+      $("#txtLoi_TenLoi_update").val(loi.LOI_TEN);
+      $("#txtLoi_MoTa_update").val(loi.LOI_MOTA);
+      // });
     },
     error: function(e) {
       console.log(e);

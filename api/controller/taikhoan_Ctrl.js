@@ -134,9 +134,6 @@ exports.checkLoginServer = (TK_ID, TK_PASSWORD, cb) => {
     })
     .then(tk_bang => {
       console.log(tk_bang.TK_ID);
-      //   // JSON.stringify(tk_bang);
-      //   // console.log(JSON.stringify(tk_bang));
-      //   // console.log(TK_PASSWORD + tk_bang.TK_PASSWORD);
       if (bcrypt.compareSync(TK_PASSWORD, tk_bang.TK_PASSWORD)) {
         console.log("Đăng nhập thành công, ", tk_bang.TK_ID);
         cb(null, "ok");

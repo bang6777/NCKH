@@ -217,25 +217,27 @@ async function GetViTri() {
     success: function(response) {
       $.each(response, function(i, xe) {
         console.log(xe.XE_ID, xe.XE_VITRI);
-        var vt = createLatLng(xe.XE_VITRI);
-        if (xe.XE_TRANGTHAI == "0") {
-          marker = new google.maps.Marker({
-            position: vt,
-            map: map,
-            icon: "./img/marker-green.png",
-            label: xe.XE_ID
-          });
-          arrxe[xe_id] = marker;
-          xe_id++;
-        } else if (xe.XE_TRANGTHAI == "1") {
-          marker = new google.maps.Marker({
-            position: vt,
-            map: map,
-            icon: "./img/marker-red.png",
-            label: xe.XE_ID
-          });
-          arrxe[xe_id] = marker;
-          xe_id++;
+        if (xe.XE_VITRI != "") {
+          var vt = createLatLng(xe.XE_VITRI);
+          if (xe.XE_TRANGTHAI == "0") {
+            marker = new google.maps.Marker({
+              position: vt,
+              map: map,
+              icon: "./img/marker-green.png",
+              label: xe.XE_ID
+            });
+            arrxe[xe_id] = marker;
+            xe_id++;
+          } else if (xe.XE_TRANGTHAI == "1") {
+            marker = new google.maps.Marker({
+              position: vt,
+              map: map,
+              icon: "./img/marker-red.png",
+              label: xe.XE_ID
+            });
+            arrxe[xe_id] = marker;
+            xe_id++;
+          }
         }
       });
     },
@@ -313,4 +315,30 @@ async function Reload() {
   await setInterval(function() {
     GetViTri();
   }, 4000);
+}
+
+// Update vị trí
+function UpdateViTri() {
+  var str = $("#location").val();
+  if (str != "") {
+    var a = str.split(":");
+    var xe_id = a[1];
+    var xe_vitri = a[0];
+    $.ajax({
+      url: "/xe/update/" + xe_id,
+      method: "POST",
+      data: JSON.stringify({
+        XE_ID: xe_id,
+        XE_VITRI: xe_vitri
+      }),
+      contentType: "application/json",
+      success: function() {
+        alert("Đã cập nhật thành công vị trí xe: " + xe_id);
+      },
+      error: function(e) {
+        alert("Đã có lỗi xảy ra!");
+        console.log(e);
+      }
+    });
+  }
 }

@@ -8,12 +8,14 @@ exports.allXe = cb => {
   });
 };
 
-exports.addXe = (XE_ID, XE_NAMSANXUAT, XE_GHICHU, cb) => {
+exports.addXe = (XE_ID, XE_NAMSANXUAT, XE_GHICHU, XE_TRANGTHAI, XE_VITRI, cb) => {
   xe_M
     .create({
       XE_ID: XE_ID,
       XE_NAMSANXUAT: XE_NAMSANXUAT,
-      XE_GHICHU: XE_GHICHU
+      XE_GHICHU: XE_GHICHU,
+      XE_TRANGTHAI: XE_TRANGTHAI,
+      XE_VITRI: XE_VITRI
     })
     .then(xe => {
       console.log("ID của xe: " + xe.XE_ID);
@@ -40,7 +42,6 @@ exports.updateXe = (XE_ID, XE_VITRI, cb) => {
   xe_M
     .update(
       {
-        XE_ID: XE_ID,
         XE_VITRI: XE_VITRI
       },
       {
@@ -55,18 +56,10 @@ exports.updateXe = (XE_ID, XE_VITRI, cb) => {
     });
 };
 
-exports.updateXeAllInf = (
-  XE_ID,
-
-  XE_NAMSANXUAT,
-  XE_GHICHU,
-  cb
-) => {
+exports.updateXeAllInf = (XE_ID, XE_NAMSANXUAT, XE_GHICHU, cb) => {
   xe_M
     .update(
       {
-        XE_ID: XE_ID,
-
         XE_NAMSANXUAT: XE_NAMSANXUAT,
         XE_GHICHU: XE_GHICHU
       },
@@ -82,6 +75,20 @@ exports.updateXeAllInf = (
     });
 };
 
+// //tim xe theo id
+// exports.findXeByID = (XE_ID, cb) => {
+//   xe_M
+//     .findAll({
+//       where: {
+//         XE_ID: XE_ID
+//       }
+//     })
+//     .then(xe => {
+//       console.log("tài khoản: ", xe.XE_ID);
+//       cb(null, xe);
+//     });
+// };
+
 //tim xe theo id
 exports.findXeByID = (XE_ID, cb) => {
   xe_M
@@ -91,7 +98,7 @@ exports.findXeByID = (XE_ID, cb) => {
       }
     })
     .then(xe => {
-      console.log("tài khoản: ", xe.XE_ID);
+      console.log("xe: ", xe.XE_ID);
       cb(null, xe);
     });
 };

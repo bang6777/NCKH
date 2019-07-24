@@ -2,6 +2,9 @@ $(document).ready(function() {
   $("#btnAdd").on("click", function() {
     ResetModal();
   });
+  // $("#tableTK").on("draw.dt", function() {
+  //   LoadView();
+  // });
 });
 
 //Reset modal
@@ -94,6 +97,7 @@ function GetAllXE() {
                       data-toggle="modal"
                       data-target="#ThongKeXe-MuonTra"
                       class="btn btn-outline-dark btn-sm"
+                      onclick="XE_MuonTra('${xe.XE_ID}')"
                     >
                       Mượn-trả
                     </button>
@@ -101,7 +105,7 @@ function GetAllXE() {
                       data-toggle="modal"
                       data-target="#ThongKeXe-ViPham"
                       class="btn btn-outline-dark btn-sm"
-                      onclick= "Xe_ViPham('${xe.XE_ID}')"
+                      onclick="Xe_ViPham('${xe.XE_ID}')"
                     >
                       Vi phạm
                     </button>
@@ -109,6 +113,7 @@ function GetAllXE() {
                       data-toggle="modal"
                       data-target="#ThongKeXe-HuHong"
                       class="btn btn-outline-dark btn-sm"
+                      onclick="XE_HuHong('${xe.XE_ID}')"
                     >
                       Hư hỏng
                     </button>
@@ -151,6 +156,8 @@ function UpdateInfo() {
     }
   });
 }
+
+
 
 function UpdateModal(a) {
   var tk = a;
@@ -199,56 +206,10 @@ function Delete(a) {
   }
 }
 
-//Thong ke TK - ViPham
-async function Xe_ViPham(a) {
-  var xe_id = a;
-  await $.ajax({
-    type: "GET",
-    url: "/vipham/xe/" + xe_id,
-    data: JSON.stringify({ XE_ID: xe_id }),
-    contentType: "application/json",
-    success: function(response) {
-      console.log(response);
-      var tb = $("#Xe_ViPham");
-      tb.html("");
-      xe_data = "";
-
-      $.each(response, function(i, xe) {
-        xe_data += `<tr>
-          <td>${xe.VP_ID}</td>
-          <td>${xe.MUONTRA_ID}</td>
-          <td id="id_loi[${xe.LOI_ID}]"></td>
-          <td>${xe.TK_ID}</td>
-          <td>${xe.VP_THOIGIAN}</td>
-        <\tr>`;
-        $.ajax({
-          url: "/loi/" + xe.LOI_ID,
-          data: JSON.stringify({ LOI_ID: xe.LOI_ID }),
-          method: "GET",
-          contentType: "application/json",
-          success: function(response) {
-            console.log(response.LOI_TEN);
-            tenloi = response.LOI_TEN;
-            var loi_id = "id_loi[" + response.LOI_ID + "]";
-            document.getElementById(loi_id).innerHTML = response.LOI_TEN;
-          },
-          error: function(e) {
-            alert("Đã có lỗi xảy ra!");
-            console.log(e);
-          }
-        });
-      });
-      tb.append(xe_data);
-    },
-    error: function(e) {
-      console.log(e);
-    }
-  });
-}
 //Thong ke TK - MuonTra
 function XE_MuonTra(a) {
   var xe_id = a;
-
+  var sl = 0;
   $.ajax({
     type: "GET",
     url: "/muontra/xe/" + xe_id,
@@ -266,19 +227,20 @@ function XE_MuonTra(a) {
           <td>${xe.MUON_THOIGIAN}</td>
           <td>${xe.TRA_THOIGIAN}</td>
         </tr>`;
+        sl++;
       });
       tb.append(xe_data);
+      document.getElementById("thongke-muontra").innerHTML = "Số lượt mượn trả: " + sl;
     },
     error: function(e) {
       console.log(e);
     }
   });
 }
-
 //Thong ke xe - HuHong
 function XE_HuHong(a) {
   var xe_id = a;
-
+  var sl = 0;
   $.ajax({
     type: "GET",
     url: "/huhong/xe/" + xe_id,
@@ -290,6 +252,7 @@ function XE_HuHong(a) {
       tb.html("");
       xe_data = "";
       $.each(response, function(i, xe) {
+        sl++;
         xe_data += `<tr>
           <td>${xe.HH_ID}</td>
           <td>${xe.TK_ID}</td>
@@ -298,6 +261,58 @@ function XE_HuHong(a) {
         </tr>`;
       });
       tb.append(xe_data);
+      document.getElementById("thongke-huhong").innerHTML = "Số lượt hư hỏng: " + sl;
+    },
+    error: function(e) {
+      console.log(e);
+    }
+  });
+}
+
+//Thong ke TK - ViPham
+async function Xe_ViPham(a) {
+  var xe_id = a;
+  var sl = 0;
+  await $.ajax({
+    type: "GET",
+    url: "/vipham/xe/" + xe_id,
+    data: JSON.stringify({ XE_ID: xe_id }),
+    contentType: "application/json",
+    success: function(response) {
+      console.log(response);
+      var tb = $("#Xe_ViPham");
+      tb.html("");
+      xe_data = "";
+
+      $.each(response, function(i, xe) {
+        sl++;
+        xe_data += `<tr>
+          <td>${xe.VP_ID}</td>
+          <td>${xe.MUONTRA_ID}</td>
+          <td id="id_loi[${xe.LOI_ID}]"></td>
+          <td>${xe.TK_ID}</td>
+          <td>${xe.VP_THOIGIAN}</td>
+        <\tr>`;
+        $.ajax({
+          url: "/loi/" + xe.LOI_ID,
+          data: JSON.stringify({ LOI_ID: xe.LOI_ID }),
+          method: "GET",
+          contentType: "application/json",
+          success: function(response) {
+            console.log(response.LOI_TEN);
+            tenloi = response.LOI_TEN;
+
+            var loi_id = "id_loi[" + response.LOI_ID + "]";
+            document.getElementById(loi_id).innerHTML = tenloi;
+          },
+          error: function(e) {
+            alert("Đã có lỗi xảy ra!");
+            console.log(e);
+          }
+        });
+      });
+      tb.append(xe_data);
+      document.getElementById("thongke-vipham").innerHTML = "Số lượt vi phạm: " + sl;
     },
     error: function(e) {
       console.log(e);

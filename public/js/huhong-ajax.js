@@ -117,6 +117,7 @@ function GetHHDangCho() {
         $("#tbHuHong")
           .DataTable()
           .destroy();
+        // alert("a");
       }
       $("#tbHuHong tbody").empty();
 
@@ -315,6 +316,14 @@ function GetHHDaSua() {
       var tb = $("#tb");
       tb.html("");
       huhong_data = "";
+
+      if ($.fn.DataTable.isDataTable("#tbHuHong")) {
+        $("#tbHuHong")
+          .DataTable()
+          .destroy();
+      }
+      $("#tbHuHong tbody").empty();
+
       $.each(response, function(i, huhong) {
         huhong_data += `<tr>
                                 <td>${huhong.HH_ID}</td>
@@ -407,6 +416,14 @@ function GetHHBaoSai() {
       var tb = $("#tb");
       tb.html("");
       huhong_data = "";
+
+      if ($.fn.DataTable.isDataTable("#tbHuHong")) {
+        $("#tbHuHong")
+          .DataTable()
+          .destroy();
+      }
+      $("#tbHuHong tbody").empty();
+
       $.each(response, function(i, huhong) {
         huhong_data += `<tr>
                                 <td>${huhong.HH_ID}</td>
@@ -560,19 +577,12 @@ function LoadTK(a) {
   });
 }
 
-//Update trạng thái xe
+//Update trạng thái hư hỏng
 function UpdateTrangThaiHuHong(a) {
   var hh_id = a;
   var hh_trangthai;
   var hhTrangThai = "slHH_TrangThai['" + hh_id + "']";
 
-  // var c = document.getElementById(ckHieuLuc);
-
-  // if (c.checked == true) {
-  //   tk_hieuluc = 1;
-  // } else {
-  //   tk_hieuluc = 0;
-  // }
   hh_trangthai = document.getElementById(hhTrangThai).value;
   $.ajax({
     url: "/huhong/update-trangthai/" + hh_id,

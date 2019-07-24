@@ -269,7 +269,7 @@ function LoadView() {
 function LoadDataTable() {
   table = $("#tbMuonTra").DataTable({
     stateSave: true,
-    columnDefs: [{ targets: [1, 2, 3], searchable: false }],
+    // columnDefs: [{ targets: [1, 2, 3], searchable: false }],
     ordering: false,
     language: {
       lengthMenu: "Hiển thị _MENU_ dòng dữ liệu trên một trang:",

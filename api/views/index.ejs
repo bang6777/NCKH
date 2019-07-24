@@ -30,7 +30,6 @@
     <script>
       $(document).ready(function() {
         GetViTri();
-        // Reload();
       });
     </script>
 
@@ -44,5 +43,7 @@
       <div id="googleMap" style="width: 100%; height :500px"></div>
       <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDr5qwgemJp4LtodR8lvXg382V-cDFK3bY&callback=myMap"></script>
     </div>
+    <input id="location" onchange="UpdateViTri()" />
+    <button id="btnlocation">Send</button>
   </body>
 </html>

@@ -463,7 +463,7 @@ function GetTKVoHieuLuc() {
 //Thong ke TK - MuonTra
 function TK_MuonTra(a) {
   var tk_id = a;
-
+  var sl = 0;
   $.ajax({
     type: "GET",
     url: "/muontra/" + tk_id,
@@ -481,8 +481,10 @@ function TK_MuonTra(a) {
           <td>${tk.MUON_THOIGIAN}</td>
           <td>${tk.TRA_THOIGIAN}</td>
         </tr>`;
+        sl++;
       });
       tb.append(tk_data);
+      document.getElementById("thongke-muontra").innerHTML = "Số lượt mượn trả: " + sl;
     },
     error: function(e) {
       console.log(e);
@@ -493,7 +495,7 @@ function TK_MuonTra(a) {
 //Thong ke TK - ViPham
 function TK_ViPham(a) {
   var tk_id = a;
-
+  var sl = 0;
   $.ajax({
     type: "GET",
     url: "/vipham/taikhoan/" + tk_id,
@@ -528,8 +530,10 @@ function TK_ViPham(a) {
             console.log(e);
           }
         });
+        sl++;
       });
       tb.append(tk_data);
+      document.getElementById("thongke-vipham").innerHTML = "Số lượt vi phạm: " + sl;
     },
     error: function(e) {
       console.log(e);
@@ -540,7 +544,7 @@ function TK_ViPham(a) {
 //Thong ke TK - HuHong
 function TK_HuHong(a) {
   var tk_id = a;
-
+  var sl = 0;
   $.ajax({
     type: "GET",
     url: "/huhong/taikhoan/" + tk_id,
@@ -552,6 +556,7 @@ function TK_HuHong(a) {
       tb.html("");
       tk_data = "";
       $.each(response, function(i, tk) {
+        sl++;
         tk_data += `<tr>
           <td>${tk.HH_ID}</td>
           <td>${tk.XE_ID}</td>
@@ -560,6 +565,7 @@ function TK_HuHong(a) {
         </tr>`;
       });
       tb.append(tk_data);
+      document.getElementById("thongke-huhong").innerHTML = "Số lượt hư hỏng: " + sl;
     },
     error: function(e) {
       console.log(e);
@@ -606,100 +612,3 @@ function LoadDataTable() {
     lengthMenu: [[5, 10, 15, 20, 25, -1], [5, 10, 15, 20, 25, "Tất cả"]]
   });
 }
-
-// function search_id(search) {
-//   var hieuluc1, hieuluc2;
-//   var view = document.getElementById("slTK_View").value;
-//   switch (view) {
-//     case "0":
-//       hieuluc1 = 0;
-//       hieuluc2 = 0;
-//       break;
-//     case "1":
-//       hieuluc1 = 1;
-//       hieuluc2 = 1;
-//       break;
-//     case "2":
-//       hieuluc1 = 1;
-//       hieuluc2 = 0;
-//       break;
-//   }
-//   $.ajax({
-//     type: "GET",
-//     url: "/taikhoan/search/" + search + "&" + hieuluc1 + "&" + hieuluc2,
-//     data: JSON.stringify({ search: search }),
-//     contentType: "application/json",
-//     success: function(response) {
-//       console.log(response);
-//       var tb = $("#tb");
-//       tb.html("");
-//       tk_data = "";
-//       $.each(response, function(i, tk) {
-//         tk_data += `<tr>
-//                       <td> ${tk.TK_ID}</td>
-//                       <td> ${tk.TK_HOTEN}</td>
-//                       <td> ${tk.TK_DONVI}</td>
-//                       <td> ${tk.TK_LOAI}</td>
-//                       <td>
-//                         <div class="custom-control custom-switch">
-//                   `;
-
-//         if (tk.TK_HIEULUC == 1) {
-//           tk_data += `<input
-//                         type="checkbox"
-//                         class="custom-control-input"
-//                         checked="true"
-//                         id="ckHieuLuc[${tk.TK_ID}]"
-//                         onclick="UpdateHieuLuc('${tk.TK_ID}')"
-//                         name= "TK_HIEULUC"
-//                       />`;
-//         } else {
-//           tk_data += `<input
-//                         type="checkbox"
-//                         class="custom-control-input"
-//                         id="ckHieuLuc[${tk.TK_ID}]"
-//                         onclick="UpdateHieuLuc('${tk.TK_ID}')"
-//                         name= "TK_HIEULUC"
-//                       />`;
-//         }
-//         tk_data += `<label class="custom-control-label" for="ckHieuLuc[${tk.TK_ID}]"></label>
-//                         </div>
-//                       </td>
-//                       <td class="">
-//                       <i class="fa fa-edit fa-lg" data-toggle="modal" data-target="#EditTK" title="Cập nhật" onclick="UpdateModal('${tk.TK_ID}')" >
-//                       </i>
-//                       <i class="fa fa-trash fa-lg" title="Xóa" onclick="Delete('${tk.TK_ID}')" >
-//                       </i>
-//                     </td>
-
-//                       `;
-//         tk_data += `
-//                       <td>
-//                       <button data-toggle="modal" data-target="#ThongKeTK-MuonTra" class="btn btn-outline-dark btn-sm" onclick="TK_MuonTra('${
-//                         tk.TK_ID
-//                       }')">
-//                         Mượn-trả
-//                       </button>
-//                       <button data-toggle="modal" data-target="#ThongKeTK-ViPham" class="btn btn-outline-dark btn-sm" onclick="TK_ViPham('${
-//                         tk.TK_ID
-//                       }')">
-//                         Vi phạm
-//                       </button>
-//                       <button data-toggle="modal" data-target="#ThongKeTK-HuHong" class="btn btn-outline-dark btn-sm"  onclick="TK_HuHong('${
-//                         tk.TK_ID
-//                       }')">
-//                         Hư hỏng
-//                       </button>
-//                       </td>
-
-//                     </tr>
-//                   `;
-//       });
-//       tb.append(tk_data);
-//     },
-//     error: function(e) {
-//       alert("Đã có lỗi xảy ra!");
-//       console.log(e);
-//     }
-//   });
-// }
