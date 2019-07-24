@@ -342,7 +342,7 @@ router.post("/xe/updateInfo/:XE_ID", function (req, res) {
 });
 
 //update trang thai xe
-router.post("/xe/updateViTri/XE:ID", function (req, res) {
+router.post("/xe/updateTrangThai/XE:ID", function (req, res) {
   var XE_ID = req.body.XE_ID;
   var XE_TRANGTHAI = req.body.XE_TRANGTHAI;
 
