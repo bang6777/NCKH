@@ -217,25 +217,27 @@ async function GetViTri() {
     success: function (response) {
       $.each(response, function (i, xe) {
         console.log(xe.XE_ID, xe.XE_VITRI);
-        var vt = createLatLng(xe.XE_VITRI);
-        if (xe.XE_TRANGTHAI == "0") {
-          marker = new google.maps.Marker({
-            position: vt,
-            map: map,
-            icon: "./img/marker-green.png",
-            label: xe.XE_ID
-          });
-          arrxe[xe_id] = marker;
-          xe_id++;
-        } else if (xe.XE_TRANGTHAI == "1") {
-          marker = new google.maps.Marker({
-            position: vt,
-            map: map,
-            icon: "./img/marker-red.png",
-            label: xe.XE_ID
-          });
-          arrxe[xe_id] = marker;
-          xe_id++;
+        if (xe.XE_VITRI != "") {
+          var vt = createLatLng(xe.XE_VITRI);
+          if (xe.XE_TRANGTHAI == "0") {
+            marker = new google.maps.Marker({
+              position: vt,
+              map: map,
+              icon: "./img/marker-green.png",
+              label: xe.XE_ID
+            });
+            arrxe[xe_id] = marker;
+            xe_id++;
+          } else if (xe.XE_TRANGTHAI == "1") {
+            marker = new google.maps.Marker({
+              position: vt,
+              map: map,
+              icon: "./img/marker-red.png",
+              label: xe.XE_ID
+            });
+            arrxe[xe_id] = marker;
+            xe_id++;
+          }
         }
       });
     },
@@ -319,14 +321,9 @@ async function Reload() {
 function UpdateViTri() {
   var str = $("#location").val();
   if (str != "") {
-
-
     var a = str.split(":");
-
-    var xe_vitri = a[0];
     var xe_id = a[1];
-
-
+    var xe_vitri = a[0];
     $.ajax({
       url: "/xe/update/" + xe_id,
       method: "POST",

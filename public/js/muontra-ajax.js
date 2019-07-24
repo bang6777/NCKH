@@ -7,8 +7,8 @@ function LoadTK(a) {
     url: "/taikhoan/find",
     data: JSON.stringify({ TK_ID: tk }),
     contentType: "application/json",
-    success: function (response) {
-      $.each(response, function (i, taikhoan) {
+    success: function(response) {
+      $.each(response, function(i, taikhoan) {
         console.log(taikhoan);
 
         $("#TK_ID").html(taikhoan.TK_ID);
@@ -22,7 +22,7 @@ function LoadTK(a) {
         $("#TK_DONVI").html(taikhoan.TK_DONVI);
       });
     },
-    error: function (e) {
+    error: function(e) {
       console.log(e);
     }
   });
@@ -40,6 +40,13 @@ function getAllMuonTra() {
       tb.html("");
       mt_data = "";
 
+      if ($.fn.DataTable.isDataTable("#tbMuonTra")) {
+        $("#tbMuonTra")
+          .DataTable()
+          .destroy();
+      }
+      $("#tbMuonTra tbody").empty();
+
       $.each(response, function(i, mt) {
         console.log(response);
         mt_data += `<tr>
@@ -60,6 +67,7 @@ function getAllMuonTra() {
                     </tr>`;
       });
       tb.append(mt_data);
+      LoadDataTable();
     }
   });
 }
@@ -76,6 +84,13 @@ function getChuaTra() {
       tb.html("");
       mt_data = "";
 
+      if ($.fn.DataTable.isDataTable("#tbMuonTra")) {
+        $("#tbMuonTra")
+          .DataTable()
+          .destroy();
+      }
+      $("#tbMuonTra tbody").empty();
+
       $.each(response, function(i, mt) {
         console.log(response);
         mt_data += `<tr>
@@ -96,6 +111,7 @@ function getChuaTra() {
                     </tr>`;
       });
       tb.append(mt_data);
+      LoadDataTable();
     }
   });
 }
@@ -104,7 +120,6 @@ function ChiTietMuonTra(a) {
   var mt_id = a;
   var vtMuon = "";
   var vtTra = "";
-  // loadKhuonVien();
 
   $.ajax({
     type: "POST",
@@ -157,6 +172,7 @@ function ChiTietMuonTra(a) {
       });
       tb.append(mt_data);
       MapPosition(vtMuon, vtTra);
+      GetAndDraw();
     },
     error: function(e) {
       console.log(e);
@@ -189,6 +205,49 @@ function MapPosition(vitriMuon, vitriTra) {
     });
   }
 }
+//get va ve toa do
+function GetAndDraw() {
+  coordinates = [];
+
+  $.ajax({
+    method: "GET",
+    url: "/khuonvien/getToaDo",
+    contentType: "application/json",
+    success: function(response) {
+      // console.log(response);
+      if (response.length > 0) {
+        $.each(response, function(i, td) {
+          coordinates.push({ lat: td.KV_LAT, lng: td.KV_LNG });
+        });
+
+        drawKhuonVien(coordinates);
+      } else {
+        alert("Hiện chưa khoanh vùng khuôn viên!");
+      }
+    },
+    error: function(e) {
+      alert("Đã có lỗi xảy ra!");
+      console.log(e);
+    }
+  });
+}
+
+//Ve khuon vien
+function drawKhuonVien(coordinates) {
+  // Construct the polygon.
+  polygon = new google.maps.Polygon({
+    paths: coordinates,
+    strokeColor: "#FFCC00",
+    strokeOpacity: 0.8,
+    strokeWeight: 3,
+    fillColor: "#FFCC00",
+    fillOpacity: 0.35
+    //editable : true
+  });
+  polygon.setMap(map);
+  // khuonvien = polygon;
+  // alert("da ve");
+}
 
 //Chia toa do
 function createLatLng(coordString) {
@@ -201,9 +260,35 @@ function LoadView() {
   var view = document.getElementById("slMuonTra_View").value;
   if (view == 1) {
     getAllMuonTra();
-    // LoadDataTable();
   } else if (view == 0) {
     getChuaTra();
-    // LoadDataTable();
   }
+}
+
+//Load table
+function LoadDataTable() {
+  table = $("#tbMuonTra").DataTable({
+    stateSave: true,
+    // columnDefs: [{ targets: [1, 2, 3], searchable: false }],
+    ordering: false,
+    language: {
+      lengthMenu: "Hiển thị _MENU_ dòng dữ liệu trên một trang:",
+      info: "Hiển thị _START_ trong tổng số _TOTAL_ dòng dữ liệu:",
+      infoEmpty: "Dữ liệu rỗng",
+      emptyTable: "Chưa có dữ liệu nào ",
+      processing: "Đang xử lý ",
+      search: "Tìm kiếm theo ID: ",
+      loadingRecords: "Đang load dữ liệu",
+      zeroRecords: "Không tìm thấy dữ liệu",
+      infoFiltered: "(Được từ tổng số _MAX_ dòng dữ liệu",
+      paginate: {
+        first: "|<",
+        last: ">|",
+        next: "Sau",
+        previous: "Trước"
+      }
+    },
+    pageLength: -1,
+    lengthMenu: [[5, 10, 15, 20, 25, -1], [5, 10, 15, 20, 25, "Tất cả"]]
+  });
 }

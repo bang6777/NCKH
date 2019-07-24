@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
     <!-- My css -->
-    <link rel="stylesheet" href="css/login.css" />
+    <link rel="stylesheet" href="./css/login.css" />
     <!-- My js -->
     <script src="./js/muontra-ajax.js"></script>
 
@@ -34,13 +34,14 @@
 
     <div class="container-fluid bg-white ">
       <h2 class="text-center font-weight-semi-bold text-dark mt-3">
-        QUẢN LÝ LỊCH SỬ MƯỢN TRẢ XE
+        THỐNG KÊ MƯỢN TRẢ XE
       </h2>
       <div class="form-group form-inline col-lg-2">
         <label class="mr-3">Lọc</label>
         <select class="form-control form-control-sm" id="slMuonTra_View" onchange="LoadView()">
-          <option value="1">Xem tất cả</option>
-          <option value="0">Chưa trả xe</option>
+          <option value="1">Ngày</option>
+          <option value="0">Tháng</option>
+          <option value="2">Năm</option>
         </select>
       </div>
       <div class="container-fluid">
@@ -58,25 +59,7 @@
               </tr>
             </thead>
 
-            <tbody class="text-center" id="tb">
-              <!-- <% muontra.forEach(function(mt){ %>
-              <tr>
-                <td></td>
-                <td class="chitiet">
-                  <a onclick="LoadTK('<%= mt.TK_ID %>')" data-toggle="modal" data-target="#ChiTietTK">
-                    <%= mt.TK_ID %>
-                  </a>
-                </td>
-                <td><%= mt.XE_ID %></td>
-                <td><%= mt.MUON_THOIGIAN %></td>
-                <td><%= mt.TRA_THOIGIAN %></td>
-                <td>
-                  <a href="#"><i class="fa fa-info-circle fa-lg" data-toggle="modal" data-target="#ChiTietMuonTra"></i></a>
-                </td>
-              </tr>
-
-              <% }); %> -->
-            </tbody>
+            <tbody class="text-center" id="tb"></tbody>
           </table>
         </div>
 

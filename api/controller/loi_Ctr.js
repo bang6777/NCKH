@@ -59,7 +59,7 @@ exports.updateLoi = (LOI_ID, LOI_TEN, LOI_MOTA, cb) => {
 
 exports.findLoiByID = (LOI_ID, cb) => {
   loi_M
-    .findAll({
+    .findOne({
       where: {
         LOI_ID: LOI_ID
       }

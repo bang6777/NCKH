@@ -26,6 +26,14 @@ function GetAllLoi() {
       var tb = $("#tb");
       tb.html("");
       loi_data = "";
+
+      if ($.fn.DataTable.isDataTable("#tbLoi")) {
+        $("#tbLoi")
+          .DataTable()
+          .destroy();
+      }
+      $("#tbLoi tbody").empty();
+
       $.each(response, function(i, loi) {
         loi_data += `<tr>
                         <td>${loi.LOI_ID}</td>
@@ -41,6 +49,7 @@ function GetAllLoi() {
                       </tr>`;
       });
       tb.append(loi_data);
+      LoadDataTable();
     },
     error: function(e) {
       alert("Đã có lỗi xảy ra!");
@@ -131,13 +140,13 @@ function UpdateModal(a) {
     url: "/loi/find",
     data: JSON.stringify({ LOI_ID: tk }),
     contentType: "application/json",
-    success: function(response) {
-      $.each(response, function(i, loi) {
-        console.log(loi);
-        $("#txtLoi_ID_update").val(loi.LOI_ID);
-        $("#txtLoi_TenLoi_update").val(loi.LOI_TEN);
-        $("#txtLoi_MoTa_update").val(loi.LOI_MOTA);
-      });
+    success: function(loi) {
+      // $.each(response, function(i, loi) {
+      console.log(loi);
+      $("#txtLoi_ID_update").val(loi.LOI_ID);
+      $("#txtLoi_TenLoi_update").val(loi.LOI_TEN);
+      $("#txtLoi_MoTa_update").val(loi.LOI_MOTA);
+      // });
     },
     error: function(e) {
       console.log(e);
@@ -167,4 +176,32 @@ function Delete(a) {
       }
     });
   }
+}
+
+//Load table
+function LoadDataTable() {
+  table = $("#tbLoi").DataTable({
+    stateSave: true,
+    columnDefs: [{ targets: [1, 2, 3], searchable: false }],
+    ordering: false,
+    language: {
+      lengthMenu: "Hiển thị _MENU_ dòng dữ liệu trên một trang:",
+      info: "Hiển thị _START_ trong tổng số _TOTAL_ dòng dữ liệu:",
+      infoEmpty: "Dữ liệu rỗng",
+      emptyTable: "Chưa có dữ liệu nào ",
+      processing: "Đang xử lý ",
+      search: "Tìm kiếm theo ID: ",
+      loadingRecords: "Đang load dữ liệu",
+      zeroRecords: "Không tìm thấy dữ liệu",
+      infoFiltered: "(Được từ tổng số _MAX_ dòng dữ liệu",
+      paginate: {
+        first: "|<",
+        last: ">|",
+        next: "Sau",
+        previous: "Trước"
+      }
+    },
+    pageLength: -1,
+    lengthMenu: [[5, 10, 15, 20, 25, -1], [5, 10, 15, 20, 25, "Tất cả"]]
+  });
 }

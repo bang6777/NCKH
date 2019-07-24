@@ -23,21 +23,38 @@ const bodyParser = require('body-parser');
 // jwtOptions.secretOrKey = 'tbtlh';
 
 
+io.on("connection", function (socket) {
+  console.log("a user connected " + socket.id);
+  socket.on("disconnect", function () {
+    console.log("a user disconnected " + socket.id);
+  });
+  socket.on("Client-send-connect", function (data) {
+    console.log("Node MCU send: " + data);
+  });
+  socket.on("hardware-send-location", function (location) {
+    console.log("hardware send location: " + location);
+    socket.broadcast.emit("Server-send-location", location);
+  });
+  socket.on("Client-send-unlock", function (data) {
+    console.log("Client send unlock: " + data);
+    socket.broadcast.emit("Server-send-unlock", data);
+  });
+});
 
 const port = process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + "/public"));
 
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
 
-var routes = require('./api/routes/bikeRoute'); //importing route
+var routes = require("./api/routes/bikeRoute"); //importing route
 // routes(app);
-app.use('/', routes);
+app.use("/", routes);
 app.use(function (req, res) {
-  res.status(404).send({ url: req.originalUrl + ' not found' });
+  res.status(404).send({ url: req.originalUrl + " not found" });
 });
 
 // socket io
