@@ -3,9 +3,9 @@ const db = require("./../Config/db");
 
 const loi_Model = db.define("loi", {
   LOI_ID: {
-    type: Sequelize.STRING,
+    type: Sequelize.INTEGER,
     primaryKey: true,
-    allowNull: false
+    autoIncrement: true,
   },
   LOI_TEN: {
     type: Sequelize.STRING

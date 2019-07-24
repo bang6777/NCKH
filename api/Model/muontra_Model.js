@@ -5,9 +5,10 @@ const db = require("../Config/db");
 
 const muontra_Model = db.define("muontra", {
   MUONTRA_ID: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    primaryKey: true
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+    allowNull: false
   },
   TK_ID: {
     type: Sequelize.STRING,
@@ -17,23 +18,31 @@ const muontra_Model = db.define("muontra", {
     }
   },
   XE_ID: {
-    type: Sequelize.STRING,
+    type: Sequelize.INTEGER,
     references: {
       model: xedap,
       key: "XE_ID"
     }
   },
-  MUON_THOIGIAN: {
-    type: Sequelize.STRING
-  },
+  MUON_THOIGIAN: { type: Sequelize.DATE, defaultValue: Sequelize.NOW },
   TRA_THOIGIAN: {
-    type: Sequelize.STRING
+    type: Sequelize.DATE
   },
-  MUON_VITRI: {
-    type: Sequelize.STRING
+  MUON_VITRI_LAT: {
+    type: Sequelize.DOUBLE,
+    defaultValue: 0.0                  
   },
-  TRA_VITRI: {
-    type: Sequelize.STRING
+  MUON_VITRI_LNG: {
+    type: Sequelize.DOUBLE,
+    defaultValue: 0.0                  
+  },
+  TRA_VITRI_LAT: {
+    type: Sequelize.DOUBLE,
+    defaultValue: 0.0
+  },
+  TRA_VITRI_LNG: {
+    type: Sequelize.DOUBLE,
+    defaultValue: 0.0
   }
 });
 
