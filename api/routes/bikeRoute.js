@@ -312,20 +312,20 @@ router.post("/xe/delete/:XE_ID", function (req, res) {
   });
 });
 
-//update vi tri xe
-router.post("/xe/update/:XE_ID", function (req, res) {
-  var XE_ID = req.body.XE_ID;
-  var XE_VITRI = req.body.XE_VITRI;
-  xe.updateXe(XE_ID, XE_VITRI, function (err, data) {
-    if (err) {
-      res.status(404).json({ message: "ERR" });
-    } else {
-      res.status(200).json({
-        message: "đã cập nhật thành công vitri cua xe có ID: " + XE_ID
-      });
-    }
-  });
-});
+// //update vi tri xe
+// router.post("/xe/update/:XE_ID", function (req, res) {
+//   var XE_ID = req.body.XE_ID;
+//   var XE_VITRI = req.body.XE_VITRI;
+//   xe.updateXe(XE_ID, XE_VITRI, function (err, data) {
+//     if (err) {
+//       res.status(404).json({ message: "ERR" });
+//     } else {
+//       res.status(200).json({
+//         message: "đã cập nhật thành công vitri cua xe có ID: " + XE_ID
+//       });
+//     }
+//   });
+// });
 // update xe
 router.post("/xe/updateInfo/:XE_ID", function (req, res) {
   var XE_ID = req.body.XE_ID;
@@ -341,20 +341,20 @@ router.post("/xe/updateInfo/:XE_ID", function (req, res) {
   });
 });
 
-// //update trang thai xe
-// router.post("/xe/updateTrangThai/XE:ID", function (req, res) {
-//   var XE_ID = req.body.XE_ID;
-//   var XE_TRANGTHAI = req.body.XE_TRANGTHAI;
+//update trang thai xe
+router.post("/xe/updateTrangThai/XE:ID", function (req, res) {
+  var XE_ID = req.body.XE_ID;
+  var XE_TRANGTHAI = req.body.XE_TRANGTHAI;
 
-//   xe.updateTrangThai(XE_ID, XE_TRANGTHAI, function (err, data) {
-//     if (err) {
-//       res.status(404).json({ message: "ERR" });
-//     } else {
-//       res.status(200).json({ message: "đã cập nhật thành công trạng thái xe ID: " + XE_ID });
-//       // return res.redirect("/xe");
-//     }
-//   });
-// });
+  xe.updateTrangThai(XE_ID, XE_TRANGTHAI, function (err, data) {
+    if (err) {
+      res.status(404).json({ message: "ERR" });
+    } else {
+      res.status(200).json({ message: "đã cập nhật thành công trạng thái xe ID: " + XE_ID });
+      // return res.redirect("/xe");
+    }
+  });
+});
 
 //update vi tri xe
 router.post("/xe/update/:XE_ID", function (req, res) {
