@@ -93,7 +93,10 @@ exports.updateTrangThai = (XE_ID, XE_TRANGTHAI, cb) => {
       cb(null, xe);
     });
 };
+<<<<<<< HEAD
 
+=======
+>>>>>>> 11c73075404a98e215b02b3a72f1ecf67f122996
 // //tim xe theo id
 // exports.findXeByID = (XE_ID, cb) => {
 //   xe_M

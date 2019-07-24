@@ -9,26 +9,11 @@ var muontra = require("../controller/muontra_Ctr");
 var vipham = require("../controller/vipham_Ctr");
 var khuonvien = require("../controller/khuonvien_Ctr");
 
+var viphamRoute = require("./vipham_Route");
 var muontraRoute = require("./muontra_Route");
 var huhongRoute = require("./huhong_Route");
-var viphamRoute = require("./vipham_Route");
 
-//-------------------------Token
-var passport = require("passport");
-var passportJWT = require("passport-jwt");
-var ExtractJwt = passportJWT.ExtractJwt;
-var JwtStrategy = passportJWT.Strategy;
-var jwtOptions = {};
-var jwt = require("jsonwebtoken");
-
-jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-jwtOptions.secretOrKey = "wowwow";
-//------------------------------
-//session
-var session = require("../../server");
-
-//--------------------------------------------------------
-
+const jwt = require("jsonwebtoken");
 //Login
 router.get("/login", function(req, res) {
   res.render("./../api/views/login");
@@ -57,6 +42,19 @@ router.post("/login", function(req, res) {
       res.status(200).json("ok");
       // res.end("done");
     }
+  });
+  // jwt.sign({taikhoan:taikhoan}, 'secretkey', (err,token)=>{
+  //   res.json({
+  //     token:token
+  //   })
+  // })
+});
+
+router.post("/api/login", (req, res) => {
+  jwt.sign({ taikhoan: taikhoan.TK_ID }, "secretkey", (err, token) => {
+    res.json({
+      token: token
+    });
   });
 });
 
@@ -345,6 +343,7 @@ router.post("/xe/updateInfo/:XE_ID", function(req, res) {
     }
   });
 });
+
 //update trang thai xe
 router.post("/xe/updateTrangThai/XE:ID", function(req, res) {
   var XE_ID = req.body.XE_ID;

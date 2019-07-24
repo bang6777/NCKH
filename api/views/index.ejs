@@ -1,50 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Trang chủ</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/usm/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
-    <!-- My css -->
-    <link rel="stylesheet" href="./css/login.css" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Trang chủ</title>
 
-    <!-- My js -->
-    <script src="./js/khuonvien.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/usm/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
+  <!-- My css -->
+  <link rel="stylesheet" href="./css/login.css" />
 
-    <!-- Data table -->
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" />
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-  </head>
+  <!-- My js -->
+  <script src="./js/khuonvien.js"></script>
 
-  <body>
-    <script>
-      $(document).ready(function() {
-        GetViTri();
-        Reload();
-      });
-    </script>
+  <!-- Data table -->
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" />
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+  <script src="jquery.js"></script>
 
-    <div id="header">
-      <%- include('header') -%>
-    </div>
-    <div class="container-fluid bg-white ">
-      <h3 class="p-2 text-center">XEM VỊ TRÍ HIỆN TẠI VÀ TRẠNG THÁI XE ĐẠP</h3>
+  <script src="/socket.io/socket.io.js"></script>
 
-      <!-- Map -->
-      <div id="googleMap" style="width: 100%; height :500px"></div>
-      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDr5qwgemJp4LtodR8lvXg382V-cDFK3bY&callback=myMap"></script>
-    </div>
-    <input id="location" onchange="UpdateViTri()" />
-    <button id="btnlocation">Send</button>
-  </body>
+</head>
+
+<body>
+  <script>
+    $(document).ready(function () {
+      GetViTri();
+      // UpdateViTri();
+      Reload();
+    });
+  </script>
+
+  <div id="header">
+    <%- include('header') -%>
+  </div>
+  <div class="container-fluid bg-white ">
+    <h3 class="p-2 text-center">XEM VỊ TRÍ HIỆN TẠI VÀ TRẠNG THÁI XE ĐẠP</h3>
+
+
+    <!-- Map -->
+    <div id="googleMap" style="width: 100%; height :500px"></div>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDr5qwgemJp4LtodR8lvXg382V-cDFK3bY&callback=myMap"></script>
+  </div>
+  <input type="text" id="location" class="btn-hidden">
+</body>
+<script>
+  var socket = io.connect("https://nckh-xedap.herokuapp.com");
+  socket.on("Server-send-location", function (data) {
+    $("#location").val(data);
+  });
+</script>
+
 </html>
