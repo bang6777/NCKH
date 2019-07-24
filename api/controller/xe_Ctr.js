@@ -120,3 +120,17 @@ exports.findXeByID = (XE_ID, cb) => {
       cb(null, xe);
     });
 };
+
+//tim xe theo id
+exports.findByID = (XE_ID, cb) => {
+  xe_M
+    .findOne({
+      where: {
+        XE_ID: XE_ID
+      }
+    })
+    .then(xe => {
+      console.log("xe: ", xe.XE_ID);
+      cb(null, xe);
+    });
+};
