@@ -365,11 +365,11 @@ router.post("/xe/update/:XE_ID", function (req, res) {
       res.status(404).json({ message: "ERR" });
     } else {
       xe.findXeByID(XE_ID, function (err, data) {
-        xe_trangthai = data.XE_TRANGTHAI;
-        res.status(200).json(xe_trangthai);
+
+        res.status(200).json(data);
       });
       res.status(200).json({
-        xe_trangthai
+        data
       });
     }
   });
