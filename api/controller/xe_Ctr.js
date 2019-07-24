@@ -121,7 +121,7 @@ exports.findXeByID = (XE_ID, cb) => {
     });
 };
 
-//tim xe theo id
+//tim xe theo id find one
 exports.findByID = (XE_ID, cb) => {
   xe_M
     .findOne({
