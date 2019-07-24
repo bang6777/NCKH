@@ -368,9 +368,9 @@ router.post("/xe/update/:XE_ID", function (req, res) {
         data = xee;
         res.json(xee);
       });
-      res.json({
+      res.json(
         xee
-      });
+      );
     }
   });
 });
