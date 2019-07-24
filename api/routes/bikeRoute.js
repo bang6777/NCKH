@@ -349,7 +349,7 @@ router.post("/xe/updateTT/:XE_ID", function (req, res) {
     if (err) {
       res.status(404).json({ message: "ERR" });
     } else {
-      res.status(404).json({ message: "Cập nhật thành công trạng thái" });
+      res.status(404).json({ message: "Cập nhật thành công trạng thái" + XE_TRANGTHAI });
 
     }
   });
