@@ -19,7 +19,7 @@ router.post("/api/taikhoan", function(req, res) {
     if (err) {
       res.status(200).json({ message: "ERR!" });
     } else {
-      res.status(200).json({ message: "đăng nhập" });
+      res.status(200).json(data);
     }
   });
 });
@@ -65,7 +65,7 @@ router.delete("/api/taikhoan/:TK_ID/muonxe", function(req, res) {
 //ds xe đang rảnh ok
 router.get("/api/xe", function(req, res) {
   xe.getXeRanh(function(err, data) {
-    res.status(200).json({ message: "ds xe đang rảnh" });
+    res.status(200).json(data);
   });
 });
 
@@ -73,7 +73,7 @@ router.get("/api/xe", function(req, res) {
 router.get("/api/xe/:XE_ID", function(req, res) {
   var XE_ID = req.params.XE_ID;
   xe.findXeByID(XE_ID, function(err, data) {
-    res.status(200).json({ message: "Lấy thông tin chi tiết xe" });
+    res.status(200).json(data);
   });
 });
 
@@ -84,7 +84,7 @@ router.get("/api/xe/:XE_ID", function(req, res) {
 
 //Lấy danh sách các loại hư hỏng ok
 router.get("/api/huhong", function(req, res) {
-  huhong.allHuHong(function(req, res) {
-    res.status(200).json({ message: "Lấy danh sách các loại hư hỏng" });
+  huhong.allHuHong(function(err, data) {
+    res.status(200).json(data);
   });
 });

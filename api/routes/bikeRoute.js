@@ -51,7 +51,9 @@ router.post("/login", function(req, res) {
       res.status(200).json("err");
     } else {
       // res.status(200).json({ message: "đã đăng nhập thành công!" });
+
       // res.session.TK_ID = req.body.TK_ID;
+      // console.log(req.session.TK_ID);
       res.status(200).json("ok");
       // res.end("done");
     }
