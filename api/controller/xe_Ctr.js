@@ -75,6 +75,24 @@ exports.updateXeAllInf = (XE_ID, XE_NAMSANXUAT, XE_GHICHU, cb) => {
     });
 };
 
+//cap nhat trang thai
+exports.updateTrangThai = (XE_ID, XE_TRANGTHAI, cb) => {
+  xe_M
+    .update(
+      {
+        XE_TRANGTHAI: XE_TRANGTHAI
+      },
+      {
+        where: {
+          XE_ID: XE_ID
+        }
+      }
+    )
+    .then(xe => {
+      console.log("Đã cập nhật trạng thái xe: ", xe.XE_ID);
+      cb(null, xe);
+    });
+};
 // //tim xe theo id
 // exports.findXeByID = (XE_ID, cb) => {
 //   xe_M

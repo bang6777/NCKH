@@ -340,6 +340,21 @@ router.post("/xe/updateInfo/:XE_ID", function (req, res) {
     }
   });
 });
+
+//update trang thai xe
+router.post("/xe/updateViTri/XE:ID", function (req, res) {
+  var XE_ID = req.body.XE_ID;
+  var XE_TRANGTHAI = req.body.XE_TRANGTHAI;
+
+  xe.updateTrangThai(XE_ID, XE_TRANGTHAI, function (err, data) {
+    if (err) {
+      res.status(404).json({ message: "ERR" });
+    } else {
+      res.status(200).json({ message: "đã cập nhật thành công trạng thái xe ID: " + XE_ID });
+      // return res.redirect("/xe");
+    }
+  });
+});
 //-------------Lỗi
 router.get("/loi", function (req, res) {
   loi.allLoi(function (err, data) {
