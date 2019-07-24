@@ -366,7 +366,7 @@ router.post("/xe/update/:XE_ID", function (req, res) {
     } else {
       xe.findXeByID(XE_ID, function (err, data) {
 
-        res.json(data);
+        res.json(data.XE_TRANGTHAI);
       });
       // res.json(
       //   xee
