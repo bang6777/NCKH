@@ -89,7 +89,7 @@ exports.updateTrangThai = (XE_ID, XE_TRANGTHAI, cb) => {
       }
     )
     .then(xe => {
-      console.log("Đã cập nhật trạng thái xe: ", xe.XE_ID);
+      console.log("Đã cập nhật xe: ", xe.XE_ID);
       cb(null, xe);
     });
 };
