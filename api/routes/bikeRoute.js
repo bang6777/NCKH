@@ -322,8 +322,11 @@ router.post("/xe/update/:XE_ID", function(req, res) {
     if (err) {
       res.status(404).json({ message: "ERR" });
     } else {
+      xe.findXeByID(XE_ID, function(err, data) {
+        res.status(200).json(data);
+      });
       res.status(200).json({
-        message: "đã cập nhật thành công vitri cua xe có ID: " + XE_ID
+        data
       });
     }
   });

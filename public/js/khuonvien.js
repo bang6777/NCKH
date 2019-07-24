@@ -261,10 +261,12 @@ async function GetViTri() {
 //-----------------Ham
 //6. Xoa tat ca marker
 function clearMarkers() {
+  alert(markers.length);
   setMapOnAll(null);
   markers = [];
   coordinates = [];
   id = 0;
+  alert("da clear");
 }
 
 function setMapOnAll(map) {
@@ -314,7 +316,7 @@ function createLatLng(coordString) {
 async function Reload() {
   await setInterval(function() {
     GetViTri();
-  }, 4000);
+  }, 10000);
 }
 
 // Update vị trí
