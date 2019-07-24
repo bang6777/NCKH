@@ -158,6 +158,7 @@ void setup() {
   while (WiFi.status() != WL_CONNECTED) { //Thoát ra khỏi vòng
     delay(500);
     Serial.print('.');
+    
   }
 
   Serial.println();
@@ -208,7 +209,7 @@ void setup() {
   while(socket.begin(host, port)){
     String strToaDo = toado();
   strToaDo = "\""+strToaDo +"\"";
-  socket.emit("hardware-send-location", strToaDo);
+  socket.emit("hardware-send-location", {id: id, vitri: strToaDo }strToaDo);
   }
 
   socket.on("Server-send-unlock", unlock);
