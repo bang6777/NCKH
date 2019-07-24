@@ -23,23 +23,23 @@ const bodyParser = require('body-parser');
 // jwtOptions.secretOrKey = 'tbtlh';
 
 
-io.on("connection", function (socket) {
-  console.log("a user connected " + socket.id);
-  socket.on("disconnect", function () {
-    console.log("a user disconnected " + socket.id);
-  });
-  socket.on("Client-send-connect", function (data) {
-    console.log("Node MCU send: " + data);
-  });
-  socket.on("hardware-send-location", function (location) {
-    console.log("hardware send location: " + location);
-    socket.broadcast.emit("Server-send-location", location);
-  });
-  socket.on("Client-send-unlock", function (data) {
-    console.log("Client send unlock: " + data);
-    socket.broadcast.emit("Server-send-unlock", data);
-  });
-});
+// io.on("connection", function (socket) {
+//   console.log("a user connected " + socket.id);
+//   socket.on("disconnect", function () {
+//     console.log("a user disconnected " + socket.id);
+//   });
+//   socket.on("Client-send-connect", function (data) {
+//     console.log("Node MCU send: " + data);
+//   });
+//   socket.on("hardware-send-location", function (location) {
+//     console.log("hardware send location: " + location);
+//     socket.broadcast.emit("Server-send-location", location);
+//   });
+//   socket.on("Client-send-unlock", function (data) {
+//     console.log("Client send unlock: " + data);
+//     socket.broadcast.emit("Server-send-unlock", data);
+//   });
+// });
 
 const port = process.env.PORT || 3000;
 

@@ -9,9 +9,10 @@ var muontra = require("../controller/muontra_Ctr");
 var vipham = require("../controller/vipham_Ctr");
 var khuonvien = require("../controller/khuonvien_Ctr");
 
+var viphamRoute = require("./vipham_Route")
 var muontraRoute = require("./muontra_Route");
 var huhongRoute = require("./huhong_Route");
-var khuonvien = require("../controller/khuonvien_Ctr");
+
 const jwt = require('jsonwebtoken');
 //Login
 router.get("/login", function (req, res) {
