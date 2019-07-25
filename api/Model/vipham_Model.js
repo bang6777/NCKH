@@ -4,6 +4,7 @@ const muontra = require("./muontra_Model");
 const loi = require("./loi_Model");
 const taikhoan = require("./taikhoan_Model");
 const xe = require("./xe_Model");
+const sequelizePaginate = require('sequelize-paginate')
 
 const vipham_Model = db.define("vipham", {
   VP_ID: {
@@ -59,4 +60,5 @@ const vipham_Model = db.define("vipham", {
 });
 
 db.sync();
+sequelizePaginate.paginate(vipham_Model);
 module.exports = vipham_Model;

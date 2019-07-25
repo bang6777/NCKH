@@ -2,6 +2,7 @@ const Sequelize = require("sequelize");
 const db = require("./../Config/db");
 const taikhoan = require("./taikhoan_Model");
 const xedap = require("./xe_Model");
+const sequelizePaginate = require('sequelize-paginate')
 
 const huhong_Model = db.define("huhong", {
   HH_ID: {
@@ -27,7 +28,9 @@ const huhong_Model = db.define("huhong", {
     type: Sequelize.STRING
   },
   HH_TRANGTHAI: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    defaultValue: "Đã báo"
+
   },
   HH_THOIGIAN:  { 
     type: Sequelize.DATE, 
@@ -48,4 +51,5 @@ const huhong_Model = db.define("huhong", {
 });
 
 db.sync();
+sequelizePaginate.paginate(huhong_Model);
 module.exports = huhong_Model;
