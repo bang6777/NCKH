@@ -5,9 +5,9 @@ const xedap = require("./xe_Model");
 
 const huhong_Model = db.define("huhong", {
   HH_ID: {
-    type: Sequelize.STRING,
+    type: Sequelize.INTEGER,
     primaryKey: true,
-    allowNull: false
+    autoIncrement: true,
   },
   TK_ID: {
     type: Sequelize.STRING,
@@ -17,7 +17,7 @@ const huhong_Model = db.define("huhong", {
     }
   },
   XE_ID: {
-    type: Sequelize.STRING,
+    type: Sequelize.INTEGER,
     references: {
       model: xedap,
       key: "XE_ID"
@@ -29,8 +29,21 @@ const huhong_Model = db.define("huhong", {
   HH_TRANGTHAI: {
     type: Sequelize.STRING
   },
-  HH_THOIGIAN: {
-    type: Sequelize.STRING
+  HH_THOIGIAN:  { 
+    type: Sequelize.DATE, 
+    defaultValue: Sequelize.NOW 
+  },
+  DA_XU_LY_HH: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  },
+  HU_HONG_LAT: {
+    type: Sequelize.DOUBLE,
+    defaultValue: 0.0
+  },
+  HU_HONG_LNG: {
+    type: Sequelize.DOUBLE,
+    defaultValue: 0.0
   }
 });
 

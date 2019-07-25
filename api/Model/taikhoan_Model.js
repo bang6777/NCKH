@@ -11,7 +11,10 @@ const taikhoan_Model = db.define("taikhoan", {
   TK_ID: {
     type: Sequelize.STRING,
     primaryKey: true,
-    allowNull: false
+    allowNull: false,
+    set(val) {
+      this.setDataValue('TK_ID', val.toUpperCase());
+    }
   },
   TK_PASSWORD: {
     type: Sequelize.STRING
@@ -30,7 +33,7 @@ const taikhoan_Model = db.define("taikhoan", {
     type: Sequelize.STRING
   },
   TK_HIEULUC: {
-    type: Sequelize.STRING
+    type: Sequelize.INTEGER
   }
 });
 
@@ -48,9 +51,9 @@ huhong_Model.belongsTo(taikhoan_Model, { foreignKey: "TK_ID" });
 huhong_Model.belongsTo(xe_Model, { foreignKey: "XE_ID" });
 
 //vi pham
-vipham_Model.belongsTo(taikhoan_Model, { foreignKey: "TK_ID" });
+// vipham_Model.belongsTo(taikhoan_Model, { foreignKey: "TK_ID" });
 vipham_Model.belongsTo(loi_Model, { foreignKey: "LOI_ID" });
-vipham_Model.belongsTo(xe_Model, { foreignKey: "XE_ID" });
+// vipham_Model.belongsTo(xe_Model, { foreignKey: "XE_ID" });
 vipham_Model.belongsTo(muontra_Model, { foreignKey: "MUONTRA_ID" });
 
 db.sync();

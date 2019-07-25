@@ -1,61 +1,41 @@
-var LocalStrategy = require('passport-local').Strategy;
-var taikhoan_M = require('../Model/taikhoan_Model');
-var passportJWT = require("passport-jwt");
-var ExtractJWT = passportJWT.ExtractJwt;
-var JWTStrategy = passportJWT.Strategy;
+// const jwt = require('jsonwebtoken');
+// const _ = require('lodash');
 
-module.exports = function (passport) {
+const passport = require('passport');
+const passportJWT = require('passport-jwt');
 
-    passport.serializeUser(function (taikhoan_M, done) {
-        done(null, taikhoan_M.TK_ID);
-    });
+let ExtractJwt = passportJWT.ExtractJwt;
+let JwtStrategy = passportJWT.Strategy;
 
-    passport.deserializeUser(function (TK_ID, done) {
-        taikhoan_M.findById(TK_ID, function (err, user) {
-            done(err, user);
-        });
-    });
+let jwtOptions = {};
+jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+jwtOptions.secretOrKey = 'HeThongQuanLyChoMuonXeDap';
+
+var TK_Model =  require("../Model/taikhoan_Model");
 
 
-    passport.use(new LocalStrategy(function (username, password, done) {
-        User.findOne({ username: username }, function (err, user) {
-            if (err) { return done(err); }
-            if (!user) {
-                return done(null, false, { message: 'Incorrect username.' });
-            }
-            if (!user.validPassword(password)) {
-                return done(null, false, { message: 'Incorrect password.' });
-            }
-            return done(null, user);
-        });
+// lets create our strategy for web token
+let strategy = new JwtStrategy(jwtOptions, function(jwt_payload, next) {
+  console.log('payload received', jwt_payload);
+  TK_Model.findOne({
+    where: {
+      TK_ID: jwt_payload.TK_ID,
+      TK_QUYEN: "Người dùng"
     }
-    ));
+  }).then(tk_result => {
+    // console.log('tk_result:'+ JSON.stringify(tk_result));
+    if(tk_result && tk_result.TK_HIEULUC == 1){
+      next(null, tk_result);
+    }else{
+      next(null, false);
+    }
+   }).catch(err => {
+    next(null, false);
+  });
 
-    passport.use(new JWTStrategy({
-        jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-        secretOrKey: 'your_jwt_secret'
-    },
-        function (jwtPayload, cb) {
-
-            // User.findOne({ username: jwtPayload.username }, function (err, user) {
-            //     if (err) { return done(err); }
-            //     if (!user) {
-            //         return done(null, false, { message: 'Incorrect username.' });
-            //     }
-            //     if (!user.validPassword(password)) {
-            //         return done(null, false, { message: 'Incorrect password.' });
-            //     }
-            //     return done(null, user);
-            // });
-            //find the user in db if needed. This functionality may be omitted if you store everything you'll need in JWT payload.
-            return User.findOne({ username: jwtPayload.username })
-                .then(user => {
-                    return cb(null, { id: user._id, username: user.username });
-                })
-                .catch(err => {
-                    return cb(err);
-                });
-        }
-    ));
-};
-
+  // let TK_Model = getUser({ id: jwt_payload.id });
+});
+// use the strategy
+passport.use(strategy);
+module.exports.getPassport = () => {return passport};
+module.exports.getSecretOrKey = () => {return jwtOptions.secretOrKey};

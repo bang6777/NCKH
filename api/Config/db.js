@@ -16,7 +16,7 @@ const Sequelize = require("sequelize");
 //   }
 // });
 
-// // Option 2: Passing parameters separately : CSDL OFFLINE
+// // // Option 2: Passing parameters separately : CSDL OFFLINE
 module.exports = new Sequelize("xedap", "root", "", {
   host: "localhost",
   dialect: "mysql",

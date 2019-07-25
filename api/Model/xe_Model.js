@@ -5,16 +5,27 @@ const muontra = require('./muontra_Model');
 const xe_Model = db.define("xe", {
 	// attributes
 	XE_ID: {
+		type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+		allowNull: false
+	},
+	XE_IMEI: {
 		type: Sequelize.STRING,
 		primaryKey: true,
 		allowNull: false
 	},
 	XE_TRANGTHAI: {
-		type: Sequelize.STRING
-		// allowNull defaults to true
+		type: Sequelize.INTEGER,
+	  	defaultValue: 1 // 1. Sẵn sàng sử dụng, 2. Đang được sử dụng, 3. Đang sửa chữa
 	},
-	XE_VITRI: {
-		type: Sequelize.STRING
+	XE_LAT: {
+	  type: Sequelize.DOUBLE,
+	  defaultValue: 0.0
+	},
+	XE_LNG: {
+	  type: Sequelize.DOUBLE,
+	  defaultValue: 0.0
 	},
 	XE_NAMSANXUAT: {
 		type: Sequelize.STRING
