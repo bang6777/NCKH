@@ -224,6 +224,20 @@ router.get("/taikhoan/search/:id&:hieuluc1&:hieuluc2", function(req, res) {
     res.status(200).json(data);
   });
 });
+
+//cap nhat mat khau
+router.post("/taikhoan/updateMK/:TK_ID", function(req, res) {
+  var TK_ID = req.body.TK_ID;
+  var TK_PASSWORD = req.body.TK_PASSWORD;
+  taikhoan.updateMK(TK_ID, TK_PASSWORD, function(err, data) {
+    if (err) {
+      res.status(404).json({ message: "ERR" });
+    } else {
+      res.status(200).json({ message: "đã cập nhật mật khẩu tài khoản ID: " + TK_ID });
+    }
+  });
+});
+
 //------------
 //Cap nhat
 router.post("/taikhoan/update", function(req, res) {
@@ -382,7 +396,7 @@ router.post("/loi/find", function(req, res) {
 // tìm lỗi theo id
 router.get("/loi/:LOI_ID", function(req, res) {
   var LOI_ID = req.params.LOI_ID;
-  loi.findLoiByID(LOI_ID, function(err, data) {
+  loi.findByID(LOI_ID, function(err, data) {
     res.status(200).json(data);
   });
 });

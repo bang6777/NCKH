@@ -573,6 +573,30 @@ function TK_HuHong(a) {
   });
 }
 
+//Cap nhat MK
+function EditMK(){
+  var tk_id = $("#txtTK_ID_editMK").val();
+  var tk_password = $("#txtTK_PASSWORD_editMK").val();
+  $.ajax({
+    url: "/taikhoan/updateMK/" + tk_id,
+    method: "POST",
+    data: JSON.stringify({
+      TK_ID: tk_id,
+      TK_PASSWORD : tk_password
+    }),
+    contentType: "application/json",
+    success: function() {
+      alert("Đã cập nhật thành công mật khẩu tài khoản: " + tk_id);
+      LoadView();
+      $("#btnCancelEditMK").click();
+    },
+    error: function(e) {
+      alert("Đã có lỗi xảy ra!");
+      console.log(e);
+    }
+  });
+}
+
 //Load View
 function LoadView() {
   var view = document.getElementById("slTK_View").value;

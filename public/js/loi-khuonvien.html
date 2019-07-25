@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="loi-khuonvien.js"></script>
+  </head>
+  <body>
+    <span id="onSegment"></span>
+    <span id="orientation"></span>
+    <span id="doIntersect"></span>
+    <span id="isInside"></span>
+    <script>
+      var p = { x: 0, y: 0 };
+      var q = { x: 2, y: 0 };
+      var r = { x: 4, y: 0 };
+
+      var p1 = { x: 0, y: 0 };
+      var p2 = { x: 0, y: 2 };
+      var q1 = { x: 4, y: 2 };
+      var q2 = { x: 4, y: 0 };
+      document.getElementById("onSegment").innerHTML = onSegment(p, q, r);
+      document.getElementById("orientation").innerHTML = orientation(p, q, r);
+      document.getElementById("doIntersect").innerHTML = doIntersect(p1, q1, p2, q2);
+
+      var polygon = [
+        { x: 10.029376161992367, y: 105.76672016600799 },
+        { x: 10.026239662558483, y: 105.77392323831748 },
+        { x: 10.025014121794612, y: 105.7655621222658 }
+      ];
+      var n = polygon.length;
+      var p = { x: 10.024763, y: 105.76693 };
+      document.getElementById("isInside").innerHTML = isInside(polygon, n, p);
+    </script>
+  </body>
+</html>
