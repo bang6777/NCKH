@@ -103,6 +103,16 @@ function GetAllViPham() {
                             <td id="loi[${i}]"></td>
                             <td>${vipham.VP_THOIGIAN}</td>
                             <td>
+                              <select
+                                id="slVP_TrangThai['${vipham.HH_ID}']"
+                                class="form-control form-control-sm"
+                                onchange="UpdateTrangThaiViPham('${vipham.HH_ID}')"
+                              >
+                                  <option value="0" >Chưa xử lý</option>
+                                  <option value="1" >Đã xử lý</option>
+                              </select>
+                            </td>
+                            <td>
                        <i class="fa fa-info-circle fa-lg" data-toggle="modal" data-target="#ChiTietViPham" onclick="ChiTietViPham('${
                          vipham.MUONTRA_ID
                        }')"></i>
