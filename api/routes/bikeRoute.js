@@ -509,6 +509,8 @@ router.get("/vipham/taikhoan/:TK_ID", viphamRoute.viewTaiKhoan);
 //vi pham - xe
 router.get("/vipham/xe/:XE_ID", viphamRoute.viewXe);
 
+//vi pham - cap nhat xu ly
+router.post("/vipham/updateXuLy", viphamRoute.updateXuLy);
 //-----------Hư hỏng
 router.get("/huhong", function(req, res) {
   huhong.allHuHong(function(err, data) {
