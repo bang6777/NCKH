@@ -52,7 +52,7 @@
               </select>
             </div>
           <input type="button" value="Thêm người dùng" class="btn btn-info mb-3 mx-3" id="btnAdd" data-toggle="modal"
-          data-target="#AddTK" />
+          data-target="#AddTK" onclick="ResetModal()" />
           
   
             
@@ -60,7 +60,7 @@
           
           <div class="form-group form-inline">
               <input type="button" value="Cấp lại mật khẩu" class="btn btn-info" id="btnEditMK" data-toggle="modal"
-              data-target="#EditMK" />
+              data-target="#EditMK" onclick="ResetModalMK()" />
           </div>
         </div>
 
@@ -355,7 +355,7 @@
                 <input type="text" name="TK_ID" id="txtTK_ID_editMK" class="form-control" required placeholder="Nhập ID tài khoản"/>
               </div>
               <div class="form-group ">
-                <input type="text" name="TK_PASSWORD" id="txtTK_PASSWORD_editMK" class="form-control" required placeholder="Nhập mật khẩu mới"/>
+                <input type="password" name="TK_PASSWORD" id="txtTK_PASSWORD_editMK" class="form-control" required placeholder="Nhập mật khẩu mới"/>
               </div>
             
           </div>

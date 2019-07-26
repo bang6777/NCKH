@@ -156,22 +156,24 @@ function ChiTietMuonTra(a) {
                       <td>Vị trí mượn</td>
                       <td>
                         <img src="./img/marker-red.png" height="20px" />
-                        ${mt.MUON_VITRI}
+                        ${mt.MUON_VITRI_LAT}, ${mt.MUON_VITRI_LNG}
                       </td>
                     </tr>
                     <tr>
                       <td>Vị trí trả</td>
                       <td>
                         <img src="./img/marker-green.png" height="20px" />
-                        ${mt.TRA_VITRI}
+                        ${mt.TRA_VITRI_LAT}, ${mt.TRA_VITRI_LNG}
                       </td>
                     </tr>
                     `;
-        vtMuon = mt.MUON_VITRI;
-        vtTra = mt.TRA_VITRI;
+        vtMuon_lat = mt.MUON_VITRI_LAT;
+        vtMuon_lng = mt.MUON_VITRI_LNG;
+        vtTra_lat = mt.TRA_VITRI_LAT;
+        vtTra_lng = mt.TRA_VITRI_LNG;
       });
       tb.append(mt_data);
-      MapPosition(vtMuon, vtTra);
+      MapPosition(vtMuon_lat, vtMuon_lng, vtTra_lat, vtTra_lng);
       GetAndDraw();
     },
     error: function(e) {
@@ -181,23 +183,23 @@ function ChiTietMuonTra(a) {
 }
 
 //Load map muon tra
-function MapPosition(vitriMuon, vitriTra) {
+function MapPosition(vitriMuonLat, vitriMuonLng, vitriTraLat, vitriTraLng) {
   var mapProp = {
     center: new google.maps.LatLng(10.0299337, 105.7684266),
     zoom: 15
   };
   map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
 
-  if (vitriMuon != null) {
-    var vtMuon = createLatLng(vitriMuon);
+  if (vitriMuonLat != null && vitriMuonLng != null) {
+    var vtMuon = new google.maps.LatLng(vitriMuonLat, vitriMuonLng);
     var markerMuon = new google.maps.Marker({
       position: vtMuon,
       map: map,
       icon: "./img/marker-red.png"
     });
   }
-  if (vitriTra != null) {
-    var vtTra = createLatLng(vitriTra);
+  if (vitriTraLat != null && vitriTraLng != null) {
+    var vtTra = new google.maps.LatLng(vitriTraLat, vitriTraLng);
     var markerTra = new google.maps.Marker({
       position: vtTra,
       map: map,

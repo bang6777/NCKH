@@ -290,12 +290,12 @@ router.post("/xe/find", function(req, res) {
 
 //them xe
 router.post("/xe", function(req, res) {
-  var XE_ID = req.body.XE_ID;
+  var XE_IMEI = req.body.XE_IMEI;
   var XE_NAMSANXUAT = req.body.XE_NAMSANXUAT;
   var XE_GHICHU = req.body.XE_GHICHU;
 
-  if (XE_ID == null) {
-    res.status(404).json({ message: "XE_ID null" });
+  if (XE_IMEI == null) {
+    res.status(404).json({ message: "XE_IMEI null" });
   }
   if (XE_NAMSANXUAT == null) {
     res.status(404).json({ message: "XE_NAMSANXUAT null" });
@@ -304,7 +304,7 @@ router.post("/xe", function(req, res) {
     res.status(404).json({ message: "XE_GHICHU null" });
   }
 
-  xe.addXe(XE_ID, XE_NAMSANXUAT, XE_GHICHU, 0, "", function(err, data) {
+  xe.addXe(XE_IMEI, XE_NAMSANXUAT, XE_GHICHU, 0, "", function(err, data) {
     if (err) {
       res.status(404).json({ message: "XE_ID null" });
     } else {
@@ -348,7 +348,8 @@ router.post("/xe/updateInfo/:XE_ID", function(req, res) {
   var XE_ID = req.body.XE_ID;
   var XE_NAMSANXUAT = req.body.XE_NAMSANXUAT;
   var XE_GHICHU = req.body.XE_GHICHU;
-  xe.updateXeAllInf(XE_ID, XE_NAMSANXUAT, XE_GHICHU, function(err, data) {
+  var XE_IMEI = req.body.XE_IMEI;
+  xe.updateXeAllInf(XE_ID, XE_IMEI, XE_NAMSANXUAT, XE_GHICHU, function(err, data) {
     if (err) {
       res.status(404).json({ message: "ERR" });
     } else {
@@ -403,19 +404,19 @@ router.get("/loi/:LOI_ID", function(req, res) {
 
 //them loi
 router.post("/loi", function(req, res) {
-  var LOI_ID = req.body.LOI_ID;
+  // var LOI_ID = req.body.LOI_ID;
   var LOI_TEN = req.body.LOI_TEN;
   var LOI_MOTA = req.body.LOI_MOTA;
-  if (LOI_ID == null) {
-    res.status(404).json({ message: "LOI_ID null" });
-  }
+  // if (LOI_ID == null) {
+  //   res.status(404).json({ message: "LOI_ID null" });
+  // }
   if (LOI_TEN == null) {
     res.status(404).json({ message: "LOI_TEN null" });
   }
   if (LOI_MOTA == null) {
     res.status(404).json({ message: "LOI_MOTA null" });
   }
-  loi.addLoi(LOI_ID, LOI_TEN, LOI_MOTA, function(err, data) {
+  loi.addLoi(LOI_TEN, LOI_MOTA, function(err, data) {
     if (err) {
       res.status(404).json({ message: "ERR!" });
     } else {
@@ -521,6 +522,9 @@ router.get("/vipham/taikhoan/:TK_ID", viphamRoute.viewTaiKhoan);
 
 //vi pham - xe
 router.get("/vipham/xe/:XE_ID", viphamRoute.viewXe);
+
+//vipham - chi tiet
+router.get("/vipham/chitiet/:MUONTRA_ID", viphamRoute.viewChiTietViPham);
 
 //-----------Hư hỏng
 router.get("/huhong", function(req, res) {

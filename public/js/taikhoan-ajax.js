@@ -1,18 +1,3 @@
-$(document).ready(function() {
-  $("#btnAdd").on("click", function() {
-    ResetModal();
-  });
-
-  // $("#search").on("keyup", function() {
-  //   var key = document.getElementById("search").value;
-  //   if (key == "") {
-  //     LoadView();
-  //   } else {
-  //     search_id(key);
-  //   }
-  // });
-});
-
 //Reset modal
 function ResetModal() {
   document.getElementById("txtTK_ID_add").value = "";
@@ -572,9 +557,14 @@ function TK_HuHong(a) {
     }
   });
 }
+//Reset data modal cap nhat MK
+function ResetModalMK() {
+  $("#txtTK_ID_editMK").val("");
+  $("#txtTK_PASSWORD_editMK").val("");
+}
 
 //Cap nhat MK
-function EditMK(){
+function EditMK() {
   var tk_id = $("#txtTK_ID_editMK").val();
   var tk_password = $("#txtTK_PASSWORD_editMK").val();
   $.ajax({
@@ -582,7 +572,7 @@ function EditMK(){
     method: "POST",
     data: JSON.stringify({
       TK_ID: tk_id,
-      TK_PASSWORD : tk_password
+      TK_PASSWORD: tk_password
     }),
     contentType: "application/json",
     success: function() {

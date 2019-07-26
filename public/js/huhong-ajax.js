@@ -217,7 +217,7 @@ function GetHHDangSua() {
       tb.html("");
       huhong_data = "";
 
-      if ($.fn.DataTable.isDataTable("#tbHuHong")) {
+      if ($.fn.DataTable.isDataTable("#tableTK")) {
         $("#tbHuHong")
           .DataTable()
           .destroy();

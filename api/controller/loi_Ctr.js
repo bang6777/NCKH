@@ -8,15 +8,15 @@ exports.allLoi = cb => {
   });
 };
 
-exports.addLoi = (LOI_ID, LOI_TEN, LOI_MOTA, cb) => {
+exports.addLoi = (LOI_TEN, LOI_MOTA, cb) => {
   loi_M
     .create({
-      LOI_ID: LOI_ID,
+      // LOI_ID: LOI_ID,
       LOI_TEN: LOI_TEN,
       LOI_MOTA: LOI_MOTA
     })
     .then(loi_bang => {
-      console.log("Da them loi ID: ", loi_bang.LOI_ID);
+      console.log("Da them loi moi! ");
       cb(null, loi_bang);
     });
 };

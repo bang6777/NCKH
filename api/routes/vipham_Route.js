@@ -13,3 +13,10 @@ exports.viewXe = function(req, res) {
     res.json(data);
   });
 };
+
+exports.viewChiTietViPham = function(req, res) {
+  var MUONTRA_ID = req.params.MUONTRA_ID;
+  viphamCtr.vipham_chitiet(MUONTRA_ID, function(err, data) {
+    res.json(data);
+  });
+};
