@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
   GetViTri();
 });
 
@@ -14,9 +14,9 @@ function GetViTri() {
     type: "GET",
     url: "/xe/vitri",
     contentType: "application/json",
-    success: function(response) {
-      $.each(response, function(i, xe) {
-        console.log(xe.XE_ID, xe.XE_VITRI, xe.XE_TRANGTHAI);
+    success: function (response) {
+      $.each(response, function (i, xe) {
+        console.log(xe.XE_ID, xe.XE_LAT, xe.XE_LNG, xe.XE_TRANGTHAI);
         if (xe.XE_VITRI == "") {
           var vt = createLatLng(xe.XE_VITRI);
           if (xe.XE_TRANGTHAI == "0") {
@@ -46,7 +46,7 @@ function GetViTri() {
         }
       });
     },
-    error: function(e) {
+    error: function (e) {
       console.log(e);
     }
   });
@@ -61,7 +61,7 @@ function createLatLng(coordString) {
 
 //Load lai tao marker
 function Reload() {
-  setInterval(function() {
+  setInterval(function () {
     GetViTri();
   }, 20000);
 }

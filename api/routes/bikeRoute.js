@@ -263,12 +263,12 @@ router.post("/xe/find", function (req, res) {
 
 //them xe
 router.post("/xe", function (req, res) {
-  var XE_ID = req.body.XE_ID;
+  var XE_IMEI = req.body.XE_IMEI;
   var XE_NAMSANXUAT = req.body.XE_NAMSANXUAT;
   var XE_GHICHU = req.body.XE_GHICHU;
 
-  if (XE_ID == null) {
-    res.status(404).json({ message: "XE_ID null" });
+  if (XE_IMEI == null) {
+    res.status(404).json({ message: "XE_IMEI null" });
   }
   if (XE_NAMSANXUAT == null) {
     res.status(404).json({ message: "XE_NAMSANXUAT null" });
@@ -277,9 +277,9 @@ router.post("/xe", function (req, res) {
     res.status(404).json({ message: "XE_GHICHU null" });
   }
 
-  xe.addXe(XE_ID, XE_NAMSANXUAT, XE_GHICHU, 0, "", function (err, data) {
+  xe.addXe(XE_IMEI, XE_NAMSANXUAT, XE_GHICHU, 0, "", function (err, data) {
     if (err) {
-      res.status(404).json({ message: "XE_ID null" });
+      res.status(404).json({ message: "XE_IMEI null" });
     } else {
       res.status(200).json({ message: "Đã thêm thành công!" });
     }
@@ -344,9 +344,10 @@ router.post("/xe/updateTT/:XE_ID", function (req, res) {
 //update vi tri xe
 router.post("/xe/update/:XE_ID", function (req, res) {
   var XE_ID = req.body.XE_ID;
-  var XE_VITRI = req.body.XE_VITRI;
+  var XE_LAT = req.body.XE_LAT;
+  var XE_LNG = req.body.XE_LNG;
   var XE_IMEI = req.body.XE_IMEI;
-  xe.updateXe(XE_ID, XE_IMEI, XE_VITRI, function (err, data) {
+  xe.updateXe(XE_ID, XE_IMEI, XE_LAT, XE_LNG, function (err, data) {
     if (err) {
       res.status(404).json({ message: "ERR" });
     } else {

@@ -38,15 +38,17 @@ exports.deleteXe = (XE_ID, cb) => {
       cb(err, null);
     });
 };
-exports.updateXe = (XE_ID, XE_VITRI, cb) => {
+exports.updateXe = (XE_ID, XE_IMEI, XE_LAT, XE_LNG, cb) => {
   xe_M
     .update(
       {
-        XE_VITRI: XE_VITRI
+        XE_LAT: XE_LAT,
+        XE_LNG: XE_LNG
       },
       {
         where: {
-          XE_ID: XE_ID
+          XE_ID: XE_ID,
+          XE_IMEI: XE_IMEI
         }
       }
     )

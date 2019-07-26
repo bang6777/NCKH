@@ -6,8 +6,8 @@ const xe_Model = db.define("xe", {
 	// attributes
 	XE_ID: {
 		type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
+		primaryKey: true,
+		autoIncrement: true,
 		allowNull: false
 	},
 	XE_IMEI: {
@@ -17,15 +17,15 @@ const xe_Model = db.define("xe", {
 	},
 	XE_TRANGTHAI: {
 		type: Sequelize.INTEGER,
-	  	defaultValue: 1 // 1. Sẵn sàng sử dụng, 2. Đang được sử dụng, 3. Đang sửa chữa
+		defaultValue: 0 // 0. Sẵn sàng sử dụng, 1. Đang được sử dụng, 2. Đang sửa chữa
 	},
 	XE_LAT: {
-	  type: Sequelize.DOUBLE,
-	  defaultValue: 0.0
+		type: Sequelize.DOUBLE,
+		defaultValue: 0.0
 	},
 	XE_LNG: {
-	  type: Sequelize.DOUBLE,
-	  defaultValue: 0.0
+		type: Sequelize.DOUBLE,
+		defaultValue: 0.0
 	},
 	XE_NAMSANXUAT: {
 		type: Sequelize.STRING
