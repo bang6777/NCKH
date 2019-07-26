@@ -27,7 +27,7 @@
     "passport-local": "^1.0.0",
     "pg": "*",
     "q": "^1.5.1",
-    "sequelize": "5.10.3",
+    "sequelize": "*",
     "sequence": "*",
     "socket.io": "*"
   },
