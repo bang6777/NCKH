@@ -102,6 +102,7 @@ function GetAllViPham() {
                             </td>
                             <td id="loi[${i}]"></td>
                             <td>${vipham.VP_THOIGIAN}</td>
+                            
                             <td>
                               <select
                                 id="slVP_TrangThai['${vipham.HH_ID}']"
@@ -126,6 +127,7 @@ function GetAllViPham() {
           success: function(response) {
             console.log(response.LOI_TEN);
             var loi_id = "loi[" + i + "]";
+            // alert(loi_id);
             document.getElementById(loi_id).innerHTML = response.LOI_TEN;
           },
           error: function(e) {
