@@ -332,7 +332,8 @@ router.post("/xe/updateInfo/:XE_ID", function (req, res) {
 router.post("/xe/updateTT/:XE_ID", function (req, res) {
   var XE_ID = req.body.XE_ID;
   var XE_TRANGTHAI = req.body.XE_TRANGTHAI;
-  xe.updateTrangThai(XE_ID, XE_TRANGTHAI, function (err, data) {
+  var XE_IMEI = req.body.XE_IMEI;
+  xe.updateTrangThai(XE_ID, XE_IMEI, XE_TRANGTHAI, function (err, data) {
     if (err) {
       res.status(404).json({ message: "ERR" });
     } else {

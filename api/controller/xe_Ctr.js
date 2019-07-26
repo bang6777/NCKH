@@ -79,7 +79,7 @@ exports.updateXeAllInf = (XE_ID, XE_IMEI, XE_NAMSANXUAT, XE_GHICHU, cb) => {
 };
 
 //cap nhat trang thai
-exports.updateTrangThai = (XE_ID, XE_TRANGTHAI, cb) => {
+exports.updateTrangThai = (XE_ID, XE_IMEI, XE_TRANGTHAI, cb) => {
   xe_M
     .update(
       {
@@ -87,7 +87,8 @@ exports.updateTrangThai = (XE_ID, XE_TRANGTHAI, cb) => {
       },
       {
         where: {
-          XE_ID: XE_ID
+          XE_ID: XE_ID,
+          XE_IMEI: XE_IMEI
         }
       }
     )
