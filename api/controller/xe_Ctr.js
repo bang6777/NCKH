@@ -38,12 +38,7 @@ exports.deleteXe = (XE_ID, cb) => {
       cb(err, null);
     });
 };
-<<<<<<< HEAD
 exports.updateXe = (XE_ID, XE_IMEI, XE_LAT, XE_LNG, cb) => {
-=======
-//cap nhat vi tri
-exports.updateXe = (XE_ID, XE_IMEI, XE_VITRI, cb) => {
->>>>>>> 09a36ccec3a21aea6c545bf08f48c8af22362f96
   xe_M
     .update(
       {
