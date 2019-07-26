@@ -73,3 +73,36 @@ exports.vipham_chitiet = function(MUONTRA_ID, cb) {
       console.log("All vi pham theo id:", JSON.stringify(dsViPham, null, 4));
     });
 };
+
+//cap nhat xu ly vi pham
+exports.updateXuLy = function(VP_ID, DA_XU_LY_VP, cb) {
+  vipham_M
+    .update(
+      {
+        DA_XU_LY_VP: DA_XU_LY_VP
+      },
+      {
+        where: {
+          VP_ID: VP_ID
+        }
+      }
+    )
+    .then(tk_bang => {
+      console.log("Đã cập nhật xử lý vi phạm: ", tk_bang.VP_ID);
+      cb(null, tk_bang);
+    });
+};
+
+//get chua xu ly
+exports.VP_ChuaXuLy = cb => {
+  vipham_M
+    .findAll({
+      where: {
+        DA_XU_LY_VP: 0
+      }
+    })
+    .then(vipham => {
+      cb(null, vipham);
+      console.log("All vipham:", JSON.stringify(vipham, null, 4));
+    });
+};

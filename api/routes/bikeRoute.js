@@ -498,9 +498,16 @@ router.get("/vipham", function (req, res) {
     res.render("./../api/views/vipham", { vipham: data });
   });
 });
-
+//get all
 router.get("/vipham/all", function (req, res) {
   vipham.allViPham(function (err, data) {
+    res.status(200).json(data);
+  });
+});
+
+//get chua xu ly
+router.get("/vipham/chuaxuly", function (req, res) {
+  vipham.VP_ChuaXuLy(function (err, data) {
     res.status(200).json(data);
   });
 });
@@ -510,6 +517,9 @@ router.get("/vipham/taikhoan/:TK_ID", viphamRoute.viewTaiKhoan);
 
 //vi pham - xe
 router.get("/vipham/xe/:XE_ID", viphamRoute.viewXe);
+
+//vi pham - cap nhat xu ly
+router.post("/vipham/updateXuLy", viphamRoute.updateXuLy);
 
 //-----------Hư hỏng
 router.get("/huhong", function (req, res) {

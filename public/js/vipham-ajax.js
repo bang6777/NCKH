@@ -102,23 +102,40 @@ function GetAllViPham() {
                             </td>
                             <td id="loi[${i}]"></td>
                             <td>${vipham.VP_THOIGIAN}</td>
-                            
-                            <td>
-                              <select
-                                id="slVP_TrangThai['${vipham.HH_ID}']"
-                                class="form-control form-control-sm"
-                                onchange="UpdateTrangThaiViPham('${vipham.HH_ID}')"
-                              >
-                                  <option value="0" >Chưa xử lý</option>
-                                  <option value="1" >Đã xử lý</option>
-                              </select>
-                            </td>
-                            <td>
-                       <i class="fa fa-info-circle fa-lg" data-toggle="modal" data-target="#ChiTietViPham" onclick="ChiTietViPham('${
-                         vipham.MUONTRA_ID
-                       }')"></i>
-                      </td>
-                    </tr>`;
+                          `;
+        if (vipham.DA_XU_LY_VP == 0) {
+          vipham_data += `<td>
+                                          <select
+                                            id="slVP_TrangThai['${vipham.HH_ID}']"
+                                            class="form-control form-control-sm"
+                                            onchange="UpdateTrangThaiViPham('${vipham.HH_ID}')"
+                                          >
+                                              <option value=0 selected=true >Chưa xử lý</option>
+                                              <option value=1 >Đã xử lý</option>
+                                          </select>
+                                        </td>
+                                        `;
+        } else if (vipham.DA_XU_LY_VP == 1) {
+          vipham_data += `<td>
+                                          <select
+                                            id="slVP_TrangThai['${vipham.VP_ID}']"
+                                            class="form-control form-control-sm"
+                                            onchange="UpdateTrangThaiViPham('${vipham.VP_ID}')"
+                                          >
+                                              <option value=0>Chưa xử lý</option>
+                                              <option value=1 selected=true >Đã xử lý</option>
+                                          </select>
+                                        </td>
+                                        `;
+        }
+
+        vipham_data += `<td>   
+                          <i class="fa fa-info-circle fa-lg" data-toggle="modal" data-target="#ChiTietViPham" onclick="ChiTietViPham('${
+                            vipham.MUONTRA_ID
+                          }')">
+                          </i>
+                        </td>
+                      </tr>`;
         $.ajax({
           url: "/loi/" + vipham.LOI_ID,
           data: JSON.stringify({ LOI_ID: vipham.LOI_ID }),
@@ -127,7 +144,6 @@ function GetAllViPham() {
           success: function(response) {
             console.log(response.LOI_TEN);
             var loi_id = "loi[" + i + "]";
-            // alert(loi_id);
             document.getElementById(loi_id).innerHTML = response.LOI_TEN;
           },
           error: function(e) {
@@ -372,6 +388,29 @@ function ChiTietViPham(a) {
       tb.append(vp_data);
     },
     error: function(e) {
+      console.log(e);
+    }
+  });
+}
+
+//update xu ly
+function UpdateTrangThaiViPham(a) {
+  var vp_id = a;
+
+  var vp_xuly = "slVP_TrangThai['" + vp_id + "']";
+  var c = document.getElementById(vp_xuly).value;
+
+  $.ajax({
+    url: "/vipham/updateXuLy",
+    method: "POST",
+    data: JSON.stringify({ VP_ID: vp_id, DA_XU_LY_VP: vp_xuly }),
+    contentType: "application/json",
+    success: function() {
+      alert("Đã cập nhật thành công xử lý vi phạm: " + vp_id);
+      // LoadView();
+    },
+    error: function(e) {
+      alert("Đã có lỗi xảy ra!");
       console.log(e);
     }
   });
