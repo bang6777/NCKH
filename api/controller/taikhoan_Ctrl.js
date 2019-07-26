@@ -205,3 +205,24 @@ exports.searchTK_ID = (id, hieuluc1, hieuluc2, cb) => {
       cb(null, tk);
     });
 };
+
+//cap nhat MK
+exports.updateMK = (TK_ID, TK_PASSWORD, cb) => {
+   const salt = bcrypt.genSaltSync();
+  TK_PASSWORD = bcrypt.hashSync(TK_PASSWORD, salt);
+  taikhoan_M
+    .update(
+      {
+       TK_PASSWORD: TK_PASSWORD
+      },
+      {
+        where: {
+          TK_ID: TK_ID
+        }
+      }
+    )
+    .then(tk_bang => {
+      console.log("Đã cập nhật mật khẩu tài khoản: ", tk_bang.TK_ID);
+      cb(null, tk_bang);
+    });
+};

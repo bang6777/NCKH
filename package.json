@@ -5,7 +5,7 @@
     "node": "8.11.1"
   },
   "description": "NCKH",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },

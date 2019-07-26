@@ -8,15 +8,15 @@ exports.allLoi = cb => {
   });
 };
 
-exports.addLoi = (LOI_ID, LOI_TEN, LOI_MOTA, cb) => {
+exports.addLoi = (LOI_TEN, LOI_MOTA, cb) => {
   loi_M
     .create({
-      LOI_ID: LOI_ID,
+      // LOI_ID: LOI_ID,
       LOI_TEN: LOI_TEN,
       LOI_MOTA: LOI_MOTA
     })
     .then(loi_bang => {
-      console.log("Da them loi ID: ", loi_bang.LOI_ID);
+      console.log("Da them loi moi! ");
       cb(null, loi_bang);
     });
 };
@@ -57,7 +57,22 @@ exports.updateLoi = (LOI_ID, LOI_TEN, LOI_MOTA, cb) => {
     });
 };
 
+//loi mang
 exports.findLoiByID = (LOI_ID, cb) => {
+  loi_M
+    .findAll({
+      where: {
+        LOI_ID: LOI_ID
+      }
+    })
+    .then(loi => {
+      console.log("Lỗi: ", loi.LOI_ID);
+      cb(null, loi);
+    });
+};
+
+//loi one
+exports.findByID = (LOI_ID, cb) => {
   loi_M
     .findOne({
       where: {
@@ -65,7 +80,7 @@ exports.findLoiByID = (LOI_ID, cb) => {
       }
     })
     .then(loi => {
-      console.log("Lỗi: ", loi.LOI_ID);
+      console.log("Lỗi: ", LOI_ID);
       cb(null, loi);
     });
 };

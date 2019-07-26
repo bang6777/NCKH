@@ -8,10 +8,10 @@ exports.allXe = cb => {
   });
 };
 
-exports.addXe = (XE_ID, XE_NAMSANXUAT, XE_GHICHU, XE_TRANGTHAI, XE_VITRI, cb) => {
+exports.addXe = (XE_IMEI, XE_NAMSANXUAT, XE_GHICHU, XE_TRANGTHAI, XE_VITRI, cb) => {
   xe_M
     .create({
-      XE_ID: XE_ID,
+      XE_IMEI: XE_IMEI,
       XE_NAMSANXUAT: XE_NAMSANXUAT,
       XE_GHICHU: XE_GHICHU,
       XE_TRANGTHAI: XE_TRANGTHAI,
@@ -56,10 +56,11 @@ exports.updateXe = (XE_ID, XE_VITRI, cb) => {
     });
 };
 
-exports.updateXeAllInf = (XE_ID, XE_NAMSANXUAT, XE_GHICHU, cb) => {
+exports.updateXeAllInf = (XE_ID, XE_IMEI, XE_NAMSANXUAT, XE_GHICHU, cb) => {
   xe_M
     .update(
       {
+        XE_IMEI: XE_IMEI,
         XE_NAMSANXUAT: XE_NAMSANXUAT,
         XE_GHICHU: XE_GHICHU
       },
@@ -93,19 +94,6 @@ exports.updateTrangThai = (XE_ID, XE_TRANGTHAI, cb) => {
       cb(null, xe);
     });
 };
-// //tim xe theo id
-// exports.findXeByID = (XE_ID, cb) => {
-//   xe_M
-//     .findAll({
-//       where: {
-//         XE_ID: XE_ID
-//       }
-//     })
-//     .then(xe => {
-//       console.log("tài khoản: ", xe.XE_ID);
-//       cb(null, xe);
-//     });
-// };
 
 //tim xe theo id
 exports.findXeByID = (XE_ID, cb) => {

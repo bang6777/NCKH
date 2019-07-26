@@ -43,23 +43,25 @@
       <div class="container-fluid">
         <div class="flex justify-content-between ">
           <div class="flex">
-              <input type="button" value="Thêm người dùng" class="btn btn-info mb-3" id="btnAdd" data-toggle="modal"
-              data-target="#AddTK" />
-  
             <div class="form-group form-inline">
-              <label class="mx-3">Lọc</label>
+              <label class="mr-3">Lọc</label>
               <select class="form-control form-control-md" id="slTK_View" onchange="LoadView()">
                 <option value="1">Còn hiệu lực</option>
                 <option value="0">Vô hiệu</option>
                 <option value="2">Xem tất cả</option>
               </select>
             </div>
+          <input type="button" value="Thêm người dùng" class="btn btn-info mb-3 mx-3" id="btnAdd" data-toggle="modal"
+          data-target="#AddTK" onclick="ResetModal()" />
+          
+  
+            
           </div>
           
-          <!-- <div class="form-group form-inline">
-              <label class="mr-3">Tìm theo ID</label>
-            <input type="text" class="form-control" placeholder="Nhập ...." id="search"/>
-          </div> -->
+          <div class="form-group form-inline">
+              <input type="button" value="Cấp lại mật khẩu" class="btn btn-info" id="btnEditMK" data-toggle="modal"
+              data-target="#EditMK" onclick="ResetModalMK()" />
+          </div>
         </div>
 
         <!-- Table TK -->
@@ -178,7 +180,7 @@
                     <input type="text" name="TK_DONVI" id="txtTK_DonVi_update" class="form-control" required />
                   </div> -->
                   <div class="form-group ">
-                    <select name="TK_DONVI" id="slTK_DonVi_edit" class="form-control">
+                    <select name="TK_DONVI" id="slTK_DonVi_update" class="form-control">
                       <option value="-1">Chọn đơn vị</option>
                       <option value="Công nghệ">Công nghệ</option>
                       <option value="CNTT & TT">CNTT & TT</option>
@@ -332,9 +334,47 @@
         </div>
       </div>
     </div>
+
+    <!-- Modal Edit MK -->
+    <div id="EditMK" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title text-uppercase">
+              CẤP LẠI MẬT KHẨU
+            </h4>
+            <button type="button" class="close" data-dismiss="modal">
+              &times;
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <form method="POST" enctype="application/x-www-form-urlencoded">
+              <div class="form-group ">
+                <input type="text" name="TK_ID" id="txtTK_ID_editMK" class="form-control" required placeholder="Nhập ID tài khoản"/>
+              </div>
+              <div class="form-group ">
+                <input type="password" name="TK_PASSWORD" id="txtTK_PASSWORD_editMK" class="form-control" required placeholder="Nhập mật khẩu mới"/>
+              </div>
+            
+          </div>
+          
+
+          <div class=" modal-footer">
+            <input type="button" value="Cập nhật" id="btnEditMK" class="btn btn-primary px-3"
+              onclick="EditMK()" />
+            <input type="button" value="Hủy" id="btnCancelEditMK" class="btn btn-danger px-3"
+              data-dismiss="modal" />
+          </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
-    </div>
-    </div>
-  </body>
+  </div>
+</div>
+</div>
+</body>
 
 </html>

@@ -27,6 +27,53 @@ function LoadTK(a) {
   });
 }
 
+// function GetAllViPham() {
+//   $.ajax({
+//     method: "GET",
+//     url: "/vipham/all",
+//     contenType: "application/json",
+//     success: function(response) {
+//       console.log(response);
+//       var tb = $("#tb");
+//       tb.html("");
+//       vipham_data = "";
+
+//       if ($.fn.DataTable.isDataTable("#tbViPham")) {
+//         $("#tbViPham")
+//           .DataTable()
+//           .destroy();
+//       }
+//       $("#tbViPham tbody").empty();
+
+//       $.each(response, function(i, vipham) {
+//         vipham_data += `<tr>
+//                             <td>${vipham.VP_ID}</td>
+//                             <td class="chitiet">
+//                               <a onclick="Load_ChiTietMuonTra('${vipham.MUONTRA_ID}')" data-toggle="modal" data-target="#ChiTietMuonTra">
+//                                 ${vipham.MUONTRA_ID}
+//                               </a>
+//                             </td>
+//                             <td>${vipham.LOI_ID}</td>
+//                             <td>${vipham.VP_THOIGIAN}</td>
+//                             <td>
+//                        <i class="fa fa-info-circle fa-lg" data-toggle="modal" data-target="#ChiTietViPham" onclick="ChiTietViPham('${
+//                          vipham.MUONTRA_ID
+//                        }')"></i>
+//                       </td>
+//                       `;
+
+//         vipham_data += `</tr>`;
+//       });
+//       tb.append(vipham_data);
+//       LoadDataTable();
+//     },
+//     error: function(e) {
+//       alert("Đã có lỗi xảy ra!");
+//       console.log(e);
+//     }
+//   });
+// }
+
 function GetAllViPham() {
   $.ajax({
     method: "GET",
@@ -53,18 +100,29 @@ function GetAllViPham() {
                                 ${vipham.MUONTRA_ID}
                               </a>
                             </td>
-                            <td>${vipham.LOI_ID}</td>
-                            <td>${vipham.TK_ID}</td>
-                            <td>${vipham.XE_ID}</td>
+                            <td id="loi[${i}]"></td>
                             <td>${vipham.VP_THOIGIAN}</td>
                             <td>
                        <i class="fa fa-info-circle fa-lg" data-toggle="modal" data-target="#ChiTietViPham" onclick="ChiTietViPham('${
-                         vipham.VP_ID
+                         vipham.MUONTRA_ID
                        }')"></i>
                       </td>
-                      `;
-
-        vipham_data += `</tr>`;
+                    </tr>`;
+        $.ajax({
+          url: "/loi/" + vipham.LOI_ID,
+          data: JSON.stringify({ LOI_ID: vipham.LOI_ID }),
+          method: "GET",
+          contentType: "application/json",
+          success: function(response) {
+            console.log(response.LOI_TEN);
+            var loi_id = "loi[" + i + "]";
+            document.getElementById(loi_id).innerHTML = response.LOI_TEN;
+          },
+          error: function(e) {
+            alert("Đã có lỗi xảy ra!");
+            console.log(e);
+          }
+        });
       });
       tb.append(vipham_data);
       LoadDataTable();
@@ -78,10 +136,6 @@ function GetAllViPham() {
 
 function Load_ChiTietMuonTra(a) {
   var mt_id = a;
-  var vtMuon = "";
-  var vtTra = "";
-  // loadKhuonVien();
-
   $.ajax({
     type: "POST",
     url: "/muontra/find",
@@ -117,22 +171,24 @@ function Load_ChiTietMuonTra(a) {
                       <td>Vị trí mượn</td>
                       <td>
                         <img src="./img/marker-red.png" height="20px" />
-                        ${mt.MUON_VITRI}
+                        ${mt.MUON_VITRI_LAT}, ${mt.MUON_VITRI_LNG}
                       </td>
                     </tr>
                     <tr>
                       <td>Vị trí trả</td>
                       <td>
                         <img src="./img/marker-green.png" height="20px" />
-                        ${mt.TRA_VITRI}
+                        ${mt.TRA_VITRI_LAT}, ${mt.TRA_VITRI_LNG}
                       </td>
                     </tr>
                     `;
-        vtMuon = mt.MUON_VITRI;
-        vtTra = mt.TRA_VITRI;
+        vtMuon_lat = mt.MUON_VITRI_LAT;
+        vtMuon_lng = mt.MUON_VITRI_LNG;
+        vtTra_lat = mt.TRA_VITRI_LAT;
+        vtTra_lng = mt.TRA_VITRI_LNG;
       });
       tb.append(mt_data);
-      MapPosition(vtMuon, vtTra);
+      MapPosition(vtMuon_lat, vtMuon_lng, vtTra_lat, vtTra_lng);
       GetAndDraw();
     },
     error: function(e) {
@@ -142,23 +198,23 @@ function Load_ChiTietMuonTra(a) {
 }
 
 //Load map muon tra
-function MapPosition(vitriMuon, vitriTra) {
+function MapPosition(vitriMuonLat, vitriMuonLng, vitriTraLat, vitriTraLng) {
   var mapProp = {
     center: new google.maps.LatLng(10.0299337, 105.7684266),
     zoom: 15
   };
   map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
 
-  if (vitriMuon != null) {
-    var vtMuon = createLatLng(vitriMuon);
+  if (vitriMuonLat != null && vitriMuonLng != null) {
+    var vtMuon = new google.maps.LatLng(vitriMuonLat, vitriMuonLng);
     var markerMuon = new google.maps.Marker({
       position: vtMuon,
       map: map,
       icon: "./img/marker-red.png"
     });
   }
-  if (vitriTra != null) {
-    var vtTra = createLatLng(vitriTra);
+  if (vitriTraLat != null && vitriTraLng != null) {
+    var vtTra = new google.maps.LatLng(vitriTraLat, vitriTraLng);
     var markerTra = new google.maps.Marker({
       position: vtTra,
       map: map,
@@ -215,7 +271,7 @@ function drawKhuonVien(coordinates) {
 function LoadDataTable() {
   table = $("#tbViPham").DataTable({
     stateSave: true,
-    columnDefs: [{ targets: [1, 2, 3, 4, 5, 6], searchable: false }],
+    columnDefs: [{ targets: [1, 2, 3, 4], searchable: false }],
     ordering: false,
     language: {
       lengthMenu: "Hiển thị _MENU_ dòng dữ liệu trên một trang:",
@@ -245,66 +301,66 @@ function createLatLng(coordString) {
   return new google.maps.LatLng(a[0], a[1]);
 }
 
-// function ChiTietViPham(a) {
-//   var vp_id = a;
-//   //var vtMuon = "";
-//   //var vtTra = "";
-//   //loadKhuonVien();
-
-//   $.ajax({
-//     type: "POST",
-//     url: "/vipham/find",
-//     data: JSON.stringify({ VP_ID: vp_id }),
-//     contentType: "application/json",
-//     success: function(response) {
-//       var tb = $("#tbCTVP");
-//       tb.html("");
-//       vp_data = "";
-//       $.each(response, function(i, vp) {
-//         console.log(vp);
-//         vp_data += `<tr>
-//                       <td>ID vi phạm</td>
-//                       <td>${vp.VP_ID}</td>
-//                     </tr>
-//                     <tr>
-//                       <td>ID tài khoản</td>
-//                       <td>${mt.TK_ID}</td>
-//                     </tr>
-//                     <tr>
-//                       <td>ID xe</td>
-//                       <td>${mt.XE_ID}</td>
-//                     </tr>
-//                     <tr>
-//                       <td>Thời gian mượn</td>
-//                       <td>${mt.MUON_THOIGIAN}</td>
-//                     </tr>
-//                     <tr>
-//                       <td>Thời gian trả</td>
-//                       <td>${mt.TRA_THOIGIAN}</td>
-//                     </tr>
-//                     <tr>
-//                       <td>Vị trí mượn</td>
-//                       <td>
-//                         <img src="./img/marker-red.png" height="20px" />
-//                         ${mt.MUON_VITRI}
-//                       </td>
-//                     </tr>
-//                     <tr>
-//                       <td>Vị trí trả</td>
-//                       <td>
-//                         <img src="./img/marker-green.png" height="20px" />
-//                         ${mt.TRA_VITRI}
-//                       </td>
-//                     </tr>
-//                     `;
-//         vtMuon = mt.MUON_VITRI;
-//         vtTra = mt.TRA_VITRI;
-//       });
-//       tb.append(mt_data);
-//       MapPosition(vtMuon, vtTra);
-//     },
-//     error: function(e) {
-//       console.log(e);
-//     }
-//   });
-// }
+function ChiTietViPham(a) {
+  var mt_id = a;
+  $.ajax({
+    type: "GET",
+    url: "/vipham/chitiet/" + mt_id,
+    // data: JSON.stringify({ VP_ID: vp_id }),
+    contentType: "application/json",
+    success: function(vp) {
+      var tb = $("#tbCTVP");
+      tb.html("");
+      vp_data = "";
+      console.log(vp);
+      vp_data += `<tr>
+                      <td>ID vi phạm</td>
+                      <td>${vp.VP_ID}</td>
+                    </tr>
+                    <tr>
+                      <td>ID mượn trả</td>
+                      <td>${vp.MUONTRA_ID}</td>
+                    </tr>
+                    <tr>
+                      <td>ID người dùng</td>
+                      <td>${vp.muontra.TK_ID}</td>
+                    </tr>
+                    <tr>
+                      <td>Xe vi phạm</td>
+                      <td>${vp.muontra.XE_ID}</td>
+                    </tr>
+                    <tr>
+                      <td>ID lỗi</td>
+                      <td>${vp.LOI_ID}</td>
+                    </tr>
+                    <tr>
+                      <td>Tên lỗi</td>
+                      <td id="id_loi[${vp.LOI_ID}]"></td>
+                    </tr>
+                    <tr>
+                      <td>Thời gian vi phạm</td>
+                      <td>${vp.VP_THOIGIAN}</td>
+                    </tr>
+                    `;
+      $.ajax({
+        url: "/loi/" + vp.LOI_ID,
+        data: JSON.stringify({ LOI_ID: vp.LOI_ID }),
+        method: "GET",
+        contentType: "application/json",
+        success: function(response) {
+          console.log(response.LOI_TEN);
+          var loi_id = "id_loi[" + response.LOI_ID + "]";
+          document.getElementById(loi_id).innerHTML = response.LOI_TEN;
+        },
+        error: function(e) {
+          alert("Đã có lỗi xảy ra!");
+          console.log(e);
+        }
+      });
+      tb.append(vp_data);
+    },
+    error: function(e) {
+      console.log(e);
+    }
+  });
+}

@@ -30,7 +30,6 @@
   <script src="jquery.js"></script>
 
   <script src="/socket.io/socket.io.js"></script>
-
 </head>
 
 <body>
@@ -38,7 +37,7 @@
     $(document).ready(function () {
       GetViTri();
       // UpdateViTri();
-      // Reload();
+      Reload();
     });
   </script>
 
@@ -47,14 +46,11 @@
   </div>
   <div class="container-fluid bg-white ">
     <h3 class="p-2 text-center">XEM VỊ TRÍ HIỆN TẠI VÀ TRẠNG THÁI XE ĐẠP</h3>
-
-
     <!-- Map -->
     <div id="googleMap" style="width: 100%; height :500px"></div>
     <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDr5qwgemJp4LtodR8lvXg382V-cDFK3bY&callback=myMap"></script>
   </div>
-  <input type="text" id="location" class="btn-hidden">
 </body>
 <script>
   var socket = io.connect("https://nckh-xedap.herokuapp.com");

@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="./css/login.css" />
     <!-- My js -->
     <script src="./js/muontra-ajax.js"></script>
+    <script src="./js/tk-muontra-ajax.js"></script>
 
     <!-- Data table -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" />
@@ -24,6 +25,9 @@
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <!-- Datetime picker -->
+    <link rel="stylesheet prefetch" href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" />
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
   </head>
 
   <body onload="getAllMuonTra()">
@@ -36,14 +40,20 @@
       <h2 class="text-center font-weight-semi-bold text-dark mt-3">
         THỐNG KÊ MƯỢN TRẢ XE
       </h2>
-      <div class="form-group form-inline col-lg-2">
+      <div class="form-group form-inline">
         <label class="mr-3">Lọc</label>
         <select class="form-control form-control-sm" id="slMuonTra_View" onchange="LoadView()">
           <option value="1">Ngày</option>
           <option value="0">Tháng</option>
           <option value="2">Năm</option>
         </select>
+        <label class="mx-3">Chọn ngày: </label>
+        <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
+          <input class="form-control" readonly="" type="text" />
+          <span class="input-group-addon"></span>
+        </div>
       </div>
+
       <div class="container-fluid">
         <!-- Table muon tra -->
         <div class="table-responsive">

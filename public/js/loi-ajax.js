@@ -1,19 +1,9 @@
-$(document).ready(function() {
-  $("#btnAdd").on("click", function() {
-    ResetModal();
-  });
-  // $("#tableTK").on("draw.dt", function() {
-  //   LoadView();
-  // });
-});
-
 //Reset modal
 function ResetModal() {
-  document.getElementById("txtLoi_ID_add").value = "";
   document.getElementById("txtLoi_TenLoi_add").value = "";
   document.getElementById("txtLoi_MoTa_add").value = "";
 
-  $("#LOI_alert").html("");
+  // $("#LOI_alert").html("");
 }
 
 function GetAllLoi() {
@@ -59,46 +49,40 @@ function GetAllLoi() {
 }
 
 function AddLoi() {
-  var loi_id = $("#txtLoi_ID_add").val();
+  // var loi_id = $("#txtLoi_ID_add").val();
   var loi_mota = $("#txtLoi_MoTa_add").val();
   var loi_tenloi = $("#txtLoi_TenLoi_add").val();
   // alert(xe_id + "------" + xe_namsanxuat + xe_ghichu);
-  if (loi_id == "" || loi_mota == "" || loi_tenloi == "") {
+  if (loi_mota == "" || loi_tenloi == "") {
     alert("Vui lòng điền đầy đủ các trường!");
   } else {
+    // $.ajax({
+    //   type: "POST",
+    //   url: "/loi/find",
+    //   data: JSON.stringify({ LOI_ID: loi_id }),
+    //   contentType: "application/json",
+    //   success: function(response) {
+    //     var length = Object.keys(response).length;
+    //     console.log(length);
+    //     if (length > 0) {
+    //       $("#LOI_alert").html("ID đã tồn tại. Vui lòng chọn ID khác!");
+    //     } else {
     $.ajax({
-      type: "POST",
-      url: "/loi/find",
-      data: JSON.stringify({ LOI_ID: loi_id }),
+      url: "/loi",
+      method: "POST",
+      data: JSON.stringify({
+        // LOI_ID: loi_id,
+        LOI_TEN: loi_tenloi,
+        LOI_MOTA: loi_mota
+      }),
       contentType: "application/json",
-      success: function(response) {
-        var length = Object.keys(response).length;
-        console.log(length);
-        if (length > 0) {
-          $("#LOI_alert").html("ID đã tồn tại. Vui lòng chọn ID khác!");
-        } else {
-          $.ajax({
-            url: "/loi",
-            method: "POST",
-            data: JSON.stringify({
-              LOI_ID: loi_id,
-              LOI_TEN: loi_tenloi,
-              LOI_MOTA: loi_mota
-            }),
-            contentType: "application/json",
-            success: function() {
-              GetAllLoi();
-              $("#btnCancelSave").click();
-              alert("Đã thêm thành công loi: " + loi_id);
-            },
-            error: function(e) {
-              alert("Đã có lỗi xảy ra!");
-              console.log(e);
-            }
-          });
-        }
+      success: function() {
+        GetAllLoi();
+        $("#btnCancelSave").click();
+        alert("Đã thêm thành công tên lỗi!");
       },
       error: function(e) {
+        alert("Đã có lỗi xảy ra!");
         console.log(e);
       }
     });
@@ -136,8 +120,8 @@ function UpdateModal(a) {
   var tk = a;
 
   $.ajax({
-    type: "POST",
-    url: "/loi/find",
+    type: "GET",
+    url: "/loi/" + tk,
     data: JSON.stringify({ LOI_ID: tk }),
     contentType: "application/json",
     success: function(loi) {
@@ -156,7 +140,7 @@ function UpdateModal(a) {
 
 function Delete(a) {
   var loi_id = a;
-  var ans = confirm("Bạn có muốn xóa tài khoản: " + loi_id + "?");
+  var ans = confirm("Bạn có muốn xóa lỗi: " + loi_id + "?");
   if (ans == true) {
     $.ajax({
       url: "/loi/delete/" + loi_id,
@@ -165,9 +149,9 @@ function Delete(a) {
       contentType: "application/json",
       success: function(res) {
         if (res == "fk") {
-          alert("Không thể xóa tài khoản vì có vi phạm, mượn trả hoặc báo hư hỏng!");
+          alert("Không thể xóa lỗi vì có vi phạm, mượn trả hoặc báo hư hỏng!");
         } else if (res == "ok") {
-          alert("Đã xóa tài khoản: " + loi_id);
+          alert("Đã xóa lỗi: " + loi_id);
         }
         GetAllLoi();
       },

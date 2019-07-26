@@ -1,15 +1,6 @@
-$(document).ready(function() {
-  $("#btnAdd").on("click", function() {
-    ResetModal();
-  });
-  // $("#tableTK").on("draw.dt", function() {
-  //   LoadView();
-  // });
-});
-
 //Reset modal
 function ResetModal() {
-  document.getElementById("txtXe_ID_add").value = "";
+  // document.getElementById("txtXe_ID_add").value = "";
   document.getElementById("txtXe_NamSanXuat_add").value = "";
   document.getElementById("txtXe_GhiChu_add").value = "";
   $("#XE_alert").html("");
@@ -17,48 +8,46 @@ function ResetModal() {
 
 //Add
 function AddXE() {
-  var xe_id = $("#txtXe_ID_add").val();
+  // var xe_id = $("#txtXe_ID_add").val();
   var xe_namsanxuat = $("#txtXe_NamSanXuat_add").val();
+  var xe_imei = $("#txtXe_Imei_add").val();
   var xe_ghichu = $("#txtXe_GhiChu_add").val();
   // alert(xe_id + "------" + xe_namsanxuat + xe_ghichu);
-  if (xe_id == "" || xe_namsanxuat == "" || xe_ghichu == "") {
+  if (xe_namsanxuat == "" || xe_ghichu == "" || xe_imei == "") {
     alert("Vui lòng điền đầy đủ các trường!");
   } else {
+    // $.ajax({
+    //   type: "POST",
+    //   url: "/xe/find",
+    //   data: JSON.stringify({ XE_ID: xe_id }),
+    //   contentType: "application/json",
+    //   success: function(response) {
+    //     var length = Object.keys(response).length;
+    //     console.log(length);
+    //     if (length > 0) {
+    //       $("#XE_alert").html("ID đã tồn tại. Vui lòng chọn ID khác!");
+    //     } else {
     $.ajax({
-      type: "POST",
-      url: "/xe/find",
-      data: JSON.stringify({ XE_ID: xe_id }),
+      url: "/xe",
+      method: "POST",
+      data: JSON.stringify({
+        // XE_ID: xe_id,
+        XE_NAMSANXUAT: xe_namsanxuat,
+        XE_GHICHU: xe_ghichu,
+        XE_IMEI: xe_imei
+      }),
       contentType: "application/json",
-      success: function(response) {
-        var length = Object.keys(response).length;
-        console.log(length);
-        if (length > 0) {
-          $("#XE_alert").html("ID đã tồn tại. Vui lòng chọn ID khác!");
-        } else {
-          $.ajax({
-            url: "/xe",
-            method: "POST",
-            data: JSON.stringify({
-              XE_ID: xe_id,
-              XE_NAMSANXUAT: xe_namsanxuat,
-              XE_GHICHU: xe_ghichu
-            }),
-            contentType: "application/json",
-            success: function() {
-              GetAllXE();
-              $("#btnCancelSave").click();
-              alert("Đã thêm thành công xe: " + xe_id);
-            },
-            error: function(e) {
-              alert("Đã có lỗi xảy ra!");
-              console.log(e);
-            }
-          });
-        }
+      success: function() {
+        GetAllXE();
+        $("#btnCancelSave").click();
+        alert("Đã thêm thành công xe! ");
       },
       error: function(e) {
+        alert("Đã có lỗi xảy ra!");
         console.log(e);
       }
+      // });
+      // }
     });
   }
 }
@@ -84,6 +73,7 @@ function GetAllXE() {
       $.each(response, function(i, xe) {
         xe_data += `<tr>
                       <td>${xe.XE_ID}</td>
+                      <td>${xe.XE_IMEI}</td>
                       <td>${xe.XE_NAMSANXUAT}</td>
                       <td>${xe.XE_GHICHU}</td>
                       <td class="">
@@ -135,12 +125,13 @@ function UpdateInfo() {
   var xe_id = $("#txtXe_ID_update").val();
   var xe_namsanxuat = $("#txtXe_NamSanXuat_update").val();
   var xe_ghichu = $("#txtXe_GhiChu_update").val();
-
+  var xe_imei = $("#txtXe_Imei_update").val();
   $.ajax({
     url: "/xe/updateInfo/" + xe_id,
     method: "POST",
     data: JSON.stringify({
       XE_ID: xe_id,
+      XE_IMEI: xe_imei,
       XE_NAMSANXUAT: xe_namsanxuat,
       XE_GHICHU: xe_ghichu
     }),
@@ -157,8 +148,6 @@ function UpdateInfo() {
   });
 }
 
-
-
 function UpdateModal(a) {
   var tk = a;
 
@@ -173,6 +162,7 @@ function UpdateModal(a) {
         $("#txtXe_ID_update").val(xe.XE_ID);
         $("#txtXe_NamSanXuat_update").val(xe.XE_NAMSANXUAT);
         $("#txtXe_GhiChu_update").val(xe.XE_GHICHU);
+        $("#txtXe_Imei_update").val(xe.XE_IMEI);
       });
     },
     error: function(e) {
@@ -183,7 +173,7 @@ function UpdateModal(a) {
 
 function Delete(a) {
   var xe_id = a;
-  var ans = confirm("Bạn có muốn xóa tài khoản: " + xe_id + "?");
+  var ans = confirm("Bạn có muốn xóa xe: " + xe_id + "?");
   var r = "";
   if (ans == true) {
     $.ajax({
@@ -193,9 +183,9 @@ function Delete(a) {
       contentType: "application/json",
       success: function(res) {
         if (res == "fk") {
-          alert("Không thể xóa tài khoản vì có vi phạm, mượn trả hoặc báo hư hỏng!");
+          alert("Không thể xóa xe vì có vi phạm, mượn trả hoặc báo hư hỏng!");
         } else if (res == "ok") {
-          alert("Đã xóa tài khoản: " + xe_id);
+          alert("Đã xóa xe: " + xe_id);
         }
         GetAllXE();
       },
