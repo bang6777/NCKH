@@ -345,7 +345,8 @@ router.post("/xe/updateTT/:XE_ID", function (req, res) {
 router.post("/xe/update/:XE_ID", function (req, res) {
   var XE_ID = req.body.XE_ID;
   var XE_VITRI = req.body.XE_VITRI;
-  xe.updateXe(XE_ID, XE_VITRI, function (err, data) {
+  var XE_IMEI = req.body.XE_IMEI;
+  xe.updateXe(XE_ID, XE_IMEI, XE_VITRI, function (err, data) {
     if (err) {
       res.status(404).json({ message: "ERR" });
     } else {
