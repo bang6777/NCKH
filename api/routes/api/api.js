@@ -12,13 +12,13 @@ router.post("/api/taikhoan", function (req, res) {
   var TK_ID = req.body.TK_ID;
   var TK_PASSWORD = req.body.TK_PASSWORD;
   if (TK_ID == null) {
-    res.status(404).json({ message: "TK_ID null" });
+    res.status(400).send("Tên tài khoản không hợp lệ");
   } else if (TK_PASSWORD == null) {
-    res.status(404).json({ message: "TK_Pwd null" });
+    res.status(400).send("Mật khẩu không hợp lệ");
   } else {
     taikhoan_ctr.checkLoginServer(TK_ID, TK_PASSWORD, function (err, data) {
       if (err) {
-        res.status(200).json({ message: err });
+        res.status(400).send(err);
       } else {
         res.status(200).json({ token: data });
       }
@@ -60,7 +60,7 @@ router.get("/api/taikhoan/:TK_ID/lich-su-muon-xe", passport.getPassport().authen
   console.log("PAGE=" + page);
   if (req.user.TK_ID == TK_ID) {
     taikhoan_ctr.layLSMuonTra_TK(TK_ID, page, function (err, MT_result) {
-      if (err) res.status(400).json({ message: err });
+      if (err) res.status(400).send(err);
       else {
         res.status(200).json(MT_result);
       }
@@ -77,7 +77,7 @@ router.get("/api/taikhoan/:TK_ID/lich-su-bao-hu-hong", passport.getPassport().au
   console.log("PAGE=" + page);
   if (req.user.TK_ID == TK_ID) {
     taikhoan_ctr.layLSBaoHuHong_TK(TK_ID, page, function (err, MT_result) {
-      if (err) res.status(400).json({ message: err });
+      if (err) res.status(400).send(err);
       else {
         res.status(200).json(MT_result);
       }
@@ -94,7 +94,7 @@ router.get("/api/taikhoan/:TK_ID/lich-su-vi-pham", passport.getPassport().authen
   console.log("PAGE=" + page);
   if (req.user.TK_ID == TK_ID) {
     taikhoan_ctr.layLSViPham_TK(TK_ID, page, function (err, MT_result) {
-      if (err) res.status(400).json({ message: err });
+      if (err) res.status(400).send(err);
       else {
         res.status(200).json(MT_result);
       }
