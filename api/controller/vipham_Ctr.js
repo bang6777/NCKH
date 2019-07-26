@@ -92,3 +92,17 @@ exports.updateXuLy = function(VP_ID, DA_XU_LY_VP, cb) {
       cb(null, tk_bang);
     });
 };
+
+//get chua xu ly
+exports.VP_ChuaXuLy = cb => {
+  vipham_M
+    .findAll({
+      where: {
+        DA_XU_LY_VP: 0
+      }
+    })
+    .then(vipham => {
+      cb(null, vipham);
+      console.log("All vipham:", JSON.stringify(vipham, null, 4));
+    });
+};

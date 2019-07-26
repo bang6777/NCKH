@@ -110,20 +110,20 @@ function GetAllViPham() {
                                             class="form-control form-control-sm"
                                             onchange="UpdateTrangThaiViPham('${vipham.HH_ID}')"
                                           >
-                                              <option value="0" selected=true >Chưa xử lý</option>
-                                              <option value="1" >Đã xử lý</option>
+                                              <option value=0 selected=true >Chưa xử lý</option>
+                                              <option value=1 >Đã xử lý</option>
                                           </select>
                                         </td>
                                         `;
         } else if (vipham.DA_XU_LY_VP == 1) {
           vipham_data += `<td>
                                           <select
-                                            id="slVP_TrangThai['${vipham.HH_ID}']"
+                                            id="slVP_TrangThai['${vipham.VP_ID}']"
                                             class="form-control form-control-sm"
-                                            onchange="UpdateTrangThaiViPham('${vipham.HH_ID}')"
+                                            onchange="UpdateTrangThaiViPham('${vipham.VP_ID}')"
                                           >
-                                              <option value="0">Chưa xử lý</option>
-                                              <option value="1" selected=true >Đã xử lý</option>
+                                              <option value=0>Chưa xử lý</option>
+                                              <option value=1 selected=true >Đã xử lý</option>
                                           </select>
                                         </td>
                                         `;
@@ -401,7 +401,7 @@ function UpdateTrangThaiViPham(a) {
   var c = document.getElementById(vp_xuly).value;
 
   $.ajax({
-    url: "/vipham/updateXuLy/" + vp_id,
+    url: "/vipham/updateXuLy",
     method: "POST",
     data: JSON.stringify({ VP_ID: vp_id, DA_XU_LY_VP: vp_xuly }),
     contentType: "application/json",

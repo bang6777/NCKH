@@ -259,15 +259,15 @@ async function GetViTri() {
     contentType: "application/json",
     success: function(response) {
       $.each(response, function(i, xe) {
-        console.log(xe.XE_ID, xe.XE_VITRI);
-        if (xe.XE_VITRI != "") {
-          var vt = createLatLng(xe.XE_VITRI);
+        console.log(xe.XE_ID, xe.XE_LAT, xe.XE_LNG, xe.XE_TRANGTHAI);
+        if (xe.XE_LAT != "" && xe.XE_LNG != "") {
+          var vt = new google.maps.LatLng(xe.XE_LAT, xe.XE_LNG);
           if (xe.XE_TRANGTHAI == "0") {
             marker = new google.maps.Marker({
               position: vt,
               map: map,
               icon: "./img/marker-green.png",
-              label: xe.XE_ID
+              label: xe.XE_ID.toString()
             });
             arrxe[xe_id] = marker;
             xe_id++;
@@ -276,7 +276,7 @@ async function GetViTri() {
               position: vt,
               map: map,
               icon: "./img/marker-red.png",
-              label: xe.XE_ID
+              label: xe.XE_ID.toString()
             });
             arrxe[xe_id] = marker;
             xe_id++;

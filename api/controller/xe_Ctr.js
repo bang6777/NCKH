@@ -38,7 +38,8 @@ exports.deleteXe = (XE_ID, cb) => {
       cb(err, null);
     });
 };
-exports.updateXe = (XE_ID, XE_VITRI, cb) => {
+//cap nhat vi tri
+exports.updateXe = (XE_ID, XE_IMEI, XE_VITRI, cb) => {
   xe_M
     .update(
       {
@@ -46,7 +47,8 @@ exports.updateXe = (XE_ID, XE_VITRI, cb) => {
       },
       {
         where: {
-          XE_ID: XE_ID
+          XE_ID: XE_ID,
+          XE_IMEI: XE_IMEI
         }
       }
     )
@@ -55,7 +57,7 @@ exports.updateXe = (XE_ID, XE_VITRI, cb) => {
       cb(null, xe);
     });
 };
-
+//cap nhat thong tin
 exports.updateXeAllInf = (XE_ID, XE_IMEI, XE_NAMSANXUAT, XE_GHICHU, cb) => {
   xe_M
     .update(

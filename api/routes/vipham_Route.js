@@ -23,7 +23,7 @@ exports.viewChiTietViPham = function(req, res) {
 
 exports.updateXuLy = function(req, res) {
   var VP_ID = req.body.VP_ID;
-  var DA_XU_LY_VP = req.body.VP_ID;
+  var DA_XU_LY_VP = req.body.DA_XU_LY_VP;
   viphamCtr.updateXuLy(VP_ID, DA_XU_LY_VP, function(err, data) {
     res.json(data);
   });
