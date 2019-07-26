@@ -28,17 +28,13 @@ const huhong_Model = db.define("huhong", {
     type: Sequelize.STRING
   },
   HH_TRANGTHAI: {
-    type: Sequelize.STRING,
-    defaultValue: "Đã báo"
+    type: Sequelize.INTEGER,
+    defaultValue: 1
 
   },
   HH_THOIGIAN:  { 
     type: Sequelize.DATE, 
     defaultValue: Sequelize.NOW 
-  },
-  DA_XU_LY_HH: {
-    type: Sequelize.BOOLEAN,
-    defaultValue: false
   },
   HU_HONG_LAT: {
     type: Sequelize.DOUBLE,

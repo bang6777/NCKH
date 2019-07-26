@@ -135,13 +135,14 @@ exports.initDatabase = () => {
         TK_ID: "B1401088",
         XE_ID: 1,
         HH_MOTA: "Đứt dây sên",
-        HH_TRANGTHAI: "Đang sửa chửa"
+        HH_TRANGTHAI: 2 //"Đang sửa chửa"
     });
+    
     HH_m.create({
         TK_ID: "B1501088",
         XE_ID: 1,
         HH_MOTA: "Đứt thắng",
-        HH_TRANGTHAI: "Đã sửa xong"
+        HH_TRANGTHAI: 3 //"Đã sửa xong"
     });
     
    
