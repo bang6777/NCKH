@@ -108,8 +108,11 @@ router.get("/api/taikhoan/:TK_ID/lich-su-vi-pham", passport.getPassport().authen
 router.post("/api/taikhoan/:TK_ID/muonxe", passport.getPassport().authenticate('jwt', { session: false }), function (req, res) {
   var TK_ID = req.params.TK_ID;
   var XE_ID = req.body.XE_ID;
-  if (req.user.TK_ID == TK_ID && XE_ID) {
-    taikhoan_ctr.muonXe(TK_ID, XE_ID, function (err, MT_result) {
+  var MUON_VITRI_LAT = req.body.MUON_VITRI_LAT;
+  var MUON_VITRI_LNG = req.body.MUON_VITRI_LNG;
+
+  if (req.user.TK_ID == TK_ID && XE_ID && MUON_VITRI_LNG && MUON_VITRI_LAT ) {
+    taikhoan_ctr.muonXe(TK_ID, XE_ID,MUON_VITRI_LAT,MUON_VITRI_LNG, function (err, MT_result) {
       if (err) res.status(400).send(err);
       else {
         res.status(200).json({ message: MT_result });

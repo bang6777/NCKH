@@ -129,17 +129,21 @@ exports.layLSViPham_TK = (TK_ID, page, cb) => {
 
 
 // ------------------------Mượn xe ---------------------
-exports.muonXe = (TK_ID, XE_ID, cb) => {
+exports.muonXe = (TK_ID, XE_ID, MUON_VITRI_LAT, MUON_VITRI_LNG, cb) => {
   muontra_M.findOne({
-    where: { TK_ID: TK_ID },
+    where: { TK_ID: TK_ID, TRA_THOIGIAN: null },
+    
     order: [['MUON_THOIGIAN', 'DESC']],
   }).then(result => {
+    console.log("result:" +result);
     if (result) { // Đang mượn xe ---> K cho mượn nữa
       cb("Chỉ cho phép mượn 1 chiếc xe", null);
     } else {  // Chưa có mượn xe --->Cho phép mượn
       muontra_M.create({
         TK_ID: TK_ID,
-        XE_ID: XE_ID
+        XE_ID: XE_ID,
+        MUON_VITRI_LAT: MUON_VITRI_LAT,
+        MUON_VITRI_LNG: MUON_VITRI_LNG
       }).then(data => {
 
         cb(null, "Đã mượn thành công");

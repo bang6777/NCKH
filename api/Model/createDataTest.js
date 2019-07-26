@@ -12,14 +12,16 @@ exports.initDatabase = () => {
         XE_IMEI: "352068063702873",
         XE_NAMSANXUAT: "2019",
         XE_GHICHU: "XE_GHICHU",
-        XE_VITRI: "10.0305035,105.7674677"
+        XE_LAT: 10.0305035,
+        XE_LNG: 105.7674677
     });
     xe_m.create({
         XE_ID: 2,
         XE_IMEI: "352068063702873",
         XE_NAMSANXUAT: "2019",
         XE_GHICHU: "XE_GHICHU",
-        XE_VITRI: "10.0291089,105.7662124"
+        XE_LAT: 10.0291089,
+        XE_LNG: 105.7662124
     });
     xe_m.create({
         XE_ID: 3,
@@ -27,7 +29,8 @@ exports.initDatabase = () => {
         XE_NAMSANXUAT: "2019",
         XE_GHICHU: "XE_GHICHU",
         XE_TRANGTHAI: 3,
-        XE_VITRI: "10.0302499,105.766663"
+        XE_LAT: 10.0302499,
+        XE_LNG: 105.766663
     });
     xe_m.create({
         XE_ID: 4,
@@ -35,7 +38,8 @@ exports.initDatabase = () => {
         XE_NAMSANXUAT: "2019",
         XE_GHICHU: "XE_GHICHU",
         XE_TRANGTHAI: 2,
-        XE_VITRI: "10.0311374,105.7699219"
+        XE_LAT: 10.0311374,
+        XE_LNG: 105.7699219
     });
     //   -------------------LỖI-------------
     loi_m.create({
