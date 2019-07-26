@@ -90,7 +90,7 @@ exports.updateTrangThai = (XE_ID, XE_TRANGTHAI, cb) => {
       }
     )
     .then(xe => {
-      console.log("Đã cập nhật trạng thái xe: ", xe.XE_ID);
+      console.log("Đã cập nhật xe: ", xe.XE_ID);
       cb(null, xe);
     });
 };
@@ -99,6 +99,20 @@ exports.updateTrangThai = (XE_ID, XE_TRANGTHAI, cb) => {
 exports.findXeByID = (XE_ID, cb) => {
   xe_M
     .findAll({
+      where: {
+        XE_ID: XE_ID
+      }
+    })
+    .then(xe => {
+      console.log("xe: ", xe.XE_ID);
+      cb(null, xe);
+    });
+};
+
+//tim xe theo id find one
+exports.findByID = (XE_ID, cb) => {
+  xe_M
+    .findOne({
       where: {
         XE_ID: XE_ID
       }
