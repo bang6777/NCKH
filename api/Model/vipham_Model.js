@@ -4,7 +4,7 @@ const muontra = require("./muontra_Model");
 const loi = require("./loi_Model");
 const taikhoan = require("./taikhoan_Model");
 const xe = require("./xe_Model");
-const sequelizePaginate = require('sequelize-paginate')
+const sequelizePaginate = require("sequelize-paginate");
 
 const vipham_Model = db.define("vipham", {
   VP_ID: {
@@ -46,7 +46,7 @@ const vipham_Model = db.define("vipham", {
     defaultValue: Sequelize.NOW
   },
   DA_XU_LY_VP: {
-    type: Sequelize.BOOLEAN,
+    type: Sequelize.INTEGER,
     defaultValue: false
   },
   VP_LAT: {
