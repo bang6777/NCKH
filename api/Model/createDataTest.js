@@ -108,7 +108,7 @@ exports.initDatabase = () => {
   VP_m.create({
     muontraMUONTRAID: 1,
     loiLOIID: 1,
-    DA_XU_LY_VP: true,
+    DA_XU_LY_VP: 1,
     VP_LAT: 10.029088509604737,
     VP_LNG: 105.76976502229843
   });
@@ -123,7 +123,7 @@ exports.initDatabase = () => {
   VP_m.create({
     muontraMUONTRAID: 4,
     loiLOIID: 1,
-    DA_XU_LY_VP: true
+    DA_XU_LY_VP: 1
   });
   //   ------------------------ Hu Hỏng ------------------
   HH_m.create({

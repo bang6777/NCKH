@@ -29,7 +29,7 @@ function GetAllHuHong() {
                             <td>${huhong.HH_THOIGIAN}</td>
                       `;
         switch (huhong.HH_TRANGTHAI) {
-          case "0": {
+          case 0: {
             huhong_data += `<td>
                     <select
                     id="slHH_TrangThai['${huhong.HH_ID}']"
@@ -44,7 +44,7 @@ function GetAllHuHong() {
               </td>`;
             break;
           }
-          case "1": {
+          case 1: {
             huhong_data += `<td>
                 <select
                 id="slHH_TrangThai['${huhong.HH_ID}']"
@@ -59,7 +59,7 @@ function GetAllHuHong() {
           </td>`;
             break;
           }
-          case "2": {
+          case 2: {
             huhong_data += `<td>
                 <select
                 id="slHH_TrangThai['${huhong.HH_ID}']"
@@ -74,7 +74,7 @@ function GetAllHuHong() {
           </td>`;
             break;
           }
-          case "3": {
+          case 3: {
             huhong_data += `<td>
                 <select
                 id="slHH_TrangThai['${huhong.HH_ID}']"
@@ -133,7 +133,7 @@ function GetHHDangCho() {
                             <td>${huhong.HH_THOIGIAN}</td>
                       `;
         switch (huhong.HH_TRANGTHAI) {
-          case "0": {
+          case 0: {
             huhong_data += `<td>
                     <select
                     id="slHH_TrangThai['${huhong.HH_ID}']"
@@ -148,7 +148,7 @@ function GetHHDangCho() {
               </td>`;
             break;
           }
-          case "1": {
+          case 1: {
             huhong_data += `<td>
                 <select
                 id="slHH_TrangThai['${huhong.HH_ID}']"
@@ -163,7 +163,7 @@ function GetHHDangCho() {
           </td>`;
             break;
           }
-          case "2": {
+          case 2: {
             huhong_data += `<td>
                 <select
                 id="slHH_TrangThai['${huhong.HH_ID}']"
@@ -178,7 +178,7 @@ function GetHHDangCho() {
           </td>`;
             break;
           }
-          case "3": {
+          case 3: {
             huhong_data += `<td>
                 <select
                 id="slHH_TrangThai['${huhong.HH_ID}']"
@@ -232,7 +232,7 @@ function GetHHDangSua() {
                                 <td>${huhong.HH_THOIGIAN}</td>
                           `;
         switch (huhong.HH_TRANGTHAI) {
-          case "0": {
+          case 0: {
             huhong_data += `<td>
                         <select
                         id="slHH_TrangThai['${huhong.HH_ID}']"
@@ -247,7 +247,7 @@ function GetHHDangSua() {
                   </td>`;
             break;
           }
-          case "1": {
+          case 1: {
             huhong_data += `<td>
                     <select
                     id="slHH_TrangThai['${huhong.HH_ID}']"
@@ -262,7 +262,7 @@ function GetHHDangSua() {
               </td>`;
             break;
           }
-          case "2": {
+          case 2: {
             huhong_data += `<td>
                     <select
                     id="slHH_TrangThai['${huhong.HH_ID}']"
@@ -277,7 +277,7 @@ function GetHHDangSua() {
               </td>`;
             break;
           }
-          case "3": {
+          case 3: {
             huhong_data += `<td>
                     <select
                     id="slHH_TrangThai['${huhong.HH_ID}']"
@@ -332,7 +332,7 @@ function GetHHDaSua() {
                                 <td>${huhong.HH_THOIGIAN}</td>
                           `;
         switch (huhong.HH_TRANGTHAI) {
-          case "0": {
+          case 0: {
             huhong_data += `<td>
                         <select
                         id="slHH_TrangThai['${huhong.HH_ID}']"
@@ -347,7 +347,7 @@ function GetHHDaSua() {
                   </td>`;
             break;
           }
-          case "1": {
+          case 1: {
             huhong_data += `<td>
                     <select
                     id="slHH_TrangThai['${huhong.HH_ID}']"
@@ -362,7 +362,7 @@ function GetHHDaSua() {
               </td>`;
             break;
           }
-          case "2": {
+          case 2: {
             huhong_data += `<td>
                     <select
                     id="slHH_TrangThai['${huhong.HH_ID}']"
@@ -377,7 +377,7 @@ function GetHHDaSua() {
               </td>`;
             break;
           }
-          case "3": {
+          case 3: {
             huhong_data += `<td>
                     <select
                     id="slHH_TrangThai['${huhong.HH_ID}']"
@@ -432,7 +432,7 @@ function GetHHBaoSai() {
                                 <td>${huhong.HH_THOIGIAN}</td>
                           `;
         switch (huhong.HH_TRANGTHAI) {
-          case "0": {
+          case 0: {
             huhong_data += `<td>
                         <select
                         id="slHH_TrangThai['${huhong.HH_ID}']"
@@ -447,7 +447,7 @@ function GetHHBaoSai() {
                   </td>`;
             break;
           }
-          case "1": {
+          case 1: {
             huhong_data += `<td>
                     <select
                     id="slHH_TrangThai['${huhong.HH_ID}']"
@@ -462,7 +462,7 @@ function GetHHBaoSai() {
               </td>`;
             break;
           }
-          case "2": {
+          case 2: {
             huhong_data += `<td>
                     <select
                     id="slHH_TrangThai['${huhong.HH_ID}']"
@@ -477,7 +477,7 @@ function GetHHBaoSai() {
               </td>`;
             break;
           }
-          case "3": {
+          case 3: {
             huhong_data += `<td>
                     <select
                     id="slHH_TrangThai['${huhong.HH_ID}']"
