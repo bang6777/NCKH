@@ -12,14 +12,13 @@ const vipham_Model = db.define("vipham", {
     autoIncrement: true,
     allowNull: false
   },
-  MUONTRA_ID: {
-    type: Sequelize.INTEGER,
-    autoIncrement: true,
-    references: {
-      model: muontra,
-      key: "MUONTRA_ID"
-    }
-  },
+  // MUONTRA_ID: {
+  //   type: Sequelize.INTEGER,
+  //   references: {
+  //     model: muontra,
+  //     key: "MUONTRA_ID"
+  //   }
+  // },
   LOI_ID: {
     type: Sequelize.INTEGER,
     autoIncrement: true,

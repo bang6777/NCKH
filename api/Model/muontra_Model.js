@@ -17,14 +17,13 @@ const muontra_Model = db.define("muontra", {
       key: "TK_ID"
     }
   },
-  XE_ID: {
-    type: Sequelize.INTEGER,
-    autoIncrement: true,
-    references: {
-      model: xedap,
-      key: "XE_ID"
-    }
-  },
+  // XE_ID: {
+  //   type: Sequelize.INTEGER,
+  //   references: {
+  //     model: xedap,
+  //     key: "XE_ID"
+  //   }
+  // },
   MUON_THOIGIAN: { type: Sequelize.DATE, defaultValue: Sequelize.NOW },
   TRA_THOIGIAN: {
     type: Sequelize.DATE

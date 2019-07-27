@@ -16,14 +16,13 @@ const huhong_Model = db.define("huhong", {
       key: "TK_ID"
     }
   },
-  XE_ID: {
-    type: Sequelize.INTEGER,
-    autoIncrement: true,
-    references: {
-      model: xedap,
-      key: "XE_ID"
-    }
-  },
+  // XE_ID: {
+  //   type: Sequelize.INTEGER,
+  //   references: {
+  //     model: xedap,
+  //     key: "XE_ID"
+  //   }
+  // },
   HH_MOTA: {
     type: Sequelize.STRING
   },
