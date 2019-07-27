@@ -126,18 +126,18 @@ exports.initDatabase = () => {
     TK_ID: "B1401088",
     XE_ID: 1,
     HH_MOTA: true,
-    HH_TRANGTHAI: "Đã báo"
+    HH_TRANGTHAI: 0
   });
   HH_m.create({
     TK_ID: "B1401088",
     XE_ID: 1,
     HH_MOTA: true,
-    HH_TRANGTHAI: "Đang sửa chửa"
+    HH_TRANGTHAI: 1
   });
   HH_m.create({
     TK_ID: "B1401088",
     XE_ID: 1,
     HH_MOTA: true,
-    HH_TRANGTHAI: "Đã sửa xong"
+    HH_TRANGTHAI: 2
   });
 };

@@ -120,83 +120,84 @@ function GetHHDangCho() {
       }
       $("#tbHuHong tbody").empty();
 
-      if (response.length > 0) {
-        $.each(response, function(i, huhong) {
-          huhong_data += `<tr>
-                                <td>${huhong.HH_ID}</td>
-                                <td>${huhong.TK_ID}</td>
-                                <td>${huhong.XE_ID}</td>
-                                <td>${huhong.HH_MOTA}</td>
-                                <td>${huhong.HH_THOIGIAN}</td>
-                          `;
-
-          switch (huhong.HH_TRANGTHAI) {
-            case "0": {
-              huhong_data += `<td>
-                        <select
-                        id="slHH_TrangThai['${huhong.HH_ID}']"
-                        class="form-control form-control-sm"
-                        onchange="UpdateTrangThaiHuHong('${huhong.HH_ID}')"
-                        >
-                            <option value="0" selected=true>Đang chờ</option>
-                            <option value="1" >Đang sửa</option>
-                            <option value="2">Đã sửa</option>
-                            <option value="3">Báo sai</option>
-                    </select>
-                  </td>`;
-              break;
-            }
-            case "1": {
-              huhong_data += `<td>
+      $.each(response, function(i, huhong) {
+        huhong_data += `<tr>
+        <td>${huhong.HH_ID}</td>
+                            <td class="chitiet">
+                            <a onclick="LoadTK('${huhong.TK_ID}')" data-toggle="modal" data-target="#ChiTietTK">
+                            ${huhong.TK_ID} </a>
+                            </td>
+                            
+                            <td>${huhong.XE_ID}</td>
+                            <td>${huhong.HH_MOTA}</td>
+                            <td>${huhong.HH_THOIGIAN}</td>
+                      `;
+        switch (huhong.HH_TRANGTHAI) {
+          case "0": {
+            huhong_data += `<td>
                     <select
                     id="slHH_TrangThai['${huhong.HH_ID}']"
                     class="form-control form-control-sm"
                     onchange="UpdateTrangThaiHuHong('${huhong.HH_ID}')"
                     >
-                        <option value="0" >Đang chờ</option>
-                        <option value="1" selected=true>Đang sửa</option>
+                        <option value="0" selected=true>Đang chờ</option>
+                        <option value="1" >Đang sửa</option>
                         <option value="2">Đã sửa</option>
                         <option value="3">Báo sai</option>
                 </select>
               </td>`;
-              break;
-            }
-            case "2": {
-              huhong_data += `<td>
-                    <select
-                    id="slHH_TrangThai['${huhong.HH_ID}']"
-                    class="form-control form-control-sm"
-                    onchange="UpdateTrangThaiHuHong('${huhong.HH_ID}')"
-                    >
-                        <option value="0" >Đang chờ</option>
-                        <option value="1" >Đang sửa</option>
-                        <option value="2" selected=true>Đã sửa</option>
-                        <option value="3">Báo sai</option>
-                </select>
-              </td>`;
-              break;
-            }
-            case "3": {
-              huhong_data += `<td>
-                    <select
-                    id="slHH_TrangThai['${huhong.HH_ID}']"
-                    class="form-control form-control-sm"
-                    onchange="UpdateTrangThaiHuHong('${huhong.HH_ID}')"
-                    >
-                        <option value="0" >Đang chờ</option>
-                        <option value="1" >Đang sửa</option>
-                        <option value="2" >Đã sửa</option>
-                        <option value="3" selected=true>Báo sai</option>
-                </select>
-              </td>`;
-              break;
-            }
+            break;
           }
-          huhong_data += `</tr>`;
-        });
-        tb.append(huhong_data);
-        LoadDataTable();
-      }
+          case "1": {
+            huhong_data += `<td>
+                <select
+                id="slHH_TrangThai['${huhong.HH_ID}']"
+                class="form-control form-control-sm"
+                onchange="UpdateTrangThaiHuHong('${huhong.HH_ID}')"
+                >
+                    <option value="0" >Đang chờ</option>
+                    <option value="1" selected=true>Đang sửa</option>
+                    <option value="2">Đã sửa</option>
+                    <option value="3">Báo sai</option>
+            </select>
+          </td>`;
+            break;
+          }
+          case "2": {
+            huhong_data += `<td>
+                <select
+                id="slHH_TrangThai['${huhong.HH_ID}']"
+                class="form-control form-control-sm"
+                onchange="UpdateTrangThaiHuHong('${huhong.HH_ID}')"
+                >
+                    <option value="0" >Đang chờ</option>
+                    <option value="1" >Đang sửa</option>
+                    <option value="2" selected=true>Đã sửa</option>
+                    <option value="3">Báo sai</option>
+            </select>
+          </td>`;
+            break;
+          }
+          case "3": {
+            huhong_data += `<td>
+                <select
+                id="slHH_TrangThai['${huhong.HH_ID}']"
+                class="form-control form-control-sm"
+                onchange="UpdateTrangThaiHuHong('${huhong.HH_ID}')"
+                >
+                    <option value="0" >Đang chờ</option>
+                    <option value="1" >Đang sửa</option>
+                    <option value="2" >Đã sửa</option>
+                    <option value="3" selected=true>Báo sai</option>
+            </select>
+          </td>`;
+            break;
+          }
+        }
+        huhong_data += `</tr>`;
+      });
+      tb.append(huhong_data);
+      LoadDataTable();
     },
     error: function(e) {
       alert("Đã có lỗi xảy ra!");
@@ -204,7 +205,6 @@ function GetHHDangCho() {
     }
   });
 }
-
 function GetHHDangSua() {
   $.ajax({
     method: "GET",
