@@ -19,14 +19,13 @@ const vipham_Model = db.define("vipham", {
   //     key: "MUONTRA_ID"
   //   }
   // },
-  LOI_ID: {
-    type: Sequelize.INTEGER,
-    autoIncrement: true,
-    references: {
-      model: loi,
-      key: "LOI_ID"
-    }
-  },
+  // LOI_ID: {
+  //   type: Sequelize.INTEGER,
+  //   references: {
+  //     model: loi,
+  //     key: "LOI_ID"
+  //   }
+  // },
   // TK_ID: {
   //   type: Sequelize.STRING,
   //   references: {
