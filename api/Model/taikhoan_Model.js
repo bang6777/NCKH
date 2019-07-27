@@ -57,7 +57,6 @@ const taikhoan_Model = db.define("taikhoan", {
 // vipham_Model.belongsTo(muontra_Model, { foreignKey: "MUONTRA_ID" });
 
 // Test New
-
 //muon tra
 taikhoan_Model.hasMany(muontra_Model);
 xe_Model.hasMany(muontra_Model);

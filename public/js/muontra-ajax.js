@@ -56,7 +56,7 @@ function getAllMuonTra() {
                           ${mt.TK_ID}  
                         </a>
                       </td>
-                      <td>${mt.XE_ID}</td>
+                      <td>${mt.xeXEID}</td>
                       <td>${mt.MUON_THOIGIAN}</td>
                       <td>${mt.TRA_THOIGIAN}</td>
                       <td>
@@ -100,7 +100,7 @@ function getChuaTra() {
                           ${mt.TK_ID}  
                         </a>
                       </td>
-                      <td>${mt.XE_ID}</td>
+                      <td>${mt.xeXEID}</td>
                       <td>${mt.MUON_THOIGIAN}</td>
                       <td>${mt.TRA_THOIGIAN}</td>
                       <td>
@@ -142,7 +142,7 @@ function ChiTietMuonTra(a) {
                     </tr>
                     <tr>
                       <td>ID xe</td>
-                      <td>${mt.XE_ID}</td>
+                      <td>${mt.xeXEID}</td>
                     </tr>
                     <tr>
                       <td>Thời gian mượn</td>

@@ -74,27 +74,27 @@ exports.initDatabase = () => {
   });
   //   ------------------------Mượn trả ------------------
   MT_m.create({
-    TK_ID: "B1601088",
-    XE_ID: 1,
+    taikhoanTKID: "B1601088",
+    xeXEID: 1,
     TRA_THOIGIAN: new Date(2019, 9, 20)
   });
   MT_m.create({
-    TK_ID: "B1501088",
-    XE_ID: 1
+    taikhoanTKID: "B1501088",
+    xeXEID: 1
   });
   MT_m.create({
-    TK_ID: "B1401088",
-    XE_ID: 1,
+    taikhoanTKID: "B1401088",
+    xeXEID: 1,
     TRA_THOIGIAN: new Date(2019, 9, 20)
   });
   MT_m.create({
-    TK_ID: "B1401088",
-    XE_ID: 2,
+    taikhoanTKID: "B1401088",
+    xeXEID: 2,
     TRA_THOIGIAN: new Date(2019, 9, 20)
   });
   MT_m.create({
-    TK_ID: "B1401088",
-    XE_ID: 1
+    taikhoanTKID: "B1401088",
+    xeXEID: 1
   });
   //   ------------------------ Vi Phạm ------------------
   VP_m.create({
@@ -117,20 +117,20 @@ exports.initDatabase = () => {
   });
   //   ------------------------ Hu Hỏng ------------------
   HH_m.create({
-    TK_ID: "B1401088",
-    XE_ID: 1,
+    taikhoanTKID: "B1401088",
+    xeXEID: 1,
     HH_MOTA: true,
     HH_TRANGTHAI: 0
   });
   HH_m.create({
-    TK_ID: "B1401088",
-    XE_ID: 1,
+    taikhoanTKID: "B1401088",
+    xeXEID: 1,
     HH_MOTA: true,
     HH_TRANGTHAI: 1
   });
   HH_m.create({
-    TK_ID: "B1401088",
-    XE_ID: 1,
+    taikhoanTKID: "B1401088",
+    xeXEID: 1,
     HH_MOTA: true,
     HH_TRANGTHAI: 2
   });
