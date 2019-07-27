@@ -54,7 +54,7 @@ exports.huhong_xe = function(XE_ID, cb) {
 
 exports.findHuHongByID = (HH_ID, cb) => {
   huhong_M
-    .findAll({
+    .findOne({
       where: {
         HH_ID: HH_ID
       }
@@ -130,7 +130,7 @@ exports.updateTrangThaiHuHong = (HH_ID, HH_TRANGTHAI, cb) => {
       }
     )
     .then(hh => {
-      console.log("Đã cập nhật trạng thái hư hỏng: " + hh.HH_ID);
+      console.log("Đã cập nhật trạng thái hư hỏng: " + HH_ID);
       cb(null, hh);
     });
 };

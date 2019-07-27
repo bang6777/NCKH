@@ -329,7 +329,7 @@ router.post("/xe/updateInfo/:XE_ID", function(req, res) {
   });
 });
 
-//update trang thai xe
+//update trang thai xe Linh
 router.post("/xe/updateTT/:XE_ID", function(req, res) {
   var XE_ID = req.body.XE_ID;
   var XE_TRANGTHAI = req.body.XE_TRANGTHAI;
@@ -338,7 +338,20 @@ router.post("/xe/updateTT/:XE_ID", function(req, res) {
     if (err) {
       res.status(404).json({ message: "ERR" });
     } else {
-      res.status(404).json({ message: "Cập nhật thành công trạng thái" + XE_TRANGTHAI });
+      res.status(200).json({ message: "Cập nhật thành công trạng thái" + XE_TRANGTHAI });
+    }
+  });
+});
+
+//update trang thai xe trang hu hong
+router.post("/xe/updateTrangThai", function(req, res) {
+  var XE_ID = req.body.XE_ID;
+  var XE_TRANGTHAI = req.body.XE_TRANGTHAI;
+  xe.updateTrangThaiXe(XE_ID, XE_TRANGTHAI, function(err, data) {
+    if (err) {
+      res.status(404).json({ message: "ERR" });
+    } else {
+      res.status(200).json({ message: "Cập nhật thành công trạng thái" + XE_TRANGTHAI });
     }
   });
 });
@@ -356,9 +369,6 @@ router.post("/xe/update/:XE_ID", function(req, res) {
       xe.findByID(XE_ID, function(err, data) {
         res.json("TTXe:" + data.XE_TRANGTHAI);
       });
-      // res.json(
-      //   xee
-      // );
     }
   });
 });

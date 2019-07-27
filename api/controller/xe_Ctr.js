@@ -98,6 +98,25 @@ exports.updateTrangThai = (XE_ID, XE_IMEI, XE_TRANGTHAI, cb) => {
     });
 };
 
+//cap nhat trang thai-huhong
+exports.updateTrangThaiXe = (XE_ID, XE_TRANGTHAI, cb) => {
+  xe_M
+    .update(
+      {
+        XE_TRANGTHAI: XE_TRANGTHAI
+      },
+      {
+        where: {
+          XE_ID: XE_ID
+        }
+      }
+    )
+    .then(xe => {
+      console.log("Đã cập nhật xe: ", xe.XE_ID);
+      cb(null, xe);
+    });
+};
+
 //tim xe theo id
 exports.findXeByID = (XE_ID, cb) => {
   xe_M

@@ -577,12 +577,13 @@ function LoadTK(a) {
 }
 
 //Update trạng thái hư hỏng
-function UpdateTrangThaiHuHong(a) {
+async function UpdateTrangThaiHuHong(a) {
   var hh_id = a;
   var hh_trangthai;
   var hhTrangThai = "slHH_TrangThai['" + hh_id + "']";
 
   hh_trangthai = document.getElementById(hhTrangThai).value;
+  alert(hh_id);
   $.ajax({
     url: "/huhong/update-trangthai/" + hh_id,
     method: "POST",
@@ -591,6 +592,62 @@ function UpdateTrangThaiHuHong(a) {
     success: function() {
       alert("Đã cập nhật thành công trạng thái của hư hỏng: " + hh_id);
       LoadView();
+
+      //cap nhat xe_trangthai = 2 neu hh_trangthai = 1
+      if (hh_trangthai == 1) {
+        $.ajax({
+          type: "POST",
+          url: "/huhong/find",
+          data: JSON.stringify({ HH_ID: hh_id }),
+          contentType: "application/json",
+          success: function(response) {
+            var xe_id = response.XE_ID;
+            $.ajax({
+              type: "POST",
+              url: "/xe/updateTrangThai",
+              data: JSON.stringify({ XE_ID: xe_id, XE_TRANGTHAI: "2" }),
+              contentType: "application/json",
+              success: function() {
+                console.log("Đã cập nhật trạng thái xe = 2");
+              },
+              error: function(e) {
+                console.log(e);
+              }
+            });
+          },
+          error: function(e) {
+            console.log(e);
+          }
+        });
+      }
+
+      //cap nhat xe_trangthai = 0 neu hh_trangthai = 3
+      else if (hh_trangthai == 2) {
+        $.ajax({
+          type: "POST",
+          url: "/huhong/find",
+          data: JSON.stringify({ HH_ID: hh_id }),
+          contentType: "application/json",
+          success: function(response) {
+            var xe_id = response.XE_ID;
+            $.ajax({
+              type: "POST",
+              url: "/xe/updateTrangThai",
+              data: JSON.stringify({ XE_ID: xe_id, XE_TRANGTHAI: "0" }),
+              contentType: "application/json",
+              success: function() {
+                console.log("Đã cập nhật trạng thái xe = 0");
+              },
+              error: function(e) {
+                console.log(e);
+              }
+            });
+          },
+          error: function(e) {
+            console.log(e);
+          }
+        });
+      }
     },
     error: function(e) {
       alert("Đã có lỗi xảy ra!");
