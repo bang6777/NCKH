@@ -47,7 +47,7 @@ const vipham_Model = db.define("vipham", {
   },
   DA_XU_LY_VP: {
     type: Sequelize.INTEGER,
-    defaultValue: false
+    defaultValue: 0
   },
   VP_LAT: {
     type: Sequelize.DOUBLE,

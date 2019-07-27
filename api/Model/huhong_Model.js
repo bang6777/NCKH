@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 const db = require("./../Config/db");
 const taikhoan = require("./taikhoan_Model");
 const xedap = require("./xe_Model");
-const sequelizePaginate = require('sequelize-paginate')
+const sequelizePaginate = require("sequelize-paginate");
 
 const huhong_Model = db.define("huhong", {
   HH_ID: {
@@ -30,7 +30,6 @@ const huhong_Model = db.define("huhong", {
   HH_TRANGTHAI: {
     type: Sequelize.INTEGER,
     defaultValue: 1
-
   },
   HH_THOIGIAN: {
     type: Sequelize.DATE,
