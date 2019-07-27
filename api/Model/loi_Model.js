@@ -3,7 +3,7 @@ const db = require("./../Config/db");
 
 const loi_Model = db.define("loi", {
   LOI_ID: {
-    type: Sequelize.SERIAL,
+    type: Sequelize.INTEGER,
     primaryKey: true,
     autoIncrement: true
   },

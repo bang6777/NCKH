@@ -7,20 +7,22 @@ const xe = require("./xe_Model");
 
 const vipham_Model = db.define("vipham", {
   VP_ID: {
-    type: Sequelize.SERIAL,
+    type: Sequelize.INTEGER,
     primaryKey: true,
     autoIncrement: true,
     allowNull: false
   },
   MUONTRA_ID: {
-    type: Sequelize.SERIAL,
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
     references: {
       model: muontra,
       key: "MUONTRA_ID"
     }
   },
   LOI_ID: {
-    type: Sequelize.SERIAL,
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
     references: {
       model: loi,
       key: "LOI_ID"

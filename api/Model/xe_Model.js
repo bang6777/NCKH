@@ -5,9 +5,9 @@ const muontra = require("./muontra_Model");
 const xe_Model = db.define("xe", {
   // attributes
   XE_ID: {
-    type: Sequelize.SERIAL,
-    primaryKey: true,
+    type: Sequelize.INTEGER,
     autoIncrement: true,
+    primaryKey: true,
     allowNull: false
   },
   XE_IMEI: {

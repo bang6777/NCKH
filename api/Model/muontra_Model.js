@@ -5,7 +5,7 @@ const db = require("../Config/db");
 
 const muontra_Model = db.define("muontra", {
   MUONTRA_ID: {
-    type: Sequelize.SERIAL,
+    type: Sequelize.INTEGER,
     primaryKey: true,
     autoIncrement: true,
     allowNull: false
@@ -18,7 +18,8 @@ const muontra_Model = db.define("muontra", {
     }
   },
   XE_ID: {
-    type: Sequelize.SERIAL,
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
     references: {
       model: xedap,
       key: "XE_ID"

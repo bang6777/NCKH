@@ -5,7 +5,7 @@ const xedap = require("./xe_Model");
 
 const huhong_Model = db.define("huhong", {
   HH_ID: {
-    type: Sequelize.SERIAL,
+    type: Sequelize.INTEGER,
     primaryKey: true,
     autoIncrement: true
   },
@@ -17,7 +17,8 @@ const huhong_Model = db.define("huhong", {
     }
   },
   XE_ID: {
-    type: Sequelize.SERIAL,
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
     references: {
       model: xedap,
       key: "XE_ID"
