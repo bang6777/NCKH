@@ -213,7 +213,7 @@ function XE_MuonTra(a) {
       $.each(response, function(i, xe) {
         xe_data += `<tr>
           <td>${xe.MUONTRA_ID}</td>
-          <td>${xe.TK_ID}</td>
+          <td>${xe.taikhoanTKID}</td>
           <td>${xe.MUON_THOIGIAN}</td>
           <td>${xe.TRA_THOIGIAN}</td>
         </tr>`;
@@ -245,7 +245,7 @@ function XE_HuHong(a) {
         sl++;
         xe_data += `<tr>
           <td>${xe.HH_ID}</td>
-          <td>${xe.TK_ID}</td>
+          <td>${xe.taikhoanTKID}</td>
           <td>${xe.HH_MOTA}</td>
           <td>${xe.HH_THOIGIAN}</td>
         </tr>`;
@@ -278,14 +278,14 @@ async function Xe_ViPham(a) {
         sl++;
         xe_data += `<tr>
           <td>${xe.VP_ID}</td>
-          <td>${xe.MUONTRA_ID}</td>
+          <td>${xe.muontraMUONTRAID}</td>
           <td id="id_loi[${xe.VP_ID}]"></td>
           
           <td>${xe.VP_THOIGIAN}</td>
         <\tr>`;
         $.ajax({
-          url: "/loi/" + xe.LOI_ID,
-          data: JSON.stringify({ LOI_ID: xe.LOI_ID }),
+          url: "/loi/" + xe.loiLOIID,
+          data: JSON.stringify({ LOI_ID: xe.loiLOIID }),
           method: "GET",
           contentType: "application/json",
           success: function(response) {

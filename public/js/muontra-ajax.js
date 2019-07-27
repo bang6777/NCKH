@@ -52,8 +52,8 @@ function getAllMuonTra() {
         mt_data += `<tr>
                       <td>${mt.MUONTRA_ID}</td>
                       <td class="chitiet">
-                        <a onclick="LoadTK('${mt.TK_ID}')" data-toggle="modal" data-target="#ChiTietTK">
-                          ${mt.TK_ID}  
+                        <a onclick="LoadTK('${mt.taikhoanTKID}')" data-toggle="modal" data-target="#ChiTietTK">
+                          ${mt.taikhoanTKID}  
                         </a>
                       </td>
                       <td>${mt.xeXEID}</td>
@@ -96,8 +96,8 @@ function getChuaTra() {
         mt_data += `<tr>
                       <td>${mt.MUONTRA_ID}</td>
                       <td class="chitiet">
-                        <a onclick="LoadTK('${mt.TK_ID}')" data-toggle="modal" data-target="#ChiTietTK">
-                          ${mt.TK_ID}  
+                        <a onclick="LoadTK('${mt.taikhoanTKID}')" data-toggle="modal" data-target="#ChiTietTK">
+                          ${mt.taikhoanTKID}  
                         </a>
                       </td>
                       <td>${mt.xeXEID}</td>
@@ -138,7 +138,7 @@ function ChiTietMuonTra(a) {
                     </tr>  
                     <tr>
                       <td>ID tài khoản</td>
-                      <td>${mt.TK_ID}</td>
+                      <td>${mt.taikhoanTKID}</td>
                     </tr>
                     <tr>
                       <td>ID xe</td>

@@ -58,7 +58,7 @@ exports.initDatabase = () => {
     TK_ID: "B1501088",
     TK_PASSWORD: "$2a$10$I3Z8uaCxjyDExJWKmqVu..MpuQJuFMZFbR2HHBpWCN2Tw6g3CVVgO",
     TK_HOTEN: "Bằng Nguyễn",
-    TK_QUYEN: "Người dùng",
+    TK_QUYEN: "Quản trị",
     TK_DONVI: "Công nghệ",
     TK_LOAI: "Sinh viên",
     TK_HIEULUC: 1
@@ -76,16 +76,24 @@ exports.initDatabase = () => {
   MT_m.create({
     taikhoanTKID: "B1601088",
     xeXEID: 1,
-    TRA_THOIGIAN: new Date(2019, 9, 20)
+    TRA_THOIGIAN: new Date(2019, 9, 20),
+    MUON_VITRI_LAT: 10.030990184893133,
+    MUON_VITRI_LNG: 105.76976502229843,
+    TRA_VITRI_LAT: 10.029088509604737,
+    TRA_VITRI_LNG: 105.76976502229843
   });
   MT_m.create({
     taikhoanTKID: "B1501088",
-    xeXEID: 1
+    xeXEID: 2
   });
   MT_m.create({
     taikhoanTKID: "B1401088",
     xeXEID: 1,
-    TRA_THOIGIAN: new Date(2019, 9, 20)
+    TRA_THOIGIAN: new Date(2019, 9, 20),
+    MUON_VITRI_LAT: 10.030990184893133,
+    MUON_VITRI_LNG: 105.76976502229843,
+    TRA_VITRI_LAT: 10.029088509604737,
+    TRA_VITRI_LNG: 105.76976502229843
   });
   MT_m.create({
     taikhoanTKID: "B1401088",
@@ -98,9 +106,11 @@ exports.initDatabase = () => {
   });
   //   ------------------------ Vi Phạm ------------------
   VP_m.create({
-    MUONTRA_ID: 1,
+    muontraMUONTRAID: 1,
     loiLOIID: 1,
-    DA_XU_LY_VP: true
+    DA_XU_LY_VP: true,
+    VP_LAT: 10.029088509604737,
+    VP_LNG: 105.76976502229843
   });
   VP_m.create({
     muontraMUONTRAID: 2,
@@ -111,8 +121,8 @@ exports.initDatabase = () => {
     loiLOIID: 2
   });
   VP_m.create({
-    MUONTRA_ID: 4,
-    LOI_ID: 1,
+    muontraMUONTRAID: 4,
+    loiLOIID: 1,
     DA_XU_LY_VP: true
   });
   //   ------------------------ Hu Hỏng ------------------
@@ -124,13 +134,13 @@ exports.initDatabase = () => {
   });
   HH_m.create({
     taikhoanTKID: "B1401088",
-    xeXEID: 1,
+    xeXEID: 2,
     HH_MOTA: true,
     HH_TRANGTHAI: 1
   });
   HH_m.create({
     taikhoanTKID: "B1401088",
-    xeXEID: 1,
+    xeXEID: 3,
     HH_MOTA: true,
     HH_TRANGTHAI: 2
   });

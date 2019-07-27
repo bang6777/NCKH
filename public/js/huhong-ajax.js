@@ -20,11 +20,11 @@ function GetAllHuHong() {
         huhong_data += `<tr>
         <td>${huhong.HH_ID}</td>
                             <td class="chitiet">
-                            <a onclick="LoadTK('${huhong.TK_ID}')" data-toggle="modal" data-target="#ChiTietTK">
-                            ${huhong.TK_ID} </a>
+                            <a onclick="LoadTK('${huhong.taikhoanTKID}')" data-toggle="modal" data-target="#ChiTietTK">
+                            ${huhong.taikhoanTKID} </a>
                             </td>
                             
-                            <td>${huhong.XE_ID}</td>
+                            <td>${huhong.xeXEID}</td>
                             <td>${huhong.HH_MOTA}</td>
                             <td>${huhong.HH_THOIGIAN}</td>
                       `;
@@ -124,11 +124,11 @@ function GetHHDangCho() {
         huhong_data += `<tr>
         <td>${huhong.HH_ID}</td>
                             <td class="chitiet">
-                            <a onclick="LoadTK('${huhong.TK_ID}')" data-toggle="modal" data-target="#ChiTietTK">
-                            ${huhong.TK_ID} </a>
+                            <a onclick="LoadTK('${huhong.taikhoanTKID}')" data-toggle="modal" data-target="#ChiTietTK">
+                            ${huhong.taikhoanTKID} </a>
                             </td>
                             
-                            <td>${huhong.XE_ID}</td>
+                            <td>${huhong.xeXEID}</td>
                             <td>${huhong.HH_MOTA}</td>
                             <td>${huhong.HH_THOIGIAN}</td>
                       `;
@@ -226,8 +226,8 @@ function GetHHDangSua() {
       $.each(response, function(i, huhong) {
         huhong_data += `<tr>
                                 <td>${huhong.HH_ID}</td>
-                                <td>${huhong.TK_ID}</td>
-                                <td>${huhong.XE_ID}</td>
+                                <td>${huhong.taikhoanTKID}</td>
+                                <td>${huhong.xeXEID}</td>
                                 <td>${huhong.HH_MOTA}</td>
                                 <td>${huhong.HH_THOIGIAN}</td>
                           `;
@@ -326,8 +326,8 @@ function GetHHDaSua() {
       $.each(response, function(i, huhong) {
         huhong_data += `<tr>
                                 <td>${huhong.HH_ID}</td>
-                                <td>${huhong.TK_ID}</td>
-                                <td>${huhong.XE_ID}</td>
+                                <td>${huhong.taikhoanTKID}</td>
+                                <td>${huhong.xeXEID}</td>
                                 <td>${huhong.HH_MOTA}</td>
                                 <td>${huhong.HH_THOIGIAN}</td>
                           `;
@@ -426,8 +426,8 @@ function GetHHBaoSai() {
       $.each(response, function(i, huhong) {
         huhong_data += `<tr>
                                 <td>${huhong.HH_ID}</td>
-                                <td>${huhong.TK_ID}</td>
-                                <td>${huhong.XE_ID}</td>
+                                <td>${huhong.taikhoanTKID}</td>
+                                <td>${huhong.xeXEID}</td>
                                 <td>${huhong.HH_MOTA}</td>
                                 <td>${huhong.HH_THOIGIAN}</td>
                           `;
@@ -583,7 +583,7 @@ async function UpdateTrangThaiHuHong(a) {
   var hhTrangThai = "slHH_TrangThai['" + hh_id + "']";
 
   hh_trangthai = document.getElementById(hhTrangThai).value;
-  alert(hh_id);
+  // alert(hh_id);
   $.ajax({
     url: "/huhong/update-trangthai/" + hh_id,
     method: "POST",
@@ -601,7 +601,7 @@ async function UpdateTrangThaiHuHong(a) {
           data: JSON.stringify({ HH_ID: hh_id }),
           contentType: "application/json",
           success: function(response) {
-            var xe_id = response.XE_ID;
+            var xe_id = response.xeXEID;
             $.ajax({
               type: "POST",
               url: "/xe/updateTrangThai",
@@ -629,7 +629,7 @@ async function UpdateTrangThaiHuHong(a) {
           data: JSON.stringify({ HH_ID: hh_id }),
           contentType: "application/json",
           success: function(response) {
-            var xe_id = response.XE_ID;
+            var xe_id = response.xeXEID;
             $.ajax({
               type: "POST",
               url: "/xe/updateTrangThai",

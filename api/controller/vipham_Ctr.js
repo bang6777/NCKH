@@ -15,7 +15,7 @@ exports.allViPham = cb => {
 //vi pham - tai khoan
 exports.vipham_taikhoan = (TK_ID, cb) => {
   sequelize
-    .query("SELECT * FROM vipham WHERE MUONTRA_ID IN ( SELECT MUONTRA_ID from muontra where TK_ID = :tk_id)", {
+    .query("SELECT * FROM vipham WHERE muontraMUONTRAID IN ( SELECT muontraMUONTRAID from muontra where taikhoanTKID = :tk_id)", {
       replacements: { tk_id: TK_ID },
       type: sequelize.QueryTypes.SELECT
     })
@@ -28,7 +28,7 @@ exports.vipham_taikhoan = (TK_ID, cb) => {
 //vi pham - xe
 exports.vipham_xe = function(XE_ID, cb) {
   sequelize
-    .query("SELECT * FROM vipham WHERE MUONTRA_ID IN ( SELECT MUONTRA_ID from muontra where XE_ID = :xe_id)", {
+    .query("SELECT * FROM vipham WHERE muontraMUONTRAID IN ( SELECT muontraMUONTRAID from muontra where xeXEID = :xe_id)", {
       replacements: { xe_id: XE_ID },
       type: sequelize.QueryTypes.SELECT
     })

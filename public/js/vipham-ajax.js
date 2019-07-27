@@ -50,8 +50,8 @@ function GetAllViPham() {
         vipham_data += `<tr>
                             <td>${vipham.VP_ID}</td>
                             <td class="chitiet">
-                              <a onclick="Load_ChiTietMuonTra('${vipham.MUONTRA_ID}')" data-toggle="modal" data-target="#ChiTietMuonTra">
-                                ${vipham.MUONTRA_ID}
+                              <a onclick="Load_ChiTietMuonTra('${vipham.muontraMUONTRAID}')" data-toggle="modal" data-target="#ChiTietMuonTra">
+                                ${vipham.muontraMUONTRAID}
                               </a>
                             </td>
                             <td id="loi[${i}]"></td>
@@ -85,14 +85,14 @@ function GetAllViPham() {
 
         vipham_data += `<td>   
                           <i class="fa fa-info-circle fa-lg" data-toggle="modal" data-target="#ChiTietViPham" onclick="ChiTietViPham('${
-                            vipham.MUONTRA_ID
+                            vipham.muontraMUONTRAID
                           }')">
                           </i>
                         </td>
                       </tr>`;
         $.ajax({
-          url: "/loi/" + vipham.LOI_ID,
-          data: JSON.stringify({ LOI_ID: vipham.LOI_ID }),
+          url: "/loi/" + vipham.loiLOIID,
+          data: JSON.stringify({ LOI_ID: vipham.loiLOIID }),
           method: "GET",
           contentType: "application/json",
           success: function(response) {
@@ -139,8 +139,8 @@ function GetChuaXuLy() {
         vipham_data += `<tr>
                             <td>${vipham.VP_ID}</td>
                             <td class="chitiet">
-                              <a onclick="Load_ChiTietMuonTra('${vipham.MUONTRA_ID}')" data-toggle="modal" data-target="#ChiTietMuonTra">
-                                ${vipham.MUONTRA_ID}
+                              <a onclick="Load_ChiTietMuonTra('${vipham.muontraMUONTRAID}')" data-toggle="modal" data-target="#ChiTietMuonTra">
+                                ${vipham.muontraMUONTRAID}
                               </a>
                             </td>
                             <td id="loi[${i}]"></td>
@@ -174,14 +174,14 @@ function GetChuaXuLy() {
 
         vipham_data += `<td>   
                           <i class="fa fa-info-circle fa-lg" data-toggle="modal" data-target="#ChiTietViPham" onclick="ChiTietViPham('${
-                            vipham.MUONTRA_ID
+                            vipham.muontraMUONTRAID
                           }')">
                           </i>
                         </td>
                       </tr>`;
         $.ajax({
-          url: "/loi/" + vipham.LOI_ID,
-          data: JSON.stringify({ LOI_ID: vipham.LOI_ID }),
+          url: "/loi/" + vipham.loiLOIID,
+          data: JSON.stringify({ LOI_ID: vipham.loiLOIID }),
           method: "GET",
           contentType: "application/json",
           success: function(response) {
@@ -228,8 +228,8 @@ function GetDaXuLy() {
         vipham_data += `<tr>
                             <td>${vipham.VP_ID}</td>
                             <td class="chitiet">
-                              <a onclick="Load_ChiTietMuonTra('${vipham.MUONTRA_ID}')" data-toggle="modal" data-target="#ChiTietMuonTra">
-                                ${vipham.MUONTRA_ID}
+                              <a onclick="Load_ChiTietMuonTra('${vipham.muontraMUONTRAID}')" data-toggle="modal" data-target="#ChiTietMuonTra">
+                                ${vipham.muontraMUONTRAID}
                               </a>
                             </td>
                             <td id="loi[${i}]"></td>
@@ -263,14 +263,14 @@ function GetDaXuLy() {
 
         vipham_data += `<td>   
                           <i class="fa fa-info-circle fa-lg" data-toggle="modal" data-target="#ChiTietViPham" onclick="ChiTietViPham('${
-                            vipham.MUONTRA_ID
+                            vipham.muontraMUONTRAID
                           }')">
                           </i>
                         </td>
                       </tr>`;
         $.ajax({
-          url: "/loi/" + vipham.LOI_ID,
-          data: JSON.stringify({ LOI_ID: vipham.LOI_ID }),
+          url: "/loi/" + vipham.loiLOIID,
+          data: JSON.stringify({ LOI_ID: vipham.loiLOIID }),
           method: "GET",
           contentType: "application/json",
           success: function(response) {
@@ -313,11 +313,11 @@ function Load_ChiTietMuonTra(a) {
                     </tr>  
                     <tr>
                       <td>ID tài khoản</td>
-                      <td>${mt.TK_ID}</td>
+                      <td>${mt.taikhoanTKID}</td>
                     </tr>
                     <tr>
                       <td>ID xe</td>
-                      <td>${mt.XE_ID}</td>
+                      <td>${mt.xeXEID}</td>
                     </tr>
                     <tr>
                       <td>Thời gian mượn</td>
@@ -459,19 +459,19 @@ function ChiTietViPham(a) {
                     </tr>
                     <tr>
                       <td>ID mượn trả</td>
-                      <td>${vp.MUONTRA_ID}</td>
+                      <td>${vp.muontraMUONTRAID}</td>
                     </tr>
                     <tr>
                       <td>ID người dùng</td>
-                      <td>${vp.muontra.TK_ID}</td>
+                      <td>${vp.muontra.taikhoanTKID}</td>
                     </tr>
                     <tr>
                       <td>Xe vi phạm</td>
-                      <td>${vp.muontra.XE_ID}</td>
+                      <td>${vp.muontra.xeXEID}</td>
                     </tr>
                     <tr>
                       <td>Tên lỗi</td>
-                      <td id="id_loi[${vp.LOI_ID}]"></td>
+                      <td id="id_loi[${vp.loiLOIID}]"></td>
                     </tr>
                     <tr>
                       <td>Thời gian vi phạm</td>
@@ -483,8 +483,8 @@ function ChiTietViPham(a) {
                     </tr>
                     `;
       $.ajax({
-        url: "/loi/" + vp.LOI_ID,
-        data: JSON.stringify({ LOI_ID: vp.LOI_ID }),
+        url: "/loi/" + vp.loiLOIID,
+        data: JSON.stringify({ LOI_ID: vp.loiLOIID }),
         method: "GET",
         contentType: "application/json",
         success: function(response) {

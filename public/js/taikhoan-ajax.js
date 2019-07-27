@@ -462,7 +462,7 @@ function TK_MuonTra(a) {
       $.each(response, function(i, tk) {
         tk_data += `<tr>
           <td>${tk.MUONTRA_ID}</td>
-          <td>${tk.XE_ID}</td>
+          <td>${tk.xeXEID}</td>
           <td>${tk.MUON_THOIGIAN}</td>
           <td>${tk.TRA_THOIGIAN}</td>
         </tr>`;
@@ -494,13 +494,13 @@ function TK_ViPham(a) {
       $.each(response, function(i, tk) {
         tk_data += `<tr>
           <td>${tk.VP_ID}</td>
-          <td>${tk.MUONTRA_ID}</td>
+          <td>${tk.muontraMUONTRAID}</td>
           <td id="id_loi[${tk.VP_ID}]"></td>
           <td>${tk.VP_THOIGIAN}</td>
         <\tr>`;
         $.ajax({
-          url: "/loi/" + tk.LOI_ID,
-          data: JSON.stringify({ LOI_ID: tk.LOI_ID }),
+          url: "/loi/" + tk.loiLOIID,
+          data: JSON.stringify({ LOI_ID: tk.loiLOIID }),
           method: "GET",
           contentType: "application/json",
           success: function(response) {
@@ -544,7 +544,7 @@ function TK_HuHong(a) {
         sl++;
         tk_data += `<tr>
           <td>${tk.HH_ID}</td>
-          <td>${tk.XE_ID}</td>
+          <td>${tk.xeXEID}</td>
           <td>${tk.HH_MOTA}</td>
           <td>${tk.HH_THOIGIAN}</td>
         </tr>`;
