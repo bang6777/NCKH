@@ -99,16 +99,16 @@ exports.initDatabase = () => {
   //   ------------------------ Vi Phạm ------------------
   VP_m.create({
     MUONTRA_ID: 1,
-    LOI_ID: 1,
+    loiLOIID: 1,
     DA_XU_LY_VP: true
   });
   VP_m.create({
-    MUONTRA_ID: 2,
-    LOI_ID: 2
+    muontraMUONTRAID: 2,
+    loiLOIID: 2
   });
   VP_m.create({
-    MUONTRA_ID: 3,
-    LOI_ID: 2
+    muontraMUONTRAID: 3,
+    loiLOIID: 2
   });
   VP_m.create({
     MUONTRA_ID: 4,
