@@ -10,13 +10,13 @@ const muontra_Model = db.define("muontra", {
     autoIncrement: true,
     allowNull: false
   },
-  TK_ID: {
-    type: Sequelize.STRING,
-    references: {
-      model: taikhoan,
-      key: "TK_ID"
-    }
-  },
+  // TK_ID: {
+  //   type: Sequelize.STRING,
+  //   references: {
+  //     model: taikhoan,
+  //     key: "TK_ID"
+  //   }
+  // },
   // XE_ID: {
   //   type: Sequelize.INTEGER,
   //   references: {

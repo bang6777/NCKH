@@ -12,7 +12,6 @@ const xe_Model = db.define("xe", {
   },
   XE_IMEI: {
     type: Sequelize.STRING,
-    primaryKey: true,
     allowNull: false
   },
   XE_TRANGTHAI: {

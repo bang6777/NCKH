@@ -9,13 +9,13 @@ const huhong_Model = db.define("huhong", {
     primaryKey: true,
     autoIncrement: true
   },
-  TK_ID: {
-    type: Sequelize.STRING,
-    references: {
-      model: taikhoan,
-      key: "TK_ID"
-    }
-  },
+  // TK_ID: {
+  //   type: Sequelize.STRING,
+  //   references: {
+  //     model: taikhoan,
+  //     key: "TK_ID"
+  //   }
+  // },
   // XE_ID: {
   //   type: Sequelize.INTEGER,
   //   references: {
