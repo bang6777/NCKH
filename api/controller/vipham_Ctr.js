@@ -12,29 +12,44 @@ exports.allViPham = cb => {
   });
 };
 
-//vi pham - tai khoan
 exports.vipham_taikhoan = (TK_ID, cb) => {
-  sequelize
-    .query("SELECT * FROM vipham WHERE muontraMUONTRAID IN ( SELECT muontraMUONTRAID from muontra where taikhoanTKID = :tk_id)", {
-      replacements: { tk_id: TK_ID },
-      type: sequelize.QueryTypes.SELECT
+  vipham_M
+    .findAll({
+      include: [
+        {
+          model: muontra_M,
+          where: {
+            taikhoanTKID: TK_ID
+          }
+        }
+      ]
     })
-    .then(tk => {
-      console.log(tk);
-      cb(null, tk);
+    .then(dsViPham => {
+      if (dsViPham) {
+        cb(null, dsViPham);
+      } else cb("Không có dữ liệu", null);
+      console.log("All vi pham theo id:", JSON.stringify(dsViPham, null, 4));
     });
 };
 
 //vi pham - xe
-exports.vipham_xe = function(XE_ID, cb) {
-  sequelize
-    .query("SELECT * FROM vipham WHERE muontraMUONTRAID IN ( SELECT muontraMUONTRAID from muontra where xeXEID = :xe_id)", {
-      replacements: { xe_id: XE_ID },
-      type: sequelize.QueryTypes.SELECT
+exports.vipham_xe = (XE_ID, cb) => {
+  vipham_M
+    .findAll({
+      include: [
+        {
+          model: muontra_M,
+          where: {
+            xeXEID: XE_ID
+          }
+        }
+      ]
     })
-    .then(tk => {
-      console.log(tk);
-      cb(null, tk);
+    .then(dsViPham => {
+      if (dsViPham) {
+        cb(null, dsViPham);
+      } else cb("Không có dữ liệu", null);
+      console.log("All vi pham theo id:", JSON.stringify(dsViPham, null, 4));
     });
 };
 

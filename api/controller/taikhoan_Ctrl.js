@@ -2,7 +2,7 @@
 const bcrypt = require("bcryptjs");
 const sequelize = require("./../Config/db");
 const taikhoan_M = require("../Model/taikhoan_Model");
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 
 exports.allUser = cb => {
   var statement = "select * from taikhoan";
@@ -208,12 +208,12 @@ exports.searchTK_ID = (id, hieuluc1, hieuluc2, cb) => {
 
 //cap nhat MK
 exports.updateMK = (TK_ID, TK_PASSWORD, cb) => {
-   const salt = bcrypt.genSaltSync();
+  const salt = bcrypt.genSaltSync();
   TK_PASSWORD = bcrypt.hashSync(TK_PASSWORD, salt);
   taikhoan_M
     .update(
       {
-       TK_PASSWORD: TK_PASSWORD
+        TK_PASSWORD: TK_PASSWORD
       },
       {
         where: {
