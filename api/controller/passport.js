@@ -25,7 +25,7 @@ let strategy = new JwtStrategy(jwtOptions, function(jwt_payload, next) {
   }).then(tk_result => {
     // console.log('tk_result:'+ JSON.stringify(tk_result));
     if(tk_result && tk_result.TK_HIEULUC == 1){
-      next(null, tk_result);
+      next(null, {TK_ID: tk_result.TK_ID});
     }else{
       next(null, false);
     }
