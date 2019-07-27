@@ -7,7 +7,7 @@ const huhong_Model = db.define("huhong", {
   HH_ID: {
     type: Sequelize.INTEGER,
     primaryKey: true,
-    autoIncrement: true,
+    autoIncrement: true
   },
   TK_ID: {
     type: Sequelize.STRING,
@@ -29,13 +29,9 @@ const huhong_Model = db.define("huhong", {
   HH_TRANGTHAI: {
     type: Sequelize.STRING
   },
-  HH_THOIGIAN:  { 
-    type: Sequelize.DATE, 
-    defaultValue: Sequelize.NOW 
-  },
-  DA_XU_LY_HH: {
-    type: Sequelize.BOOLEAN,
-    defaultValue: false
+  HH_THOIGIAN: {
+    type: Sequelize.DATE,
+    defaultValue: Sequelize.NOW
   },
   HU_HONG_LAT: {
     type: Sequelize.DOUBLE,
