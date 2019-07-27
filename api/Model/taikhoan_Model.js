@@ -57,24 +57,23 @@ const taikhoan_Model = db.define("taikhoan", {
 // vipham_Model.belongsTo(muontra_Model, { foreignKey: "MUONTRA_ID" });
 
 // Test New
+
 //muon tra
+taikhoan_Model.hasMany(muontra_Model);
+xe_Model.hasMany(muontra_Model);
 muontra_Model.belongsTo(taikhoan_Model);
 muontra_Model.belongsTo(xe_Model);
 
-// xe_Model.hasMany(muontra_Model, { as: "muontra", foreignKey: "XE_ID" });
-
-// muontra_Model.belongsTo(xe_Model, { foreignKey: "XE_ID" });
-
 //tai khoan - hu hong
-
+taikhoan_Model.hasMany(huhong_Model);
+xe_Model.hasMany(huhong_Model);
 huhong_Model.belongsTo(taikhoan_Model);
 huhong_Model.belongsTo(xe_Model);
-taikhoan_Model.hasMany(huhong_Model);
 
 //vi pham
-// vipham_Model.belongsTo(taikhoan_Model, { foreignKey: "TK_ID" });
+loi_Model.hasMany(vipham_Model);
+muontra_Model.hasMany(vipham_Model);
 vipham_Model.belongsTo(loi_Model);
-// vipham_Model.belongsTo(xe_Model, { foreignKey: "XE_ID" });
 vipham_Model.belongsTo(muontra_Model);
 
 db.sync();
