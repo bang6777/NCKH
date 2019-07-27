@@ -10,7 +10,7 @@ exports.getXeRanh = cb => {
     .findAll({
       attributes: ['XE_ID', 'XE_LAT', 'XE_LNG'],
       where: {
-        XE_TRANGTHAI: 1
+        XE_TRANGTHAI: 0
       }
     })
     .then(xe => {
@@ -35,8 +35,8 @@ exports.findXeByID = (XE_ID, cb) => {
 
 exports.baoHuHong = (XE_ID, TK_ID, HH_MOTA, cb) => {
   huhong_M.create({
-    TK_ID: TK_ID,
-    XE_ID: XE_ID,
+    taikhoanTKID: TK_ID,
+    xeXEID: XE_ID,
     HH_MOTA: HH_MOTA
   }).then(result => {
     // console.log("xe: ", xe.XE_ID);

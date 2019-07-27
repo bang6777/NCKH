@@ -25,8 +25,10 @@ app.set("view engine", "ejs");
 
 var routes = require("./api/routes/bikeRoute"); //importing route
 var routes_android = require("./api/routes/api/api");
+var routes_locker = require("./api/routes/api/api_locker");
 // routes(app);
 app.use("/", routes);
+app.use("/v1/", routes_locker);
 app.use("/v1/", routes_android);
 app.use(function (req, res) {
   res.status(404).send({ url: req.originalUrl + " not found" });

@@ -53,8 +53,13 @@ exports.updateXe = (XE_ID, XE_IMEI, XE_LAT, XE_LNG, cb) => {
       }
     )
     .then(xe => {
-      console.log("Đã cập nhật xe: ", xe.XE_ID);
-      cb(null, xe);
+      if(xe){
+        console.log("Đã cập nhật vị trí xe: ", xe.XE_ID);
+        cb(null, "OK");
+      }else cb("ERR", null);
+      
+    }).catch(err=>{
+      cb(err, null);
     });
 };
 //cap nhat thong tin
@@ -93,8 +98,12 @@ exports.updateTrangThai = (XE_ID, XE_IMEI, XE_TRANGTHAI, cb) => {
       }
     )
     .then(xe => {
-      console.log("Đã cập nhật xe: ", xe.XE_ID);
-      cb(null, xe);
+      if(xe){
+        console.log("Đã cập nhật trạng thái xe: ", xe.XE_ID);
+        cb(null, "OK");
+      }else cb("ERR", null);
+    }).catch(err=>{
+      cb(err, null);
     });
 };
 
