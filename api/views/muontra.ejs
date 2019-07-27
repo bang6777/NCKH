@@ -49,7 +49,7 @@
           <table id="tbMuonTra" class="table table-striped table-bordered" style="width:100%" cellspacing="0" cellpadding="0">
             <thead class="bg-info text-white font-weight-semi-bold text-center">
               <tr>
-                <td>STT</td>
+                <td>MƯỢN TRẢ ID</td>
                 <td>ID người dùng</td>
                 <td>ID xe</td>
                 <td>Thời gian mượn</td>
@@ -58,25 +58,7 @@
               </tr>
             </thead>
 
-            <tbody class="text-center" id="tb">
-              <!-- <% muontra.forEach(function(mt){ %>
-              <tr>
-                <td></td>
-                <td class="chitiet">
-                  <a onclick="LoadTK('<%= mt.TK_ID %>')" data-toggle="modal" data-target="#ChiTietTK">
-                    <%= mt.TK_ID %>
-                  </a>
-                </td>
-                <td><%= mt.XE_ID %></td>
-                <td><%= mt.MUON_THOIGIAN %></td>
-                <td><%= mt.TRA_THOIGIAN %></td>
-                <td>
-                  <a href="#"><i class="fa fa-info-circle fa-lg" data-toggle="modal" data-target="#ChiTietMuonTra"></i></a>
-                </td>
-              </tr>
-
-              <% }); %> -->
-            </tbody>
+            <tbody class="text-center" id="tb"></tbody>
           </table>
         </div>
 
@@ -93,46 +75,11 @@
               </div>
 
               <div class="modal-body">
-                <table class="table table-sm table-borderless col-lg-8 mx-auto" id="tbCTMT">
-                  <!-- <tr>
-                    <td>ID mượn trả</td>
-                    <td>1</td>
-                  </tr>
-                  <tr>
-                    <td>ID người dùng</td>
-                    <td>B1606935</td>
-                  </tr>
-                  <tr>
-                    <td>ID xe</td>
-                    <td>X001</td>
-                  </tr>
-                  <tr>
-                    <td>Thời gian mượn</td>
-                    <td>15:00:00 06/05/2019</td>
-                  </tr>
-                  <tr>
-                    <td>Thời gian trả</td>
-                    <td>15:15:00 06/05/2019</td>
-                  </tr>
-                  <tr>
-                    <td>Vị trí mượn</td>
-                    <td>
-                      <img src="img/marker-green.png" height="20px" />
-                      10.02998, 105.769601
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Vị trí trả</td>
-                    <td>
-                      <img src="img/marker-red.png" height="20px" />
-                      10.03054, 105.768646
-                    </td>
-                  </tr> -->
-                </table>
+                <table class="table table-sm table-borderless col-lg-8 mx-auto" id="tbCTMT"></table>
               </div>
 
               <!-- Map -->
-              <div id="googleMap" style="width: 100%; height :200px"></div>
+              <div id="googleMap" style="width: 100%; height :220px"></div>
               <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDr5qwgemJp4LtodR8lvXg382V-cDFK3bY&callback=MapPosition"></script>
 
               <div class=" modal-footer">

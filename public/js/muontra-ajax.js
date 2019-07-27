@@ -50,7 +50,7 @@ function getAllMuonTra() {
       $.each(response, function(i, mt) {
         console.log(response);
         mt_data += `<tr>
-                      <td>${i + 1}</td>
+                      <td>${mt.MUONTRA_ID}</td>
                       <td class="chitiet">
                         <a onclick="LoadTK('${mt.TK_ID}')" data-toggle="modal" data-target="#ChiTietTK">
                           ${mt.TK_ID}  
@@ -94,7 +94,7 @@ function getChuaTra() {
       $.each(response, function(i, mt) {
         console.log(response);
         mt_data += `<tr>
-                      <td>${i + 1}</td>
+                      <td>${mt.MUONTRA_ID}</td>
                       <td class="chitiet">
                         <a onclick="LoadTK('${mt.TK_ID}')" data-toggle="modal" data-target="#ChiTietTK">
                           ${mt.TK_ID}  

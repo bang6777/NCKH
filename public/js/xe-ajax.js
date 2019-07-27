@@ -279,8 +279,8 @@ async function Xe_ViPham(a) {
         xe_data += `<tr>
           <td>${xe.VP_ID}</td>
           <td>${xe.MUONTRA_ID}</td>
-          <td id="id_loi[${xe.LOI_ID}]"></td>
-          <td>${xe.TK_ID}</td>
+          <td id="id_loi[${xe.VP_ID}]"></td>
+          
           <td>${xe.VP_THOIGIAN}</td>
         <\tr>`;
         $.ajax({
@@ -292,7 +292,7 @@ async function Xe_ViPham(a) {
             console.log(response.LOI_TEN);
             tenloi = response.LOI_TEN;
 
-            var loi_id = "id_loi[" + response.LOI_ID + "]";
+            var loi_id = "id_loi[" + xe.VP_ID + "]";
             document.getElementById(loi_id).innerHTML = tenloi;
           },
           error: function(e) {

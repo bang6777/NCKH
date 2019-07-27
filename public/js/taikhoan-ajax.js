@@ -495,8 +495,7 @@ function TK_ViPham(a) {
         tk_data += `<tr>
           <td>${tk.VP_ID}</td>
           <td>${tk.MUONTRA_ID}</td>
-          <td id="id_loi[${tk.LOI_ID}]"></td>
-          <td>${tk.XE_ID}</td>
+          <td id="id_loi[${tk.VP_ID}]"></td>
           <td>${tk.VP_THOIGIAN}</td>
         <\tr>`;
         $.ajax({
@@ -507,7 +506,7 @@ function TK_ViPham(a) {
           success: function(response) {
             console.log(response.LOI_TEN);
             tenloi = response.LOI_TEN;
-            var loi_id = "id_loi[" + response.LOI_ID + "]";
+            var loi_id = "id_loi[" + tk.VP_ID + "]";
             document.getElementById(loi_id).innerHTML = response.LOI_TEN;
           },
           error: function(e) {
@@ -515,6 +514,7 @@ function TK_ViPham(a) {
             console.log(e);
           }
         });
+
         sl++;
       });
       tb.append(tk_data);

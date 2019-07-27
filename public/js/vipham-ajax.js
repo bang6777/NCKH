@@ -27,53 +27,7 @@ function LoadTK(a) {
   });
 }
 
-// function GetAllViPham() {
-//   $.ajax({
-//     method: "GET",
-//     url: "/vipham/all",
-//     contenType: "application/json",
-//     success: function(response) {
-//       console.log(response);
-//       var tb = $("#tb");
-//       tb.html("");
-//       vipham_data = "";
-
-//       if ($.fn.DataTable.isDataTable("#tbViPham")) {
-//         $("#tbViPham")
-//           .DataTable()
-//           .destroy();
-//       }
-//       $("#tbViPham tbody").empty();
-
-//       $.each(response, function(i, vipham) {
-//         vipham_data += `<tr>
-//                             <td>${vipham.VP_ID}</td>
-//                             <td class="chitiet">
-//                               <a onclick="Load_ChiTietMuonTra('${vipham.MUONTRA_ID}')" data-toggle="modal" data-target="#ChiTietMuonTra">
-//                                 ${vipham.MUONTRA_ID}
-//                               </a>
-//                             </td>
-//                             <td>${vipham.LOI_ID}</td>
-//                             <td>${vipham.VP_THOIGIAN}</td>
-//                             <td>
-//                        <i class="fa fa-info-circle fa-lg" data-toggle="modal" data-target="#ChiTietViPham" onclick="ChiTietViPham('${
-//                          vipham.MUONTRA_ID
-//                        }')"></i>
-//                       </td>
-//                       `;
-
-//         vipham_data += `</tr>`;
-//       });
-//       tb.append(vipham_data);
-//       LoadDataTable();
-//     },
-//     error: function(e) {
-//       alert("Đã có lỗi xảy ra!");
-//       console.log(e);
-//     }
-//   });
-// }
-
+//All VP
 function GetAllViPham() {
   $.ajax({
     method: "GET",
@@ -106,9 +60,187 @@ function GetAllViPham() {
         if (vipham.DA_XU_LY_VP == 0) {
           vipham_data += `<td>
                                           <select
-                                            id="slVP_TrangThai['${vipham.HH_ID}']"
+                                            id="slVP_TrangThai['${vipham.VP_ID}']"
                                             class="form-control form-control-sm"
-                                            onchange="UpdateTrangThaiViPham('${vipham.HH_ID}')"
+                                            onchange="UpdateTrangThaiViPham('${vipham.VP_ID}')"
+                                          >
+                                              <option value=0 selected=true >Chưa xử lý</option>
+                                              <option value=1 >Đã xử lý</option>
+                                          </select>
+                                        </td>
+                                        `;
+        } else if (vipham.DA_XU_LY_VP == 1) {
+          vipham_data += `<td>
+                                          <select
+                                            id="slVP_TrangThai['${vipham.VP_ID}']"
+                                            class="form-control form-control-sm"
+                                            onchange="UpdateTrangThaiViPham('${vipham.VP_ID}')"
+                                          >
+                                              <option value=0>Chưa xử lý</option>
+                                              <option value=1 selected=true >Đã xử lý</option>
+                                          </select>
+                                        </td>
+                                        `;
+        }
+
+        vipham_data += `<td>   
+                          <i class="fa fa-info-circle fa-lg" data-toggle="modal" data-target="#ChiTietViPham" onclick="ChiTietViPham('${
+                            vipham.MUONTRA_ID
+                          }')">
+                          </i>
+                        </td>
+                      </tr>`;
+        $.ajax({
+          url: "/loi/" + vipham.LOI_ID,
+          data: JSON.stringify({ LOI_ID: vipham.LOI_ID }),
+          method: "GET",
+          contentType: "application/json",
+          success: function(response) {
+            console.log(response.LOI_TEN);
+            var loi_id = "loi[" + i + "]";
+            document.getElementById(loi_id).innerHTML = response.LOI_TEN;
+          },
+          error: function(e) {
+            alert("Đã có lỗi xảy ra!");
+            console.log(e);
+          }
+        });
+      });
+      tb.append(vipham_data);
+      LoadDataTable();
+    },
+    error: function(e) {
+      alert("Đã có lỗi xảy ra!");
+      console.log(e);
+    }
+  });
+}
+
+//Chua Xu Ly
+function GetChuaXuLy() {
+  $.ajax({
+    method: "GET",
+    url: "/vipham/chuaxuly",
+    contenType: "application/json",
+    success: function(response) {
+      console.log(response);
+      var tb = $("#tb");
+      tb.html("");
+      vipham_data = "";
+
+      if ($.fn.DataTable.isDataTable("#tbViPham")) {
+        $("#tbViPham")
+          .DataTable()
+          .destroy();
+      }
+      $("#tbViPham tbody").empty();
+
+      $.each(response, function(i, vipham) {
+        vipham_data += `<tr>
+                            <td>${vipham.VP_ID}</td>
+                            <td class="chitiet">
+                              <a onclick="Load_ChiTietMuonTra('${vipham.MUONTRA_ID}')" data-toggle="modal" data-target="#ChiTietMuonTra">
+                                ${vipham.MUONTRA_ID}
+                              </a>
+                            </td>
+                            <td id="loi[${i}]"></td>
+                            <td>${vipham.VP_THOIGIAN}</td>
+                          `;
+        if (vipham.DA_XU_LY_VP == 0) {
+          vipham_data += `<td>
+                                          <select
+                                            id="slVP_TrangThai['${vipham.VP_ID}']"
+                                            class="form-control form-control-sm"
+                                            onchange="UpdateTrangThaiViPham('${vipham.VP_ID}')"
+                                          >
+                                              <option value=0 selected=true >Chưa xử lý</option>
+                                              <option value=1 >Đã xử lý</option>
+                                          </select>
+                                        </td>
+                                        `;
+        } else if (vipham.DA_XU_LY_VP == 1) {
+          vipham_data += `<td>
+                                          <select
+                                            id="slVP_TrangThai['${vipham.VP_ID}']"
+                                            class="form-control form-control-sm"
+                                            onchange="UpdateTrangThaiViPham('${vipham.VP_ID}')"
+                                          >
+                                              <option value=0>Chưa xử lý</option>
+                                              <option value=1 selected=true >Đã xử lý</option>
+                                          </select>
+                                        </td>
+                                        `;
+        }
+
+        vipham_data += `<td>   
+                          <i class="fa fa-info-circle fa-lg" data-toggle="modal" data-target="#ChiTietViPham" onclick="ChiTietViPham('${
+                            vipham.MUONTRA_ID
+                          }')">
+                          </i>
+                        </td>
+                      </tr>`;
+        $.ajax({
+          url: "/loi/" + vipham.LOI_ID,
+          data: JSON.stringify({ LOI_ID: vipham.LOI_ID }),
+          method: "GET",
+          contentType: "application/json",
+          success: function(response) {
+            console.log(response.LOI_TEN);
+            var loi_id = "loi[" + i + "]";
+            document.getElementById(loi_id).innerHTML = response.LOI_TEN;
+          },
+          error: function(e) {
+            alert("Đã có lỗi xảy ra!");
+            console.log(e);
+          }
+        });
+      });
+      tb.append(vipham_data);
+      LoadDataTable();
+    },
+    error: function(e) {
+      alert("Đã có lỗi xảy ra!");
+      console.log(e);
+    }
+  });
+}
+
+//Chua Da Ly
+function GetDaXuLy() {
+  $.ajax({
+    method: "GET",
+    url: "/vipham/daxuly",
+    contenType: "application/json",
+    success: function(response) {
+      console.log(response);
+      var tb = $("#tb");
+      tb.html("");
+      vipham_data = "";
+
+      if ($.fn.DataTable.isDataTable("#tbViPham")) {
+        $("#tbViPham")
+          .DataTable()
+          .destroy();
+      }
+      $("#tbViPham tbody").empty();
+
+      $.each(response, function(i, vipham) {
+        vipham_data += `<tr>
+                            <td>${vipham.VP_ID}</td>
+                            <td class="chitiet">
+                              <a onclick="Load_ChiTietMuonTra('${vipham.MUONTRA_ID}')" data-toggle="modal" data-target="#ChiTietMuonTra">
+                                ${vipham.MUONTRA_ID}
+                              </a>
+                            </td>
+                            <td id="loi[${i}]"></td>
+                            <td>${vipham.VP_THOIGIAN}</td>
+                          `;
+        if (vipham.DA_XU_LY_VP == 0) {
+          vipham_data += `<td>
+                                          <select
+                                            id="slVP_TrangThai['${vipham.VP_ID}']"
+                                            class="form-control form-control-sm"
+                                            onchange="UpdateTrangThaiViPham('${vipham.VP_ID}')"
                                           >
                                               <option value=0 selected=true >Chưa xử lý</option>
                                               <option value=1 >Đã xử lý</option>
@@ -195,29 +327,9 @@ function Load_ChiTietMuonTra(a) {
                       <td>Thời gian trả</td>
                       <td>${mt.TRA_THOIGIAN}</td>
                     </tr>
-                    <tr>
-                      <td>Vị trí mượn</td>
-                      <td>
-                        <img src="./img/marker-red.png" height="20px" />
-                        ${mt.MUON_VITRI_LAT}, ${mt.MUON_VITRI_LNG}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Vị trí trả</td>
-                      <td>
-                        <img src="./img/marker-green.png" height="20px" />
-                        ${mt.TRA_VITRI_LAT}, ${mt.TRA_VITRI_LNG}
-                      </td>
-                    </tr>
                     `;
-        vtMuon_lat = mt.MUON_VITRI_LAT;
-        vtMuon_lng = mt.MUON_VITRI_LNG;
-        vtTra_lat = mt.TRA_VITRI_LAT;
-        vtTra_lng = mt.TRA_VITRI_LNG;
       });
       tb.append(mt_data);
-      MapPosition(vtMuon_lat, vtMuon_lng, vtTra_lat, vtTra_lng);
-      GetAndDraw();
     },
     error: function(e) {
       console.log(e);
@@ -358,16 +470,16 @@ function ChiTietViPham(a) {
                       <td>${vp.muontra.XE_ID}</td>
                     </tr>
                     <tr>
-                      <td>ID lỗi</td>
-                      <td>${vp.LOI_ID}</td>
-                    </tr>
-                    <tr>
                       <td>Tên lỗi</td>
                       <td id="id_loi[${vp.LOI_ID}]"></td>
                     </tr>
                     <tr>
                       <td>Thời gian vi phạm</td>
                       <td>${vp.VP_THOIGIAN}</td>
+                    </tr>
+                    <tr>
+                      <td>Vị trí vi phạm</td>
+                      <td>${vp.VP_LAT}, ${vp.VP_LNG}</td>
                     </tr>
                     `;
       $.ajax({
@@ -386,6 +498,8 @@ function ChiTietViPham(a) {
         }
       });
       tb.append(vp_data);
+      MapVP(vp.VP_LAT, vp.VP_LNG);
+      GetAndDraw();
     },
     error: function(e) {
       console.log(e);
@@ -396,9 +510,8 @@ function ChiTietViPham(a) {
 //update xu ly
 function UpdateTrangThaiViPham(a) {
   var vp_id = a;
-
-  var vp_xuly = "slVP_TrangThai['" + vp_id + "']";
-  var c = document.getElementById(vp_xuly).value;
+  var vp_xuly_id = "slVP_TrangThai['" + vp_id + "']";
+  var vp_xuly = Number(document.getElementById(vp_xuly_id).value);
 
   $.ajax({
     url: "/vipham/updateXuLy",
@@ -407,11 +520,41 @@ function UpdateTrangThaiViPham(a) {
     contentType: "application/json",
     success: function() {
       alert("Đã cập nhật thành công xử lý vi phạm: " + vp_id);
-      // LoadView();
+      LoadView();
     },
     error: function(e) {
       alert("Đã có lỗi xảy ra!");
       console.log(e);
     }
   });
+}
+
+//Load map vi pham
+function MapVP(vpLat, vpLng) {
+  var mapProp = {
+    center: new google.maps.LatLng(10.0299337, 105.7684266),
+    zoom: 15
+  };
+  map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+
+  if (vpLat != null && vpLng != null) {
+    var vtVP = new google.maps.LatLng(vpLat, vpLng);
+    var markerVP = new google.maps.Marker({
+      position: vtVP,
+      map: map,
+      icon: "./img/marker-red.png"
+    });
+  }
+}
+
+//Load View
+function LoadView() {
+  var view = document.getElementById("slViPham_View").value;
+  if (view == 2) {
+    GetAllViPham();
+  } else if (view == 0) {
+    GetChuaXuLy();
+  } else if (view == 1) {
+    GetDaXuLy();
+  }
 }

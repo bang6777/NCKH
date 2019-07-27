@@ -117,7 +117,6 @@ function GetHHDangCho() {
         $("#tbHuHong")
           .DataTable()
           .destroy();
-        // alert("a");
       }
       $("#tbHuHong tbody").empty();
 
@@ -217,7 +216,7 @@ function GetHHDangSua() {
       tb.html("");
       huhong_data = "";
 
-      if ($.fn.DataTable.isDataTable("#tableTK")) {
+      if ($.fn.DataTable.isDataTable("#tbHuHong")) {
         $("#tbHuHong")
           .DataTable()
           .destroy();

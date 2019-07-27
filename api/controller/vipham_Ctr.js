@@ -3,6 +3,7 @@ const vipham_M = require("../Model/vipham_Model");
 const muontra_M = require("../Model/muontra_Model");
 const taikhoan_M = require("../Model/taikhoan_Model");
 const xe_M = require("../Model/xe_Model");
+const sequelize = require("./../Config/db");
 
 exports.allViPham = cb => {
   vipham_M.findAll().then(vipham => {
@@ -12,44 +13,28 @@ exports.allViPham = cb => {
 };
 
 //vi pham - tai khoan
-exports.vipham_taikhoan = function(TK_ID, cb) {
-  vipham_M
-    .findAll({
-      include: [
-        {
-          model: taikhoan_M,
-          where: {
-            TK_ID: TK_ID
-          }
-        }
-      ]
+exports.vipham_taikhoan = (TK_ID, cb) => {
+  sequelize
+    .query("SELECT * FROM vipham WHERE MUONTRA_ID IN ( SELECT MUONTRA_ID from muontra where TK_ID = :tk_id)", {
+      replacements: { tk_id: TK_ID },
+      type: sequelize.QueryTypes.SELECT
     })
-    .then(dsViPham => {
-      if (dsViPham) {
-        cb(null, dsViPham);
-      } else cb("Không có dữ liệu", null);
-      console.log("All vi pham theo id:", JSON.stringify(dsViPham, null, 4));
+    .then(tk => {
+      console.log(tk);
+      cb(null, tk);
     });
 };
 
 //vi pham - xe
 exports.vipham_xe = function(XE_ID, cb) {
-  vipham_M
-    .findAll({
-      include: [
-        {
-          model: xe_M,
-          where: {
-            XE_ID: XE_ID
-          }
-        }
-      ]
+  sequelize
+    .query("SELECT * FROM vipham WHERE MUONTRA_ID IN ( SELECT MUONTRA_ID from muontra where XE_ID = :xe_id)", {
+      replacements: { xe_id: XE_ID },
+      type: sequelize.QueryTypes.SELECT
     })
-    .then(dsViPham => {
-      if (dsViPham) {
-        cb(null, dsViPham);
-      } else cb("Không có dữ liệu", null);
-      console.log("All vi pham theo id:", JSON.stringify(dsViPham, null, 4));
+    .then(tk => {
+      console.log(tk);
+      cb(null, tk);
     });
 };
 
@@ -99,6 +84,20 @@ exports.VP_ChuaXuLy = cb => {
     .findAll({
       where: {
         DA_XU_LY_VP: 0
+      }
+    })
+    .then(vipham => {
+      cb(null, vipham);
+      console.log("All vipham:", JSON.stringify(vipham, null, 4));
+    });
+};
+
+//get da xu ly
+exports.VP_DaXuLy = cb => {
+  vipham_M
+    .findAll({
+      where: {
+        DA_XU_LY_VP: 1
       }
     })
     .then(vipham => {
