@@ -299,20 +299,6 @@ router.post("/xe/delete/:XE_ID", function(req, res) {
   });
 });
 
-// //update vi tri xe
-// router.post("/xe/update/:XE_ID", function (req, res) {
-//   var XE_ID = req.body.XE_ID;
-//   var XE_VITRI = req.body.XE_VITRI;
-//   xe.updateXe(XE_ID, XE_VITRI, function (err, data) {
-//     if (err) {
-//       res.status(404).json({ message: "ERR" });
-//     } else {
-//       res.status(200).json({
-//         message: "đã cập nhật thành công vitri cua xe có ID: " + XE_ID
-//       });
-//     }
-//   });
-// });
 // update xe
 router.post("/xe/updateInfo/:XE_ID", function(req, res) {
   var XE_ID = req.body.XE_ID;
@@ -330,7 +316,7 @@ router.post("/xe/updateInfo/:XE_ID", function(req, res) {
 });
 
 //update trang thai xe Linh
-router.post("/xe/updateTT/:XE_ID", function(req, res) {
+router.put("/xe/updateTT/:XE_ID", function(req, res) {
   var XE_ID = req.body.XE_ID;
   var XE_TRANGTHAI = req.body.XE_TRANGTHAI;
   var XE_IMEI = req.body.XE_IMEI;
@@ -357,7 +343,7 @@ router.post("/xe/updateTrangThai", function(req, res) {
 });
 
 //update vi tri xe
-router.post("/xe/update/:XE_ID", function(req, res) {
+router.put("/xe/update/:XE_ID", function(req, res) {
   var XE_ID = req.body.XE_ID;
   var XE_LAT = req.body.XE_LAT;
   var XE_LNG = req.body.XE_LNG;

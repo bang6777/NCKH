@@ -45,7 +45,7 @@ const vipham_Model = db.define("vipham", {
     type: Sequelize.DATE,
     defaultValue: Sequelize.NOW
   },
-  DA_XU_LY_VP: {
+  VP_TRANGTHAI: {
     type: Sequelize.INTEGER,
     defaultValue: 0
   },

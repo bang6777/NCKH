@@ -60,11 +60,11 @@ exports.vipham_chitiet = function(MUONTRA_ID, cb) {
 };
 
 //cap nhat xu ly vi pham
-exports.updateXuLy = function(VP_ID, DA_XU_LY_VP, cb) {
+exports.updateXuLy = function(VP_ID, VP_TRANGTHAI, cb) {
   vipham_M
     .update(
       {
-        DA_XU_LY_VP: DA_XU_LY_VP
+        VP_TRANGTHAI: VP_TRANGTHAI
       },
       {
         where: {
@@ -83,7 +83,7 @@ exports.VP_ChuaXuLy = cb => {
   vipham_M
     .findAll({
       where: {
-        DA_XU_LY_VP: 0
+        VP_TRANGTHAI: 0
       }
     })
     .then(vipham => {
@@ -97,7 +97,7 @@ exports.VP_DaXuLy = cb => {
   vipham_M
     .findAll({
       where: {
-        DA_XU_LY_VP: 1
+        VP_TRANGTHAI: 1
       }
     })
     .then(vipham => {

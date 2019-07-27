@@ -57,7 +57,7 @@ function GetAllViPham() {
                             <td id="loi[${i}]"></td>
                             <td>${vipham.VP_THOIGIAN}</td>
                           `;
-        if (vipham.DA_XU_LY_VP == 0) {
+        if (vipham.VP_TRANGTHAI == 0) {
           vipham_data += `<td>
                                           <select
                                             id="slVP_TrangThai['${vipham.VP_ID}']"
@@ -69,7 +69,7 @@ function GetAllViPham() {
                                           </select>
                                         </td>
                                         `;
-        } else if (vipham.DA_XU_LY_VP == 1) {
+        } else if (vipham.VP_TRANGTHAI == 1) {
           vipham_data += `<td>
                                           <select
                                             id="slVP_TrangThai['${vipham.VP_ID}']"
@@ -146,7 +146,7 @@ function GetChuaXuLy() {
                             <td id="loi[${i}]"></td>
                             <td>${vipham.VP_THOIGIAN}</td>
                           `;
-        if (vipham.DA_XU_LY_VP == 0) {
+        if (vipham.VP_TRANGTHAI == 0) {
           vipham_data += `<td>
                                           <select
                                             id="slVP_TrangThai['${vipham.VP_ID}']"
@@ -158,7 +158,7 @@ function GetChuaXuLy() {
                                           </select>
                                         </td>
                                         `;
-        } else if (vipham.DA_XU_LY_VP == 1) {
+        } else if (vipham.VP_TRANGTHAI == 1) {
           vipham_data += `<td>
                                           <select
                                             id="slVP_TrangThai['${vipham.VP_ID}']"
@@ -235,7 +235,7 @@ function GetDaXuLy() {
                             <td id="loi[${i}]"></td>
                             <td>${vipham.VP_THOIGIAN}</td>
                           `;
-        if (vipham.DA_XU_LY_VP == 0) {
+        if (vipham.VP_TRANGTHAI == 0) {
           vipham_data += `<td>
                                           <select
                                             id="slVP_TrangThai['${vipham.VP_ID}']"
@@ -247,7 +247,7 @@ function GetDaXuLy() {
                                           </select>
                                         </td>
                                         `;
-        } else if (vipham.DA_XU_LY_VP == 1) {
+        } else if (vipham.VP_TRANGTHAI == 1) {
           vipham_data += `<td>
                                           <select
                                             id="slVP_TrangThai['${vipham.VP_ID}']"
@@ -516,7 +516,7 @@ function UpdateTrangThaiViPham(a) {
   $.ajax({
     url: "/vipham/updateXuLy",
     method: "POST",
-    data: JSON.stringify({ VP_ID: vp_id, DA_XU_LY_VP: vp_xuly }),
+    data: JSON.stringify({ VP_ID: vp_id, VP_TRANGTHAI: vp_xuly }),
     contentType: "application/json",
     success: function() {
       alert("Đã cập nhật thành công xử lý vi phạm: " + vp_id);
