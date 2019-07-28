@@ -375,6 +375,7 @@ router.put("/xe/update/:XE_ID", function (req, res) {
     if (err) {
       res.status(404).json({ message: "ERR" });
     } else {
+      
       xe.findByID(XE_ID, function (err, data) {
         res.json("TTXe:" + data.XE_TRANGTHAI);
       });
