@@ -64,6 +64,24 @@ exports.baoHuHong = (XE_ID, TK_ID, HH_MOTA, cb) => {
     }).catch(err => {
       cb(err, null);
     });
+};
 
-
+exports.updateTrangThaiXe = (XE_ID, XE_TRANGTHAI, cb) => {
+  xe_M
+    .update(
+      {
+        XE_TRANGTHAI: XE_TRANGTHAI
+      },
+      {
+        where: {
+          XE_ID: XE_ID
+        }
+      }
+    )
+    .then(xe => {
+      console.log("Đã cập nhật xe: ", xe.XE_ID);
+      cb(null, xe);
+    }).catch(err=>{
+      cb(err, null);
+    });
 };

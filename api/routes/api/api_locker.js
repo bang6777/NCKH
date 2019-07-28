@@ -34,6 +34,26 @@ router.post("/locker/:XE_ID/traxe", function (req, res) {
 
 });
 
+//
+router.get("/locker/:XE_ID", function (req, res) {
+    var XE_ID = req.params.XE_ID;
+    var XE_IMEI = req.query.XE_IMEI;
+
+    if (XE_ID && XE_IMEI) {
+
+        xe.findXeByID_IMEI(XE_ID, XE_IMEI, function (err, result) {
+            if (err) {
+                res.status(400).send("ERR");
+            } else {
+
+                res.send(result.XE_TRANGTHAI);
+
+            }
+        });
+    } else res.status(400).send("Yêu cầu không hợp lệ");
+
+});
+
 // Cập nhật vị trí
 router.put("/locker/:XE_ID", function (req, res) {
     var XE_ID = req.params.XE_ID;
@@ -55,5 +75,6 @@ router.put("/locker/:XE_ID", function (req, res) {
     } else res.status(400).send("Yêu cầu không hợp lệ");
 
 });
+
 
 module.exports = router;
