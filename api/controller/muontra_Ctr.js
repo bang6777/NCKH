@@ -11,6 +11,7 @@ const xe_M = require("../Model/xe_Model");
 exports.muontra_nguoidung = function(TK_ID, cb) {
   muontra_M
     .findAll({
+      order: [["createdAt", "DESC"]],
       include: [
         {
           model: taikhoan_M,
@@ -30,6 +31,7 @@ exports.muontra_nguoidung = function(TK_ID, cb) {
 exports.muontra_Xe = function(XE_ID, cb) {
   muontra_M
     .findAll({
+      order: [["createdAt", "DESC"]],
       include: [
         {
           model: xe_M,
@@ -49,10 +51,14 @@ exports.muontra_Xe = function(XE_ID, cb) {
 
 //get All muon tra
 exports.allMuonTra = cb => {
-  muontra_M.findAll().then(muontra => {
-    cb(null, muontra);
-    console.log("All mượn trả:", JSON.stringify(muontra, null, 4));
-  });
+  muontra_M
+    .findAll({
+      order: [["createdAt", "DESC"]]
+    })
+    .then(muontra => {
+      cb(null, muontra);
+      console.log("All mượn trả:", JSON.stringify(muontra, null, 4));
+    });
 };
 
 //get chua tra xe
@@ -60,6 +66,7 @@ exports.getChuaTra = cb => {
   const Op = Sequelize.Op;
   muontra_M
     .findAll({
+      order: [["createdAt", "DESC"]],
       where: {
         [Op.or]: [
           {
@@ -74,6 +81,7 @@ exports.getChuaTra = cb => {
         ]
       }
     })
+
     .then(mt => {
       console.log("muon tra: ", mt.MUONTRA_ID);
       cb(null, mt);

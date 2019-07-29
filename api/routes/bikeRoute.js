@@ -8,10 +8,13 @@ var huhong = require("../controller/huhong_Ctr");
 var muontra = require("../controller/muontra_Ctr");
 var vipham = require("../controller/vipham_Ctr");
 var khuonvien = require("../controller/khuonvien_Ctr");
+var checkloi = require("../controller/checkloi_Ctrl");
 
 var viphamRoute = require("./vipham_Route");
 var muontraRoute = require("./muontra_Route");
 var huhongRoute = require("./huhong_Route");
+
+var checkloiRoute = require("./checkloi_Route");
 
 const jwt = require("jsonwebtoken");
 //Login
@@ -316,7 +319,7 @@ router.post("/xe/updateInfo/:XE_ID", function(req, res) {
 });
 
 //update trang thai xe Linh
-router.put("/xe/updateTT/:XE_ID", function(req, res) {
+router.put("/xe/updateTrangThai", function(req, res) {
   var XE_ID = req.body.XE_ID;
   var XE_TRANGTHAI = req.body.XE_TRANGTHAI;
   var XE_IMEI = req.body.XE_IMEI;
@@ -342,16 +345,55 @@ router.post("/xe/updateTrangThai", function(req, res) {
   });
 });
 
+// //update vi tri xe
+// router.put("/xe/update/:XE_ID", function(req, res) {
+//   var XE_ID = req.body.XE_ID;
+//   var XE_LAT = req.body.XE_LAT;
+//   var XE_LNG = req.body.XE_LNG;
+//   var XE_IMEI = req.body.XE_IMEI;
+//   xe.updateXe(XE_ID, XE_IMEI, XE_LAT, XE_LNG, function(err, data) {
+//     if (err) {
+//       res.status(404).json({ message: "ERR" });
+//     } else {
+//       xe.findByID(XE_ID, function(err, data) {
+//         res.json("TTXe:" + data.XE_TRANGTHAI);
+//       });
+//     }
+//   });
+// });
+
 //update vi tri xe
-router.put("/xe/update/:XE_ID", function(req, res) {
+router.put("/xe/updateViTri", function(req, res) {
   var XE_ID = req.body.XE_ID;
   var XE_LAT = req.body.XE_LAT;
   var XE_LNG = req.body.XE_LNG;
   var XE_IMEI = req.body.XE_IMEI;
   xe.updateXe(XE_ID, XE_IMEI, XE_LAT, XE_LNG, function(err, data) {
     if (err) {
-      res.status(404).json({ message: "ERR" });
+      res.json({ message: "ERR1" });
     } else {
+      //kiem tra Is inside
+      //if outside
+      checkloi.findMuontraID_Xe(XE_ID, function(err, data) {
+        if (err) {
+          res.json({ message: "ERR2" });
+          // console.log(err);
+        } else {
+          var mt_id = data.MUONTRA_ID;
+          checkloi.findIDLoi_MT(mt_id, function(err, data) {
+            //neu chua co loi
+            if (err) {
+              //them loi
+              checkloi.addVP(mt_id, function(err, data) {
+                if (err) {
+                  res.json({ message: "ERR3" });
+                }
+              });
+              // res.status(404).json({ message: "CHUA CO LOI" });
+            }
+          });
+        }
+      });
       xe.findByID(XE_ID, function(err, data) {
         res.json("TTXe:" + data.XE_TRANGTHAI);
       });
@@ -643,3 +685,7 @@ router.get("/tk-muontra", function(req, res) {
 });
 
 module.exports = router;
+
+//---------------------Check lỗi
+router.get("/getMT_ID", checkloiRoute.getIDMT);
+router.get("/getLOI_ID", checkloiRoute.getIDLOI);
