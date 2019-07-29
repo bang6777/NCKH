@@ -327,7 +327,14 @@ router.put("/xe/updateTT/:XE_ID", function(req, res) {
     if (err) {
       res.status(404).json({ message: "ERR" });
     } else {
-      res.status(200).json({ message: "Cập nhật thành công trạng thái" + XE_TRANGTHAI });
+      muontra.traXe(XE_ID, LAT, LNG, function(err, result) {
+        if (err) {
+          xe.updateTrangThai(XE_ID, XE_IMEI, 1, function(err, result) {});
+          res.status(404).json({ message: "ERR" });
+        } else {
+          res.status(200).json({ message: "Cập nhật thành công trạng thái" + XE_TRANGTHAI });
+        }
+      });
     }
   });
 });

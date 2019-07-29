@@ -8,7 +8,7 @@ const xe_M = require("../Model/xe_Model");
 // muontra_M.belongsTo(taikhoan_M, { foreignKey: 'TK_ID' });
 
 //muon tra - tai khoan
-exports.muontra_nguoidung = function(TK_ID, cb) {
+exports.muontra_nguoidung = function (TK_ID, cb) {
   muontra_M
     .findAll({
       order: [["createdAt", "DESC"]],
@@ -28,7 +28,7 @@ exports.muontra_nguoidung = function(TK_ID, cb) {
       console.log("All muon tra theo id:", JSON.stringify(dsMuonTra, null, 4));
     });
 };
-exports.muontra_Xe = function(XE_ID, cb) {
+exports.muontra_Xe = function (XE_ID, cb) {
   muontra_M
     .findAll({
       order: [["createdAt", "DESC"]],
@@ -100,3 +100,32 @@ exports.findMuonTraByID = (MUONTRA_ID, cb) => {
       cb(null, mt);
     });
 };
+
+exports.traXe = (XE_ID,LAT,LNG, cb) => {
+  //Tìm xe đang mượn
+  muontra_M.findOne({
+    where: { xeXEID: XE_ID, TRA_THOIGIAN: null },
+
+    order: [['MUON_THOIGIAN', 'DESC']],
+  }).then(result => {
+    if (result) {
+      muontra_M.update({
+        TRA_THOIGIAN: Date.now(),
+        TRA_VITRI_LAT: LAT,
+        TRA_VITRI_LNG: LNG
+        }, {
+          where: {
+            MUONTRA_ID: result.MUONTRA_ID
+          }
+        }).then(xe => {
+          if (xe) cb(null, "OK")
+          else cb("ERR", null);
+        }).catch(err => {
+          cb(err, null);
+        });
+    } else cb("ERR", null);
+  }).catch(err => {
+    cb(err, null);
+  });
+}
+
