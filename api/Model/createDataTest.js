@@ -8,7 +8,7 @@ var xe_m = require("./xe_Model");
 exports.initDatabase = () => {
   // -------------------------------XE------------------
   xe_m.create({
-    XE_IMEI: "352068063702873",
+    XE_IMEI: "867959033016407",
     XE_NAMSANXUAT: "2019",
     XE_GHICHU: "XE_GHICHU",
     XE_LAT: "10.0305035",
@@ -129,19 +129,19 @@ exports.initDatabase = () => {
   HH_m.create({
     taikhoanTKID: "B1401088",
     xeXEID: 1,
-    HH_MOTA: true,
+    HH_MOTA: "Xe bị bể bánh",
     HH_TRANGTHAI: 0
   });
   HH_m.create({
     taikhoanTKID: "B1401088",
-    xeXEID: 2,
-    HH_MOTA: true,
+    xeXEID: 1,
+    HH_MOTA: "Đứt dây sên",
     HH_TRANGTHAI: 1
   });
   HH_m.create({
     taikhoanTKID: "B1401088",
-    xeXEID: 3,
-    HH_MOTA: true,
+    xeXEID: 1,
+    HH_MOTA: "Kẹt thắng",
     HH_TRANGTHAI: 2
   });
 };

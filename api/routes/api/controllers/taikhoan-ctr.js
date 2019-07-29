@@ -66,104 +66,91 @@ exports.findTKByID = (TK_ID, cb) => {
 
 // -------------------Lịch sử---------------------
 exports.layLSMuonTra_TK = (TK_ID, page, cb) => {
-  muontra_M
-    .paginate({
-      // attributes: ['id', 'name'],
-      page: page, // Default 1
-      paginate: 5, // Default 25
-      order: [["MUON_THOIGIAN", "DESC"]],
-      where: { TK_ID: TK_ID }
-    })
-    .then(MT_result => {
-      // console.log("Mượn trả: ", MT_result);
-      cb(null, MT_result);
-    })
-    .catch(err => {
-      cb(err, null);
-    });
+  muontra_M.paginate({
+    // attributes: ['id', 'name'],
+    page: page, // Default 1
+    paginate: 5, // Default 25
+    order: [['MUON_THOIGIAN', 'DESC']],
+    where: { taikhoanTKID: TK_ID }
+  }).then(MT_result => {
+    // console.log("Mượn trả: ", MT_result);
+    cb(null, MT_result);
+  }).catch(err => {
+    cb(err, null);
+  });
 };
 
 exports.layLSBaoHuHong_TK = (TK_ID, page, cb) => {
-  huhong_M
-    .paginate({
-      // attributes: ['id', 'name'],
-      page: page, // Default 1
-      paginate: 5, // Default 25
-      order: [["HH_THOIGIAN", "DESC"]],
-      where: { TK_ID: TK_ID }
-    })
-    .then(MT_result => {
-      // console.log("Mượn trả: ", MT_result);
-      cb(null, MT_result);
-    })
-    .catch(err => {
-      cb(err, null);
-    });
+  huhong_M.paginate({
+    // attributes: ['id', 'name'],
+    page: page, // Default 1
+    paginate: 5, // Default 25
+    order: [['HH_THOIGIAN', 'DESC']],
+    where: { taikhoanTKID: TK_ID }
+  }).then(MT_result => {
+    // console.log("Mượn trả: ", MT_result);
+    cb(null, MT_result);
+  }).catch(err => {
+    cb(err, null);
+  });
 };
 exports.layLSViPham_TK = (TK_ID, page, cb) => {
-  vipham_M
-    .paginate({
-      attributes: ["VP_ID", "VP_THOIGIAN", "VP_TRANGTHAI", "VP_LAT", "VP_LNG"],
-      // .findAll({
-      // include: [],
-      include: [
-        {
-          attributes: ["LOI_TEN", "LOI_MOTA"],
-          model: loi_M
-          // where: { LOI_ID: Sequelize.col('loi.LOI_ID') }
-        },
-        {
-          attributes: ["MUONTRA_ID", "TK_ID", "XE_ID"],
-          model: muontra_M,
-          where: { TK_ID: TK_ID },
-          paginate: 5 // Default 25
-        }
-      ],
-      // })
-      page: page, // Default 1
+  vipham_M.paginate({
+    attributes: ['VP_ID', 'VP_THOIGIAN', 'DA_XU_LY_VP', 'VP_LAT', 'VP_LNG'],
+    // .findAll({
+    // include: [],
+    include: [
+      {
+        attributes: ["LOI_TEN", 'LOI_MOTA'],
+        model: loi_M,
+        // where: { LOI_ID: Sequelize.col('loi.LOI_ID') }
+      }, {
+        attributes: ['MUONTRA_ID', "taikhoanTKID", 'xeXEID'],
+        model: muontra_M,
+        where: { taikhoanTKID: TK_ID },
+        paginate: 5, // Default 25
+      }],
+    // })
+    page: page, // Default 1
 
-      order: [["VP_THOIGIAN", "DESC"]]
-      // where: { TK_ID: TK_ID }
-    })
-    .then(MT_result => {
-      // console.log("Mượn trả: ", MT_result);
-      cb(null, MT_result);
-    })
-    .catch(err => {
-      cb(err, null);
-    });
+    order: [['VP_THOIGIAN', 'DESC']],
+    // where: { taikhoanTKID: TK_ID }
+  }).then(MT_result => {
+    // console.log("Mượn trả: ", MT_result);
+    cb(null, MT_result);
+  }).catch(err => {
+    cb(err, null);
+  });
+
+
+
 };
 
 // ------------------------Mượn xe ---------------------
 exports.muonXe = (TK_ID, XE_ID, MUON_VITRI_LAT, MUON_VITRI_LNG, cb) => {
-  muontra_M
-    .findOne({
-      where: { TK_ID: TK_ID, TRA_THOIGIAN: null },
+  muontra_M.findOne({
+    where: { taikhoanTKID: TK_ID, TRA_THOIGIAN: null },
 
-      order: [["MUON_THOIGIAN", "DESC"]]
-    })
-    .then(result => {
-      console.log("result:" + result);
-      if (result) {
-        // Đang mượn xe ---> K cho mượn nữa
-        cb("Chỉ cho phép mượn 1 chiếc xe", null);
-      } else {
-        // Chưa có mượn xe --->Cho phép mượn
-        muontra_M
-          .create({
-            TK_ID: TK_ID,
-            XE_ID: XE_ID,
-            MUON_VITRI_LAT: MUON_VITRI_LAT,
-            MUON_VITRI_LNG: MUON_VITRI_LNG
-          })
-          .then(data => {
-            cb(null, "Đã mượn thành công");
-          })
-          .catch(err => {
-            cb(err, null);
-          });
-      }
-    })
+    order: [['MUON_THOIGIAN', 'DESC']],
+  }).then(result => {
+    // console.log("result:" +result);
+    if (result) { // Đang mượn xe ---> K cho mượn nữa
+      cb("Chỉ cho phép mượn 1 chiếc xe", null);
+    } else {  // Chưa có mượn xe --->Cho phép mượn
+      muontra_M.create({
+        taikhoanTKID: TK_ID,
+        xeXEID: XE_ID,
+        MUON_VITRI_LAT: MUON_VITRI_LAT,
+        MUON_VITRI_LNG: MUON_VITRI_LNG
+      }).then(data => {
+
+        cb(null, "Đã mượn thành công");
+      })
+        .catch(err => {
+          cb(err, null);
+        });
+    }
+  })
     .catch(err => {
       cb(err, null);
     });

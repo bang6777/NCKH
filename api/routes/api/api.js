@@ -111,11 +111,19 @@ router.post("/api/taikhoan/:TK_ID/muonxe", passport.getPassport().authenticate('
   var MUON_VITRI_LAT = req.body.MUON_VITRI_LAT;
   var MUON_VITRI_LNG = req.body.MUON_VITRI_LNG;
 
-  if (req.user.TK_ID == TK_ID && XE_ID && MUON_VITRI_LNG && MUON_VITRI_LAT ) {
-    taikhoan_ctr.muonXe(TK_ID, XE_ID,MUON_VITRI_LAT,MUON_VITRI_LNG, function (err, MT_result) {
+  if (req.user.TK_ID == TK_ID && XE_ID && MUON_VITRI_LNG && MUON_VITRI_LAT) {
+
+    taikhoan_ctr.muonXe(TK_ID, XE_ID, MUON_VITRI_LAT, MUON_VITRI_LNG, function (err, MT_result) {
       if (err) res.status(400).send(err);
       else {
-        res.status(200).json({ message: MT_result });
+        xe.updateTrangThaiXe(XE_ID, 1, function (err, result) {
+          if (err) {
+            res.status(400).send(err);
+          } else {
+            res.status(200).json({ message: MT_result });
+          }
+        });
+
       }
     });
   } else {
@@ -159,6 +167,14 @@ router.get("/api/xe", function (req, res) {
 //     res.status(200).json(data);
 //   });
 // });
+router.get("/api/xe/:XE_ID", function (req, res) {
+  var XE_ID = req.params.XE_ID;
+  xe.findXeByID(XE_ID, function (err, data) {
+    if (err) res.status(400).send(err);
+    else
+      res.status(200).json(data);
+  });
+});
 
 //Báo hư hỏng
 router.post("/api/xe/:XE_ID", passport.getPassport().authenticate('jwt', { session: false }), function (req, res) {
