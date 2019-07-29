@@ -319,7 +319,7 @@ router.post("/xe/updateInfo/:XE_ID", function(req, res) {
 });
 
 //update trang thai xe Linh
-router.put("/xe/updateTrangThai", function(req, res) {
+router.put("/xe/updateTT/:XE_ID", function(req, res) {
   var XE_ID = req.body.XE_ID;
   var XE_TRANGTHAI = req.body.XE_TRANGTHAI;
   var XE_IMEI = req.body.XE_IMEI;
@@ -363,7 +363,7 @@ router.post("/xe/updateTrangThai", function(req, res) {
 // });
 
 //update vi tri xe
-router.put("/xe/updateViTri", function(req, res) {
+router.put("/xe/update/:XE_ID", function(req, res) {
   var XE_ID = req.body.XE_ID;
   var XE_LAT = req.body.XE_LAT;
   var XE_LNG = req.body.XE_LNG;
@@ -377,7 +377,6 @@ router.put("/xe/updateViTri", function(req, res) {
       checkloi.findMuontraID_Xe(XE_ID, function(err, data) {
         if (err) {
           res.json({ message: "ERR2" });
-          // console.log(err);
         } else {
           var mt_id = data.MUONTRA_ID;
           checkloi.findIDLoi_MT(mt_id, function(err, data) {
@@ -387,9 +386,12 @@ router.put("/xe/updateViTri", function(req, res) {
               checkloi.addVP(mt_id, function(err, data) {
                 if (err) {
                   res.json({ message: "ERR3" });
+                } else {
+                  console.log("Ghi nhận thành công vi phạm vượt khuôn viên : " + mt_id);
                 }
               });
-              // res.status(404).json({ message: "CHUA CO LOI" });
+            } else {
+              console.log("Đã tồn tại vi phạm! ");
             }
           });
         }
