@@ -28,6 +28,10 @@ var routes_locker = require("./api/routes/api/api_locker");
 app.use("/", routes);
 app.use("/v1/", routes_locker);
 app.use("/v1/", routes_android);
+app.get("/init_db",function(req,res){
+  require("./api/Model/createDataTest").initDatabase();
+  res.status(200).send("Đã tạo thành công cơ sở dữ liệu ảo !");
+});
 app.use(function(req, res) {
   res.status(404).send({ url: req.originalUrl + " not found" });
 });
@@ -44,4 +48,4 @@ io.on("connection", svSocket.eventSocket);
 http.listen(port);
 console.log("RESTful API server started on: " + port);
 
-require("./api/Model/createDataTest").initDatabase();
+
