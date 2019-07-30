@@ -144,64 +144,72 @@ async function updateKhuonVien() {
 
 //--------------Button Hoan Thanh
 async function Save() {
-  google.maps.event.clearListeners(map, "click");
-  setMapOnAll(null);
-  //luu toa do
-  coordinates = [];
-  var j = 0;
-  document.getElementById("ToaDo").innerHTML = "";
-
-  //cap nhat
-  await $.ajax({
-    url: "/khuonvien/update",
-    method: "POST",
-    contentType: "application/json",
-    data: JSON.stringify({ KV_TRANGTHAI: "0" }),
-    success: function() {
-      // alert("Đã cập nhật thành công trạng thái tọa độ!");
-    },
-    error: function(e) {
-      alert("Đã có lỗi xảy ra!");
-      console.log(e);
-    }
-  });
-
-  //luu
+  //dem sl dinh
+  var sldinh = 0;
   for (var i = 0; i < markers.length; i++) {
-    markers[i].setDraggable(false);
     if (markers[i].label != "null") {
-      // document.getElementById("ToaDo").innerHTML +=
-      // markers[i].id + "-" + "Lat: " + markers[i].position.lat() + " - Lng: " + markers[i].position.lng() + "<br>";
-      kv_lat = markers[i].position.lat();
-      kv_lng = markers[i].position.lng();
-
-      //ajax luu
-      await $.ajax({
-        url: "/khuonvien",
-        method: "POST",
-        data: JSON.stringify({
-          KV_LAT: kv_lat,
-          KV_LNG: kv_lng
-        }),
-        contentType: "application/json",
-        success: function() {
-          // alert("Đã thêm thành công tọa độ! " + kv_lat + "---" + kv_lng);
-        },
-        error: function(e) {
-          alert("Đã có lỗi xảy ra!");
-          console.log(e);
-        }
-      });
+      sldinh++;
     }
   }
-  alert("Đã cập nhật thành công khuôn viên!");
+  if (sldinh < 3) {
+    alert("Số đỉnh phải lớn hơn hoặc bằng 3!");
+  } else {
+    google.maps.event.clearListeners(map, "click");
+    setMapOnAll(null);
+    //luu toa do
+    coordinates = [];
+    var j = 0;
 
-  //button
-  document.getElementById("btnEditMarker").disabled = false;
-  document.getElementById("btnDone").disabled = true;
-  document.getElementById("btnDeleteAllMarkers").disabled = true;
+    //cap nhat
+    await $.ajax({
+      url: "/khuonvien",
+      method: "PUT",
+      contentType: "application/json",
+      data: JSON.stringify({ KV_TRANGTHAI: "0" }),
+      success: function() {
+        // alert("Đã cập nhật thành công trạng thái tọa độ!");
+      },
+      error: function(e) {
+        alert("Đã có lỗi xảy ra!");
+        console.log(e);
+      }
+    });
 
-  await load();
+    //luu
+    for (var i = 0; i < markers.length; i++) {
+      markers[i].setDraggable(false);
+      if (markers[i].label != "null") {
+        kv_lat = markers[i].position.lat();
+        kv_lng = markers[i].position.lng();
+
+        //ajax luu
+        await $.ajax({
+          url: "/khuonvien",
+          method: "POST",
+          data: JSON.stringify({
+            KV_LAT: kv_lat,
+            KV_LNG: kv_lng
+          }),
+          contentType: "application/json",
+          success: function() {
+            // alert("Đã thêm thành công tọa độ! " + kv_lat + "---" + kv_lng);
+          },
+          error: function(e) {
+            alert("Đã có lỗi xảy ra!");
+            console.log(e);
+          }
+        });
+      }
+    }
+    alert("Đã cập nhật thành công khuôn viên!");
+
+    //button
+    document.getElementById("btnEditMarker").disabled = false;
+    document.getElementById("btnDone").disabled = true;
+    document.getElementById("btnDeleteAllMarkers").disabled = true;
+
+    await load();
+  }
 }
 //-----------------Ham
 //6. Xoa tat ca marker
@@ -290,14 +298,18 @@ async function GetViTri() {
   });
 
   await setTimeout(function() {
+    list = $("#list-xe");
+    list.html("");
+    str = "";
     for (i = 0; i < arrxe.length; i++) {
       var isInside = google.maps.geometry.poly.containsLocation(arrxe[i].getPosition(), polygon);
       var isOnEdge = google.maps.geometry.poly.isLocationOnEdge(arrxe[i].getPosition(), polygon, 0.00001);
       if (isInside == false && isOnEdge == false) {
-        // alert(xe.XE_ID + " Trong trường: " + isInside + "----Trên cạnh: " + isOnEdge);
-        alert("Xe ID " + arrxe[i].label.toString() + " : ngoài trường");
+        str += "XE ID: " + arrxe[i].label.toString() + "<br>";
       }
     }
+    list.html(str);
+    console.log(str);
   }, 1000);
 }
 

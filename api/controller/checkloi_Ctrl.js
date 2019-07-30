@@ -50,5 +50,3 @@ exports.addVP = (muontraMUONTRAID, cb) => {
       cb(null, vp);
     });
 };
-
-//is Inside
