@@ -45,3 +45,18 @@ exports.updateKV_TrangThai = (KV_TRANGTHAI, cb) => {
       cb(null, kv);
     });
 };
+
+//get lat & lng khuon vien
+exports.getLatLng = cb => {
+  khuonvien_M
+    .findAll({
+      where: {
+        KV_TRANGTHAI: "1"
+      },
+      attributes: ["KV_LAT", "KV_LNG"]
+    })
+    .then(kv => {
+      cb(null, kv);
+      console.log("All toa do:", JSON.stringify(kv, null, 4));
+    });
+};

@@ -58,10 +58,6 @@ function isInside(polygon, n, p) {
 
       // cout << (orientation(polygon[i], p, polygon[next]));
       if (orientation(polygon[i], p, polygon[next]) == 0) {
-        // cout<< "Canh: ";
-        // cout<< i;
-        // cout<< next;
-        // cout << onSegment(polygon[i], p, polygon[next]);
         return onSegment(polygon[i], p, polygon[next]);
       }
 
@@ -73,8 +69,6 @@ function isInside(polygon, n, p) {
     i = next;
   } while (i != 0);
 
-  // cout << "so diem ";
-  // cout << count;
   // Return true if count is odd, false otherwise
   return count % 2 == 0; // Same as (count%2 == 1)
 }
