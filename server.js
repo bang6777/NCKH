@@ -48,4 +48,4 @@ io.on("connection", svSocket.eventSocket);
 http.listen(port);
 console.log("RESTful API server started on: " + port);
 
-
+// require("./api/Model/createDataTest").initDatabase();

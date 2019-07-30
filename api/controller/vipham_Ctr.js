@@ -6,7 +6,7 @@ const xe_M = require("../Model/xe_Model");
 const sequelize = require("./../Config/db");
 
 exports.allViPham = cb => {
-  vipham_M.findAll().then(vipham => {
+  vipham_M.findAll({ order: [["createdAt", "DESC"]] }).then(vipham => {
     cb(null, vipham);
     console.log("All vipham:", JSON.stringify(vipham, null, 4));
   });
@@ -15,6 +15,7 @@ exports.allViPham = cb => {
 exports.vipham_taikhoan = (TK_ID, cb) => {
   vipham_M
     .findAll({
+      order: [["createdAt", "DESC"]],
       include: [
         {
           model: muontra_M,
@@ -36,6 +37,7 @@ exports.vipham_taikhoan = (TK_ID, cb) => {
 exports.vipham_xe = (XE_ID, cb) => {
   vipham_M
     .findAll({
+      order: [["createdAt", "DESC"]],
       include: [
         {
           model: muontra_M,
@@ -97,6 +99,7 @@ exports.updateXuLy = function(VP_ID, VP_TRANGTHAI, cb) {
 exports.VP_ChuaXuLy = cb => {
   vipham_M
     .findAll({
+      order: [["createdAt", "DESC"]],
       where: {
         VP_TRANGTHAI: 0
       }
@@ -111,6 +114,7 @@ exports.VP_ChuaXuLy = cb => {
 exports.VP_DaXuLy = cb => {
   vipham_M
     .findAll({
+      order: [["createdAt", "DESC"]],
       where: {
         VP_TRANGTHAI: 1
       }

@@ -4,7 +4,7 @@ const taikhoan_M = require("../Model/taikhoan_Model");
 const xe_M = require("../Model/xe_Model");
 
 exports.allHuHong = cb => {
-  huhong_M.findAll().then(huhong => {
+  huhong_M.findAll({ order: [["createdAt", "DESC"]] }).then(huhong => {
     cb(null, huhong);
     console.log("Tất cả hư hỏng: ", JSON.stringify(huhong, null, 4));
   });
@@ -14,6 +14,7 @@ exports.allHuHong = cb => {
 exports.huhong_taikhoan = function(TK_ID, cb) {
   huhong_M
     .findAll({
+      order: [["createdAt", "DESC"]],
       include: [
         {
           model: taikhoan_M,
@@ -35,6 +36,7 @@ exports.huhong_taikhoan = function(TK_ID, cb) {
 exports.huhong_xe = function(XE_ID, cb) {
   huhong_M
     .findAll({
+      order: [["createdAt", "DESC"]],
       include: [
         {
           model: xe_M,
@@ -68,6 +70,7 @@ exports.findHuHongByID = (HH_ID, cb) => {
 exports.getHuHongDangCho = cb => {
   huhong_M
     .findAll({
+      order: [["createdAt", "DESC"]],
       where: {
         HH_TRANGTHAI: "0"
       }
@@ -81,6 +84,7 @@ exports.getHuHongDangCho = cb => {
 exports.getHuHongDangSua = cb => {
   huhong_M
     .findAll({
+      order: [["createdAt", "DESC"]],
       where: {
         HH_TRANGTHAI: "1"
       }
@@ -94,6 +98,7 @@ exports.getHuHongDangSua = cb => {
 exports.getHuHongDaSua = cb => {
   huhong_M
     .findAll({
+      order: [["createdAt", "DESC"]],
       where: {
         HH_TRANGTHAI: "2"
       }
@@ -107,6 +112,7 @@ exports.getHuHongDaSua = cb => {
 exports.getHuHongBaoSai = cb => {
   huhong_M
     .findAll({
+      order: [["createdAt", "DESC"]],
       where: {
         HH_TRANGTHAI: "3"
       }
