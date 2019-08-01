@@ -105,10 +105,10 @@ exports.traXe = (XE_ID,LAT,LNG, cb) => {
   //Tìm xe đang mượn
   muontra_M.findOne({
     where: { xeXEID: XE_ID, TRA_THOIGIAN: null },
-
-    order: [['MUON_THOIGIAN', 'DESC']],
   }).then(result => {
+    console.log("Tìm xe đang mượn: " + JSON.stringify(result))
     if (result) {
+      
       muontra_M.update({
         TRA_THOIGIAN: Date.now(),
         TRA_VITRI_LAT: LAT,
@@ -119,11 +119,11 @@ exports.traXe = (XE_ID,LAT,LNG, cb) => {
           }
         }).then(xe => {
           if (xe) cb(null, "OK")
-          else cb("ERR", null);
+          else cb("Cập nhật mượn trả thất bại", null);
         }).catch(err => {
           cb(err, null);
         });
-    } else cb("ERR", null);
+    } else cb("Không có xe đang mượn", null);
   }).catch(err => {
     cb(err, null);
   });

@@ -99,7 +99,7 @@ exports.updateTrangThai = (XE_ID, XE_IMEI, XE_TRANGTHAI, cb) => {
     )
     .then(xe => {
       if(xe){
-        console.log("Đã cập nhật trạng thái xe: ", xe.XE_ID);
+        console.log("Đã cập nhật trạng thái xe: ", xe);
         
         cb(null, "OK");
       }else cb("ERR", null);
@@ -136,7 +136,7 @@ exports.findXeByID = (XE_ID, cb) => {
       }
     })
     .then(xe => {
-      console.log("xe: ", xe.XE_ID);
+      console.log("xe: "+ JSON.stringify(xe));
       cb(null, xe);
     });
 };
