@@ -275,7 +275,8 @@ async function GetViTri() {
               position: vt,
               map: map,
               icon: "./img/marker-green.png",
-              label: xe.XE_ID.toString()
+              label: xe.XE_ID.toString(),
+              title: xe.XE_LAT + ", " + xe.XE_LNG
             });
             arrxe[xe_id] = marker;
             xe_id++;
@@ -284,7 +285,8 @@ async function GetViTri() {
               position: vt,
               map: map,
               icon: "./img/marker-red.png",
-              label: xe.XE_ID.toString()
+              label: xe.XE_ID.toString(),
+              title: xe.XE_LAT + ", " + xe.XE_LNG
             });
             arrxe[xe_id] = marker;
             xe_id++;
