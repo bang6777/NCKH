@@ -327,9 +327,9 @@ router.put("/xe/updateTT", function (req, res) {
     console.log("err" + err);
     console.log("data" + data);
 
-    if (err != null) {
+    if (err) {
       res.status(404).json(err);
-    } else {
+    } else if(data){
       xe.findByID(XE_ID, function (err, xeObj) {
         if (xeObj.XE_TRANGTHAI == 1) {
           //yÊu cầu trả xe
@@ -347,7 +347,7 @@ router.put("/xe/updateTT", function (req, res) {
         }
       })
 
-    }
+    }else res.status(404).json("Lỗi !");
   });
 });
 
