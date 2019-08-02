@@ -98,7 +98,7 @@ exports.updateTrangThai = (XE_ID, XE_IMEI, XE_TRANGTHAI, cb) => {
       }
     )
     .then(xe => {
-      
+      console.log("xe"+ xe);
       if(xe == [ 0 ]){
         console.log("Đã cập nhật trạng thái xe: ", xe);
         
