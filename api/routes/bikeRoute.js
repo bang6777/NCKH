@@ -323,32 +323,35 @@ router.put("/xe/updateTT", function (req, res) {
   var XE_ID = req.body.XE_ID;
   var XE_TRANGTHAI = req.body.XE_TRANGTHAI;
   var XE_IMEI = req.body.XE_IMEI;
-  xe.updateTrangThai(XE_ID, XE_IMEI, XE_TRANGTHAI, function (err, data) {
-    console.log("err" + err);
-    console.log("data" + data);
-
-    if (err) {
-      res.status(400).send(err);
-    } else if(data){
-      xe.findByID(XE_ID, function (err, xeObj) {
-        if (xeObj.XE_TRANGTHAI == 0) {
-          //yÊu cầu trả xe
-          muontra.traXe(XE_ID, xeObj.XE_LAT, xeObj.XE_LNG, function (err, result) {
-            console.log('err'+err);
-            if (err) {
-              xe.updateTrangThai(XE_ID, XE_IMEI, 1, function (err, result) { }); // Thất bại -> trả về 1 (đag mượn)
-              res.status(400).send(err);
-            } else {
-              res.status(200).json({ message: "Cập nhật thành công trạng thái 1 - " + XE_TRANGTHAI });
-            }
-          });
-        }else{
-          res.status(200).json({ message: "Cập nhật thành công trạng thái 0 - " + XE_TRANGTHAI });
-        }
-      })
-
-    }else res.status(404).json("Lỗi !");
-  });
+  if(XE_TRANGTHAI==0){
+    xe.updateTrangThai(XE_ID, XE_IMEI, XE_TRANGTHAI, function (err, data) {
+      console.log("err" + err);
+      console.log("data" + data);
+  
+      if (err) {
+        res.status(400).send(err);
+      } else if(data){
+        xe.findByID(XE_ID, function (err, xeObj) {
+          if (xeObj.XE_TRANGTHAI == 0) {
+            //yÊu cầu trả xe
+            muontra.traXe(XE_ID, xeObj.XE_LAT, xeObj.XE_LNG, function (err, result) {
+              console.log('err'+err);
+              if (err) {
+                xe.updateTrangThai(XE_ID, XE_IMEI, 1, function (err, result) { }); // Thất bại -> trả về 1 (đag mượn)
+                res.status(400).send(err);
+              } else {
+                res.status(200).json({ message: "Cập nhật thành công trạng thái 1 - " + XE_TRANGTHAI });
+              }
+            });
+          }else{
+            res.status(200).json({ message: "Cập nhật thành công trạng thái 0 - " + XE_TRANGTHAI });
+          }
+        })
+  
+      }else res.status(404).json("Lỗi !");
+    });
+  }else res.status(400).send("Trạng thái trả xe không hợp lệ");
+ 
 });
 
 //update trang thai xe trang hu hong
