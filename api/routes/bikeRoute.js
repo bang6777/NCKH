@@ -331,12 +331,12 @@ router.put("/xe/updateTT", function (req, res) {
       res.status(404).json(err);
     } else {
       xe.findByID(XE_ID, function (err, xeObj) {
-        if (xeObj.XE_TRANGTHAI == 0) {
+        if (xeObj.XE_TRANGTHAI == 1) {
           //yÊu cầu trả xe
           muontra.traXe(XE_ID, xeObj.XE_LAT, xeObj.XE_LNG, function (err, result) {
             console.log('err'+err);
             if (err) {
-              xe.updateTrangThai(XE_ID, XE_IMEI, 1, function (err, result) { });
+              xe.updateTrangThai(XE_ID, XE_IMEI, 1, function (err, result) { }); // Thất bại -> trả về 1 (đag mượn)
               res.status(400).send(err);
             } else {
               res.status(200).json({ message: "Cập nhật thành công trạng thái - " + XE_TRANGTHAI });
