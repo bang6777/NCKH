@@ -328,7 +328,7 @@ router.put("/xe/updateTT", function (req, res) {
     console.log("data" + data);
 
     if (err) {
-      res.status(404).json(err);
+      res.status(400).send(err);
     } else if(data){
       xe.findByID(XE_ID, function (err, xeObj) {
         if (xeObj.XE_TRANGTHAI == 1) {
