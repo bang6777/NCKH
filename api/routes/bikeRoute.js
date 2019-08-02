@@ -331,7 +331,7 @@ router.put("/xe/updateTT", function (req, res) {
       res.status(400).send(err);
     } else if(data){
       xe.findByID(XE_ID, function (err, xeObj) {
-        if (xeObj.XE_TRANGTHAI == 1) {
+        if (xeObj.XE_TRANGTHAI == 0) {
           //yÊu cầu trả xe
           muontra.traXe(XE_ID, xeObj.XE_LAT, xeObj.XE_LNG, function (err, result) {
             console.log('err'+err);
