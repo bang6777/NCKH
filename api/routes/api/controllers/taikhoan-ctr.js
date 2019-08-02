@@ -160,7 +160,7 @@ exports.layThongTinXeMuon = (TK_ID, cb) => {
   muontra_M
     .findOne({
       where: {
-        TK_ID: TK_ID,
+        taikhoanTKID: TK_ID,
         TRA_THOIGIAN: null
       }
     })
