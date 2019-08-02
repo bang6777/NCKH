@@ -102,7 +102,7 @@ exports.updateTrangThai = (XE_ID, XE_IMEI, XE_TRANGTHAI, cb) => {
         console.log("Đã cập nhật trạng thái xe: ", xe);
         
         cb(null, "OK");
-      }else cb("ERR", null);
+      }else cb("Thông tin về xe không hợp lệ ", null);
     }).catch(err=>{
       cb(err, null);
     });
