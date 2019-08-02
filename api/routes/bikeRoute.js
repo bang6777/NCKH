@@ -339,11 +339,11 @@ router.put("/xe/updateTT", function (req, res) {
               xe.updateTrangThai(XE_ID, XE_IMEI, 1, function (err, result) { }); // Thất bại -> trả về 1 (đag mượn)
               res.status(400).send(err);
             } else {
-              res.status(200).json({ message: "Cập nhật thành công trạng thái - " + XE_TRANGTHAI });
+              res.status(200).json({ message: "Cập nhật thành công trạng thái 1 - " + XE_TRANGTHAI });
             }
           });
         }else{
-          res.status(200).json({ message: "Cập nhật thành công trạng thái - " + XE_TRANGTHAI });
+          res.status(200).json({ message: "Cập nhật thành công trạng thái 0 - " + XE_TRANGTHAI });
         }
       })
 
