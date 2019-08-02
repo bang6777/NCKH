@@ -23,7 +23,7 @@ exports.getXeRanh = cb => {
 exports.findXeByID = (XE_ID, cb) => {
   xe_M
     .findOne({
-      attributes: ["XE_ID", "XE_LAT", "XE_LNG", "XE_NAMSANXUAT", "XE_GHICHU"],
+      attributes: ["XE_ID", "XE_LAT", "XE_LNG", "XE_TRANGTHAI"],
       where: {
         XE_ID: XE_ID
       }
@@ -81,7 +81,7 @@ exports.updateTrangThaiXe = (XE_ID, XE_TRANGTHAI, cb) => {
     .then(xe => {
       console.log("Đã cập nhật xe: ", xe.XE_ID);
       cb(null, xe);
-    }).catch(err=>{
+    }).catch(err => {
       cb(err, null);
     });
 };

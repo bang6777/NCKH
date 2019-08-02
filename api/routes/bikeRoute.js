@@ -492,9 +492,12 @@ router.put("/xe/update", function (req, res) {
 
           //nếu kq = false => xe ở ngoài => thêm vp
           if (kq == false && kv == true) {
+            xe.updateTrangThai(XE_ID,XE_IMEI,3,function(err,data){ // Cập nhật trạng thái xe dag vượt khỏi khuôn viên
+              if(err) console.log(err);
+            });
             checkloi.findMuontraID_Xe(XE_ID, function (err, data) {
               if (err) {
-                res.json({ message: "ERR2" });
+                res.json({ message: err });
               } else {
                 var mt_id = data.MUONTRA_ID;
                 checkloi.findIDLoi_MT(mt_id, function (err, data) {
@@ -515,6 +518,10 @@ router.put("/xe/update", function (req, res) {
               }
             });
           } else if (kq == true && kv == true) {
+            //Cập nhật trạng thái xe đang mượn ở trong khuôn viên
+            xe.updateTrangThai(XE_ID,XE_IMEI,1,function(err,data){
+              if(err) console.log(err);
+            });
             console.log("Xe ở trong");
           } else {
             console.log("Khuôn viên nhỏ hơn 3 đỉnh: " + kq);

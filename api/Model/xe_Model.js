@@ -16,7 +16,7 @@ const xe_Model = db.define("xe", {
   },
   XE_TRANGTHAI: {
     type: Sequelize.INTEGER,
-    defaultValue: 0 // 0. Sẵn sàng sử dụng, 1. Đang được sử dụng, 2. Đang sửa chữa
+    defaultValue: 0 // 0. Sẵn sàng sử dụng, 1. Đang được sử dụng, 2. Đang sửa chữa , 3. Vượt ra khỏi khu vực trường
   },
   XE_LAT: {
     type: Sequelize.DOUBLE,
