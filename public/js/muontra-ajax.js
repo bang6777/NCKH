@@ -290,7 +290,7 @@ function LoadDataTable() {
         previous: "Trước"
       }
     },
-    pageLength: -1,
+
     lengthMenu: [[5, 10, 15, 20, 25, -1], [5, 10, 15, 20, 25, "Tất cả"]]
   });
 }

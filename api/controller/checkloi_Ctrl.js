@@ -31,18 +31,18 @@ exports.findIDLoi_MT = (MT_ID, cb) => {
       }
     })
     .then(ID_LOI => {
-      if (ID_LOI) {
-        cb(null, ID_LOI);
-      } else cb("Không có dữ liệu", null);
-      console.log("ID Lỗi:", JSON.stringify(ID_LOI, null, 4));
+      console.log("ID lỗi:", JSON.stringify(ID_LOI, null, 4));
+      cb(null, ID_LOI);
     });
 };
 
 //add vi pham LOI ID = 1
-exports.addVP = (muontraMUONTRAID, cb) => {
+exports.addVP = (muontraMUONTRAID, VP_LAT, VP_LNG, cb) => {
   vp_M
     .create({
       loiLOIID: "1",
+      VP_LAT: VP_LAT,
+      VP_LNG: VP_LNG,
       muontraMUONTRAID: muontraMUONTRAID
     })
     .then(vp => {

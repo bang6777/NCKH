@@ -38,7 +38,7 @@
 
     <div class="container-fluid bg-white ">
       <h2 class="text-center font-weight-semi-bold text-dark mt-3">
-        QUẢN LÝ THÔNG TIN NGƯỜI DÙNG
+        QUẢN LÝ THÔNG TIN TÀI KHOẢN NGƯỜI DÙNG
       </h2>
       <div class="container-fluid">
         <div class="flex justify-content-between ">
@@ -90,7 +90,7 @@
           <!-- Modal content-->
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title text-uppercase">Thêm người dùng</h4>
+              <h4 class="modal-title text-uppercase">Thêm tài khoản người dùng</h4>
               <button type="button" class="close" data-dismiss="modal">
                 &times;
               </button>
@@ -101,18 +101,18 @@
                 <div class="form-group">
                   <span id="TK_alert" class="text-danger font-size-1"></span>
                   <input type="text" name="TK_ID" id="txtTK_ID_add" class="form-control" required
-                    placeholder="ID người dùng" />
+                    placeholder="ID người dùng (*)" />
                 </div>
                 <div class="form-group ">
                   <input type="text" name="TK_HOTEN" id="txtTK_HoTen_add" class="form-control" required
-                    placeholder="Họ tên người dùng" />
+                    placeholder="Họ tên người dùng (*)" />
                 </div>
                 <!-- <div class="form-group ">
                   <input type="text" name="TK_DONVI" id="txtTK_DonVi_add" class="form-control" required placeholder="Đơn vị" />
                 </div> -->
                 <div class="form-group ">
                   <select name="TK_DONVI" id="slTK_DonVi_add" class="form-control">
-                    <option value="-1">Chọn đơn vị</option>
+                    <option value="-1">Chọn đơn vị (*)</option>
                     <option value="Công nghệ">Công nghệ</option>
                     <option value="CNTT & TT">CNTT & TT</option>
                     <option value="Ngoại ngữ">Ngoại ngữ</option>
@@ -120,18 +120,18 @@
                 </div>
                 <div class="form-group">
                   <input type="password" name="TK_PASSWORD" id="txtTK_Password_add" class="form-control" required
-                    placeholder="Password" />
+                    placeholder="Password (*)" />
                 </div>
                 <div class="form-group ">
                   <select name="TK_QUYEN" id="slTK_Quyen_add" class="form-control">
-                    <option value="-1">Chọn quyền sử dụng</option>
+                    <option value="-1">Chọn quyền sử dụng(*)</option>
                     <option value="Quản trị">Quản trị</option>
                     <option value="Người dùng">Người dùng</option>
                   </select>
                 </div>
                 <div class="form-group ">
                   <select name="TK_LOAI" id="slTK_Loai_add" class="form-control">
-                    <option value="-1">Chọn loại tài khoản</option>
+                    <option value="-1">Chọn loại tài khoản (*)</option>
                     <option value="Sinh viên">Sinh viên</option>
                     <option value="Giảng viên">Giảng viên</option>
                     <option value="Khách vãng lai">Khách vãng lai</option>
@@ -351,10 +351,10 @@
           <div class="modal-body">
             <form method="POST" enctype="application/x-www-form-urlencoded">
               <div class="form-group ">
-                <input type="text" name="TK_ID" id="txtTK_ID_editMK" class="form-control" required placeholder="Nhập ID tài khoản"/>
+                <input type="text" name="TK_ID" id="txtTK_ID_editMK" class="form-control" required placeholder="Nhập ID tài khoản (*)"/>
               </div>
               <div class="form-group ">
-                <input type="password" name="TK_PASSWORD" id="txtTK_PASSWORD_editMK" class="form-control" required placeholder="Nhập mật khẩu mới"/>
+                <input type="password" name="TK_PASSWORD" id="txtTK_PASSWORD_editMK" class="form-control" required placeholder="Nhập mật khẩu mới (*)"/>
               </div>
             
           </div>
