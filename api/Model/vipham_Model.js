@@ -47,7 +47,7 @@ const vipham_Model = db.define("vipham", {
   },
   VP_TRANGTHAI: {
     type: Sequelize.INTEGER,
-    defaultValue: 0
+    defaultValue: 0 //Chưa xử lý vi phạm
   },
   VP_LAT: {
     type: Sequelize.DOUBLE,

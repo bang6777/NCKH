@@ -323,31 +323,33 @@ router.put("/xe/updateTT", function(req, res) {
   var XE_ID = req.body.XE_ID;
   var XE_TRANGTHAI = req.body.XE_TRANGTHAI;
   var XE_IMEI = req.body.XE_IMEI;
-  xe.updateTrangThai(XE_ID, XE_IMEI, XE_TRANGTHAI, function(err, data) {
-    console.log("err" + err);
-    console.log("data" + data);
+  if (XE_TRANGTHAI == 0) {
+    xe.updateTrangThai(XE_ID, XE_IMEI, XE_TRANGTHAI, function(err, data) {
+      console.log("err" + err);
+      console.log("data" + data);
 
-    if (err) {
-      res.status(400).send(err);
-    } else if (data) {
-      xe.findByID(XE_ID, function(err, xeObj) {
-        if (xeObj.XE_TRANGTHAI == 0) {
-          //yÊu cầu trả xe
-          muontra.traXe(XE_ID, xeObj.XE_LAT, xeObj.XE_LNG, function(err, result) {
-            console.log("err" + err);
-            if (err) {
-              xe.updateTrangThai(XE_ID, XE_IMEI, 1, function(err, result) {}); // Thất bại -> trả về 1 (đag mượn)
-              res.status(400).send(err);
-            } else {
-              res.status(200).json({ message: "Cập nhật thành công trạng thái 1 - " + XE_TRANGTHAI });
-            }
-          });
-        } else {
-          res.status(200).json({ message: "Cập nhật thành công trạng thái 0 - " + XE_TRANGTHAI });
-        }
-      });
-    } else res.status(404).json("Lỗi !");
-  });
+      if (err) {
+        res.status(400).send(err);
+      } else if (data) {
+        xe.findByID(XE_ID, function(err, xeObj) {
+          if (xeObj.XE_TRANGTHAI == 0) {
+            //yÊu cầu trả xe
+            muontra.traXe(XE_ID, xeObj.XE_LAT, xeObj.XE_LNG, function(err, result) {
+              console.log("err" + err);
+              if (err) {
+                xe.updateTrangThai(XE_ID, XE_IMEI, 1, function(err, result) {}); // Thất bại -> trả về 1 (đag mượn)
+                res.status(400).send(err);
+              } else {
+                res.status(200).json({ message: "Cập nhật thành công trạng thái 1 - " + XE_TRANGTHAI });
+              }
+            });
+          } else {
+            res.status(200).json({ message: "Cập nhật thành công trạng thái 0 - " + XE_TRANGTHAI });
+          }
+        });
+      } else res.status(404).json("Lỗi !");
+    });
+  } else res.status(400).send("Trạng thái trả xe không hợp lệ");
 });
 
 //update trang thai xe trang hu hong
@@ -488,9 +490,13 @@ router.put("/xe/update", function(req, res) {
 
           //nếu kq = false => xe ở ngoài => thêm vp
           if (kq == false && kv == true) {
+            xe.updateTrangThai(XE_ID, XE_IMEI, 3, function(err, data) {
+              // Cập nhật trạng thái xe dag vượt khỏi khuôn viên
+              if (err) console.log(err);
+            });
             checkloi.findMuontraID_Xe(XE_ID, function(err, data) {
               if (err) {
-                res.json({ message: "ERR2" });
+                res.json({ message: err });
               } else {
                 var mt_id = data.MUONTRA_ID;
                 var vp_lat = XE_LAT;
@@ -514,6 +520,10 @@ router.put("/xe/update", function(req, res) {
               }
             });
           } else if (kq == true && kv == true) {
+            //Cập nhật trạng thái xe đang mượn ở trong khuôn viên
+            xe.updateTrangThai(XE_ID, XE_IMEI, 1, function(err, data) {
+              if (err) console.log(err);
+            });
             console.log("Xe ở trong");
           } else {
             console.log("Khuôn viên nhỏ hơn 3 đỉnh: " + kq);

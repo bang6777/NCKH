@@ -96,7 +96,7 @@ exports.layLSBaoHuHong_TK = (TK_ID, page, cb) => {
 };
 exports.layLSViPham_TK = (TK_ID, page, cb) => {
   vipham_M.paginate({
-    attributes: ['VP_ID', 'VP_THOIGIAN', 'DA_XU_LY_VP', 'VP_LAT', 'VP_LNG'],
+    attributes: ['VP_ID', 'VP_THOIGIAN', 'VP_TRANGTHAI', 'VP_LAT', 'VP_LNG'],
     // .findAll({
     // include: [],
     include: [
