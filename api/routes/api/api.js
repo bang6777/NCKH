@@ -11,6 +11,7 @@ var passport = require("../../controller/passport");
 router.post("/api/taikhoan", function (req, res) {
   var TK_ID = req.body.TK_ID;
   var TK_PASSWORD = req.body.TK_PASSWORD;
+  TK_ID = TK_ID.toUpperCase();
   if (TK_ID == null) {
     res.status(400).send("Tên tài khoản không hợp lệ");
   } else if (TK_PASSWORD == null) {
@@ -31,6 +32,7 @@ router.post("/api/taikhoan", function (req, res) {
 router.get("/api/taikhoan/:TK_ID", passport.getPassport().authenticate('jwt', { session: false }), function (req, res) {
   var TK_ID = req.params.TK_ID;
   // console.log("Req:"+JSON.stringify())
+  TK_ID = TK_ID.toUpperCase();
   if (req.user.TK_ID == TK_ID) {
     taikhoan_ctr.findTKByID(TK_ID, function (err, data) {
       if (err) {
@@ -57,6 +59,7 @@ router.get("/api/taikhoan/:TK_ID", passport.getPassport().authenticate('jwt', { 
 router.get("/api/taikhoan/:TK_ID/lich-su-muon-xe", passport.getPassport().authenticate('jwt', { session: false }), function (req, res) {
   var TK_ID = req.params.TK_ID;
   var page = req.query.page;
+  TK_ID = TK_ID.toUpperCase();
   console.log("PAGE=" + page);
   if (req.user.TK_ID == TK_ID) {
     taikhoan_ctr.layLSMuonTra_TK(TK_ID, page, function (err, MT_result) {
@@ -74,6 +77,9 @@ router.get("/api/taikhoan/:TK_ID/lich-su-muon-xe", passport.getPassport().authen
 router.get("/api/taikhoan/:TK_ID/lich-su-bao-hu-hong", passport.getPassport().authenticate('jwt', { session: false }), function (req, res) {
   var TK_ID = req.params.TK_ID;
   var page = req.query.page;
+
+  TK_ID = TK_ID.toUpperCase(); 
+
   console.log("PAGE=" + page);
   if (req.user.TK_ID == TK_ID) {
     taikhoan_ctr.layLSBaoHuHong_TK(TK_ID, page, function (err, MT_result) {
@@ -91,6 +97,9 @@ router.get("/api/taikhoan/:TK_ID/lich-su-bao-hu-hong", passport.getPassport().au
 router.get("/api/taikhoan/:TK_ID/lich-su-vi-pham", passport.getPassport().authenticate('jwt', { session: false }), function (req, res) {
   var TK_ID = req.params.TK_ID;
   var page = req.query.page;
+
+  TK_ID = TK_ID.toUpperCase();
+
   console.log("PAGE=" + page);
   if (req.user.TK_ID == TK_ID) {
     taikhoan_ctr.layLSViPham_TK(TK_ID, page, function (err, MT_result) {
@@ -110,6 +119,8 @@ router.post("/api/taikhoan/:TK_ID/muonxe", passport.getPassport().authenticate('
   var XE_ID = req.body.XE_ID;
   var MUON_VITRI_LAT = req.body.MUON_VITRI_LAT;
   var MUON_VITRI_LNG = req.body.MUON_VITRI_LNG;
+
+  TK_ID = TK_ID.toUpperCase();
 
   if (req.user.TK_ID == TK_ID && XE_ID && MUON_VITRI_LNG && MUON_VITRI_LAT) {
 
@@ -134,6 +145,7 @@ router.post("/api/taikhoan/:TK_ID/muonxe", passport.getPassport().authenticate('
 //thông tin xe đang mượn
 router.get("/api/taikhoan/:TK_ID/muonxe", passport.getPassport().authenticate('jwt', { session: false }), function (req, res) {
   var TK_ID = req.params.TK_ID;
+  TK_ID = TK_ID.toUpperCase();
   if (req.user.TK_ID == TK_ID) {
     taikhoan_ctr.layThongTinXeMuon(TK_ID, function (err, MT_result) {
       if (err) res.status(400).send(err);

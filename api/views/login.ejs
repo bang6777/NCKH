@@ -42,6 +42,9 @@
                         <!-- <form> -->
                         <div class="content">
                             <img src="./img/logo.png" width="30%" class="mb-5" />
+                            <% if (error) { %>
+                            <div width="30%" class="d-flex justify-content-center mb-5 text-danger "><%= error %></div>
+                            <% } %>
                             <div class="form-group ">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend col-lg-2">
@@ -61,7 +64,8 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input type="button" value="Đăng nhập" width="300px" id="btnLogin" onclick="Login()"
+                            
+                                <input type="submit" value="Đăng nhập" width="300px" id="btnLogin" 
                                     class="justify-content-center p-2 ml-5 btn btn-primary">
                             </div>
                         </div>

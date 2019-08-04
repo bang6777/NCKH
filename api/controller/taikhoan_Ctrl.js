@@ -104,26 +104,22 @@ exports.findTKByPK = (TK_ID, cb) => {
     });
 };
 
-// exports.checkLoginServer = (TK_ID, TK_PASSWORD, cb) => {
-//   taikhoan_M
-//     .findOne({
-//       where: {
-//         TK_ID: TK_ID,
-//         TK_QUYEN: "Quản trị"
-//       }
-//     })
-//     .then(tk_bang => {
-//       // JSON.stringify(tk_bang);
-//       // console.log(JSON.stringify(tk_bang));
-//       // console.log(TK_PASSWORD + tk_bang.TK_PASSWORD);
-//       if (bcrypt.compareSync(TK_PASSWORD, tk_bang.TK_PASSWORD)) {
-//         console.log("Đăng nhập thành công, ", tk_bang.TK_ID);
-//       } else {
-//         console.log("Sai tài khoản hoặc password, ", tk_bang.TK_ID);
-//         cb(err, null);
-//       }
-//     });
-// };
+exports.validPassword = (TK_ID, TK_PASSWORD) => {
+  taikhoan_M
+    .findOne({
+      where: {
+        TK_ID: TK_ID,
+        TK_QUYEN: "Quản trị"
+      }
+    })
+    .then(tk_bang => {
+      if (bcrypt.compareSync(TK_PASSWORD, tk_bang.TK_PASSWORD)) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+};
 
 exports.checkLoginServer = (TK_ID, TK_PASSWORD, cb) => {
   taikhoan_M

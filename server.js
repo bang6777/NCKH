@@ -5,18 +5,20 @@ var session = require("express-session");
 // const passport = require('passport');
 var path = require("path");
 const bodyParser = require("body-parser");
+flash = require('connect-flash');
+// app.use(express.cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(express.static(__dirname + "/public"));
 app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true })); // session secret
+app.use(flash());
 
 // import passport and passport-jwt modules
 passport = require("./api/controller/passport").getPassport(); //Define Passport
 app.use(passport.initialize());
-// app.use(passport.session());
+app.use(passport.session());
 
 const port = process.env.PORT || 3000;
-
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-app.use(express.static(__dirname + "/public"));
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
@@ -38,12 +40,12 @@ app.use(function(req, res) {
 
 // socket io
 var http = require("http").createServer(app);
-var io = require("socket.io")(http);
+// var io = require("socket.io")(http);
 //var server = require("http").Server(app);
 //var io = require("socket.io")(server);
 
-svSocket = require("./server-socket.io");
-io.on("connection", svSocket.eventSocket);
+// svSocket = require("./server-socket.io");
+// io.on("connection", svSocket.eventSocket);
 
 http.listen(port);
 console.log("RESTful API server started on: " + port);
