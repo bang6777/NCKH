@@ -2,6 +2,7 @@
 const huhong_M = require("../Model/huhong_Model");
 const taikhoan_M = require("../Model/taikhoan_Model");
 const xe_M = require("../Model/xe_Model");
+const Sequelize = require("sequelize");
 
 exports.allHuHong = cb => {
   huhong_M.findAll({ order: [["createdAt", "DESC"]] }).then(huhong => {
@@ -137,6 +138,26 @@ exports.updateTrangThaiHuHong = (HH_ID, HH_TRANGTHAI, cb) => {
     )
     .then(hh => {
       console.log("Đã cập nhật trạng thái hư hỏng: " + HH_ID);
+      cb(null, hh);
+    });
+};
+
+//get Thong ke hu hong
+exports.ThongKeHuHong = (tungay, denngay, cb) => {
+  const Op = Sequelize.Op;
+  huhong_M
+    .findAll({
+      order: [["createdAt", "DESC"]],
+
+      where: {
+        HH_THOIGIAN: {
+          [Op.between]: [tungay, denngay]
+        }
+      }
+    })
+
+    .then(hh => {
+      console.log("hu hong: ", hh.HH_ID);
       cb(null, hh);
     });
 };

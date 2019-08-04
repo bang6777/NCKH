@@ -15,9 +15,10 @@ exports.viewXe = function(req, res) {
 };
 
 exports.viewChiTietViPham = function(req, res) {
-  var MUONTRA_ID = req.params.MUONTRA_ID;
-  viphamCtr.vipham_chitiet(MUONTRA_ID, function(err, data) {
+  var VP_ID = req.params.VP_ID;
+  viphamCtr.vipham_chitiet(VP_ID, function(err, data) {
     res.json(data);
+    console.log(data);
   });
 };
 
@@ -26,5 +27,14 @@ exports.updateXuLy = function(req, res) {
   var VP_TRANGTHAI = req.body.VP_TRANGTHAI;
   viphamCtr.updateXuLy(VP_ID, VP_TRANGTHAI, function(err, data) {
     res.json("ok");
+  });
+};
+
+exports.thongkeViPham = function(req, res) {
+  var tungay = req.body.tungay;
+  var denngay = req.body.denngay;
+  console.log(tungay + "---" + denngay);
+  viphamCtr.ThongKeViPham(tungay, denngay, function(err, data) {
+    res.json(data);
   });
 };

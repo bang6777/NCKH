@@ -261,6 +261,9 @@ function placeMarker(position) {
 //Get vi tri xe
 async function GetViTri() {
   Resetmap();
+  list = $("#list-xe");
+  list.html("");
+  str = "";
   await $.ajax({
     type: "GET",
     url: "/xe/vitri",
@@ -274,9 +277,9 @@ async function GetViTri() {
             marker = new google.maps.Marker({
               position: vt,
               map: map,
-              icon: "./img/marker-green.png",
+              icon: "./img/bike-green-2.png",
               label: xe.XE_ID.toString(),
-              title: xe.XE_LAT + ", " + xe.XE_LNG
+              title: xe.XE_ID + ": " + xe.XE_LAT + ", " + xe.XE_LNG
             });
             arrxe[xe_id] = marker;
             xe_id++;
@@ -284,35 +287,49 @@ async function GetViTri() {
             marker = new google.maps.Marker({
               position: vt,
               map: map,
-              icon: "./img/marker-red.png",
+              icon: "./img/bike-red-2.png",
               label: xe.XE_ID.toString(),
-              title: xe.XE_LAT + ", " + xe.XE_LNG
+              title: xe.XE_ID + ": " + xe.XE_LAT + ", " + xe.XE_LNG
+            });
+            arrxe[xe_id] = marker;
+            xe_id++;
+          } else if (xe.XE_TRANGTHAI == "3") {
+            marker = new google.maps.Marker({
+              position: vt,
+              map: map,
+              icon: "./img/bike-orange-2.png",
+              label: xe.XE_ID.toString(),
+              title: xe.XE_ID + ": " + xe.XE_LAT + ", " + xe.XE_LNG
             });
             arrxe[xe_id] = marker;
             xe_id++;
           }
+          if (xe.XE_TRANGTHAI == "3") {
+            str += "XE ID: " + arrxe[i].label.toString() + "<br>";
+          }
         }
       });
+      list.html(str);
     },
     error: function(e) {
       console.log(e);
     }
   });
 
-  await setTimeout(function() {
-    list = $("#list-xe");
-    list.html("");
-    str = "";
-    for (i = 0; i < arrxe.length; i++) {
-      var isInside = google.maps.geometry.poly.containsLocation(arrxe[i].getPosition(), polygon);
-      var isOnEdge = google.maps.geometry.poly.isLocationOnEdge(arrxe[i].getPosition(), polygon, 0.00001);
-      if (isInside == false && isOnEdge == false) {
-        str += "XE ID: " + arrxe[i].label.toString() + "<br>";
-      }
-    }
-    list.html(str);
-    console.log(str);
-  }, 1000);
+  // await setTimeout(function() {
+  //   list = $("#list-xe");
+  //   list.html("");
+  //   str = "";
+  //   for (i = 0; i < arrxe.length; i++) {
+  // var isInside = google.maps.geometry.poly.containsLocation(arrxe[i].getPosition(), polygon);
+  // var isOnEdge = google.maps.geometry.poly.isLocationOnEdge(arrxe[i].getPosition(), polygon, 0.00001);
+  // if (isInside == false && isOnEdge == false) {
+  //   str += "XE ID: " + arrxe[i].label.toString() + "<br>";
+  // }
+  //   }
+  //   list.html(str);
+  //   console.log(str);
+  // }, 1000);
 }
 
 //Chia toa do

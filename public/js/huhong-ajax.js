@@ -523,7 +523,7 @@ function LoadView() {
 function LoadDataTable() {
   table = $("#tbHuHong").DataTable({
     stateSave: true,
-    columnDefs: [{ targets: [1, 2, 3, 4, 5], searchable: false }],
+    // columnDefs: [{ targets: [1, 2, 3, 4, 5], searchable: false }],
     ordering: false,
     language: {
       lengthMenu: "Hiển thị _MENU_ dòng dữ liệu trên một trang:",
@@ -531,7 +531,7 @@ function LoadDataTable() {
       infoEmpty: "Dữ liệu rỗng",
       emptyTable: "Chưa có dữ liệu nào ",
       processing: "Đang xử lý ",
-      search: "Tìm kiếm theo ID: ",
+      search: "Tìm kiếm: ",
       loadingRecords: "Đang load dữ liệu",
       zeroRecords: "Không tìm thấy dữ liệu",
       infoFiltered: "(Được từ tổng số _MAX_ dòng dữ liệu",

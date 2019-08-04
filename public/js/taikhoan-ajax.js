@@ -150,27 +150,31 @@ function UpdateInfo() {
   var tk_donvi = $("#slTK_DonVi_update").val();
   var tk_quyen = $("#slTK_Quyen_update").val();
   var tk_loai = $("#slTK_Loai_update").val();
-  $.ajax({
-    url: "/taikhoan/update/" + tk_id,
-    method: "POST",
-    data: JSON.stringify({
-      TK_ID: tk_id,
-      TK_HOTEN: tk_hoten,
-      TK_DONVI: tk_donvi,
-      TK_QUYEN: tk_quyen,
-      TK_LOAI: tk_loai
-    }),
-    contentType: "application/json",
-    success: function() {
-      alert("Đã cập nhật thành công thông tin tài khoản: " + tk_id);
-      LoadView();
-      $("#btnCancelUpdate").click();
-    },
-    error: function(e) {
-      alert("Đã có lỗi xảy ra!");
-      console.log(e);
-    }
-  });
+  if (tk_id == "" || tk_hoten == "" || tk_donvi == "" || tk_quyen == "" || tk_loai == "") {
+    alert("Vui lòng điền đầy đủ các trường!");
+  } else {
+    $.ajax({
+      url: "/taikhoan/update/" + tk_id,
+      method: "POST",
+      data: JSON.stringify({
+        TK_ID: tk_id,
+        TK_HOTEN: tk_hoten,
+        TK_DONVI: tk_donvi,
+        TK_QUYEN: tk_quyen,
+        TK_LOAI: tk_loai
+      }),
+      contentType: "application/json",
+      success: function() {
+        alert("Đã cập nhật thành công thông tin tài khoản: " + tk_id);
+        LoadView();
+        $("#btnCancelUpdate").click();
+      },
+      error: function(e) {
+        alert("Đã có lỗi xảy ra!");
+        console.log(e);
+      }
+    });
+  }
 }
 
 //Get tat ca tai khoan
@@ -603,7 +607,7 @@ function LoadView() {
 function LoadDataTable() {
   table = $("#tableTK").DataTable({
     stateSave: true,
-    columnDefs: [{ targets: [1, 2, 3, 4, 5, 6], searchable: false }],
+    // columnDefs: [{ targets: [1, 2, 3, 4, 5, 6], searchable: false }],
     ordering: false,
     language: {
       lengthMenu: "Hiển thị _MENU_ dòng dữ liệu trên một trang:",
@@ -611,7 +615,7 @@ function LoadDataTable() {
       infoEmpty: "Dữ liệu rỗng",
       emptyTable: "Chưa có dữ liệu nào ",
       processing: "Đang xử lý ",
-      search: "Tìm kiếm theo ID: ",
+      search: "Tìm kiếm: ",
       loadingRecords: "Đang load dữ liệu",
       zeroRecords: "Không tìm thấy dữ liệu",
       infoFiltered: "(Được từ tổng số _MAX_ dòng dữ liệu",

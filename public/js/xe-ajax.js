@@ -13,20 +13,9 @@ function AddXE() {
   var xe_imei = $("#txtXe_Imei_add").val();
   var xe_ghichu = $("#txtXe_GhiChu_add").val();
   // alert(xe_id + "------" + xe_namsanxuat + xe_ghichu);
-  if (xe_namsanxuat == "" || xe_ghichu == "" || xe_imei == "") {
+  if (xe_namsanxuat == "" || xe_imei == "") {
     alert("Vui lòng điền đầy đủ các trường!");
   } else {
-    // $.ajax({
-    //   type: "POST",
-    //   url: "/xe/find",
-    //   data: JSON.stringify({ XE_ID: xe_id }),
-    //   contentType: "application/json",
-    //   success: function(response) {
-    //     var length = Object.keys(response).length;
-    //     console.log(length);
-    //     if (length > 0) {
-    //       $("#XE_alert").html("ID đã tồn tại. Vui lòng chọn ID khác!");
-    //     } else {
     $.ajax({
       url: "/xe",
       method: "POST",
@@ -126,26 +115,30 @@ function UpdateInfo() {
   var xe_namsanxuat = $("#txtXe_NamSanXuat_update").val();
   var xe_ghichu = $("#txtXe_GhiChu_update").val();
   var xe_imei = $("#txtXe_Imei_update").val();
-  $.ajax({
-    url: "/xe/updateInfo/" + xe_id,
-    method: "POST",
-    data: JSON.stringify({
-      XE_ID: xe_id,
-      XE_IMEI: xe_imei,
-      XE_NAMSANXUAT: xe_namsanxuat,
-      XE_GHICHU: xe_ghichu
-    }),
-    contentType: "application/json",
-    success: function() {
-      alert("Đã cập nhật thành công thông tin xe: " + xe_id);
-      GetAllXE();
-      $("#btnCancelUpdate").click();
-    },
-    error: function(e) {
-      alert("Đã có lỗi xảy ra!");
-      console.log(e);
-    }
-  });
+  if (xe_namsanxuat == "" || xe_imei == "" || xe_id == "") {
+    alert("Vui lòng điền đầy đủ các trường!");
+  } else {
+    $.ajax({
+      url: "/xe/updateInfo/" + xe_id,
+      method: "POST",
+      data: JSON.stringify({
+        XE_ID: xe_id,
+        XE_IMEI: xe_imei,
+        XE_NAMSANXUAT: xe_namsanxuat,
+        XE_GHICHU: xe_ghichu
+      }),
+      contentType: "application/json",
+      success: function() {
+        alert("Đã cập nhật thành công thông tin xe: " + xe_id);
+        GetAllXE();
+        $("#btnCancelUpdate").click();
+      },
+      error: function(e) {
+        alert("Đã có lỗi xảy ra!");
+        console.log(e);
+      }
+    });
+  }
 }
 
 function UpdateModal(a) {
@@ -314,7 +307,7 @@ async function Xe_ViPham(a) {
 function LoadDataTable() {
   table = $("#tbXe").DataTable({
     stateSave: true,
-    columnDefs: [{ targets: [1, 2, 3, 4], searchable: false }],
+    // columnDefs: [{ targets: [1, 2, 3, 4], searchable: false }],
     ordering: false,
     language: {
       lengthMenu: "Hiển thị _MENU_ dòng dữ liệu trên một trang:",
@@ -322,7 +315,7 @@ function LoadDataTable() {
       infoEmpty: "Dữ liệu rỗng",
       emptyTable: "Chưa có dữ liệu nào ",
       processing: "Đang xử lý ",
-      search: "Tìm kiếm theo ID: ",
+      search: "Tìm kiếm: ",
       loadingRecords: "Đang load dữ liệu",
       zeroRecords: "Không tìm thấy dữ liệu",
       infoFiltered: "(Được từ tổng số _MAX_ dòng dữ liệu",
@@ -333,7 +326,6 @@ function LoadDataTable() {
         previous: "Trước"
       }
     },
-    pageLength: -1,
     lengthMenu: [[5, 10, 15, 20, 25, -1], [5, 10, 15, 20, 25, "Tất cả"]]
   });
 }

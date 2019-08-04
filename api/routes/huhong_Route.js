@@ -13,3 +13,13 @@ exports.viewHuHongXe = function(req, res) {
     res.json(data);
   });
 };
+
+exports.thongkeHuHong = function(req, res) {
+  var tungay = req.body.tungay;
+  var denngay = req.body.denngay;
+  console.log(tungay + "---" + denngay);
+  huhongCtr.ThongKeHuHong(tungay, denngay, function(err, data) {
+    res.json(data);
+    // console.log(data);
+  });
+};

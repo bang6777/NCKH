@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Quản lý lịch sử mượn trả xe</title>
+    <title>Thống kê mượn trả xe</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
@@ -15,8 +15,8 @@
     <!-- My css -->
     <link rel="stylesheet" href="./css/login.css" />
     <!-- My js -->
-    <script src="./js/muontra-ajax.js"></script>
     <script src="./js/tk-muontra-ajax.js"></script>
+    <script src="./js/muontra-ajax.js"></script>
 
     <!-- Data table -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" />
@@ -30,7 +30,7 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
   </head>
 
-  <body onload="getAllMuonTra()">
+  <body onload="ThongKeMuonTra()">
     <script></script>
     <div id="header">
       <%- include('header'); -%>
@@ -38,26 +38,28 @@
 
     <div class="container-fluid bg-white ">
       <h2 class="text-center font-weight-semi-bold text-dark mt-3">
-        THỐNG KÊ MƯỢN TRẢ XE
+        THỐNG KÊ LƯỢT MƯỢN TRẢ XE
       </h2>
       <div class="form-group form-inline">
-        <label class="mr-3">Lọc</label>
-        <select class="form-control form-control-sm" id="slMuonTra_View" onchange="LoadView()">
-          <option value="1">Ngày</option>
-          <option value="0">Tháng</option>
-          <option value="2">Năm</option>
-        </select>
-        <label class="mx-3">Chọn ngày: </label>
-        <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
+        <label class="mx-3">Từ ngày: </label>
+        <div id="tungay" class="input-group date" data-date-format="yyyy-mm-dd">
           <input class="form-control" readonly="" type="text" />
           <span class="input-group-addon"></span>
+        </div>
+        <label class="mx-3">Đến ngày: </label>
+        <div id="denngay" class="input-group date mr-3" data-date-format="yyyy-mm-dd">
+          <input class="form-control" readonly="" type="text" />
+          <span class="input-group-addon"></span>
+        </div>
+        <div class="form-group form-inline">
+          <input type="button" value="Xem" class="btn btn-info" id="btnXem" onclick="ThongKeMuonTra()" />
         </div>
       </div>
 
       <div class="container-fluid">
         <!-- Table muon tra -->
         <div class="table-responsive">
-          <table id="tbMuonTra" class="table table-striped table-bordered" style="width:100%" cellspacing="0" cellpadding="0">
+          <table id="tbTKMT" class="table table-striped table-bordered" style="width:100%" cellspacing="0" cellpadding="0">
             <thead class="bg-info text-white font-weight-semi-bold text-center">
               <tr>
                 <td>STT</td>
@@ -86,46 +88,11 @@
               </div>
 
               <div class="modal-body">
-                <table class="table table-sm table-borderless col-lg-8 mx-auto" id="tbCTMT">
-                  <!-- <tr>
-                    <td>ID mượn trả</td>
-                    <td>1</td>
-                  </tr>
-                  <tr>
-                    <td>ID người dùng</td>
-                    <td>B1606935</td>
-                  </tr>
-                  <tr>
-                    <td>ID xe</td>
-                    <td>X001</td>
-                  </tr>
-                  <tr>
-                    <td>Thời gian mượn</td>
-                    <td>15:00:00 06/05/2019</td>
-                  </tr>
-                  <tr>
-                    <td>Thời gian trả</td>
-                    <td>15:15:00 06/05/2019</td>
-                  </tr>
-                  <tr>
-                    <td>Vị trí mượn</td>
-                    <td>
-                      <img src="img/marker-green.png" height="20px" />
-                      10.02998, 105.769601
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Vị trí trả</td>
-                    <td>
-                      <img src="img/marker-red.png" height="20px" />
-                      10.03054, 105.768646
-                    </td>
-                  </tr> -->
-                </table>
+                <table class="table table-sm table-borderless col-lg-8 mx-auto" id="tbCTMT"></table>
               </div>
 
               <!-- Map -->
-              <div id="googleMap" style="width: 100%; height :200px"></div>
+              <div id="googleMap" style="width: 100%; height :220px"></div>
               <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDr5qwgemJp4LtodR8lvXg382V-cDFK3bY&callback=MapPosition"></script>
 
               <div class=" modal-footer">

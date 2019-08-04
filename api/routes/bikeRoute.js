@@ -827,6 +827,19 @@ router.put("/khuonvien", function(req, res) {
 router.get("/tk-muontra", function(req, res) {
   res.render("./../api/views/tk-muontra");
 });
+router.post("/tk-muontra", muontraRoute.thongkeMuontra);
+
+//vi phạm
+router.get("/tk-vipham", function(req, res) {
+  res.render("./../api/views/tk-vipham");
+});
+// router.post("/tk-vipham", viphamRoute.thongkeViPham);
+
+//hư hỏng
+router.get("/tk-huhong", function(req, res) {
+  res.render("./../api/views/tk-huhong");
+});
+router.post("/tk-huhong", huhongRoute.thongkeHuHong);
 
 module.exports = router;
 

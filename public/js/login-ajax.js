@@ -15,7 +15,7 @@ function Login() {
           alert("Đăng nhập thành công!");
           location.href = "/";
         } else if (response == "err") {
-          alert("Sai tài khoản hoặc mật khẩu!");
+          alert("Sai tài khoản hoặc mật khẩu hoặc bạn không có quyền vào trang web này!");
         }
       },
       error: function() {

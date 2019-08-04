@@ -3,7 +3,7 @@ const vipham_M = require("../Model/vipham_Model");
 const muontra_M = require("../Model/muontra_Model");
 const taikhoan_M = require("../Model/taikhoan_Model");
 const xe_M = require("../Model/xe_Model");
-const sequelize = require("./../Config/db");
+const Sequelize = require("sequelize");
 
 exports.allViPham = cb => {
   vipham_M.findAll({ order: [["createdAt", "DESC"]] }).then(vipham => {
@@ -56,17 +56,20 @@ exports.vipham_xe = (XE_ID, cb) => {
 };
 
 //vi pham - chi tiet
-exports.vipham_chitiet = function(MUONTRA_ID, cb) {
+exports.vipham_chitiet = function(VP_ID, cb) {
   vipham_M
     .findOne({
       include: [
         {
-          model: muontra_M,
-          where: {
-            MUONTRA_ID: MUONTRA_ID
-          }
+          model: muontra_M
+          // where: {
+          //   MUONTRA_ID: MUONTRA_ID
+          // }
         }
-      ]
+      ],
+      where: {
+        VP_ID: VP_ID
+      }
     })
     .then(dsViPham => {
       if (dsViPham) {
@@ -122,5 +125,25 @@ exports.VP_DaXuLy = cb => {
     .then(vipham => {
       cb(null, vipham);
       console.log("All vipham:", JSON.stringify(vipham, null, 4));
+    });
+};
+
+//get Thong ke vi pham
+exports.ThongKeViPham = (tungay, denngay, cb) => {
+  const Op = Sequelize.Op;
+  vipham_M
+    .findAll({
+      order: [["createdAt", "DESC"]],
+
+      where: {
+        VP_THOIGIAN: {
+          [Op.between]: [tungay, denngay]
+        }
+      }
+    })
+
+    .then(vp => {
+      console.log("vipham: ", vp.VP_ID);
+      cb(null, vp);
     });
 };

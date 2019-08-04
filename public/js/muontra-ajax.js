@@ -279,7 +279,7 @@ function LoadDataTable() {
       infoEmpty: "Dữ liệu rỗng",
       emptyTable: "Chưa có dữ liệu nào ",
       processing: "Đang xử lý ",
-      search: "Tìm kiếm theo ID: ",
+      search: "Tìm kiếm: ",
       loadingRecords: "Đang load dữ liệu",
       zeroRecords: "Không tìm thấy dữ liệu",
       infoFiltered: "(Được từ tổng số _MAX_ dòng dữ liệu",

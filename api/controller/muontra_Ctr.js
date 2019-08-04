@@ -8,7 +8,7 @@ const xe_M = require("../Model/xe_Model");
 // muontra_M.belongsTo(taikhoan_M, { foreignKey: 'TK_ID' });
 
 //muon tra - tai khoan
-exports.muontra_nguoidung = function (TK_ID, cb) {
+exports.muontra_nguoidung = function(TK_ID, cb) {
   muontra_M
     .findAll({
       order: [["createdAt", "DESC"]],
@@ -28,7 +28,7 @@ exports.muontra_nguoidung = function (TK_ID, cb) {
       console.log("All muon tra theo id:", JSON.stringify(dsMuonTra, null, 4));
     });
 };
-exports.muontra_Xe = function (XE_ID, cb) {
+exports.muontra_Xe = function(XE_ID, cb) {
   muontra_M
     .findAll({
       order: [["createdAt", "DESC"]],
@@ -101,31 +101,58 @@ exports.findMuonTraByID = (MUONTRA_ID, cb) => {
     });
 };
 
-exports.traXe = (XE_ID,LAT,LNG, cb) => {
+exports.traXe = (XE_ID, LAT, LNG, cb) => {
   //Tìm xe đang mượn
-  muontra_M.findOne({
-    where: { xeXEID: XE_ID, TRA_THOIGIAN: null },
-  }).then(result => {
-    console.log("Tìm xe đang mượn: " + JSON.stringify(result))
-    if (result) {
-      
-      muontra_M.update({
-        TRA_THOIGIAN: Date.now(),
-        TRA_VITRI_LAT: LAT,
-        TRA_VITRI_LNG: LNG
-        }, {
-          where: {
-            MUONTRA_ID: result.MUONTRA_ID
-          }
-        }).then(xe => {
-          if (xe) cb(null, "OK")
-          else cb("Cập nhật mượn trả thất bại", null);
-        }).catch(err => {
-          cb(err, null);
-        });
-    } else cb("Không có xe đang mượn", null);
-  }).catch(err => {
-    cb(err, null);
-  });
-}
+  muontra_M
+    .findOne({
+      where: { xeXEID: XE_ID, TRA_THOIGIAN: null }
+    })
+    .then(result => {
+      console.log("Tìm xe đang mượn: " + JSON.stringify(result));
+      if (result) {
+        muontra_M
+          .update(
+            {
+              TRA_THOIGIAN: Date.now(),
+              TRA_VITRI_LAT: LAT,
+              TRA_VITRI_LNG: LNG
+            },
+            {
+              where: {
+                MUONTRA_ID: result.MUONTRA_ID
+              }
+            }
+          )
+          .then(xe => {
+            if (xe) cb(null, "OK");
+            else cb("Cập nhật mượn trả thất bại", null);
+          })
+          .catch(err => {
+            cb(err, null);
+          });
+      } else cb("Không có xe đang mượn", null);
+    })
+    .catch(err => {
+      cb(err, null);
+    });
+};
 
+//get Thong ke muon tra
+exports.ThongKeMuonTra = (tungay, denngay, cb) => {
+  const Op = Sequelize.Op;
+  muontra_M
+    .findAll({
+      order: [["createdAt", "DESC"]],
+
+      where: {
+        MUON_THOIGIAN: {
+          [Op.between]: [tungay, denngay]
+        }
+      }
+    })
+
+    .then(mt => {
+      console.log("muon tra: ", mt.MUONTRA_ID);
+      cb(null, mt);
+    });
+};

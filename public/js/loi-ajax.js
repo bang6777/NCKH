@@ -56,17 +56,6 @@ function AddLoi() {
   if (loi_mota == "" || loi_tenloi == "") {
     alert("Vui lòng điền đầy đủ các trường!");
   } else {
-    // $.ajax({
-    //   type: "POST",
-    //   url: "/loi/find",
-    //   data: JSON.stringify({ LOI_ID: loi_id }),
-    //   contentType: "application/json",
-    //   success: function(response) {
-    //     var length = Object.keys(response).length;
-    //     console.log(length);
-    //     if (length > 0) {
-    //       $("#LOI_alert").html("ID đã tồn tại. Vui lòng chọn ID khác!");
-    //     } else {
     $.ajax({
       url: "/loi",
       method: "POST",
@@ -94,26 +83,29 @@ function UpdateInfo() {
   var loi_id = $("#txtLoi_ID_update").val();
   var loi_mota = $("#txtLoi_MoTa_update").val();
   var loi_tenloi = $("#txtLoi_TenLoi_update").val();
-
-  $.ajax({
-    url: "/loi/update/" + loi_id,
-    method: "POST",
-    data: JSON.stringify({
-      LOI_ID: loi_id,
-      LOI_TEN: loi_tenloi,
-      LOI_MOTA: loi_mota
-    }),
-    contentType: "application/json",
-    success: function() {
-      alert("Đã cập nhật thành công thông tin lỗi: " + loi_id);
-      GetAllLoi();
-      $("#btnCancelUpdate").click();
-    },
-    error: function(e) {
-      alert("Đã có lỗi xảy ra!");
-      console.log(e);
-    }
-  });
+  if (loi_mota == "" || loi_tenloi == "" || loi_id == "") {
+    alert("Vui lòng điền đầy đủ các trường!");
+  } else {
+    $.ajax({
+      url: "/loi/update/" + loi_id,
+      method: "POST",
+      data: JSON.stringify({
+        LOI_ID: loi_id,
+        LOI_TEN: loi_tenloi,
+        LOI_MOTA: loi_mota
+      }),
+      contentType: "application/json",
+      success: function() {
+        alert("Đã cập nhật thành công thông tin lỗi: " + loi_id);
+        GetAllLoi();
+        $("#btnCancelUpdate").click();
+      },
+      error: function(e) {
+        alert("Đã có lỗi xảy ra!");
+        console.log(e);
+      }
+    });
+  }
 }
 
 function UpdateModal(a) {
@@ -166,7 +158,7 @@ function Delete(a) {
 function LoadDataTable() {
   table = $("#tbLoi").DataTable({
     stateSave: true,
-    columnDefs: [{ targets: [1, 2, 3], searchable: false }],
+    // columnDefs: [{ targets: [1, 2, 3], searchable: false }],
     ordering: false,
     language: {
       lengthMenu: "Hiển thị _MENU_ dòng dữ liệu trên một trang:",
@@ -174,7 +166,7 @@ function LoadDataTable() {
       infoEmpty: "Dữ liệu rỗng",
       emptyTable: "Chưa có dữ liệu nào ",
       processing: "Đang xử lý ",
-      search: "Tìm kiếm theo ID: ",
+      search: "Tìm kiếm: ",
       loadingRecords: "Đang load dữ liệu",
       zeroRecords: "Không tìm thấy dữ liệu",
       infoFiltered: "(Được từ tổng số _MAX_ dòng dữ liệu",
