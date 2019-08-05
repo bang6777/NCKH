@@ -15,8 +15,9 @@ exports.viewXe = function(req, res) {
 };
 
 exports.viewChiTietViPham = function(req, res) {
-  var VP_ID = req.params.VP_ID;
-  viphamCtr.vipham_chitiet(VP_ID, function(err, data) {
+  var VP_ID = req.body.VP_ID;
+  var MUONTRA_ID = req.body.MUONTRA_ID;
+  viphamCtr.vipham_chitiet(VP_ID, MUONTRA_ID, function(err, data) {
     res.json(data);
     console.log(data);
   });
