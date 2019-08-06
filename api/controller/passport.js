@@ -48,6 +48,7 @@ let localStrategy = new LocalStrategy({
   // passReqToCallback: true
 },
   function (TK_ID, password, done) {
+    TK_ID = TK_ID.toUpperCase();
     TK_Model.findOne({
       where: {
         TK_ID: TK_ID,
@@ -76,6 +77,7 @@ passport.serializeUser(function (user, done) {
 });
 
 passport.deserializeUser(function (TK_ID, done) {
+  TK_ID = TK_ID.toUpperCase();
   TK_Model.findOne({
     where: {
       TK_ID: TK_ID,
