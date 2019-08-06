@@ -1,3 +1,4 @@
+var dateFormat = require("dateformat");
 //Load thong tin TK
 function LoadTK(a) {
   var tk = a;
@@ -49,6 +50,7 @@ function getAllMuonTra() {
 
       $.each(response, function(i, mt) {
         console.log(response);
+
         mt_data += `<tr>
                       <td>${mt.MUONTRA_ID}</td>
                       <td class="chitiet">
@@ -57,8 +59,8 @@ function getAllMuonTra() {
                         </a>
                       </td>
                       <td>${mt.xeXEID}</td>
-                      <td>${mt.MUON_THOIGIAN}</td>
-                      <td>${mt.TRA_THOIGIAN}</td>
+                      <td>${formatDate(mt.MUON_THOIGIAN)}</td>
+                      <td>${formatDate(mt.TRA_THOIGIAN)}</td>
                       <td>
                        <i class="fa fa-info-circle fa-lg" data-toggle="modal" data-target="#ChiTietMuonTra" onclick="ChiTietMuonTra('${
                          mt.MUONTRA_ID
@@ -101,8 +103,8 @@ function getChuaTra() {
                         </a>
                       </td>
                       <td>${mt.xeXEID}</td>
-                      <td>${mt.MUON_THOIGIAN}</td>
-                      <td>${mt.TRA_THOIGIAN}</td>
+                      <td>${formatDate(mt.MUON_THOIGIAN)}</td>
+                      <td>${formatDate(mt.TRA_THOIGIAN)}</td>
                       <td>
                        <i class="fa fa-info-circle fa-lg" data-toggle="modal" data-target="#ChiTietMuonTra" onclick="ChiTietMuonTra('${
                          mt.MUONTRA_ID
@@ -146,11 +148,11 @@ function ChiTietMuonTra(a) {
                     </tr>
                     <tr>
                       <td>Thời gian mượn</td>
-                      <td>${mt.MUON_THOIGIAN}</td>
+                      <td>${formatDate(mt.MUON_THOIGIAN)}</td>
                     </tr>
                     <tr>
                       <td>Thời gian trả</td>
-                      <td>${mt.TRA_THOIGIAN}</td>
+                      <td>${formatDate(mt.TRA_THOIGIAN)}</td>
                     </tr>
                     <tr>
                       <td>Vị trí mượn</td>
@@ -293,4 +295,25 @@ function LoadDataTable() {
 
     lengthMenu: [[5, 10, 15, 20, 25, -1], [5, 10, 15, 20, 25, "Tất cả"]]
   });
+}
+
+//format Date
+function formatDate(timestamp) {
+  if (timestamp == null) return "";
+  date = new Date(Date.parse(timestamp));
+
+  var month = date.getMonth() + 1;
+  var day = date.getDate();
+  var hour = date.getHours();
+  var min = date.getMinutes();
+  var sec = date.getSeconds();
+
+  month = (month < 10 ? "0" : "") + month;
+  day = (day < 10 ? "0" : "") + day;
+  hour = (hour < 10 ? "0" : "") + hour;
+  min = (min < 10 ? "0" : "") + min;
+  sec = (sec < 10 ? "0" : "") + sec;
+  var str = day + "-" + month + "-" + date.getFullYear() + " " + hour + " giờ " + min + " phút " + sec + " giây";
+
+  return str;
 }

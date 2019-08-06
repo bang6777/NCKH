@@ -55,7 +55,7 @@ function GetAllViPham() {
                               </a>
                             </td>
                             <td>${vipham.loi.LOI_TEN}</td>
-                            <td>${vipham.VP_THOIGIAN}</td>
+                            <td>${formatDate(vipham.VP_THOIGIAN)}</td>
                           `;
         if (vipham.VP_TRANGTHAI == 0) {
           vipham_data += `<td>
@@ -129,7 +129,7 @@ function GetChuaXuLy() {
                               </a>
                             </td>
                             <td>${vipham.loi.LOI_TEN}</td>
-                            <td>${vipham.VP_THOIGIAN}</td>
+                            <td>${formatDate(vipham.VP_THOIGIAN)}</td>
                           `;
         if (vipham.VP_TRANGTHAI == 0) {
           vipham_data += `<td>
@@ -203,7 +203,7 @@ function GetDaXuLy() {
                               </a>
                             </td>
                             <td>${vipham.loi.LOI_TEN}</td>
-                            <td>${vipham.VP_THOIGIAN}</td>
+                            <td>${formatDate(vipham.VP_THOIGIAN)}</td>
                           `;
         if (vipham.VP_TRANGTHAI == 0) {
           vipham_data += `<td>
@@ -431,7 +431,7 @@ function ChiTietViPham(a, b) {
                     </tr>
                     <tr>
                       <td>Thời gian vi phạm</td>
-                      <td>${vp.VP_THOIGIAN}</td>
+                      <td>${formatDate(vp.VP_THOIGIAN)}</td>
                     </tr>
                     <tr>
                       <td>Vị trí vi phạm</td>
@@ -516,4 +516,25 @@ function LoadView() {
   } else if (view == 1) {
     GetDaXuLy();
   }
+}
+
+//format Date
+function formatDate(timestamp) {
+  if (timestamp == null) return "";
+  date = new Date(Date.parse(timestamp));
+
+  var month = date.getMonth() + 1;
+  var day = date.getDate();
+  var hour = date.getHours();
+  var min = date.getMinutes();
+  var sec = date.getSeconds();
+
+  month = (month < 10 ? "0" : "") + month;
+  day = (day < 10 ? "0" : "") + day;
+  hour = (hour < 10 ? "0" : "") + hour;
+  min = (min < 10 ? "0" : "") + min;
+  sec = (sec < 10 ? "0" : "") + sec;
+  var str = day + "-" + month + "-" + date.getFullYear() + " " + hour + " giờ " + min + " phút " + sec + " giây";
+
+  return str;
 }

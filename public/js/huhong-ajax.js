@@ -26,7 +26,7 @@ function GetAllHuHong() {
                             
                             <td>${huhong.xeXEID}</td>
                             <td>${huhong.HH_MOTA}</td>
-                            <td>${huhong.HH_THOIGIAN}</td>
+                            <td>${formatDate(huhong.HH_THOIGIAN)}</td>
                       `;
         switch (huhong.HH_TRANGTHAI) {
           case 0: {
@@ -130,7 +130,7 @@ function GetHHDangCho() {
                             
                             <td>${huhong.xeXEID}</td>
                             <td>${huhong.HH_MOTA}</td>
-                            <td>${huhong.HH_THOIGIAN}</td>
+                            <td>${formatDate(huhong.HH_THOIGIAN)}</td>
                       `;
         switch (huhong.HH_TRANGTHAI) {
           case 0: {
@@ -229,7 +229,7 @@ function GetHHDangSua() {
                                 <td>${huhong.taikhoanTKID}</td>
                                 <td>${huhong.xeXEID}</td>
                                 <td>${huhong.HH_MOTA}</td>
-                                <td>${huhong.HH_THOIGIAN}</td>
+                                <td>${formatDate(huhong.HH_THOIGIAN)}</td>
                           `;
         switch (huhong.HH_TRANGTHAI) {
           case 0: {
@@ -329,7 +329,7 @@ function GetHHDaSua() {
                                 <td>${huhong.taikhoanTKID}</td>
                                 <td>${huhong.xeXEID}</td>
                                 <td>${huhong.HH_MOTA}</td>
-                                <td>${huhong.HH_THOIGIAN}</td>
+                                <td>${formatDate(huhong.HH_THOIGIAN)}</td>
                           `;
         switch (huhong.HH_TRANGTHAI) {
           case 0: {
@@ -429,7 +429,7 @@ function GetHHBaoSai() {
                                 <td>${huhong.taikhoanTKID}</td>
                                 <td>${huhong.xeXEID}</td>
                                 <td>${huhong.HH_MOTA}</td>
-                                <td>${huhong.HH_THOIGIAN}</td>
+                                <td>${formatDate(huhong.HH_THOIGIAN)}</td>
                           `;
         switch (huhong.HH_TRANGTHAI) {
           case 0: {
@@ -654,4 +654,25 @@ async function UpdateTrangThaiHuHong(a) {
       console.log(e);
     }
   });
+}
+
+//format Date
+function formatDate(timestamp) {
+  if (timestamp == null) return "";
+  date = new Date(Date.parse(timestamp));
+
+  var month = date.getMonth() + 1;
+  var day = date.getDate();
+  var hour = date.getHours();
+  var min = date.getMinutes();
+  var sec = date.getSeconds();
+
+  month = (month < 10 ? "0" : "") + month;
+  day = (day < 10 ? "0" : "") + day;
+  hour = (hour < 10 ? "0" : "") + hour;
+  min = (min < 10 ? "0" : "") + min;
+  sec = (sec < 10 ? "0" : "") + sec;
+  var str = day + "-" + month + "-" + date.getFullYear() + " " + hour + " giờ " + min + " phút " + sec + " giây";
+
+  return str;
 }

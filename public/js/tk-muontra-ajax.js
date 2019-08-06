@@ -78,8 +78,8 @@ function ThongKeMuonTra() {
                         </a>
                       </td>
                       <td>${mt.xeXEID}</td>
-                      <td>${mt.MUON_THOIGIAN}</td>
-                      <td>${mt.TRA_THOIGIAN}</td>
+                      <td>${formatDate(mt.MUON_THOIGIAN)}</td>
+                      <td>${formatDate(mt.TRA_THOIGIAN)}</td>
                       <td>
                        <i class="fa fa-info-circle fa-lg" data-toggle="modal" data-target="#ChiTietMuonTra" onclick="ChiTietMuonTra('${
                          mt.MUONTRA_ID
@@ -98,4 +98,25 @@ function a() {
     .find("input")
     .val();
   alert(b);
+}
+
+//format Date
+function formatDate(timestamp) {
+  if (timestamp == null) return "";
+  date = new Date(Date.parse(timestamp));
+
+  var month = date.getMonth() + 1;
+  var day = date.getDate();
+  var hour = date.getHours();
+  var min = date.getMinutes();
+  var sec = date.getSeconds();
+
+  month = (month < 10 ? "0" : "") + month;
+  day = (day < 10 ? "0" : "") + day;
+  hour = (hour < 10 ? "0" : "") + hour;
+  min = (min < 10 ? "0" : "") + min;
+  sec = (sec < 10 ? "0" : "") + sec;
+  var str = day + "-" + month + "-" + date.getFullYear() + " " + hour + " giờ " + min + " phút " + sec + " giây";
+
+  return str;
 }

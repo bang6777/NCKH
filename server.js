@@ -5,7 +5,7 @@ var session = require("express-session");
 // const passport = require('passport');
 var path = require("path");
 const bodyParser = require("body-parser");
-flash = require('connect-flash');
+flash = require("connect-flash");
 // app.use(express.cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -30,7 +30,7 @@ var routes_locker = require("./api/routes/api/api_locker");
 app.use("/", routes);
 app.use("/v1/", routes_locker);
 app.use("/v1/", routes_android);
-app.get("/init_db",function(req,res){
+app.get("/init_db", function(req, res) {
   require("./api/Model/createDataTest").initDatabase();
   res.status(200).send("Đã tạo thành công cơ sở dữ liệu ảo !");
 });
@@ -49,7 +49,6 @@ var http = require("http").createServer(app);
 
 http.listen(port);
 console.log("RESTful API server started on: " + port);
-console.log("Thời gian hoạt động trên máy chủ là: "+Date(Date.now()).toString());
-
+console.log("Thời gian hoạt động trên máy chủ là: " + Date(Date.now()).toString());
 
 // require("./api/Model/createDataTest").initDatabase();
