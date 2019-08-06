@@ -9,13 +9,14 @@ exports.findMuontraID_Xe = (XE_ID, cb) => {
       order: [["createdAt", "DESC"]],
       attributes: ["MUONTRA_ID"],
       where: {
-        xeXEID: XE_ID
+        xeXEID: XE_ID,
+        TRA_THOIGIAN: null
       }
     })
     .then(ID_MT => {
       if (ID_MT) {
         cb(null, ID_MT);
-      } else cb("Không có dữ liệu", null);
+      } else cb("Không có dữ liệu!", null);
       console.log("ID mượn trả:", JSON.stringify(ID_MT, null, 4));
     });
 };

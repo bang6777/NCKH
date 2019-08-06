@@ -54,7 +54,7 @@ function GetAllViPham() {
                                 ${vipham.muontraMUONTRAID}
                               </a>
                             </td>
-                            <td id="loi[${i}]"></td>
+                            <td>${vipham.loi.LOI_TEN}</td>
                             <td>${vipham.VP_THOIGIAN}</td>
                           `;
         if (vipham.VP_TRANGTHAI == 0) {
@@ -85,26 +85,11 @@ function GetAllViPham() {
 
         vipham_data += `<td>   
                           <i class="fa fa-info-circle fa-lg" data-toggle="modal" data-target="#ChiTietViPham" onclick="ChiTietViPham('${
-                            vipham.muontraMUONTRAID
-                          }')">
+                            vipham.VP_ID
+                          }','${vipham.muontraMUONTRAID}')">
                           </i>
                         </td>
                       </tr>`;
-        $.ajax({
-          url: "/loi/" + vipham.loiLOIID,
-          data: JSON.stringify({ LOI_ID: vipham.loiLOIID }),
-          method: "GET",
-          contentType: "application/json",
-          success: function(response) {
-            console.log(response.LOI_TEN);
-            var loi_id = "loi[" + i + "]";
-            document.getElementById(loi_id).innerHTML = response.LOI_TEN;
-          },
-          error: function(e) {
-            alert("Đã có lỗi xảy ra!");
-            console.log(e);
-          }
-        });
       });
       tb.append(vipham_data);
       LoadDataTable();
@@ -143,7 +128,7 @@ function GetChuaXuLy() {
                                 ${vipham.muontraMUONTRAID}
                               </a>
                             </td>
-                            <td id="loi[${i}]"></td>
+                            <td>${vipham.loi.LOI_TEN}</td>
                             <td>${vipham.VP_THOIGIAN}</td>
                           `;
         if (vipham.VP_TRANGTHAI == 0) {
@@ -175,25 +160,10 @@ function GetChuaXuLy() {
         vipham_data += `<td>   
                           <i class="fa fa-info-circle fa-lg" data-toggle="modal" data-target="#ChiTietViPham" onclick="ChiTietViPham('${
                             vipham.VP_ID
-                          }')">
+                          }','${vipham.muontraMUONTRAID}')">
                           </i>
                         </td>
                       </tr>`;
-        $.ajax({
-          url: "/loi/" + vipham.loiLOIID,
-          data: JSON.stringify({ LOI_ID: vipham.loiLOIID }),
-          method: "GET",
-          contentType: "application/json",
-          success: function(response) {
-            console.log(response.LOI_TEN);
-            var loi_id = "loi[" + i + "]";
-            document.getElementById(loi_id).innerHTML = response.LOI_TEN;
-          },
-          error: function(e) {
-            alert("Đã có lỗi xảy ra!");
-            console.log(e);
-          }
-        });
       });
       tb.append(vipham_data);
       LoadDataTable();
@@ -232,7 +202,7 @@ function GetDaXuLy() {
                                 ${vipham.muontraMUONTRAID}
                               </a>
                             </td>
-                            <td id="loi[${i}]"></td>
+                            <td>${vipham.loi.LOI_TEN}</td>
                             <td>${vipham.VP_THOIGIAN}</td>
                           `;
         if (vipham.VP_TRANGTHAI == 0) {
@@ -261,28 +231,13 @@ function GetDaXuLy() {
                                         `;
         }
 
-        vipham_data += `<td>   
+        vipham_data += `<td>
                           <i class="fa fa-info-circle fa-lg" data-toggle="modal" data-target="#ChiTietViPham" onclick="ChiTietViPham('${
-                            vipham.muontraMUONTRAID
-                          }')">
+                            vipham.VP_ID
+                          }','${vipham.muontraMUONTRAID}')">
                           </i>
                         </td>
                       </tr>`;
-        $.ajax({
-          url: "/loi/" + vipham.loiLOIID,
-          data: JSON.stringify({ LOI_ID: vipham.loiLOIID }),
-          method: "GET",
-          contentType: "application/json",
-          success: function(response) {
-            console.log(response.LOI_TEN);
-            var loi_id = "loi[" + i + "]";
-            document.getElementById(loi_id).innerHTML = response.LOI_TEN;
-          },
-          error: function(e) {
-            alert("Đã có lỗi xảy ra!");
-            console.log(e);
-          }
-        });
       });
       tb.append(vipham_data);
       LoadDataTable();
@@ -441,12 +396,13 @@ function createLatLng(coordString) {
   return new google.maps.LatLng(a[0], a[1]);
 }
 
-function ChiTietViPham(a) {
+function ChiTietViPham(a, b) {
   var vp_id = a;
+  var mt_id = b;
   $.ajax({
-    type: "GET",
-    url: "/vipham/chitiet/" + vp_id,
-    // data: JSON.stringify({ VP_ID: vp_id }),
+    type: "POST",
+    url: "/vipham/chitiet",
+    data: JSON.stringify({ VP_ID: vp_id, MUONTRA_ID: mt_id }),
     contentType: "application/json",
     success: function(vp) {
       var tb = $("#tbCTVP");
@@ -479,7 +435,10 @@ function ChiTietViPham(a) {
                     </tr>
                     <tr>
                       <td>Vị trí vi phạm</td>
-                      <td>${vp.VP_LAT}, ${vp.VP_LNG}</td>
+                      <td>
+                        <img src="./img/marker-orange.png" height="20px"/>
+                        ${vp.VP_LAT}, ${vp.VP_LNG}
+                        </td>
                     </tr>
                     `;
       $.ajax({
@@ -542,7 +501,7 @@ function MapVP(vpLat, vpLng) {
     var markerVP = new google.maps.Marker({
       position: vtVP,
       map: map,
-      icon: "./img/marker-red.png"
+      icon: "./img/marker-orange.png"
     });
   }
 }

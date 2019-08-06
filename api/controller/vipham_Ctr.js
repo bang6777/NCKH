@@ -1,15 +1,23 @@
 "use strict";
 const vipham_M = require("../Model/vipham_Model");
 const muontra_M = require("../Model/muontra_Model");
-const taikhoan_M = require("../Model/taikhoan_Model");
-const xe_M = require("../Model/xe_Model");
+const loi_M = require("../Model/loi_Model");
 const Sequelize = require("sequelize");
 
 exports.allViPham = cb => {
-  vipham_M.findAll({ order: [["createdAt", "DESC"]] }).then(vipham => {
-    cb(null, vipham);
-    console.log("All vipham:", JSON.stringify(vipham, null, 4));
-  });
+  vipham_M
+    .findAll({
+      order: [["createdAt", "DESC"]],
+      include: [
+        {
+          model: loi_M
+        }
+      ]
+    })
+    .then(vipham => {
+      cb(null, vipham);
+      console.log("All vipham:", JSON.stringify(vipham, null, 4));
+    });
 };
 
 exports.vipham_taikhoan = (TK_ID, cb) => {
@@ -56,20 +64,20 @@ exports.vipham_xe = (XE_ID, cb) => {
 };
 
 //vi pham - chi tiet
-exports.vipham_chitiet = function(VP_ID, cb) {
+exports.vipham_chitiet = function(VP_ID, MUONTRA_ID, cb) {
   vipham_M
     .findOne({
-      include: [
-        {
-          model: muontra_M
-          // where: {
-          //   MUONTRA_ID: MUONTRA_ID
-          // }
-        }
-      ],
       where: {
         VP_ID: VP_ID
-      }
+      },
+      include: [
+        {
+          model: muontra_M,
+          where: {
+            MUONTRA_ID: MUONTRA_ID
+          }
+        }
+      ]
     })
     .then(dsViPham => {
       if (dsViPham) {
@@ -105,7 +113,12 @@ exports.VP_ChuaXuLy = cb => {
       order: [["createdAt", "DESC"]],
       where: {
         VP_TRANGTHAI: 0
-      }
+      },
+      include: [
+        {
+          model: loi_M
+        }
+      ]
     })
     .then(vipham => {
       cb(null, vipham);
@@ -120,7 +133,12 @@ exports.VP_DaXuLy = cb => {
       order: [["createdAt", "DESC"]],
       where: {
         VP_TRANGTHAI: 1
-      }
+      },
+      include: [
+        {
+          model: loi_M
+        }
+      ]
     })
     .then(vipham => {
       cb(null, vipham);

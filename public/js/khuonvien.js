@@ -104,6 +104,7 @@ async function updateKhuonVien() {
   document.getElementById("btnEditMarker").disabled = true;
   document.getElementById("btnDone").disabled = false;
   document.getElementById("btnDeleteAllMarkers").disabled = false;
+  document.getElementById("btnCancel").disabled = false;
 
   //get toa do
   coordinates = [];
@@ -207,9 +208,22 @@ async function Save() {
     document.getElementById("btnEditMarker").disabled = false;
     document.getElementById("btnDone").disabled = true;
     document.getElementById("btnDeleteAllMarkers").disabled = true;
+    document.getElementById("btnCancel").disabled = true;
 
     await load();
   }
+}
+
+//--------------------Button Hủy
+function Cancel() {
+  //button
+  document.getElementById("btnEditMarker").disabled = false;
+  document.getElementById("btnDone").disabled = true;
+  document.getElementById("btnDeleteAllMarkers").disabled = true;
+  document.getElementById("btnCancel").disabled = true;
+  google.maps.event.clearListeners(map, "click");
+  setMapOnAll(null);
+  load();
 }
 //-----------------Ham
 //6. Xoa tat ca marker
