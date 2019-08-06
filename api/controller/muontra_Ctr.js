@@ -137,6 +137,22 @@ exports.traXe = (XE_ID, LAT, LNG, cb) => {
     });
 };
 
+exports.kiemTraXeDangMuon = (XE_ID, cb) => {
+  muontra_M
+    .findOne({
+      where: {
+        xeXEID: XE_ID,
+        TRA_THOIGIAN: null
+      }
+    })
+    .then(result => {
+      cb(null, result);
+    })
+    .catch(err => {
+      cb(err, null);
+    });
+};
+
 //get Thong ke muon tra
 exports.ThongKeMuonTra = (tungay, denngay, cb) => {
   const Op = Sequelize.Op;
