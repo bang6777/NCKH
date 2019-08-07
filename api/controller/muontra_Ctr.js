@@ -172,3 +172,48 @@ exports.ThongKeMuonTra = (tungay, denngay, cb) => {
       cb(null, mt);
     });
 };
+
+//get Muon tra moi nhat theo TK_ID
+exports.findMuontraID_TK = (TK_ID, cb) => {
+  muontra_M
+    .findOne({
+      order: [["createdAt", "DESC"]],
+      attributes: ["MUONTRA_ID"],
+      where: {
+        taikhoanTKID: TK_ID,
+        TRA_THOIGIAN: null
+      }
+    })
+    .then(ID_MT => {
+      if (ID_MT) {
+        cb(null, ID_MT);
+      } else cb("no", null);
+      console.log("ID mượn trả tìm dc là:" + JSON.stringify(ID_MT));
+    });
+};
+
+//update thời gian trả
+exports.updateTra_ThoiGian = (MUONTRA_ID, cb) => {
+  muontra_M
+    .update(
+      {
+        TRA_THOIGIAN: Date.now(),
+        TRA_VITRI_LAT: 0,
+        TRA_VITRI_LNG: 0
+      },
+      {
+        where: {
+          MUONTRA_ID: MUONTRA_ID
+        }
+      }
+    )
+    .then(mt => {
+      if (mt) {
+        console.log("Đã cập nhật mượn trả: ", mt.MUONTRA_ID);
+        cb(null, "OK");
+      } else cb("ERR", null);
+    })
+    .catch(err => {
+      cb(err, null);
+    });
+};
