@@ -50,5 +50,11 @@ var http = require("http").createServer(app);
 http.listen(port);
 console.log("RESTful API server started on: " + port);
 console.log("Thời gian hoạt động trên máy chủ là: " + Date(Date.now()).toString());
+const date = new Date("2012-01-26 13:51");
+
+console.log(date.toString());
 
 // require("./api/Model/createDataTest").initDatabase();
+
+// ----------------------NOTE: CHANGE TIME ZONE HEROKU -----------------
+// heroku config:add TZ="Asia/Ho_Chi_Minh"

@@ -335,7 +335,7 @@ router.put("/xe/updateTT", function(req, res) {
   if (XE_TRANGTHAI == 0) {
     xe.findByID(XE_ID, function(err, xeObj) {
       // Kiểm tra trạng thái xe có đang mượn hay không trước khi cập nhật
-      if (xeObj.XE_TRANGTHAI == 0) {
+      if (xeObj.XE_TRANGTHAI != 1) {
         res.status(200).json({ message: "C" });
       } else {
         xe.updateTrangThai(XE_ID, XE_IMEI, XE_TRANGTHAI, function(err, data) {
@@ -445,112 +445,128 @@ router.put("/xe/update", function(req, res) {
   var XE_LAT = req.body.XE_LAT;
   var XE_LNG = req.body.XE_LNG;
   var XE_IMEI = req.body.XE_IMEI;
-  xe.updateXe(XE_ID, XE_IMEI, XE_LAT, XE_LNG, function(err, data) {
-    if (err) {
-      res.json({ message: "ERR1" });
-    } else {
-      //get tọa độ xe
-      var p = { x: XE_LAT, y: XE_LNG };
-      //kiem tra Is inside
-      khuonvien.getLatLng(function(err, data) {
-        if (err) {
-          console.log(err);
-        } else {
-          var kq;
-          var kv = true;
-          var i,
-            polygon = [];
-
-          for (i = 0; i < data.length; i++) {
-            polygon.push({ x: data[i].KV_LAT, y: data[i].KV_LNG });
-          }
-          var n = polygon.length;
-
-          // There must be at least 3 vertices in polygon[]
-          if (n < 3) {
-            kq = false;
-            kv = false;
+  if(XE_ID && XE_IMEI &&XE_LAT && XE_LNG){
+    xe.updateXe(XE_ID, XE_IMEI, XE_LAT, XE_LNG, function(err, data) {
+      if (err) {
+        res.json({ message: "ERR1" });
+      } else {
+        //get tọa độ xe
+        var p = { x: XE_LAT, y: XE_LNG };
+        //kiem tra Is inside
+        khuonvien.getLatLng(function(err, data) {
+          if (err) {
+            console.log(err);
           } else {
-            // Create a point for line segment from p to infinite
-            var extreme = { x: 10.0305035, y: 105.766663 };
-
-            // Count intersections of the above line with sides of polygon
-            var count = 0,
-              i = 0;
-            do {
-              var next = (i + 1) % n;
-
-              // Check if the line segment from 'p' to 'extreme' intersects
-              // with the line segment from 'polygon[i]' to 'polygon[next]'
-              if (doIntersect(polygon[i], polygon[next], p, extreme)) {
-                // If the point 'p' is colinear with line segment 'i-next',
-                // then check if it lies on segment. If it lies, return true,
-                // otherwise false
-
-                // cout << (orientation(polygon[i], p, polygon[next]));
-                if (orientation(polygon[i], p, polygon[next]) == 0) {
-                  kq = onSegment(polygon[i], p, polygon[next]);
-                }
-
-                count++;
-              }
-              if ((onSegment(extreme, polygon[i], p) == 0 || onSegment(extreme, polygon[next], p) == 0) && count == 2) {
-                kq = count % 2 == 1;
-              }
-              i = next;
-            } while (i != 0);
-
-            // Return true if count is odd, false otherwise
-            kq = count % 2 == 0; // Same as (count%2 == 1)
-          }
-
-          //nếu kq = false => xe ở ngoài => thêm vp
-          if (kq == false && kv == true) {
-            xe.updateTrangThai(XE_ID, XE_IMEI, 3, function(err, data) {
-              // Cập nhật trạng thái xe dag vượt khỏi khuôn viên
-              if (err) console.log(err);
-            });
-            checkloi.findMuontraID_Xe(XE_ID, function(err, data) {
-              if (err) {
-                console.log(err + "aa");
-              } else {
-                var mt_id = data.MUONTRA_ID;
-                var vp_lat = XE_LAT;
-                var vp_lng = XE_LNG;
-
-                checkloi.findIDLoi_MT(mt_id, function(err, data) {
-                  //neu chua co loi
-                  if (data == null) {
-                    //them loi
-                    checkloi.addVP(mt_id, vp_lat, vp_lng, function(err, data) {
-                      if (err) {
-                        res.json({ message: "ERR3" });
-                      } else {
-                        console.log("Ghi nhận thành công vi phạm vượt khuôn viên : " + mt_id);
-                      }
-                    });
-                  } else {
-                    console.log("Đã tồn tại vi phạm! ");
+            var kq;
+            var kv = true;
+            var i,
+              polygon = [];
+  
+            for (i = 0; i < data.length; i++) {
+              polygon.push({ x: data[i].KV_LAT, y: data[i].KV_LNG });
+            }
+            var n = polygon.length;
+  
+            // There must be at least 3 vertices in polygon[]
+            if (n < 3) {
+              kq = false;
+              kv = false;
+            } else {
+              // Create a point for line segment from p to infinite
+              var extreme = { x: 10.0305035, y: 105.766663 };
+  
+              // Count intersections of the above line with sides of polygon
+              var count = 0,
+                i = 0;
+              do {
+                var next = (i + 1) % n;
+  
+                // Check if the line segment from 'p' to 'extreme' intersects
+                // with the line segment from 'polygon[i]' to 'polygon[next]'
+                if (doIntersect(polygon[i], polygon[next], p, extreme)) {
+                  // If the point 'p' is colinear with line segment 'i-next',
+                  // then check if it lies on segment. If it lies, return true,
+                  // otherwise false
+  
+                  // cout << (orientation(polygon[i], p, polygon[next]));
+                  if (orientation(polygon[i], p, polygon[next]) == 0) {
+                    kq = onSegment(polygon[i], p, polygon[next]);
                   }
-                });
-              }
+  
+                  count++;
+                }
+                if ((onSegment(extreme, polygon[i], p) == 0 || onSegment(extreme, polygon[next], p) == 0) && count == 2) {
+                  kq = count % 2 == 1;
+                }
+                i = next;
+              } while (i != 0);
+  
+              // Return true if count is odd, false otherwise
+              kq = count % 2 == 0; // Same as (count%2 == 1)
+            }
+  
+            //nếu kq = false => xe ở ngoài => thêm vp
+            if (kq == false && kv == true) {
+              xe.updateTrangThai(XE_ID, XE_IMEI, 3, function(err, data) {
+                // Cập nhật trạng thái xe dag vượt khỏi khuôn viên
+                if (err) console.log(err);
+              });
+              checkloi.findMuontraID_Xe(XE_ID, function(err, data) {
+                if (err) {
+                  console.log(err + "aa");
+                } else {
+                  var mt_id = data.MUONTRA_ID;
+                  var vp_lat = XE_LAT;
+                  var vp_lng = XE_LNG;
+  
+                  checkloi.findIDLoi_MT(mt_id, function(err, data) {
+                    //neu chua co loi
+                    if (data == null) {
+                      //them loi
+                      checkloi.addVP(mt_id, vp_lat, vp_lng, function(err, data) {
+                        if (err) {
+                          console.log(err );
+                        } else {
+                          console.log("Ghi nhận thành công vi phạm vượt khuôn viên : " + mt_id);
+                        }
+                      });
+                    } else {
+                      console.log("Đã tồn tại vi phạm! ");
+                    }
+                  });
+                }
+              });
+            } else if (kq == true && kv == true) {
+              console.log("Xe ở trong");
+              //Cập nhật trạng thái xe đang mượn ở trong khuôn viên
+              muontra.kiemTraXeDangMuon(XE_ID, function(err,result){
+                if(result){ // Xe dag mượn -> Tiếp tục trả về là xe dag mượn
+                  xe.updateTrangThai(XE_ID, XE_IMEI, 1, function(err, data) {
+                    if (err) console.log(err);
+                  });
+                }else{ // Xe không mượn -> trả về là k có mượn
+                  xe.updateTrangThai(XE_ID, XE_IMEI, 0, function(err, data) {
+                    if (err) console.log(err);
+                  });
+                }
+                
+                
+              })
+              
+            } else {
+              console.log("Khuôn viên nhỏ hơn 3 đỉnh: " + kq);
+            }
+            xe.findByID(XE_ID, function(err, data) {
+              res.json("TTXe:" + data.XE_TRANGTHAI);
             });
-          } else if (kq == true && kv == true) {
-            //Cập nhật trạng thái xe đang mượn ở trong khuôn viên
-            xe.updateTrangThai(XE_ID, XE_IMEI, 1, function(err, data) {
-              if (err) console.log(err);
-            });
-            console.log("Xe ở trong");
-          } else {
-            console.log("Khuôn viên nhỏ hơn 3 đỉnh: " + kq);
           }
-          xe.findByID(XE_ID, function(err, data) {
-            res.json("TTXe:" + data.XE_TRANGTHAI);
-          });
-        }
-      });
-    }
-  });
+        });
+      }
+    });
+  }else{
+    res.status(200).json("Yêu cầu không hợp lệ");
+  }
+  
 });
 
 //-------------Lỗi
