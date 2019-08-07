@@ -335,7 +335,7 @@ router.put("/xe/updateTT", function(req, res) {
   if (XE_TRANGTHAI == 0) {
     xe.findByID(XE_ID, function(err, xeObj) {
       // Kiểm tra trạng thái xe có đang mượn hay không trước khi cập nhật
-      if (xeObj.XE_TRANGTHAI == 0) {
+      if (xeObj.XE_TRANGTHAI != 1) {
         res.status(200).json({ message: "C" });
       } else {
         xe.updateTrangThai(XE_ID, XE_IMEI, XE_TRANGTHAI, function(err, data) {
