@@ -7,14 +7,14 @@ var VP_m = require("./vipham_Model");
 var xe_m = require("./xe_Model");
 exports.initDatabase = () => {
   // -------------------------------XE------------------
-  xe_m.create({
-    XE_ID: 1,
-    XE_IMEI: "867959033016407",
-    XE_NAMSANXUAT: "2019",
-    XE_GHICHU: "XE_GHICHU",
-    XE_LAT: "10.0305035",
-    XE_LNG: "105.766663"
-  });
+  // xe_m.create({
+  //   XE_ID: 1,
+  //   XE_IMEI: "867959033016407",
+  //   XE_NAMSANXUAT: "2019",
+  //   XE_GHICHU: "XE_GHICHU",
+  //   XE_LAT: "10.0305035",
+  //   XE_LNG: "105.766663"
+  // });
   // xe_m.create({
   //   XE_IMEI: "352068063702873",
   //   XE_NAMSANXUAT: "2019",
@@ -37,14 +37,16 @@ exports.initDatabase = () => {
   //   XE_LNG: "105.766663"
   // });
   // //   -------------------LỖI-------------
-  // loi_m.create({
-  //   LOI_TEN: "Vượt khỏi khuôn viên",
-  //   LOI_MOTA: "Phạt 100.000 - 500.000VND khi vượt khỏi khuôn viên trường"
-  // });
-  // loi_m.create({
-  //   LOI_TEN: "Đậu xe không đúng nơi qui định",
-  //   LOI_MOTA: "Phạt 50.000 - 100.000VND khi vượt khỏi khuôn viên trường"
-  // });
+  loi_m.create({
+    LOI_ID:1,
+    LOI_TEN: "Vượt khỏi khuôn viên",
+    LOI_MOTA: "Phạt 100.000 - 500.000VND khi vượt khỏi khuôn viên trường"
+  });
+  loi_m.create({
+    LOI_ID:2,
+    LOI_TEN: "Đậu xe không đúng nơi qui định",
+    LOI_MOTA: "Phạt 50.000 - 100.000VND khi vượt khỏi khuôn viên trường"
+  });
   // //   ------------------------Tài khoản ------------------
   // TK_m.create({
   //   TK_ID: "B1401088",

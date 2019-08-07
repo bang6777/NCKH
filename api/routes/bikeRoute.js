@@ -525,7 +525,7 @@ router.put("/xe/update", function(req, res) {
                       //them loi
                       checkloi.addVP(mt_id, vp_lat, vp_lng, function(err, data) {
                         if (err) {
-                          res.json({ message: "ERR3" });
+                          console.log(err );
                         } else {
                           console.log("Ghi nhận thành công vi phạm vượt khuôn viên : " + mt_id);
                         }

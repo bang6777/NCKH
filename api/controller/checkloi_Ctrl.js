@@ -17,7 +17,7 @@ exports.findMuontraID_Xe = (XE_ID, cb) => {
       if (ID_MT) {
         cb(null, ID_MT);
       } else cb("Không có dữ liệu!", null);
-      console.log("ID mượn trả:", JSON.stringify(ID_MT, null, 4));
+      console.log("ID mượn trả tìm dc là:"+ JSON.stringify(ID_MT));
     });
 };
 
@@ -27,8 +27,8 @@ exports.findIDLoi_MT = (MT_ID, cb) => {
     .findOne({
       where: {
         muontraMUONTRAID: MT_ID,
-        loiLOIID: "1",
-        VP_TRANGTHAI: "0"
+        loiLOIID: 1,
+        VP_TRANGTHAI: 0
       }
     })
     .then(ID_LOI => {
@@ -41,7 +41,7 @@ exports.findIDLoi_MT = (MT_ID, cb) => {
 exports.addVP = (muontraMUONTRAID, VP_LAT, VP_LNG, cb) => {
   vp_M
     .create({
-      loiLOIID: "1",
+      loiLOIID: 1,
       VP_LAT: VP_LAT,
       VP_LNG: VP_LNG,
       muontraMUONTRAID: muontraMUONTRAID
