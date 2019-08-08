@@ -70,17 +70,7 @@ function GetAllViPham() {
                                         </td>
                                         `;
         } else if (vipham.VP_TRANGTHAI == 1) {
-          vipham_data += `<td>
-                                          <select
-                                            id="slVP_TrangThai['${vipham.VP_ID}']"
-                                            class="form-control form-control-sm"
-                                            onchange="UpdateTrangThaiViPham('${vipham.VP_ID}')"
-                                          >
-                                              <option value=0>Chưa xử lý</option>
-                                              <option value=1 selected=true >Đã xử lý</option>
-                                          </select>
-                                        </td>
-                                        `;
+          vipham_data += `<td>Đã xử lý</td>`;
         }
 
         vipham_data += `<td>   
@@ -136,7 +126,7 @@ function GetChuaXuLy() {
                                           <select
                                             id="slVP_TrangThai['${vipham.VP_ID}']"
                                             class="form-control form-control-sm"
-                                            onchange="UpdateTrangThaiViPham('${vipham.VP_ID}')"
+                                            onchange="UpdateTrangThaiViPham('${vipham.VP_ID}', '${vipham.muontraMUONTRAID}')"
                                           >
                                               <option value=0 selected=true >Chưa xử lý</option>
                                               <option value=1 >Đã xử lý</option>
@@ -206,29 +196,9 @@ function GetDaXuLy() {
                             <td>${formatDate(vipham.VP_THOIGIAN)}</td>
                           `;
         if (vipham.VP_TRANGTHAI == 0) {
-          vipham_data += `<td>
-                                          <select
-                                            id="slVP_TrangThai['${vipham.VP_ID}']"
-                                            class="form-control form-control-sm"
-                                            onchange="UpdateTrangThaiViPham('${vipham.VP_ID}')"
-                                          >
-                                              <option value=0 selected=true >Chưa xử lý</option>
-                                              <option value=1 >Đã xử lý</option>
-                                          </select>
-                                        </td>
-                                        `;
+          vipham_data += `<td>Chưa xử lý</td>`;
         } else if (vipham.VP_TRANGTHAI == 1) {
-          vipham_data += `<td>
-                                          <select
-                                            id="slVP_TrangThai['${vipham.VP_ID}']"
-                                            class="form-control form-control-sm"
-                                            onchange="UpdateTrangThaiViPham('${vipham.VP_ID}')"
-                                          >
-                                              <option value=0>Chưa xử lý</option>
-                                              <option value=1 selected=true >Đã xử lý</option>
-                                          </select>
-                                        </td>
-                                        `;
+          vipham_data += `<td>Đã xử lý</td>`;
         }
 
         vipham_data += `<td>
@@ -467,15 +437,15 @@ function ChiTietViPham(a, b) {
 }
 
 //update xu ly
-function UpdateTrangThaiViPham(a) {
+function UpdateTrangThaiViPham(a, b) {
   var vp_id = a;
   var vp_xuly_id = "slVP_TrangThai['" + vp_id + "']";
   var vp_xuly = Number(document.getElementById(vp_xuly_id).value);
-
+  var mt_id = b;
   $.ajax({
     url: "/vipham/updateXuLy",
     method: "POST",
-    data: JSON.stringify({ VP_ID: vp_id, VP_TRANGTHAI: vp_xuly }),
+    data: JSON.stringify({ VP_ID: vp_id, VP_TRANGTHAI: vp_xuly, MUONTRA_ID: mt_id }),
     contentType: "application/json",
     success: function() {
       alert("Đã cập nhật thành công xử lý vi phạm: " + vp_id);
