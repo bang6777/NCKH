@@ -1,6 +1,5 @@
 var viphamCtr = require("../controller/vipham_Ctr");
 var xeCtr = require("../controller/xe_Ctr");
-var muontraCtr = require("../controller/muontra_Ctr");
 
 exports.viewTaiKhoan = function(req, res) {
   var TK_ID = req.params.TK_ID;
@@ -34,23 +33,20 @@ exports.updateXuLy = function(req, res) {
     if (err) {
       console.log(err);
     } else {
-      //tìm id xe
-      viphamCtr.vipham_chitiet(VP_ID, MUONTRA_ID, function(err, data) {
-        {
-          if (err) console.log(err);
-          else {
-            xe_id = data.muontra.xeXEID;
-            //cập nhật trạng thái xe = 0
-            xeCtr.updateTrangThaiXe(xe_id, 0, function(err, data) {
-              //kết thúc mượn trả
-              muontraCtr.updateTra_ThoiGian(MUONTRA_ID, function(err, data) {
-                res.json(data);
-              });
-            });
-          }
-        }
-      });
+      // //tìm id xe
+      // viphamCtr.vipham_chitiet(VP_ID, MUONTRA_ID, function(err, data) {
+      //   {
+      //     if (err) console.log(err);
+      //     else {
+      //       xe_id = data.muontra.xeXEID;
+      //       //cập nhật trạng thái xe = 0
+      //       xeCtr.updateTrangThaiXe(xe_id, 0, function(err, data) {
+      res.json(data);
+      // });
     }
+    // }
+    // });
+    // }
   });
 };
 

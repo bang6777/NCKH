@@ -70,7 +70,17 @@ function GetAllViPham() {
                                         </td>
                                         `;
         } else if (vipham.VP_TRANGTHAI == 1) {
-          vipham_data += `<td>Đã xử lý</td>`;
+          vipham_data += `<td>
+                            <select
+                              id="slVP_TrangThai['${vipham.VP_ID}']"
+                              class="form-control form-control-sm"
+                              onchange="UpdateTrangThaiViPham('${vipham.VP_ID}')"
+                            >
+                                <option value=0>Chưa xử lý</option>
+                                <option value=1 selected=true>Đã xử lý</option>
+                            </select>
+                          </td>
+                          `;
         }
 
         vipham_data += `<td>   
@@ -196,9 +206,29 @@ function GetDaXuLy() {
                             <td>${formatDate(vipham.VP_THOIGIAN)}</td>
                           `;
         if (vipham.VP_TRANGTHAI == 0) {
-          vipham_data += `<td>Chưa xử lý</td>`;
+          vipham_data += `<td>
+                            <select
+                              id="slVP_TrangThai['${vipham.VP_ID}']"
+                              class="form-control form-control-sm"
+                              onchange="UpdateTrangThaiViPham('${vipham.VP_ID}')"
+                            >
+                                <option value=0 selected=true>Chưa xử lý</option>
+                                <option value=1>Đã xử lý</option>
+                            </select>
+                          </td>
+                          `;
         } else if (vipham.VP_TRANGTHAI == 1) {
-          vipham_data += `<td>Đã xử lý</td>`;
+          vipham_data += `<td>
+                            <select
+                              id="slVP_TrangThai['${vipham.VP_ID}']"
+                              class="form-control form-control-sm"
+                              onchange="UpdateTrangThaiViPham('${vipham.VP_ID}')"
+                            >
+                                <option value=0>Chưa xử lý</option>
+                                <option value=1 selected=true>Đã xử lý</option>
+                            </select>
+                          </td>
+                          `;
         }
 
         vipham_data += `<td>
