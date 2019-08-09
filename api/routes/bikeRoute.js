@@ -242,7 +242,10 @@ router.post("/taikhoan/update", function(req, res) {
   });
 });
 
-// ---------------------------------------------Test
+//get TK đang đăng nhập
+router.get("/taikhoan-login", checkLoginServer, function(req, res) {
+  res.json(req.user.TK_HOTEN);
+});
 
 //-------------Xe
 //render trang xe
