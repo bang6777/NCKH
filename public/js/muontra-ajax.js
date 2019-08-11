@@ -120,8 +120,6 @@ function getChuaTra() {
 
 function ChiTietMuonTra(a) {
   var mt_id = a;
-  var vtMuon = "";
-  var vtTra = "";
 
   $.ajax({
     type: "POST",

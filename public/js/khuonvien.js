@@ -17,7 +17,7 @@ var xe_id = 0;
 //load map
 function myMap() {
   var mapProp = {
-    center: new google.maps.LatLng(10.0299337, 105.7684266),
+    center: new google.maps.LatLng(10.029933, 105.768426),
     zoom: 16
   };
   map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
@@ -180,8 +180,8 @@ async function Save() {
     for (var i = 0; i < markers.length; i++) {
       markers[i].setDraggable(false);
       if (markers[i].label != "null") {
-        kv_lat = markers[i].position.lat();
-        kv_lng = markers[i].position.lng();
+        kv_lat = markers[i].position.lat().toFixed(6);
+        kv_lng = markers[i].position.lng().toFixed(6);
 
         //ajax luu
         await $.ajax({
@@ -356,7 +356,7 @@ function createLatLng(coordString) {
 async function Reload() {
   await setInterval(function() {
     GetViTri();
-  }, 10000);
+  }, 2000);
 }
 
 //Ham

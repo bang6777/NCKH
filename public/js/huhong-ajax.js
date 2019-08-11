@@ -27,9 +27,7 @@ function GetAllHuHong() {
                             <td>${huhong.xeXEID}</td>
                             <td>${huhong.HH_MOTA}`;
         if (huhong.HH_MOTA == "Ổ khóa bị hư") {
-          huhong_data += `<i class="fa fa-check-square fa-lg mx-3" title="Kết thúc mượn trả" onclick="KetThucMuonTra('${huhong.taikhoanTKID}','${
-            huhong.HH_ID
-          }')" >
+          huhong_data += `<i class="fa fa-check-square fa-lg mx-3" title="Kết thúc mượn trả" onclick="KetThucMuonTra('${huhong.taikhoanTKID}')" >
           </i></td>`;
         }
         huhong_data += `<td>${formatDate(huhong.HH_THOIGIAN)}</td>`;
@@ -134,12 +132,10 @@ function GetHHDangCho() {
                             </td>
                             
                             <td>${huhong.xeXEID}</td>
-                            <td>${huhong.HH_MOTA}`;
+                            <<td>${huhong.HH_MOTA}`;
         if (huhong.HH_MOTA == "Ổ khóa bị hư") {
-          huhong_data += `<i class="fa fa-check-square fa-lg mx-3" title="Kết thúc mượn trả" onclick="KetThucMuonTra('${huhong.taikhoanTKID}','${
-            huhong.HH_ID
-          }')" >
-          </i></td>`;
+          huhong_data += `<i class="fa fa-check-square fa-lg mx-3" title="Kết thúc mượn trả" onclick="KetThucMuonTra('${huhong.taikhoanTKID}')" >
+                              </i></td>`;
         }
         huhong_data += `<td>${formatDate(huhong.HH_THOIGIAN)}</td>`;
         switch (huhong.HH_TRANGTHAI) {
@@ -238,8 +234,12 @@ function GetHHDangSua() {
                                 <td>${huhong.HH_ID}</td>
                                 <td>${huhong.taikhoanTKID}</td>
                                 <td>${huhong.xeXEID}</td>
-                                <td>${huhong.HH_MOTA}</td>
-                                <td>${formatDate(huhong.HH_THOIGIAN)}</td>`;
+                                <td>${huhong.HH_MOTA}`;
+        if (huhong.HH_MOTA == "Ổ khóa bị hư") {
+          huhong_data += `<i class="fa fa-check-square fa-lg mx-3" title="Kết thúc mượn trả" onclick="KetThucMuonTra('${huhong.taikhoanTKID}')" >
+          </i></td>`;
+        }
+        huhong_data += `<td>${formatDate(huhong.HH_THOIGIAN)}</td>`;
         switch (huhong.HH_TRANGTHAI) {
           case 0: {
             huhong_data += `<td>
@@ -337,7 +337,11 @@ function GetHHDaSua() {
                                 <td>${huhong.HH_ID}</td>
                                 <td>${huhong.taikhoanTKID}</td>
                                 <td>${huhong.xeXEID}</td>
-                                <td>${huhong.HH_MOTA}</td>`;
+                                <td>${huhong.HH_MOTA}`;
+        if (huhong.HH_MOTA == "Ổ khóa bị hư") {
+          huhong_data += `<i class="fa fa-check-square fa-lg mx-3" title="Kết thúc mượn trả" onclick="KetThucMuonTra('${huhong.taikhoanTKID}')" >
+          </i></td>`;
+        }
         huhong_data += `<td>${formatDate(huhong.HH_THOIGIAN)}</td>`;
         switch (huhong.HH_TRANGTHAI) {
           case 0: {
@@ -436,9 +440,12 @@ function GetHHBaoSai() {
                                 <td>${huhong.HH_ID}</td>
                                 <td>${huhong.taikhoanTKID}</td>
                                 <td>${huhong.xeXEID}</td>
-                                <td>${huhong.HH_MOTA}</td>
-                                <td>${formatDate(huhong.HH_THOIGIAN)}</td>
-                          `;
+                                <<td>${huhong.HH_MOTA}`;
+        if (huhong.HH_MOTA == "Ổ khóa bị hư") {
+          huhong_data += `<i class="fa fa-check-square fa-lg mx-3" title="Kết thúc mượn trả" onclick="KetThucMuonTra('${huhong.taikhoanTKID}')" >
+                                  </i></td>`;
+        }
+        huhong_data += `<td>${formatDate(huhong.HH_THOIGIAN)}</td>`;
         switch (huhong.HH_TRANGTHAI) {
           case 0: {
             huhong_data += `<td>
@@ -685,7 +692,7 @@ function formatDate(timestamp) {
   return str;
 }
 
-function KetThucMuonTra(tk_id, hh_id) {
+function KetThucMuonTra(tk_id) {
   var ans = confirm("Bạn có muốn kết thúc lượt mượn trả của : " + tk_id + "?");
   if (ans == true) {
     //ket thuc muon tra
@@ -693,23 +700,12 @@ function KetThucMuonTra(tk_id, hh_id) {
       type: "PUT",
       url: "/muontra/" + tk_id,
       contentType: "application/json",
-      success: function() {
-        alert("Đã kết thúc mượn trả!");
-        //set trang thai hu hong = 2
-        $.ajax({
-          url: "/huhong/update-trangthai/" + hh_id,
-          method: "POST",
-          data: JSON.stringify({ HH_ID: hh_id, HH_TRANGTHAI: 2 }),
-          contentType: "application/json",
-          success: function() {
-            alert("Đã cập nhật thành công trạng thái của hư hỏng: " + hh_id);
-            LoadView();
-          },
-          error: function(e) {
-            console.log(e);
-            alert("Đã có lỗi");
-          }
-        });
+      success: function(res) {
+        if (res == "no") {
+          alert("Lượt mượn trả đã được kết thúc trước đó!");
+        } else {
+          alert("Kết thúc lượt mượn trả thành công!");
+        }
       },
       error: function(e) {
         console.log(e);

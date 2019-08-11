@@ -82,7 +82,7 @@ router.get("/", checkLoginServer, function(req, res) {
 
 //----Danh mục
 //------------- Tài Khoản
-router.get("/taikhoan", function(req, res) {
+router.get("/taikhoan", checkLoginServer, function(req, res) {
   taikhoan.allUser(function(err, data) {
     res.render("./../api/views/taikhoan", { taikhoan: data });
   });
@@ -454,24 +454,26 @@ router.put("/xe/update", function(req, res) {
         res.json({ message: "ERR1" });
       } else {
         //get tọa độ xe
-        var p = { x: XE_LAT, y: XE_LNG };
+        var p = { x: XE_LNG, y: XE_LAT };
         //kiem tra Is inside
         khuonvien.getLatLng(function(err, data) {
           if (err) {
             console.log(err);
           } else {
             var kq;
-
+            var epsilon = 0.000001;
+            var inf = 10000;
             var i,
               polygon = [];
 
             for (i = 0; i < data.length; i++) {
-              polygon.push({ x: data[i].KV_LAT, y: data[i].KV_LNG });
+              polygon.push({ x: data[i].KV_LNG, y: data[i].KV_LAT });
             }
+
             var n = polygon.length;
 
             // Create a point for line segment from p to infinite
-            var extreme = { x: 10.0305035, y: 105.766663 };
+            var extreme = { x: inf, y: p.y };
 
             // Count intersections of the above line with sides of polygon
             var count = 0,
@@ -479,30 +481,39 @@ router.put("/xe/update", function(req, res) {
             do {
               var next = (i + 1) % n;
 
-              // Check if the line segment from 'p' to 'extreme' intersects
-              // with the line segment from 'polygon[i]' to 'polygon[next]'
-              if (doIntersect(polygon[i], polygon[next], p, extreme)) {
-                // If the point 'p' is colinear with line segment 'i-next',
-                // then check if it lies on segment. If it lies, return true,
-                // otherwise false
+              //neu trung voi dinh
+              if ((p.y == polygon[i].y && p.x == polygon[i].x) || (p.y == polygon[next].y && p.x == polygon[next].x)) {
+                console.log("trung dinh");
+                kq = true;
+                break;
+              }
 
-                // cout << (orientation(polygon[i], p, polygon[next]));
-                if (orientation(polygon[i], p, polygon[next]) == 0) {
-                  kq = onSegment(polygon[i], p, polygon[next]);
+              //neu trung voi canh
+              else {
+                if (p.y == polygon[i].y || p.y == polygon[next].y) {
+                  p.y = p.y + epsilon;
                 }
+                // Check if the line segment from 'p' to 'extreme' intersects
+                // with the line segment from 'polygon[i]' to 'polygon[next]'
+                if (doIntersect(polygon[i], polygon[next], p, extreme)) {
+                  // If the point 'p' is colinear with line segment 'i-next',
+                  // then check if it lies on segment. If it lies, return true,
+                  // otherwise false
 
-                count++;
+                  // cout << (orientation(polygon[i], p, polygon[next]));
+                  if (orientation(polygon[i], p, polygon[next]) == 0) {
+                    kq = onSegment(polygon[i], p, polygon[next]);
+                  }
+
+                  count++;
+                }
+                i = next;
               }
-              if ((onSegment(extreme, polygon[i], p) == 0 || onSegment(extreme, polygon[next], p) == 0) && count == 2) {
-                kq = count % 2 == 1;
-              }
-              i = next;
+              // Return true if count is odd, false otherwise
+              kq = count % 2 == 1; // Same as (count%2 == 1)
             } while (i != 0);
-
-            // Return true if count is odd, false otherwise
-            kq = count % 2 == 0; // Same as (count%2 == 1)
           }
-
+          
           //nếu kq = false => xe ở ngoài => thêm vp
           if (kq == false) {
             xe.updateTrangThai(XE_ID, XE_IMEI, 3, function(err, data) {
@@ -511,7 +522,7 @@ router.put("/xe/update", function(req, res) {
             });
             checkloi.findMuontraID_Xe(XE_ID, function(err, data) {
               if (err) {
-                console.log(err + "aa");
+                console.log(err);
               } else {
                 var mt_id = data.MUONTRA_ID;
                 var vp_lat = XE_LAT;

@@ -30,8 +30,8 @@ exports.KetThucMuonTra = function(req, res) {
   muontraCtr.findMuontraID_TK(TK_ID, function(err, mt_id) {
     if (err) {
       console.log(err);
+      res.json(err);
     } else {
-      // console.log("MTID: " + mt_id.MUONTRA_ID);
       muontraCtr.updateTra_ThoiGian(mt_id.MUONTRA_ID, function(err, data) {
         res.json(data);
       });
