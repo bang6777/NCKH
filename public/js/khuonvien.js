@@ -69,8 +69,10 @@ function drawKhuonVien(coordinates) {
     //editable : true
   });
   polygon.setMap(map);
-  // khuonvien = polygon;
-  // alert("da ve");
+
+  //xem thong tin cac dinh
+  polygon.addListener("click", showArrays);
+  infoWindow = new google.maps.InfoWindow();
 }
 
 // get toa do
@@ -367,4 +369,23 @@ function Resetmap() {
   }
   arrxe = [];
   xe_id = 0;
+}
+
+function showArrays(event) {
+  var contentString =
+    "<b>KHUÔN VIÊN TRƯỜNG ĐẠI HỌC CẦN THƠ:</b><br>" +
+    "Tọa độ vừa click: <br>" +
+    event.latLng.lat().toFixed(6) +
+    ", " +
+    event.latLng.lng().toFixed(6) +
+    "<br>";
+
+  for (var i = 0; i < coordinates.length; i++) {
+    contentString += "<br>" + "Tọa độ " + i + ": " + coordinates[i].lat + ", " + coordinates[i].lng;
+  }
+
+  infoWindow.setContent(contentString);
+  infoWindow.setPosition(event.latLng);
+
+  infoWindow.open(map);
 }
