@@ -13,7 +13,8 @@ exports.initDatabase = () => {
     XE_NAMSANXUAT: "2019",
     XE_GHICHU: "XE_GHICHU",
     XE_LAT: "10.0305035",
-    XE_LNG: "105.766663"
+    XE_LNG: "105.766663",
+    XE_TRANGTHAI: 1
   });
   xe_m.create({
     XE_IMEI: "352068063702873",
@@ -27,7 +28,8 @@ exports.initDatabase = () => {
     XE_NAMSANXUAT: "2019",
     XE_GHICHU: "XE_GHICHU",
     XE_LAT: "10.0302499",
-    XE_LNG: "105.766663"
+    XE_LNG: "105.766663",
+    XE_TRANGTHAI: 1
   });
   xe_m.create({
     XE_IMEI: "352068063702873",
@@ -40,14 +42,23 @@ exports.initDatabase = () => {
   loi_m.create({
     LOI_ID: 1,
     LOI_TEN: "Vượt khỏi khuôn viên",
-    LOI_MOTA: "Phạt 100.000 - 500.000VND khi vượt khỏi khuôn viên trường"
+    LOI_MOTA: "Ghi nhận vi phạm vào HTQL và có biện pháp xử lý"
   });
   loi_m.create({
     LOI_ID: 2,
-    LOI_TEN: "Đậu xe không đúng nơi qui định",
-    LOI_MOTA: "Phạt 50.000 - 100.000VND khi vượt khỏi khuôn viên trường"
+    LOI_TEN: "Mượn quá thời gian cho phép",
+    LOI_MOTA: "Gửi cảnh báo đến người dùng"
   });
   //   ------------------------Tài khoản ------------------
+  TK_m.create({
+    TK_ID: "admin",
+    TK_PASSWORD: "$2a$10$I3Z8uaCxjyDExJWKmqVu..MpuQJuFMZFbR2HHBpWCN2Tw6g3CVVgO",
+    TK_HOTEN: "Admin",
+    TK_QUYEN: "Quản trị",
+    TK_DONVI: "CNTT & TT",
+    TK_LOAI: "Giảng viên",
+    TK_HIEULUC: 1
+  });
   TK_m.create({
     TK_ID: "B1401088",
     TK_PASSWORD: "$2a$10$I3Z8uaCxjyDExJWKmqVu..MpuQJuFMZFbR2HHBpWCN2Tw6g3CVVgO",
@@ -77,56 +88,70 @@ exports.initDatabase = () => {
   });
   //   ------------------------Mượn trả ------------------
   MT_m.create({
-    taikhoanTKID: "B1601088",
+    taikhoanTKID: "B1501088",
     xeXEID: 1,
-    TRA_THOIGIAN: new Date(2019, 9, 20),
-    MUON_VITRI_LAT: 10.030990184893133,
-    MUON_VITRI_LNG: 105.76976502229843,
-    TRA_VITRI_LAT: 10.029088509604737,
-    TRA_VITRI_LNG: 105.76976502229843
+    TRA_THOIGIAN: new Date(2019, 9, 15),
+    MUON_VITRI_LAT: 10.03099,
+    MUON_VITRI_LNG: 105.769765,
+    TRA_VITRI_LAT: 10.029088,
+    TRA_VITRI_LNG: 105.769765
   });
   MT_m.create({
     taikhoanTKID: "B1501088",
-    xeXEID: 2
+    xeXEID: 3,
+    MUON_VITRI_LAT: 10.03099,
+    MUON_VITRI_LNG: 105.769765
   });
   MT_m.create({
     taikhoanTKID: "B1401088",
     xeXEID: 1,
-    TRA_THOIGIAN: new Date(2019, 9, 20),
-    MUON_VITRI_LAT: 10.030990184893133,
-    MUON_VITRI_LNG: 105.76976502229843,
-    TRA_VITRI_LAT: 10.029088509604737,
-    TRA_VITRI_LNG: 105.76976502229843
+    TRA_THOIGIAN: new Date(2019, 9, 15),
+    MUON_VITRI_LAT: 10.03099,
+    MUON_VITRI_LNG: 105.769765,
+    TRA_VITRI_LAT: 10.029088,
+    TRA_VITRI_LNG: 105.769765
   });
   MT_m.create({
     taikhoanTKID: "B1401088",
     xeXEID: 2,
-    TRA_THOIGIAN: new Date(2019, 9, 20)
+    MUON_VITRI_LAT: 10.03099,
+    MUON_VITRI_LNG: 105.769765,
+    TRA_VITRI_LAT: 10.029088,
+    TRA_VITRI_LNG: 105.769765,
+    TRA_THOIGIAN: new Date(2019, 9, 15)
   });
   MT_m.create({
-    taikhoanTKID: "B1401088",
-    xeXEID: 1
+    taikhoanTKID: "B1606935",
+    xeXEID: 1,
+    MUON_VITRI_LAT: 10.03099,
+    MUON_VITRI_LNG: 105.769765
   });
   //   ------------------------ Vi Phạm ------------------
   VP_m.create({
     muontraMUONTRAID: 1,
     loiLOIID: 1,
     VP_TRANGTHAI: 1,
-    VP_LAT: 10.029088509604737,
-    VP_LNG: 105.76976502229843
+    VP_LAT: 10.029088,
+    VP_LNG: 105.769765
   });
   VP_m.create({
     muontraMUONTRAID: 2,
-    loiLOIID: 2
+    loiLOIID: 2,
+    VP_LAT: 10.029088,
+    VP_LNG: 105.769765
   });
   VP_m.create({
     muontraMUONTRAID: 3,
-    loiLOIID: 2
+    loiLOIID: 2,
+    VP_LAT: 10.029088,
+    VP_LNG: 105.769765
   });
   VP_m.create({
     muontraMUONTRAID: 4,
     loiLOIID: 1,
-    VP_TRANGTHAI: 1
+    VP_TRANGTHAI: 1,
+    VP_LAT: 10.029088,
+    VP_LNG: 105.769765
   });
   //   ------------------------ Hu Hỏng ------------------
   HH_m.create({
@@ -146,5 +171,11 @@ exports.initDatabase = () => {
     xeXEID: 1,
     HH_MOTA: "Kẹt thắng",
     HH_TRANGTHAI: 2
+  });
+  HH_m.create({
+    taikhoanTKID: "B1606935",
+    xeXEID: 1,
+    HH_MOTA: "Ổ khóa bị hư",
+    HH_TRANGTHAI: 0
   });
 };

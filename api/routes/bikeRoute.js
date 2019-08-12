@@ -513,7 +513,7 @@ router.put("/xe/update", function(req, res) {
               kq = count % 2 == 1; // Same as (count%2 == 1)
             } while (i != 0);
           }
-          
+
           //nếu kq = false => xe ở ngoài => thêm vp
           if (kq == false) {
             xe.updateTrangThai(XE_ID, XE_IMEI, 3, function(err, data) {
@@ -839,7 +839,7 @@ router.post("/khuonvien/", checkLoginServer, function(req, res) {
   var KV_LAT = req.body.KV_LAT;
   var KV_LNG = req.body.KV_LNG;
 
-  khuonvien.addKV(KV_LAT, KV_LNG, 1, function(err, data) {
+  khuonvien.addKV(KV_LAT, KV_LNG, 1, req.user.TK_ID, function(err, data) {
     if (err) {
       res.status(404).json({ message: "ERR!" });
     } else {

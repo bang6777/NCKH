@@ -5,6 +5,7 @@ const huhong_Model = require("../Model/huhong_Model");
 const vipham_Model = require("../Model/vipham_Model");
 const xe_Model = require("../Model/xe_Model");
 const loi_Model = require("../Model/loi_Model");
+const khuonvien_Model = require("../Model/khuonvien_Model");
 
 const taikhoan_Model = db.define("taikhoan", {
   // attributes
@@ -74,6 +75,10 @@ loi_Model.hasMany(vipham_Model);
 muontra_Model.hasMany(vipham_Model);
 vipham_Model.belongsTo(loi_Model);
 vipham_Model.belongsTo(muontra_Model);
+
+//tai khoan - khuon vien
+taikhoan_Model.hasMany(khuonvien_Model);
+khuonvien_Model.belongsTo(taikhoan_Model);
 
 db.sync();
 module.exports = taikhoan_Model;

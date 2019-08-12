@@ -18,7 +18,7 @@ function AddTK() {
   var tk_quyen = $("#slTK_Quyen_add").val();
   var tk_loai = $("#slTK_Loai_add").val();
 
-  if (tk_id == "" || tk_hoten == "" || tk_password == "" || tk_donvi == "" || tk_quyen == "" || tk_loai == "") {
+  if (tk_id == "" || tk_hoten == "" || tk_password == "" || tk_donvi == "-1" || tk_quyen == "-1" || tk_loai == "-1") {
     alert("Vui lòng điền đầy đủ các trường!");
   } else {
     $.ajax({
@@ -150,7 +150,7 @@ function UpdateInfo() {
   var tk_donvi = $("#slTK_DonVi_update").val();
   var tk_quyen = $("#slTK_Quyen_update").val();
   var tk_loai = $("#slTK_Loai_update").val();
-  if (tk_id == "" || tk_hoten == "" || tk_donvi == "" || tk_quyen == "" || tk_loai == "") {
+  if (tk_id == "" || tk_hoten == "" || tk_donvi == "-1" || tk_quyen == "-1" || tk_loai == "-1") {
     alert("Vui lòng điền đầy đủ các trường!");
   } else {
     $.ajax({
@@ -467,8 +467,8 @@ function TK_MuonTra(a) {
         tk_data += `<tr>
           <td>${tk.MUONTRA_ID}</td>
           <td>${tk.xeXEID}</td>
-          <td>${tk.MUON_THOIGIAN}</td>
-          <td>${tk.TRA_THOIGIAN}</td>
+          <td>${formatDate(tk.MUON_THOIGIAN)}</td>
+          <td>${formatDate(tk.TRA_THOIGIAN)}</td>
         </tr>`;
         sl++;
       });
@@ -500,7 +500,7 @@ function TK_ViPham(a) {
           <td>${tk.VP_ID}</td>
           <td>${tk.muontraMUONTRAID}</td>
           <td id="id_loi[${tk.VP_ID}]"></td>
-          <td>${tk.VP_THOIGIAN}</td>
+          <td>${formatDate(tk.VP_THOIGIAN)}</td>
         <\tr>`;
         $.ajax({
           url: "/loi/" + tk.loiLOIID,
@@ -550,7 +550,7 @@ function TK_HuHong(a) {
           <td>${tk.HH_ID}</td>
           <td>${tk.xeXEID}</td>
           <td>${tk.HH_MOTA}</td>
-          <td>${tk.HH_THOIGIAN}</td>
+          <td>${formatDate(tk.HH_THOIGIAN)}</td>
         </tr>`;
       });
       tb.append(tk_data);
@@ -629,4 +629,25 @@ function LoadDataTable() {
 
     lengthMenu: [[5, 10, 15, 20, 25, -1], [5, 10, 15, 20, 25, "Tất cả"]]
   });
+}
+
+//format Date
+function formatDate(timestamp) {
+  if (timestamp == null) return "";
+  date = new Date(Date.parse(timestamp));
+
+  var month = date.getMonth() + 1;
+  var day = date.getDate();
+  var hour = date.getHours();
+  var min = date.getMinutes();
+  var sec = date.getSeconds();
+
+  month = (month < 10 ? "0" : "") + month;
+  day = (day < 10 ? "0" : "") + day;
+  hour = (hour < 10 ? "0" : "") + hour;
+  min = (min < 10 ? "0" : "") + min;
+  sec = (sec < 10 ? "0" : "") + sec;
+  var str = day + "-" + month + "-" + date.getFullYear() + " " + hour + " giờ " + min + " phút " + sec + " giây";
+
+  return str;
 }

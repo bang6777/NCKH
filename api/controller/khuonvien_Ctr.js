@@ -14,12 +14,13 @@ exports.allToaDo = cb => {
     });
 };
 
-exports.addKV = (KV_LAT, KV_LNG, KV_TRANGTHAI, cb) => {
+exports.addKV = (KV_LAT, KV_LNG, KV_TRANGTHAI, TK_ID, cb) => {
   khuonvien_M
     .create({
       KV_LAT: KV_LAT,
       KV_LNG: KV_LNG,
-      KV_TRANGTHAI: KV_TRANGTHAI
+      KV_TRANGTHAI: KV_TRANGTHAI,
+      taikhoanTKID: TK_ID
     })
     .then(kv => {
       console.log("Khuon vien da add:");

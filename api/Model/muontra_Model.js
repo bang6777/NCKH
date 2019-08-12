@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 const taikhoan = require("./taikhoan_Model");
 const xedap = require("./xe_Model");
 const db = require("../Config/db");
-const sequelizePaginate = require('sequelize-paginate')
+const sequelizePaginate = require("sequelize-paginate");
 
 const muontra_Model = db.define("muontra", {
   MUONTRA_ID: {

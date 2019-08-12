@@ -207,8 +207,8 @@ function XE_MuonTra(a) {
         xe_data += `<tr>
           <td>${xe.MUONTRA_ID}</td>
           <td>${xe.taikhoanTKID}</td>
-          <td>${xe.MUON_THOIGIAN}</td>
-          <td>${xe.TRA_THOIGIAN}</td>
+          <td>${formatDate(xe.MUON_THOIGIAN)}</td>
+          <td>${formatDate(xe.TRA_THOIGIAN)}</td>
         </tr>`;
         sl++;
       });
@@ -240,7 +240,7 @@ function XE_HuHong(a) {
           <td>${xe.HH_ID}</td>
           <td>${xe.taikhoanTKID}</td>
           <td>${xe.HH_MOTA}</td>
-          <td>${xe.HH_THOIGIAN}</td>
+          <td>${formatDate(xe.HH_THOIGIAN)}</td>
         </tr>`;
       });
       tb.append(xe_data);
@@ -274,7 +274,7 @@ async function Xe_ViPham(a) {
           <td>${xe.muontraMUONTRAID}</td>
           <td id="id_loi[${xe.VP_ID}]"></td>
           
-          <td>${xe.VP_THOIGIAN}</td>
+          <td>${formatDate(xe.VP_THOIGIAN)}</td>
         <\tr>`;
         $.ajax({
           url: "/loi/" + xe.loiLOIID,
@@ -328,4 +328,25 @@ function LoadDataTable() {
     },
     lengthMenu: [[5, 10, 15, 20, 25, -1], [5, 10, 15, 20, 25, "Tất cả"]]
   });
+}
+
+//format Date
+function formatDate(timestamp) {
+  if (timestamp == null) return "";
+  date = new Date(Date.parse(timestamp));
+
+  var month = date.getMonth() + 1;
+  var day = date.getDate();
+  var hour = date.getHours();
+  var min = date.getMinutes();
+  var sec = date.getSeconds();
+
+  month = (month < 10 ? "0" : "") + month;
+  day = (day < 10 ? "0" : "") + day;
+  hour = (hour < 10 ? "0" : "") + hour;
+  min = (min < 10 ? "0" : "") + min;
+  sec = (sec < 10 ? "0" : "") + sec;
+  var str = day + "-" + month + "-" + date.getFullYear() + " " + hour + " giờ " + min + " phút " + sec + " giây";
+
+  return str;
 }

@@ -276,11 +276,11 @@ function Load_ChiTietMuonTra(a) {
                     </tr>
                     <tr>
                       <td>Thời gian mượn</td>
-                      <td>${mt.MUON_THOIGIAN}</td>
+                      <td>${formatDate(mt.MUON_THOIGIAN)}</td>
                     </tr>
                     <tr>
                       <td>Thời gian trả</td>
-                      <td>${mt.TRA_THOIGIAN}</td>
+                      <td>${formatDate(mt.TRA_THOIGIAN)}</td>
                     </tr>
                     `;
       });
