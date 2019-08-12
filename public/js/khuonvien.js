@@ -234,7 +234,7 @@ function clearMarkers() {
   markers = [];
   coordinates = [];
   id = 0;
-  alert("da clear");
+  alert("Đã xóa tất cả marker!");
 }
 
 function setMapOnAll(map) {
