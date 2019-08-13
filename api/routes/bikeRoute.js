@@ -448,7 +448,7 @@ router.put("/xe/update", function(req, res) {
   var XE_LAT = req.body.XE_LAT;
   var XE_LNG = req.body.XE_LNG;
   var XE_IMEI = req.body.XE_IMEI;
-  if (XE_ID && XE_IMEI && XE_LAT && XE_LNG) {
+  if (XE_ID && XE_IMEI && XE_LAT && XE_LNG && XE_LAT != 0 && XE_LNG != 0) {
     xe.updateXe(XE_ID, XE_IMEI, XE_LAT, XE_LNG, function(err, data) {
       if (err) {
         res.json({ message: "ERR1" });
