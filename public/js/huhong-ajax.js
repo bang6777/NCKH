@@ -26,7 +26,11 @@ function GetAllHuHong() {
                             
                             <td>${huhong.xeXEID}</td>
                             <td>${huhong.HH_MOTA}`;
-        if (huhong.HH_MOTA == "Không khóa được xe") {
+        if (
+          huhong.HH_MOTA == "Không khóa được xe" ||
+          huhong.HH_MOTA == "Không mở được ổ khóa" ||
+          huhong.HH_MOTA == "Đã khóa xe nhưng không cập nhật trên điện thoại"
+        ) {
           huhong_data += `<i class="fa fa-check-square fa-lg mx-3" title="Kết thúc mượn trả" onclick="KetThucMuonTra('${huhong.taikhoanTKID}')" >
           </i></td>`;
         }
@@ -133,7 +137,11 @@ function GetHHDangCho() {
                             
                             <td>${huhong.xeXEID}</td>
                             <<td>${huhong.HH_MOTA}`;
-        if (huhong.HH_MOTA == "Không khóa được xe") {
+        if (
+          huhong.HH_MOTA == "Không khóa được xe" ||
+          huhong.HH_MOTA == "Không mở được ổ khóa" ||
+          huhong.HH_MOTA == "Đã khóa xe nhưng không cập nhật trên điện thoại"
+        ) {
           huhong_data += `<i class="fa fa-check-square fa-lg mx-3" title="Kết thúc mượn trả" onclick="KetThucMuonTra('${huhong.taikhoanTKID}')" >
                               </i></td>`;
         }
@@ -235,7 +243,11 @@ function GetHHDangSua() {
                                 <td>${huhong.taikhoanTKID}</td>
                                 <td>${huhong.xeXEID}</td>
                                 <td>${huhong.HH_MOTA}`;
-        if (huhong.HH_MOTA == "Không khóa được xe") {
+        if (
+          huhong.HH_MOTA == "Không khóa được xe" ||
+          huhong.HH_MOTA == "Không mở được ổ khóa" ||
+          huhong.HH_MOTA == "Đã khóa xe nhưng không cập nhật trên điện thoại"
+        ) {
           huhong_data += `<i class="fa fa-check-square fa-lg mx-3" title="Kết thúc mượn trả" onclick="KetThucMuonTra('${huhong.taikhoanTKID}')" >
           </i></td>`;
         }
@@ -338,7 +350,11 @@ function GetHHDaSua() {
                                 <td>${huhong.taikhoanTKID}</td>
                                 <td>${huhong.xeXEID}</td>
                                 <td>${huhong.HH_MOTA}`;
-        if (huhong.HH_MOTA == "Không khóa được xe") {
+        if (
+          huhong.HH_MOTA == "Không khóa được xe" ||
+          huhong.HH_MOTA == "Không mở được ổ khóa" ||
+          huhong.HH_MOTA == "Đã khóa xe nhưng không cập nhật trên điện thoại"
+        ) {
           huhong_data += `<i class="fa fa-check-square fa-lg mx-3" title="Kết thúc mượn trả" onclick="KetThucMuonTra('${huhong.taikhoanTKID}')" >
           </i></td>`;
         }
@@ -441,7 +457,11 @@ function GetHHBaoSai() {
                                 <td>${huhong.taikhoanTKID}</td>
                                 <td>${huhong.xeXEID}</td>
                                 <<td>${huhong.HH_MOTA}`;
-        if (huhong.HH_MOTA == "Không khóa được xe") {
+        if (
+          huhong.HH_MOTA == "Không khóa được xe" ||
+          huhong.HH_MOTA == "Không mở được ổ khóa" ||
+          huhong.HH_MOTA == "Đã khóa xe nhưng không cập nhật trên điện thoại"
+        ) {
           huhong_data += `<i class="fa fa-check-square fa-lg mx-3" title="Kết thúc mượn trả" onclick="KetThucMuonTra('${huhong.taikhoanTKID}')" >
                                   </i></td>`;
         }
