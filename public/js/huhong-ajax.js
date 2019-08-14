@@ -240,7 +240,8 @@ function GetHHDangSua() {
       $.each(response, function(i, huhong) {
         huhong_data += `<tr>
                                 <td>${huhong.HH_ID}</td>
-                                <td>${huhong.taikhoanTKID}</td>
+                                <td class="chitiet"><a onclick="LoadTK('${huhong.taikhoanTKID}')" data-toggle="modal" data-target="#ChiTietTK">
+                                ${huhong.taikhoanTKID} </a></td>
                                 <td>${huhong.xeXEID}</td>
                                 <td>${huhong.HH_MOTA}`;
         if (
@@ -347,7 +348,8 @@ function GetHHDaSua() {
       $.each(response, function(i, huhong) {
         huhong_data += `<tr>
                                 <td>${huhong.HH_ID}</td>
-                                <td>${huhong.taikhoanTKID}</td>
+                                <td class="chitiet"><a onclick="LoadTK('${huhong.taikhoanTKID}')" data-toggle="modal" data-target="#ChiTietTK">
+                                ${huhong.taikhoanTKID} </a></td>
                                 <td>${huhong.xeXEID}</td>
                                 <td>${huhong.HH_MOTA}`;
         if (
@@ -454,7 +456,8 @@ function GetHHBaoSai() {
       $.each(response, function(i, huhong) {
         huhong_data += `<tr>
                                 <td>${huhong.HH_ID}</td>
-                                <td>${huhong.taikhoanTKID}</td>
+                                <td class="chitiet"><a onclick="LoadTK('${huhong.taikhoanTKID}')" data-toggle="modal" data-target="#ChiTietTK">
+                                ${huhong.taikhoanTKID} </a></td>
                                 <td>${huhong.xeXEID}</td>
                                 <<td>${huhong.HH_MOTA}`;
         if (
