@@ -179,6 +179,7 @@ router.get("/api/xe", function (req, res) {
 //     res.status(200).json(data);
 //   });
 // });
+
 router.get("/api/xe/:XE_ID", function (req, res) {
   var XE_ID = req.params.XE_ID;
   xe.findXeByID(XE_ID, function (err, data) {
