@@ -194,6 +194,7 @@ router.post("/api/xe/:XE_ID", passport.getPassport().authenticate('jwt', { sessi
   var XE_ID = req.params.XE_ID;
   var TK_ID = req.body.TK_ID;
   var HH_MOTA = req.body.HH_MOTA;
+  TK_ID = TK_ID.toUpperCase();
   if (req.user.TK_ID == TK_ID && XE_ID && HH_MOTA) {
     xe.baoHuHong(XE_ID, TK_ID, HH_MOTA, function (err, MT_result) {
       if (err) res.status(400).send(err);
