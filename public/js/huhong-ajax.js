@@ -26,7 +26,7 @@ function GetAllHuHong() {
                             
                             <td>${huhong.xeXEID}</td>
                             <td>${huhong.HH_MOTA}`;
-        if (huhong.HH_MOTA == "Ổ khóa bị hư") {
+        if (huhong.HH_MOTA == "Không khóa được xe") {
           huhong_data += `<i class="fa fa-check-square fa-lg mx-3" title="Kết thúc mượn trả" onclick="KetThucMuonTra('${huhong.taikhoanTKID}')" >
           </i></td>`;
         }
@@ -133,7 +133,7 @@ function GetHHDangCho() {
                             
                             <td>${huhong.xeXEID}</td>
                             <<td>${huhong.HH_MOTA}`;
-        if (huhong.HH_MOTA == "Ổ khóa bị hư") {
+        if (huhong.HH_MOTA == "Không khóa được xe") {
           huhong_data += `<i class="fa fa-check-square fa-lg mx-3" title="Kết thúc mượn trả" onclick="KetThucMuonTra('${huhong.taikhoanTKID}')" >
                               </i></td>`;
         }
@@ -235,7 +235,7 @@ function GetHHDangSua() {
                                 <td>${huhong.taikhoanTKID}</td>
                                 <td>${huhong.xeXEID}</td>
                                 <td>${huhong.HH_MOTA}`;
-        if (huhong.HH_MOTA == "Ổ khóa bị hư") {
+        if (huhong.HH_MOTA == "Không khóa được xe") {
           huhong_data += `<i class="fa fa-check-square fa-lg mx-3" title="Kết thúc mượn trả" onclick="KetThucMuonTra('${huhong.taikhoanTKID}')" >
           </i></td>`;
         }
@@ -338,7 +338,7 @@ function GetHHDaSua() {
                                 <td>${huhong.taikhoanTKID}</td>
                                 <td>${huhong.xeXEID}</td>
                                 <td>${huhong.HH_MOTA}`;
-        if (huhong.HH_MOTA == "Ổ khóa bị hư") {
+        if (huhong.HH_MOTA == "Không khóa được xe") {
           huhong_data += `<i class="fa fa-check-square fa-lg mx-3" title="Kết thúc mượn trả" onclick="KetThucMuonTra('${huhong.taikhoanTKID}')" >
           </i></td>`;
         }
@@ -441,7 +441,7 @@ function GetHHBaoSai() {
                                 <td>${huhong.taikhoanTKID}</td>
                                 <td>${huhong.xeXEID}</td>
                                 <<td>${huhong.HH_MOTA}`;
-        if (huhong.HH_MOTA == "Ổ khóa bị hư") {
+        if (huhong.HH_MOTA == "Không khóa được xe") {
           huhong_data += `<i class="fa fa-check-square fa-lg mx-3" title="Kết thúc mượn trả" onclick="KetThucMuonTra('${huhong.taikhoanTKID}')" >
                                   </i></td>`;
         }

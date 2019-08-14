@@ -569,7 +569,7 @@ router.put("/xe/update", function(req, res) {
       }
     });
   } else {
-    res.status(200).json("Yêu cầu không hợp lệ");
+    res.json({ message: "ERR1" });
   }
 });
 
