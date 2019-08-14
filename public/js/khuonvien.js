@@ -18,7 +18,8 @@ var xe_id = 0;
 function myMap() {
   var mapProp = {
     center: new google.maps.LatLng(10.029933, 105.768426),
-    zoom: 16
+    zoom: 16,
+    mapTypeId: "satellite"
   };
   map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
   load();
