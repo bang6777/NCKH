@@ -18,7 +18,7 @@ var checkloiRoute = require("./checkloi_Route");
 
 const jwt = require("jsonwebtoken");
 //Login
-router.get("/login", function (req, res) {
+router.get("/login", function(req, res) {
   if (req.isAuthenticated()) {
     res.redirect("/");
   } else {
@@ -57,7 +57,7 @@ router.post(
   // }
 );
 
-router.get("/signout", function (req, res) {
+router.get("/signout", function(req, res) {
   req.logout();
   res.redirect("/");
 });
@@ -71,7 +71,7 @@ router.get("/signout", function (req, res) {
 // });
 
 // Trang chủ
-router.get("/", checkLoginServer, function (req, res) {
+router.get("/", checkLoginServer, function(req, res) {
   // var sess = req.session;
   // if (req.session.TK_ID) {
   res.render("./../api/views/index");
@@ -82,14 +82,14 @@ router.get("/", checkLoginServer, function (req, res) {
 
 //----Danh mục
 //------------- Tài Khoản
-router.get("/taikhoan", checkLoginServer, function (req, res) {
-  taikhoan.allUser(function (err, data) {
+router.get("/taikhoan", checkLoginServer, function(req, res) {
+  taikhoan.allUser(function(err, data) {
     res.render("./../api/views/taikhoan", { taikhoan: data });
   });
 });
 
 //-----------add tài khoản
-router.post("/taikhoan", function (req, res, next) {
+router.post("/taikhoan", function(req, res, next) {
   var TK_ID = req.body.TK_ID;
   var TK_PASSWORD = req.body.TK_PASSWORD;
   var TK_HOTEN = req.body.TK_HOTEN;
@@ -116,7 +116,7 @@ router.post("/taikhoan", function (req, res, next) {
   if (TK_LOAI == null) {
     res.status(404).json({ message: "TK_LOAI null" });
   }
-  taikhoan.addUser(TK_ID, TK_PASSWORD, TK_HOTEN, TK_QUYEN, TK_DONVI, TK_LOAI, 1, function (err, data) {
+  taikhoan.addUser(TK_ID, TK_PASSWORD, TK_HOTEN, TK_QUYEN, TK_DONVI, TK_LOAI, 1, function(err, data) {
     if (err) {
       res.status(404).json({ message: "ERR!" });
     } else {
@@ -128,25 +128,25 @@ router.post("/taikhoan", function (req, res, next) {
 
 // ---------------------------------------------Test
 //get all TK
-router.get("/taikhoan/all", function (req, res) {
-  taikhoan.allUser(function (err, data) {
+router.get("/taikhoan/all", function(req, res) {
+  taikhoan.allUser(function(err, data) {
     res.status(200).json(data);
   });
 });
 
 //get 1 TK theo id
-router.post("/taikhoan/find", function (req, res) {
+router.post("/taikhoan/find", function(req, res) {
   var TK_ID = req.body.TK_ID;
-  taikhoan.findTKByPK(TK_ID, function (err, data) {
+  taikhoan.findTKByPK(TK_ID, function(err, data) {
     res.status(200).json(data);
   });
 });
 
 //cap nhat hieu luc
-router.post("/taikhoan/update-hieuluc/:TK_ID", function (req, res) {
+router.post("/taikhoan/update-hieuluc/:TK_ID", function(req, res) {
   var TK_ID = req.body.TK_ID;
   var TK_HIEULUC = req.body.TK_HIEULUC;
-  taikhoan.updateHieuLuc(TK_ID, TK_HIEULUC, function (err, data) {
+  taikhoan.updateHieuLuc(TK_ID, TK_HIEULUC, function(err, data) {
     if (err) {
       // res.status(404).json({ message: "ERR" });
       res.status(404).json(err.name);
@@ -158,13 +158,13 @@ router.post("/taikhoan/update-hieuluc/:TK_ID", function (req, res) {
 });
 
 //cap nhat thong tin
-router.post("/taikhoan/update/:TK_ID", function (req, res) {
+router.post("/taikhoan/update/:TK_ID", function(req, res) {
   var TK_ID = req.body.TK_ID;
   var TK_HOTEN = req.body.TK_HOTEN;
   var TK_DONVI = req.body.TK_DONVI;
   var TK_LOAI = req.body.TK_LOAI;
   var TK_QUYEN = req.body.TK_QUYEN;
-  taikhoan.updateUser(TK_ID, TK_HOTEN, TK_DONVI, TK_LOAI, TK_QUYEN, function (err, data) {
+  taikhoan.updateUser(TK_ID, TK_HOTEN, TK_DONVI, TK_LOAI, TK_QUYEN, function(err, data) {
     if (err) {
       res.status(404).json({ message: "ERR" });
     } else {
@@ -174,9 +174,9 @@ router.post("/taikhoan/update/:TK_ID", function (req, res) {
 });
 
 //xoa taikhoan
-router.post("/taikhoan/delete/:TK_ID", function (req, res) {
+router.post("/taikhoan/delete/:TK_ID", function(req, res) {
   var TK_ID = req.body.TK_ID;
-  taikhoan.deleteUser(TK_ID, function (err, data) {
+  taikhoan.deleteUser(TK_ID, function(err, data) {
     if (err.name == "SequelizeForeignKeyConstraintError") {
       // res.status(202).json(err.name);
       res.status(202).json("fk");
@@ -188,34 +188,34 @@ router.post("/taikhoan/delete/:TK_ID", function (req, res) {
 });
 
 //tai khoan con hieu luc
-router.get("/taikhoan/conhieuluc", function (req, res) {
-  taikhoan.getTKConHieuLuc(function (err, data) {
+router.get("/taikhoan/conhieuluc", function(req, res) {
+  taikhoan.getTKConHieuLuc(function(err, data) {
     res.status(200).json(data);
   });
 });
 
 //tai khoan vo hieu luc
-router.get("/taikhoan/vohieuluc", function (req, res) {
-  taikhoan.getTKVoHieuLuc(function (err, data) {
+router.get("/taikhoan/vohieuluc", function(req, res) {
+  taikhoan.getTKVoHieuLuc(function(err, data) {
     res.status(200).json(data);
   });
 });
 
 //search TK_ID
-router.get("/taikhoan/search/:id&:hieuluc1&:hieuluc2", function (req, res) {
+router.get("/taikhoan/search/:id&:hieuluc1&:hieuluc2", function(req, res) {
   var id = req.params.id;
   var hieuluc1 = req.params.hieuluc1;
   var hieuluc2 = req.params.hieuluc2;
-  taikhoan.searchTK_ID(id, hieuluc1, hieuluc2, function (err, data) {
+  taikhoan.searchTK_ID(id, hieuluc1, hieuluc2, function(err, data) {
     res.status(200).json(data);
   });
 });
 
 //cap nhat mat khau
-router.post("/taikhoan/updateMK/:TK_ID", function (req, res) {
+router.post("/taikhoan/updateMK/:TK_ID", function(req, res) {
   var TK_ID = req.body.TK_ID;
   var TK_PASSWORD = req.body.TK_PASSWORD;
-  taikhoan.updateMK(TK_ID, TK_PASSWORD, function (err, data) {
+  taikhoan.updateMK(TK_ID, TK_PASSWORD, function(err, data) {
     if (err) {
       res.status(404).json({ message: "ERR" });
     } else {
@@ -225,14 +225,14 @@ router.post("/taikhoan/updateMK/:TK_ID", function (req, res) {
 });
 //------------
 //Cap nhat
-router.post("/taikhoan/update", function (req, res) {
+router.post("/taikhoan/update", function(req, res) {
   var TK_ID = req.body.TK_ID;
   var TK_HOTEN = req.body.TK_HOTEN;
   var TK_DONVI = req.body.TK_DONVI;
   var TK_LOAI = req.body.TK_LOAI;
   var TK_QUYEN = req.body.TK_QUYEN;
 
-  taikhoan.updateUser(TK_ID, TK_HOTEN, TK_DONVI, TK_LOAI, TK_QUYEN, function (err, data) {
+  taikhoan.updateUser(TK_ID, TK_HOTEN, TK_DONVI, TK_LOAI, TK_QUYEN, function(err, data) {
     if (err) {
       res.status(404).json({ message: "ERR" });
     } else {
@@ -243,41 +243,41 @@ router.post("/taikhoan/update", function (req, res) {
 });
 
 //get TK đang đăng nhập
-router.get("/taikhoan-login", checkLoginServer, function (req, res) {
+router.get("/taikhoan-login", checkLoginServer, function(req, res) {
   res.json(req.user.TK_HOTEN);
 });
 
 //-------------Xe
 //render trang xe
-router.get("/xe", checkLoginServer, function (req, res) {
-  xe.allXe(function (err, data) {
+router.get("/xe", checkLoginServer, function(req, res) {
+  xe.allXe(function(err, data) {
     res.render("./../api/views/xe", { xe: data });
   });
 });
 
 //get all xe
-router.get("/xe/all", checkLoginServer, function (req, res) {
-  xe.allXe(function (err, data) {
+router.get("/xe/all", checkLoginServer, function(req, res) {
+  xe.allXe(function(err, data) {
     res.status(200).json(data);
   });
 });
 //Xe VITRI
-router.get("/xe/vitri", checkLoginServer, function (req, res) {
-  xe.allXe(function (err, data) {
+router.get("/xe/vitri", checkLoginServer, function(req, res) {
+  xe.allXe(function(err, data) {
     res.status(200).json(data);
   });
 });
 
 //tim xe theo id
-router.post("/xe/find", checkLoginServer, function (req, res) {
+router.post("/xe/find", checkLoginServer, function(req, res) {
   var XE_ID = req.body.XE_ID;
-  xe.findXeByID(XE_ID, function (err, data) {
+  xe.findXeByID(XE_ID, function(err, data) {
     res.status(200).json(data);
   });
 });
 
 //them xe
-router.post("/xe", checkLoginServer, function (req, res) {
+router.post("/xe", checkLoginServer, function(req, res) {
   var XE_IMEI = req.body.XE_IMEI;
   var XE_NAMSANXUAT = req.body.XE_NAMSANXUAT;
   var XE_GHICHU = req.body.XE_GHICHU;
@@ -292,7 +292,7 @@ router.post("/xe", checkLoginServer, function (req, res) {
     res.status(404).json({ message: "XE_GHICHU null" });
   }
 
-  xe.addXe(XE_IMEI, XE_NAMSANXUAT, XE_GHICHU, 0, "", function (err, data) {
+  xe.addXe(XE_IMEI, XE_NAMSANXUAT, XE_GHICHU, 0, "", function(err, data) {
     if (err) {
       res.status(404).json({ message: "XE_IMEI null" });
     } else {
@@ -301,9 +301,9 @@ router.post("/xe", checkLoginServer, function (req, res) {
   });
 });
 
-router.post("/xe/delete/:XE_ID", checkLoginServer, function (req, res) {
+router.post("/xe/delete/:XE_ID", checkLoginServer, function(req, res) {
   var XE_ID = req.body.XE_ID;
-  xe.deleteXe(XE_ID, function (err, data) {
+  xe.deleteXe(XE_ID, function(err, data) {
     if (err.name == "SequelizeForeignKeyConstraintError") {
       // res.status(202).json(err.name);
       res.status(202).json("fk");
@@ -315,12 +315,12 @@ router.post("/xe/delete/:XE_ID", checkLoginServer, function (req, res) {
 });
 
 // update xe
-router.post("/xe/updateInfo/:XE_ID", checkLoginServer, function (req, res) {
+router.post("/xe/updateInfo/:XE_ID", checkLoginServer, function(req, res) {
   var XE_ID = req.body.XE_ID;
   var XE_IMEI = req.body.XE_IMEI;
   var XE_NAMSANXUAT = req.body.XE_NAMSANXUAT;
   var XE_GHICHU = req.body.XE_GHICHU;
-  xe.updateXeAllInf(XE_ID, XE_IMEI, XE_NAMSANXUAT, XE_GHICHU, function (err, data) {
+  xe.updateXeAllInf(XE_ID, XE_IMEI, XE_NAMSANXUAT, XE_GHICHU, function(err, data) {
     if (err) {
       res.status(404).json({ message: "ERR" });
     } else {
@@ -331,30 +331,30 @@ router.post("/xe/updateInfo/:XE_ID", checkLoginServer, function (req, res) {
 });
 
 //update trang thai xe Linh
-router.put("/xe/updateTT", function (req, res) {
+router.put("/xe/updateTT", function(req, res) {
   var XE_ID = req.body.XE_ID;
   var XE_TRANGTHAI = req.body.XE_TRANGTHAI;
   var XE_IMEI = req.body.XE_IMEI;
   if (XE_TRANGTHAI == 0) {
-    xe.findByID(XE_ID, function (err, xeObj) {
+    xe.findByID(XE_ID, function(err, xeObj) {
       // Kiểm tra trạng thái xe có đang mượn hay không trước khi cập nhật
       if (xeObj.XE_TRANGTHAI != 1) {
         res.status(200).json({ message: "C" });
       } else {
-        xe.updateTrangThai(XE_ID, XE_IMEI, XE_TRANGTHAI, function (err, data) {
+        xe.updateTrangThai(XE_ID, XE_IMEI, XE_TRANGTHAI, function(err, data) {
           console.log("err" + err);
           console.log("data" + data);
 
           if (err) {
             res.status(400).send(err);
           } else if (data) {
-            xe.findByID(XE_ID, function (err, xeObj) {
+            xe.findByID(XE_ID, function(err, xeObj) {
               if (xeObj.XE_TRANGTHAI == 0) {
                 //yÊu cầu trả xe
-                muontra.traXe(XE_ID, xeObj.XE_LAT, xeObj.XE_LNG, function (err, result) {
+                muontra.traXe(XE_ID, xeObj.XE_LAT, xeObj.XE_LNG, function(err, result) {
                   console.log("err" + err);
                   if (err) {
-                    xe.updateTrangThai(XE_ID, XE_IMEI, 1, function (err, result) { }); // Thất bại -> trả về 1 (đag mượn)
+                    xe.updateTrangThai(XE_ID, XE_IMEI, 1, function(err, result) {}); // Thất bại -> trả về 1 (đag mượn)
                     res.status(400).send(err);
                   } else {
                     res.status(200).json({ message: "Cập nhật thành công trạng thái 1 - " + XE_TRANGTHAI });
@@ -372,10 +372,10 @@ router.put("/xe/updateTT", function (req, res) {
 });
 
 //update trang thai xe trang hu hong
-router.post("/xe/updateTrangThai", function (req, res) {
+router.post("/xe/updateTrangThai", function(req, res) {
   var XE_ID = req.body.XE_ID;
   var XE_TRANGTHAI = req.body.XE_TRANGTHAI;
-  xe.updateTrangThaiXe(XE_ID, XE_TRANGTHAI, function (err, data) {
+  xe.updateTrangThaiXe(XE_ID, XE_TRANGTHAI, function(err, data) {
     if (err) {
       res.status(404).json({ message: "ERR" });
     } else {
@@ -443,20 +443,20 @@ function doIntersect(p1, q1, p2, q2) {
 /**************************************** */
 
 //update vi tri xe
-router.put("/xe/update", function (req, res) {
+router.put("/xe/update", function(req, res) {
   var XE_ID = req.body.XE_ID;
   var XE_LAT = req.body.XE_LAT;
   var XE_LNG = req.body.XE_LNG;
   var XE_IMEI = req.body.XE_IMEI;
   if (XE_ID && XE_IMEI && XE_LAT && XE_LNG && XE_LAT != 0 && XE_LNG != 0) {
-    xe.updateXe(XE_ID, XE_IMEI, XE_LAT, XE_LNG, function (err, data) {
+    xe.updateXe(XE_ID, XE_IMEI, XE_LAT, XE_LNG, function(err, data) {
       if (err) {
         res.json({ message: "ERR1" });
       } else {
         //get tọa độ xe
         var p = { x: XE_LNG, y: XE_LAT };
         //kiem tra Is inside
-        khuonvien.getLatLng(function (err, data) {
+        khuonvien.getLatLng(function(err, data) {
           if (err) {
             console.log(err);
           } else {
@@ -516,11 +516,11 @@ router.put("/xe/update", function (req, res) {
 
           //nếu kq = false => xe ở ngoài => thêm vp
           if (kq == false) {
-            xe.updateTrangThai(XE_ID, XE_IMEI, 3, function (err, data) {
+            xe.updateTrangThai(XE_ID, XE_IMEI, 3, function(err, data) {
               // Cập nhật trạng thái xe dag vượt khỏi khuôn viên
               if (err) console.log(err);
             });
-            checkloi.findMuontraID_Xe(XE_ID, function (err, data) {
+            checkloi.findMuontraID_Xe(XE_ID, function(err, data) {
               if (err) {
                 console.log(err);
               } else {
@@ -528,11 +528,11 @@ router.put("/xe/update", function (req, res) {
                 var vp_lat = XE_LAT;
                 var vp_lng = XE_LNG;
 
-                checkloi.findIDLoi_MT(mt_id, function (err, data) {
+                checkloi.findIDLoi_MT(mt_id, function(err, data) {
                   //neu chua co loi
                   if (data == null) {
                     //them loi
-                    checkloi.addVP(mt_id, vp_lat, vp_lng, function (err, data) {
+                    checkloi.addVP(mt_id, vp_lat, vp_lng, function(err, data) {
                       if (err) {
                         console.log(err);
                       } else {
@@ -548,21 +548,21 @@ router.put("/xe/update", function (req, res) {
           } else if (kq == true) {
             console.log("Xe ở trong");
             //Cập nhật trạng thái xe đang mượn ở trong khuôn viên
-            muontra.kiemTraXeDangMuon(XE_ID, function (err, result) {
+            muontra.kiemTraXeDangMuon(XE_ID, function(err, result) {
               if (result) {
                 // Xe dag mượn -> Tiếp tục trả về là xe dag mượn
-                xe.updateTrangThai(XE_ID, XE_IMEI, 1, function (err, data) {
+                xe.updateTrangThai(XE_ID, XE_IMEI, 1, function(err, data) {
                   if (err) console.log(err);
                 });
               } else {
                 // Xe không mượn -> trả về là k có mượn
-                xe.updateTrangThai(XE_ID, XE_IMEI, 0, function (err, data) {
+                xe.updateTrangThai(XE_ID, XE_IMEI, 0, function(err, data) {
                   if (err) console.log(err);
                 });
               }
             });
           }
-          xe.findByID(XE_ID, function (err, data) {
+          xe.findByID(XE_ID, function(err, data) {
             res.json("TTXe:" + data.XE_TRANGTHAI);
           });
         });
@@ -574,36 +574,36 @@ router.put("/xe/update", function (req, res) {
 });
 
 //-------------Lỗi
-router.get("/loi", checkLoginServer, function (req, res) {
-  loi.allLoi(function (err, data) {
+router.get("/loi", checkLoginServer, function(req, res) {
+  loi.allLoi(function(err, data) {
     res.render("./../api/views/loi", { loi: data });
   });
 });
 // get all loi
-router.get("/loi/all", checkLoginServer, function (req, res) {
-  loi.allLoi(function (err, data) {
+router.get("/loi/all", checkLoginServer, function(req, res) {
+  loi.allLoi(function(err, data) {
     res.status(200).json(data);
   });
 });
 
 // tìm lỗi theo id
-router.post("/loi/find", checkLoginServer, function (req, res) {
+router.post("/loi/find", checkLoginServer, function(req, res) {
   var LOI_ID = req.body.LOI_ID;
-  loi.findLoiByID(LOI_ID, function (err, data) {
+  loi.findLoiByID(LOI_ID, function(err, data) {
     res.status(200).json(data);
   });
 });
 
 // tìm lỗi theo id
-router.get("/loi/:LOI_ID", checkLoginServer, function (req, res) {
+router.get("/loi/:LOI_ID", checkLoginServer, function(req, res) {
   var LOI_ID = req.params.LOI_ID;
-  loi.findByID(LOI_ID, function (err, data) {
+  loi.findByID(LOI_ID, function(err, data) {
     res.status(200).json(data);
   });
 });
 
 //them loi
-router.post("/loi", checkLoginServer, function (req, res) {
+router.post("/loi", checkLoginServer, function(req, res) {
   var LOI_TEN = req.body.LOI_TEN;
   var LOI_MOTA = req.body.LOI_MOTA;
 
@@ -613,7 +613,7 @@ router.post("/loi", checkLoginServer, function (req, res) {
   if (LOI_MOTA == null) {
     res.status(404).json({ message: "LOI_MOTA null" });
   }
-  loi.addLoi(LOI_TEN, LOI_MOTA, function (err, data) {
+  loi.addLoi(LOI_TEN, LOI_MOTA, function(err, data) {
     if (err) {
       res.status(404).json({ message: "ERR!" });
     } else {
@@ -622,9 +622,9 @@ router.post("/loi", checkLoginServer, function (req, res) {
   });
 });
 
-router.post("/loi/delete/:LOI_ID", checkLoginServer, function (req, res) {
+router.post("/loi/delete/:LOI_ID", checkLoginServer, function(req, res) {
   var LOI_ID = req.body.LOI_ID;
-  loi.deleteLoi(LOI_ID, function (err, data) {
+  loi.deleteLoi(LOI_ID, function(err, data) {
     if (err.name == "SequelizeForeignKeyConstraintError") {
       // res.status(202).json(err.name);
       res.status(202).json("fk");
@@ -635,22 +635,22 @@ router.post("/loi/delete/:LOI_ID", checkLoginServer, function (req, res) {
   });
 });
 
-router.post("/loi/update/:LOI_ID", checkLoginServer, function (req, res) {
+router.post("/loi/update/:LOI_ID", checkLoginServer, function(req, res) {
   var LOI_ID = req.body.LOI_ID;
   var LOI_TEN = req.body.LOI_TEN;
   var LOI_MOTA = req.body.LOI_MOTA;
-  loi.updateLoi(LOI_ID, LOI_TEN, LOI_MOTA, function (err, data) {
+  loi.updateLoi(LOI_ID, LOI_TEN, LOI_MOTA, function(err, data) {
     if (err) {
       res.status(404).json({ message: "ERR" });
     } else res.status(200).json({ message: "đã cập nhật thành công lỗi ID: " + LOI_ID });
   });
 });
 
-router.post("/loi/update", checkLoginServer, function (req, res) {
+router.post("/loi/update", checkLoginServer, function(req, res) {
   var LOI_ID = req.body.LOI_ID;
   var LOI_TEN = req.body.LOI_TEN;
   var LOI_MOTA = req.body.LOI_MOTA;
-  loi.updateLoi(LOI_ID, LOI_TEN, LOI_MOTA, function (err, data) {
+  loi.updateLoi(LOI_ID, LOI_TEN, LOI_MOTA, function(err, data) {
     if (err) {
       res.status(404).json({ message: "ERR" });
     } else {
@@ -660,36 +660,36 @@ router.post("/loi/update", checkLoginServer, function (req, res) {
   });
 });
 //Cập nhật khuôn viên
-router.get("/khuonvien", checkLoginServer, function (req, res) {
+router.get("/khuonvien", checkLoginServer, function(req, res) {
   res.render("./../api/views/khuonvien");
 });
 
 //----Quản lý
 //-----------Render Mượn trả
-router.get("/muontra", checkLoginServer, function (req, res) {
-  muontra.allMuonTra(function (err, data) {
+router.get("/muontra", checkLoginServer, function(req, res) {
+  muontra.allMuonTra(function(err, data) {
     res.render("./../api/views/muontra", { muontra: data });
   });
 });
 
 //Get all muon tra
-router.get("/muontra/all", checkLoginServer, function (req, res) {
-  muontra.allMuonTra(function (err, data) {
+router.get("/muontra/all", checkLoginServer, function(req, res) {
+  muontra.allMuonTra(function(err, data) {
     res.status(200).json(data);
   });
 });
 
 //get chua tra
-router.get("/muontra/chuatra", checkLoginServer, function (req, res) {
-  muontra.getChuaTra(function (err, data) {
+router.get("/muontra/chuatra", checkLoginServer, function(req, res) {
+  muontra.getChuaTra(function(err, data) {
     res.status(200).json(data);
   });
 });
 
 //get muon tra theo MT_ID
-router.post("/muontra/find", checkLoginServer, function (req, res) {
+router.post("/muontra/find", checkLoginServer, function(req, res) {
   var MUONTRA_ID = req.body.MUONTRA_ID;
-  muontra.findMuonTraByID(MUONTRA_ID, function (err, data) {
+  muontra.findMuonTraByID(MUONTRA_ID, function(err, data) {
     res.status(200).json(data);
   });
 });
@@ -705,28 +705,28 @@ router.put("/muontra/:TK_ID", muontraRoute.KetThucMuonTra);
 
 //-----------Vi phạm
 
-router.get("/vipham", checkLoginServer, function (req, res) {
-  vipham.allViPham(function (err, data) {
+router.get("/vipham", checkLoginServer, function(req, res) {
+  vipham.allViPham(function(err, data) {
     res.render("./../api/views/vipham", { vipham: data });
   });
 });
 //get all
-router.get("/vipham/all", checkLoginServer, function (req, res) {
-  vipham.allViPham(function (err, data) {
+router.get("/vipham/all", checkLoginServer, function(req, res) {
+  vipham.allViPham(function(err, data) {
     res.status(200).json(data);
   });
 });
 
 //get chua xu ly
-router.get("/vipham/chuaxuly", checkLoginServer, function (req, res) {
-  vipham.VP_ChuaXuLy(function (err, data) {
+router.get("/vipham/chuaxuly", checkLoginServer, function(req, res) {
+  vipham.VP_ChuaXuLy(function(err, data) {
     res.status(200).json(data);
   });
 });
 
 //get da xu ly
-router.get("/vipham/daxuly", checkLoginServer, function (req, res) {
-  vipham.VP_DaXuLy(function (err, data) {
+router.get("/vipham/daxuly", checkLoginServer, function(req, res) {
+  vipham.VP_DaXuLy(function(err, data) {
     res.status(200).json(data);
   });
 });
@@ -744,23 +744,23 @@ router.post("/vipham/updateXuLy", checkLoginServer, viphamRoute.updateXuLy);
 router.post("/vipham/chitiet", checkLoginServer, viphamRoute.viewChiTietViPham);
 
 //-----------Hư hỏng
-router.get("/huhong", checkLoginServer, function (req, res) {
-  huhong.allHuHong(function (err, data) {
+router.get("/huhong", checkLoginServer, function(req, res) {
+  huhong.allHuHong(function(err, data) {
     res.render("./../api/views/huhong", { huhong: data });
   });
 });
 
 //get all huhong
-router.get("/huhong/all", checkLoginServer, function (req, res) {
-  huhong.allHuHong(function (err, data) {
+router.get("/huhong/all", checkLoginServer, function(req, res) {
+  huhong.allHuHong(function(err, data) {
     res.status(200).json(data);
   });
 });
 
 //find theo id
-router.post("/huhong/find", checkLoginServer, function (req, res) {
+router.post("/huhong/find", checkLoginServer, function(req, res) {
   var HH_ID = req.body.HH_ID;
-  huhong.findHuHongByID(HH_ID, function (err, data) {
+  huhong.findHuHongByID(HH_ID, function(err, data) {
     res.status(200).json(data);
   });
 });
@@ -772,38 +772,38 @@ router.get("/huhong/taikhoan/:TK_ID", checkLoginServer, huhongRoute.viewHuHong);
 router.get("/huhong/xe/:XE_ID", checkLoginServer, huhongRoute.viewHuHongXe);
 
 //hh dang cho
-router.get("/huhong/huhongdangcho", checkLoginServer, function (req, res) {
-  huhong.getHuHongDangCho(function (err, data) {
+router.get("/huhong/huhongdangcho", checkLoginServer, function(req, res) {
+  huhong.getHuHongDangCho(function(err, data) {
     res.status(200).json(data);
   });
 });
 
 //hh đang sửa
-router.get("/huhong/huhongdangsua", checkLoginServer, function (req, res) {
-  huhong.getHuHongDangSua(function (err, data) {
+router.get("/huhong/huhongdangsua", checkLoginServer, function(req, res) {
+  huhong.getHuHongDangSua(function(err, data) {
     res.status(200).json(data);
   });
 });
 
 //hh đã sửa
-router.get("/huhong/huhongdasua", checkLoginServer, function (req, res) {
-  huhong.getHuHongDaSua(function (err, data) {
+router.get("/huhong/huhongdasua", checkLoginServer, function(req, res) {
+  huhong.getHuHongDaSua(function(err, data) {
     res.status(200).json(data);
   });
 });
 
 //hh báo sai
-router.get("/huhong/huhongbaosai", checkLoginServer, function (req, res) {
-  huhong.getHuHongBaoSai(function (err, data) {
+router.get("/huhong/huhongbaosai", checkLoginServer, function(req, res) {
+  huhong.getHuHongBaoSai(function(err, data) {
     res.status(200).json(data);
   });
 });
 
 //update trạng thái hư hỏng
-router.post("/huhong/update-trangthai/:HH_ID", checkLoginServer, function (req, res) {
+router.post("/huhong/update-trangthai/:HH_ID", checkLoginServer, function(req, res) {
   var HH_ID = req.body.HH_ID;
   var HH_TRANGTHAI = req.body.HH_TRANGTHAI;
-  huhong.updateTrangThaiHuHong(HH_ID, HH_TRANGTHAI, function (err, data) {
+  huhong.updateTrangThaiHuHong(HH_ID, HH_TRANGTHAI, function(err, data) {
     if (err) {
       // res.status(404).json({ message: "ERR" });
       res.status(404).json(err.name);
@@ -815,31 +815,31 @@ router.post("/huhong/update-trangthai/:HH_ID", checkLoginServer, function (req, 
 });
 //----------Khuon vien
 //get toa do
-router.get("/khuonvien/getToaDo", checkLoginServer, function (req, res) {
-  khuonvien.allToaDo(function (err, data) {
+router.get("/khuonvien/getToaDo", checkLoginServer, function(req, res) {
+  khuonvien.allToaDo(function(err, data) {
     res.status(202).json(data);
   });
 });
 
 //get lat lng check loi
-router.get("/khuonvien/getLatLng", checkLoginServer, function (req, res) {
-  khuonvien.getLatLng(function (err, data) {
+router.get("/khuonvien/getLatLng", checkLoginServer, function(req, res) {
+  khuonvien.getLatLng(function(err, data) {
     res.json(data);
   });
 });
 
 //render
-router.get("/khuonvien-off", checkLoginServer, function (req, res) {
+router.get("/khuonvien-off", checkLoginServer, function(req, res) {
   res.render("./../api/views/khuonvien-off");
 });
 
 //add toa do
-router.post("/khuonvien/", checkLoginServer, function (req, res) {
+router.post("/khuonvien/", checkLoginServer, function(req, res) {
   // var TK_ID = req.body.TK_ID;
   var KV_LAT = req.body.KV_LAT;
   var KV_LNG = req.body.KV_LNG;
 
-  khuonvien.addKV(KV_LAT, KV_LNG, 1, req.user.TK_ID, function (err, data) {
+  khuonvien.addKV(KV_LAT, KV_LNG, 1, req.user.TK_ID, function(err, data) {
     if (err) {
       res.status(404).json({ message: "ERR!" });
     } else {
@@ -850,9 +850,9 @@ router.post("/khuonvien/", checkLoginServer, function (req, res) {
 });
 
 //cap nhat trang thai 0
-router.put("/khuonvien", checkLoginServer, function (req, res) {
+router.put("/khuonvien", checkLoginServer, function(req, res) {
   var KV_TRANGTHAI = req.body.KV_TRANGTHAI;
-  khuonvien.updateKV_TrangThai(KV_TRANGTHAI, function (err, data) {
+  khuonvien.updateKV_TrangThai(KV_TRANGTHAI, function(err, data) {
     if (err) {
       res.status(404).json({ message: "ERR" });
     } else {
@@ -863,19 +863,19 @@ router.put("/khuonvien", checkLoginServer, function (req, res) {
 
 //-------------------------Thống kê
 //mượn trả
-router.get("/tk-muontra", checkLoginServer, function (req, res) {
+router.get("/tk-muontra", checkLoginServer, function(req, res) {
   res.render("./../api/views/tk-muontra");
 });
 router.post("/tk-muontra", checkLoginServer, muontraRoute.thongkeMuontra);
 
 //vi phạm
-router.get("/tk-vipham", checkLoginServer, function (req, res) {
+router.get("/tk-vipham", checkLoginServer, function(req, res) {
   res.render("./../api/views/tk-vipham");
 });
 router.post("/tk-vipham", viphamRoute.thongkeViPham);
 
 //hư hỏng
-router.get("/tk-huhong", checkLoginServer, function (req, res) {
+router.get("/tk-huhong", checkLoginServer, function(req, res) {
   res.render("./../api/views/tk-huhong");
 });
 router.post("/tk-huhong", checkLoginServer, huhongRoute.thongkeHuHong);
