@@ -179,6 +179,7 @@ router.get("/api/xe", function (req, res) {
 //     res.status(200).json(data);
 //   });
 // });
+
 router.get("/api/xe/:XE_ID", function (req, res) {
   var XE_ID = req.params.XE_ID;
   xe.findXeByID(XE_ID, function (err, data) {
@@ -194,6 +195,10 @@ router.post("/api/xe/:XE_ID", passport.getPassport().authenticate('jwt', { sessi
   var XE_ID = req.params.XE_ID;
   var TK_ID = req.body.TK_ID;
   var HH_MOTA = req.body.HH_MOTA;
+  TK_ID = TK_ID.toUpperCase();
+  console.log("req.body.TK_ID:" + req.body.TK_ID)
+  console.log("req.user.TK_ID:" + req.user.TK_ID)
+
   if (req.user.TK_ID == TK_ID && XE_ID && HH_MOTA) {
     xe.baoHuHong(XE_ID, TK_ID, HH_MOTA, function (err, MT_result) {
       if (err) res.status(400).send(err);
